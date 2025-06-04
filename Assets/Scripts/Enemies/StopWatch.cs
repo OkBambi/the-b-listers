@@ -4,12 +4,14 @@ public class StopWatch : MonoBehaviour
 {
     [SerializeField] Renderer model;
     [SerializeField] PrimaryColor setColor;
+    [SerializeField] GameObject SpitSac;
     [Space]
     [SerializeField] int hp;
 
     Color colorOriginal;
     string nameStr;
     int counter;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -55,7 +57,7 @@ public class StopWatch : MonoBehaviour
         {
             counter = 0;
             // Destroy object in use for testing
-            Destroy(gameObject);
+            
 
             SacSpit();
         }
@@ -63,6 +65,6 @@ public class StopWatch : MonoBehaviour
 
     void SacSpit()
     {
-        
+        Instantiate(SpitSac,transform.position,Quaternion.identity);
     }
 }
