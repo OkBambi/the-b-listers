@@ -6,7 +6,7 @@ public class pauseMenu : MonoBehaviour
     [SerializeField] bool paused = false;
     [SerializeField] GameObject pauseMenuUI;
 
-    private void Start()
+    void Start()
     {
         paused = false;
     }
@@ -19,32 +19,34 @@ public class pauseMenu : MonoBehaviour
             if (paused)
             {
                 Resume();
-                GameObject.FindFirstObjectByType<Player>().canAction = true;
-                GameObject.FindFirstObjectByType<Player>().canCam = true;
-                GameObject.FindFirstObjectByType<Player>().canAction = true;
 
             }
             else
             {
                 Paused();
-                GameObject.FindFirstObjectByType<Player>().canAction = false;
-                GameObject.FindFirstObjectByType<Player>().canCam = false;
-                GameObject.FindFirstObjectByType<Player>().canAction = false;
             }
         }
     }
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+        GameObject.FindFirstObjectByType<Player>().canAction = true;
+        GameObject.FindFirstObjectByType<Player>().canCam = true;
+        GameObject.FindFirstObjectByType<Player>().canAction = true;
+        Cursor.visible = false;
         Time.timeScale = 1.0f;
         paused = false;
     }
 
     public void Paused()
     {
-        Cursor.visible = true;
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
+        GameObject.FindFirstObjectByType<Player>().canAction = false;
+        GameObject.FindFirstObjectByType<Player>().canCam = false;
+        GameObject.FindFirstObjectByType<Player>().canAction = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0.001f;
         paused = true;
     }
 
