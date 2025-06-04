@@ -7,8 +7,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        playerMovement.Initliaze();
-        playerCamera.Initliaze();
+        playerMovement.Initialize();
+        playerCamera.Initialize();
     }
 
     void Update()

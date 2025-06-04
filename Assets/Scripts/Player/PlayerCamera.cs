@@ -19,7 +19,7 @@ public class PlayerCamera : MonoBehaviour
     float rotX;
     Quaternion initialRotation;
 
-    public void Initliaze()
+    public void Initialize()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -64,9 +64,9 @@ public class PlayerCamera : MonoBehaviour
 
     void CameraLean()
     {
-        float rotZ = Input.GetAxis("Horizontal") * leanIntensity;
+        float rotZ = Input.GetAxis("Horizontal") * leanIntensity * -1f;
 
-        Quaternion leanRot = Quaternion.Euler(0, 0, rotZ);
-        transform.localRotation = Quaternion.Lerp(initialRotation, leanRot, leanSmooth);
+        Quaternion finalRot = Quaternion.Euler(rotX, 0, rotZ);
+        transform.localRotation = Quaternion.Lerp(initialRotation, finalRot, leanSmooth);
     }
 }

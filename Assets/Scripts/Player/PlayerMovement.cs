@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] CharacterController controller;
+    [SerializeField] Rigidbody rb;
 
     [Header("Movement")]
     [SerializeField] float speed;
@@ -10,57 +10,98 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jumping")]
     [SerializeField] float jumpVel;
     [SerializeField] int jumpMax;
-    [SerializeField] float gravity;
+
+    [Header("Dashing")]
+    [SerializeField] float dashForce;
+    [SerializeField] bool canDash = true;
+
+    [Header("Misc Movement")]
+    [SerializeField] float slamForce;
 
     int jumpCount;
+    bool isGrounded;
 
     Vector3 moveDir;
     Vector3 playerVel;
 
-    public void Initliaze()
+    public void Initialize()
     {
 
     }
 
     public void UpdateBody()
     {
+        isGrounded = IsGrounded();
+
         //groundcheck
-        if (controller.isGrounded)
+        if (isGrounded)
         {
             jumpCount = 0;
-            playerVel.y = 0;
+            canDash = true;
         }
 
 
         moveDir = (Input.GetAxis("Horizontal") * transform.right)
                 + (Input.GetAxis("Vertical") * transform.forward);
 
-        controller.Move(moveDir * speed * Time.deltaTime);
+        //transform.Translate(moveDir * speed * Time.deltaTime);
+        rb.MovePosition(transform.position + moveDir * Time.deltaTime * speed);
 
-        //jump
-        Jump();
-
-        controller.Move(playerVel * Time.deltaTime);
-
-        playerVel.y -= gravity * Time.deltaTime;
+        //jump, dash, etc etc
+        Space();
     }
 
-    void Jump()
+    void Space()
     {
-        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        if (Input.GetButtonDown("Jump"))
         {
-            playerVel.y = jumpVel;
-            jumpCount++;
+            if (IsGrounded())
+            {
+                if (jumpCount < jumpMax)
+                {
+                    Debug.Log("Jump");
+                    rb.AddForce(transform.up * jumpVel, ForceMode.Impulse);
+                    jumpCount++;
+                }
+            }
+            else
+            {
+                if (canDash && moveDir.magnitude > 0)
+                {
+                    //dash, derive from input
+                    if(Input.GetAxisRaw("Vertical") == 1 && Input.GetAxisRaw("Horizontal") == 0)
+                    {
+                        //forward dash
+                        Debug.Log("FDash");
+                        rb.AddForce(Camera.main.transform.forward * dashForce, ForceMode.Impulse);
+                        canDash = false;
+                    }
+                    else
+                    {
+                        //directional dash
+                        Debug.Log("DirDash");
+                        rb.AddForce(moveDir * dashForce, ForceMode.Impulse);
+                        canDash = false;
+                    }
+                }
+                else if (moveDir.magnitude == 0)
+                {
+                    //groundslam
+                    Debug.Log("SLAM!");
+                    rb.AddForce(-transform.up * slamForce, ForceMode.Impulse);
+                }
+
+            }
         }
     }
 
     public bool IsGrounded()
     {
-        return controller.isGrounded;
+        return Physics.Raycast(transform.position, -Vector3.up, 1f);
     }
 
     public float MoveSpeed()
     {
-        return controller.velocity.magnitude;
+        return rb.linearVelocity.magnitude;
     }
 }
