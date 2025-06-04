@@ -50,8 +50,8 @@ public class RedSchmove : MonoBehaviour, ISchmove
                 {
                     Vector3 whereTo = (rb.transform.position - hit.point).normalized;
 
-                    //rb.AddForce(-whereTo * hookForce, ForceMode.Impulse);
-                    rb.MovePosition(transform.position + whereTo * Time.deltaTime * hookForce);
+                    rb.AddForce(-whereTo * hookForce, ForceMode.Impulse);
+                    //rb.MovePosition(whereTo * Time.deltaTime * hookForce);
                 }
                 else
                 {
