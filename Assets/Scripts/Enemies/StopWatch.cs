@@ -55,7 +55,14 @@ public class StopWatch : MonoBehaviour
         {
             counter = 0;
             // Destroy object in use for testing
-            Destroy(gameObject); 
+            Destroy(gameObject);
+
+            SacSpit();
         }
+    }
+
+    void SacSpit()
+    {
+        
     }
 }
