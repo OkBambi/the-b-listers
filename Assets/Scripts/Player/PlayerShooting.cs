@@ -70,9 +70,35 @@ public class PlayerShooting : MonoBehaviour
         {
             isHolding = false;
 
-            if(holdTime <= tapThreshold)
+            if(holdTime <= tapThreshold && shootTimer > shotCooldown)
             {
                 //shotgun
+                shootTimer = 0;
+                for (int i = 0; i < bulletAmount; i++)
+                {
+                    GameObject b = Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
+                    b.transform.Rotate(
+                        Random.Range(-spreadAngle, spreadAngle), 
+                        Random.Range(-spreadAngle, spreadAngle), 
+                        Random.Range(-360, 360));
+                    switch (playerColor)
+                    {
+                        case PrimaryColor.RED:
+                            b.GetComponent<Renderer>().material.color = Color.red;
+                            break;
+                        case PrimaryColor.BLUE:
+                            b.GetComponent<Renderer>().material.color = Color.blue;
+                            break;
+                        case PrimaryColor.YELLOW:
+                            b.GetComponent<Renderer>().material.color = Color.yellow;
+                            break;
+                        default:
+                            b.GetComponent<Renderer>().material.color = Color.black;
+                            break;
+                    }
+
+                    b.GetComponent<Dagger>().Initialize(playerColor, bulletSpeed, bulletLifeTime, ignoreLayer);
+                }
             }
 
             holdTime = 0;
