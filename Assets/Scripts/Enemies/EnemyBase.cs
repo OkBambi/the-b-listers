@@ -5,12 +5,23 @@ public class EnemyBase : MonoBehaviour
     public Renderer model;
     public PrimaryColor setColor;
     [Space]
-    protected int hp;
+    public int hp;
 
     Color colorOriginal;
     string nameStr;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
+    {
+        ColorSelection();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    void ColorSelection()
     {
         switch (setColor)
         {
@@ -32,11 +43,5 @@ public class EnemyBase : MonoBehaviour
                 nameStr = "Omni";
                 break;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

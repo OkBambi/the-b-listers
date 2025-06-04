@@ -3,39 +3,13 @@ using UnityEngine;
 public class StopWatch : EnemyBase
 {
     [SerializeField] GameObject SpitSac;
-    
-    
-    Color colorOriginal;
-    string nameStr;
+   
     int counter;
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         counter = 0;
-
-        switch (setColor)
-        {
-            case PrimaryColor.RED:
-                model.material.color = Color.red;
-                nameStr = "Red";
-                break;
-            case PrimaryColor.YELLOW:
-                model.material.color = Color.yellow;
-                nameStr = "Yellow";
-                break;
-            case PrimaryColor.BLUE:
-                model.material.color = Color.blue;
-                nameStr = "Blue";
-                break;
-            case PrimaryColor.OMNI:
-            default:
-                model.material.color = Color.black;
-                nameStr = "Omni";
-                break;
-        }
-
     }
 
     // Update is called once per frame
