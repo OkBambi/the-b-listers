@@ -28,7 +28,7 @@ public class PlayerShooting : MonoBehaviour
         
     }
 
-    public void UpdateWeapon()
+    public void UpdateWeapon(PrimaryColor playerColor)
     {
         shootTimer += Time.deltaTime;
 
@@ -45,8 +45,23 @@ public class PlayerShooting : MonoBehaviour
                     shootTimer = 0;
                     GameObject b = Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
                     b.transform.Rotate(0, 0, Random.Range(-360, 360));
+                    switch(playerColor)
+                    {
+                        case PrimaryColor.RED:
+                            b.GetComponent<Renderer>().material.color = Color.red;
+                            break;
+                        case PrimaryColor.BLUE:
+                            b.GetComponent<Renderer>().material.color = Color.blue;
+                            break;
+                        case PrimaryColor.YELLOW:
+                            b.GetComponent<Renderer>().material.color = Color.yellow;
+                            break;
+                        default:
+                            b.GetComponent<Renderer>().material.color = Color.black;
+                            break;
+                    }
                     
-                    b.GetComponent<Dagger>().Initialize(bulletSpeed, bulletLifeTime, ignoreLayer);
+                    b.GetComponent<Dagger>().Initialize(playerColor, bulletSpeed, bulletLifeTime, ignoreLayer);
                 }
             }
         }

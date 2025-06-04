@@ -8,11 +8,13 @@ public class Dagger : MonoBehaviour
 
     [SerializeField] float speed;
     [SerializeField] LayerMask ignoreMask;
+    [SerializeField] PrimaryColor projColor;
 
     Vector3 lastPos;
 
-    public void Initialize(float _speed, float _lifeTime, LayerMask _ignoreMask)
+    public void Initialize(PrimaryColor _color, float _speed, float _lifeTime, LayerMask _ignoreMask)
     {
+        projColor = _color;
         speed = _speed;
         ignoreMask = _ignoreMask;
 
