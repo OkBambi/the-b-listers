@@ -1,13 +1,10 @@
 using UnityEngine;
 
-public class StopWatch : MonoBehaviour
+public class StopWatch : EnemyBase
 {
-    [SerializeField] Renderer model;
-    [SerializeField] PrimaryColor setColor;
     [SerializeField] GameObject SpitSac;
-    [Space]
-    [SerializeField] int hp;
-
+    
+    
     Color colorOriginal;
     string nameStr;
     int counter;
@@ -63,6 +60,7 @@ public class StopWatch : MonoBehaviour
 
     void SacSpit()
     {
-        Instantiate(SpitSac,transform.position,Quaternion.identity);
+        SacGroundDetection mySac = Instantiate(SpitSac,transform.position,Quaternion.identity).GetComponent<SacGroundDetection>();
+        mySac.setColor = this.setColor;
     }
 }
