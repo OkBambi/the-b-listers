@@ -21,7 +21,7 @@ public class BlueSchmove : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        activated = true;
+        activated = true;//test for now
     }
 
     // Update is called once per frame
@@ -37,24 +37,24 @@ public class BlueSchmove : MonoBehaviour
                 {
                     attached = true;
                     holderRb = rb;
-                    //rb.isKinematic = false;
                 }
             }
             else
             {
                 if (Physics.Raycast(holderRb.transform.position, holderRb.transform.forward, out hit, pulseRadius, ~ignoreLayer))
                 {
+                    rb.transform.position = hit.transform.position;
                     IDamage dmg = hit.collider.GetComponent<IDamage>();
+                    StickToHit();
 
                     if (dmg != null)
                     {
                         dmg.takeDamage(PrimaryColor.OMNI, 2);
                     }
                 }
-                StartCoroutine(pulse());
+                StartCoroutine(Pulse());
                 activated = false;
                 attached = false;
-                //rb.isKinematic = true;
             }
         }
     }
@@ -65,17 +65,21 @@ public class BlueSchmove : MonoBehaviour
         activated = true;
     }
 
-    IEnumerator pulse()
+    IEnumerator Pulse()
     {
         while (pulsesDone < maxPulses)
         {
-            Debug.Log("Fire");
             model.material.color = Color.red;
             yield return new WaitForSeconds(timeBetweenPulses);
             model.material.color = Color.white;
             yield return new WaitForSeconds(timeBetweenPulses);
             pulsesDone++;
-            Debug.Log("Ball");
         }
+    }
+
+    void StickToHit()
+    {
+
+        
     }
 }
