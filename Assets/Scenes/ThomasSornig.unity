@@ -334,6 +334,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1886484547}
+  - component: {fileID: 1886484548}
   - component: {fileID: 1886484546}
   - component: {fileID: 1886484545}
   - component: {fileID: 1886484544}
@@ -434,9 +435,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 1886484544}
-  setColor: 0
-  SpitSac: {fileID: 5045310995074784091, guid: af50256b57bec0245af22c062410c1a0, type: 3}
+  setColor: 1
   hp: 0
+  SpitSac: {fileID: 5045310995074784091, guid: af50256b57bec0245af22c062410c1a0, type: 3}
 --- !u!4 &1886484547
 Transform:
   m_ObjectHideFlags: 0
@@ -452,6 +453,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1886484548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886484542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 529e05ee7a6a17b4885ccf6e77430e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 1886484544}
+  setColor: 2
+  hp: 0
 --- !u!1 &2063747852
 GameObject:
   m_ObjectHideFlags: 0
