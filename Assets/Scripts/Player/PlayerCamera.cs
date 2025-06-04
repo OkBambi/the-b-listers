@@ -8,7 +8,7 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] int lockVertMin, lockVertMax;
     [SerializeField] bool invertY;
 
-    [Range(85, 120)]
+    [Range(85, 110)]
     [SerializeField] int fov;
 
     [Space]
