@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         playerMovement.Initliaze();
-        playerMovement.Initliaze();
+        playerCamera.Initliaze();
     }
 
     void Update()

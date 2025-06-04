@@ -6,12 +6,21 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] int lockVertMin, lockVertMax;
     [SerializeField] bool invertY;
 
+    [Range(85, 120)]
+    [SerializeField] int fov;
+
     float rotX;
 
     public void Initliaze()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        InitializeSettings();
+    }
+
+    public void InitializeSettings()
+    {
+        Camera.main.fieldOfView = fov;
     }
 
     //TO-DO: Smoothing, camera tilt and lean, the works.
