@@ -14,6 +14,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         playerMovement.UpdateBody();
-        playerCamera.UpdateCamera();
+        playerCamera.UpdateCamera(playerMovement.IsGrounded());
     }
 }

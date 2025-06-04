@@ -1,7 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
+    [Header("Look Settings")]
     [SerializeField] int sens;
     [SerializeField] int lockVertMin, lockVertMax;
     [SerializeField] bool invertY;
@@ -9,13 +11,21 @@ public class PlayerCamera : MonoBehaviour
     [Range(85, 120)]
     [SerializeField] int fov;
 
+    [Space]
+    [Header("Camera Tilt")]
+    [SerializeField] float leanIntensity = 0.3f;
+    [SerializeField] float leanSmooth = 4f;
+
     float rotX;
+    Quaternion initialRotation;
 
     public void Initliaze()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         InitializeSettings();
+
+        initialRotation = transform.localRotation;
     }
 
     public void InitializeSettings()
@@ -23,8 +33,11 @@ public class PlayerCamera : MonoBehaviour
         Camera.main.fieldOfView = fov;
     }
 
-    //TO-DO: Smoothing, camera tilt and lean, the works.
-    public void UpdateCamera()
+    //TO-DO:
+    //- SMOOTHING
+    //- TILT
+    //- INSANELY slight bob on walk
+    public void UpdateCamera(bool isGrounded)
     {
         // get input
         float mouseX = Input.GetAxis("Mouse X") * sens * Time.deltaTime;
@@ -44,5 +57,16 @@ public class PlayerCamera : MonoBehaviour
 
         // rotate the player on the y axis to look left and right
         transform.parent.Rotate(Vector3.up * mouseX);
+
+        //camera leaning
+        CameraLean();
+    }
+
+    void CameraLean()
+    {
+        float rotZ = Input.GetAxis("Horizontal") * leanIntensity;
+
+        Quaternion leanRot = Quaternion.Euler(0, 0, rotZ);
+        transform.localRotation = Quaternion.Lerp(initialRotation, leanRot, leanSmooth);
     }
 }

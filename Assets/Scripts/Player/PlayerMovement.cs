@@ -53,4 +53,14 @@ public class PlayerMovement : MonoBehaviour
             jumpCount++;
         }
     }
+
+    public bool IsGrounded()
+    {
+        return controller.isGrounded;
+    }
+
+    public float MoveSpeed()
+    {
+        return controller.velocity.magnitude;
+    }
 }
