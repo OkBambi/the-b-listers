@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/* Thank you to Keenan Woodall for the tutorial
+ * https://www.youtube.com/watch?v=NsSk58un8E0
+ */
+
 public class CameraSpring : MonoBehaviour
 {
     [Min(0.01f)]
@@ -32,6 +36,7 @@ public class CameraSpring : MonoBehaviour
         transform.localPosition += relativeSpringPosition * linearDisplacement;
     }
 
+    //https://allenchou.net/2015/04/game-math-more-on-numeric-springing/
     private static void Spring(ref Vector3 current, ref Vector3 velocity, Vector3 target, float halfLife, float frequency, float timeStep)
     {
         var dampingRatio = -Mathf.Log(0.5f) / (frequency * halfLife);
