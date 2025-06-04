@@ -10,6 +10,7 @@ public class Dummy : MonoBehaviour, IDamage
     [SerializeField] int hp;
 
     Color colorOriginal;
+    string nameStr;
 
     void Start()
     {
@@ -17,20 +18,25 @@ public class Dummy : MonoBehaviour, IDamage
         {
             case PrimaryColor.RED:
                 model.material.color = Color.red;
+                nameStr = "Red";
                 break;
             case PrimaryColor.YELLOW:
                 model.material.color = Color.yellow;
+                nameStr = "Yellow";
                 break;
             case PrimaryColor.BLUE:
                 model.material.color = Color.blue;
+                nameStr = "Blue";
                 break;
             case PrimaryColor.OMNI:
             default:
                 model.material.color = Color.black;
+                nameStr = "Omni";
                 break;
         }
 
         colorOriginal = model.material.color;
+        transform.name = nameStr + " Dummy";
     }
 
 

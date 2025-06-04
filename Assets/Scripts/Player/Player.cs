@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     [SerializeField] PlayerCamera playerCamera;
     [SerializeField] PlayerShooting weapon;
     [SerializeField] ColorSwapping colorSwapper;
+    [SerializeField] Schmoves schmover;
 
     [Space]
     [SerializeField] PrimaryColor currentColor;
@@ -25,6 +26,8 @@ public class Player : MonoBehaviour
         colorSwapper.UpdateColor(ref currentColor);
 
         weapon.UpdateWeapon(currentColor);
+
+        schmover.UpdateInput(currentColor);
     }
 }
 
