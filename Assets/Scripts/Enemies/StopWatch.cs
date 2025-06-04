@@ -1,0 +1,39 @@
+using UnityEngine;
+
+public class StopWatch : MonoBehaviour
+{
+    [SerializeField] Renderer model;
+    [SerializeField] PrimaryColor setColor;
+    [Space]
+    [SerializeField] int hp;
+
+    Color colorOriginal;
+    string nameStr;
+    int counter;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        counter = 0;
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T)) 
+        {
+            CountDownTimer();
+        }
+    }
+
+    void CountDownTimer()
+    {
+        counter++;
+        if(counter == 3)
+        {
+            counter = 0;
+
+        }
+    }
+}
