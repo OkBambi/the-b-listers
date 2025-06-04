@@ -7,6 +7,8 @@ public class TestBoidAI : MonoBehaviour
     [Header("Components")]
     [SerializeField] Rigidbody rb;
     public List<Rigidbody> boids;
+    [SerializeField] LayerMask hitLayer;
+    [SerializeField] GameObject stageGround;
 
     [Header("Ranges")]
     [SerializeField] float protectedRange;
@@ -24,6 +26,8 @@ public class TestBoidAI : MonoBehaviour
     [SerializeField] float separationWeight = 8f;
     [SerializeField] float alignmentWeight = 1.0f;
     [SerializeField] float cohesionWeight = 1.2f;
+    [SerializeField] float stageWeight = 0.5f;
+
     //[SerializeField] float avoidanceWeight = 5.0f;
     [Space]
     [SerializeField] float groundAvoidance = 10f;
@@ -37,14 +41,26 @@ public class TestBoidAI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        GameObject[] objects = FindObjectsByType<GameObject>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        foreach(GameObject potentialGround in objects)
+        {
+            if(potentialGround.layer == LayerMask.NameToLayer("Ground"))
+            {
+                stageGround = potentialGround;
+                break;
+            }
+        }
+        
         UpdateBoidAwareness();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
         //the boids should not touch the ground and should not go too high
-        HeightControl();
+        //they should also stay on stage
+        StageAwareness();
 
         //the boids should not touch eachother
         Avoidance();
@@ -56,7 +72,13 @@ public class TestBoidAI : MonoBehaviour
         Cohesion();
 
         //the boids should stay on the stage
+        
+
         //the boids should 'magnitize towards the player'
+
+        //the boids should keep moving
+        //ConstantMovement();
+        LookAtMoveDirection();
 
     }
 
@@ -87,24 +109,17 @@ public class TestBoidAI : MonoBehaviour
         }
     }
 
-    void HeightControl()
+    void ConstantMovement()
     {
-        //so we dont want the boid to hit the floor, like really dont touch the floor,
-        RaycastHit hit;
-
-        if (Physics.SphereCast(transform.position, 0.25f, -Vector3.up, out hit, 5f))
-        {
-            Debug.Log("send out cast");
-            Debug.Log(hit.collider.name);
-            rb.AddForce(Vector3.up * (minHeight - (transform.position.y - hit.collider.transform.position.y)) * groundAvoidance * Time.deltaTime, ForceMode.Acceleration);
-        }
-
-        //id say that we have more of a soft cap on the height, so they can breach the limit like a fish out of water
-        if (transform.position.y >= maxHeight)
-        {
-            rb.AddForce(-Vector3.up * (transform.position.y - maxHeight) * skyAvoidance * Time.deltaTime, ForceMode.Acceleration);
-        }
+        currentSpeed = Mathf.Clamp(currentSpeed, minSpeed, maxSpeed);
+        rb.AddForce(transform.forward * currentSpeed * Time.deltaTime);
     }
+
+    void LookAtMoveDirection()
+    {
+        transform.LookAt(transform.position + rb.linearVelocity);
+    }
+
 
     void Avoidance()
     {
@@ -171,5 +186,41 @@ public class TestBoidAI : MonoBehaviour
             //move the boid towards the average location
             rb.AddForce((averageLocation - transform.position) * cohesionWeight * Time.deltaTime, ForceMode.Acceleration);
         }
+    }
+
+    void StageAwareness()
+    {
+        #region Height Control
+
+        //so we dont want the boid to hit the floor, like really dont touch the floor,
+        RaycastHit hit;
+
+        Debug.DrawRay(transform.position, -Vector3.up * minHeight, Color.red);
+        if (Physics.SphereCast(transform.position, 0.25f, -Vector3.up, out hit, minHeight, hitLayer))
+        {
+            Debug.Log("send out cast");
+            Debug.Log(hit.collider.name);
+            rb.AddForce(Vector3.up * (minHeight - (transform.position.y - hit.collider.transform.position.y)) * groundAvoidance * Time.deltaTime, ForceMode.Acceleration);
+        }
+
+        //id say that we have more of a soft cap on the height, so they can breach the limit like a fish out of water
+        if (transform.position.y >= maxHeight)
+        {
+            rb.AddForce(-Vector3.up * (transform.position.y - maxHeight) * skyAvoidance * Time.deltaTime, ForceMode.Acceleration);
+        }
+
+        #endregion
+
+        #region Staying on Stage
+
+        //THIS DOESNT WORK :)
+        if (Vector3.Distance(stageGround.transform.position, transform.position) >= stageGround.transform.localScale.x)
+            rb.AddForce((stageGround.transform.position - transform.position) * stageWeight * Time.deltaTime);
+
+        #endregion
+
+
+
+
     }
 }
