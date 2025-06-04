@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RedSchmove : MonoBehaviour, ISchmove
 {
+    [SerializeField] Player player;
     [SerializeField] Rigidbody rb;
     bool activated;
 
@@ -18,7 +19,7 @@ public class RedSchmove : MonoBehaviour, ISchmove
 
     void Start()
     {
-        
+        player = GameObject.FindFirstObjectByType<Player>();
     }
 
     void Update()
@@ -27,6 +28,9 @@ public class RedSchmove : MonoBehaviour, ISchmove
         if (activated)
         {
             holdTime += Time.deltaTime;
+
+            player.canMove = false;
+            player.canAction = false;
 
             //launch up
             if (holdTime <= Time.deltaTime) 
@@ -58,6 +62,9 @@ public class RedSchmove : MonoBehaviour, ISchmove
                     //if nothing was returned, slam directly down. if you fall into the void this way, so be it.
                     rb.AddForce(-transform.up * hookForce, ForceMode.Impulse);
                 }
+
+                player.canMove = true;
+                player.canAction = true;
             }
         }
     }

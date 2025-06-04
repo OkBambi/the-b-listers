@@ -16,9 +16,9 @@ public class Player : MonoBehaviour
 
     [Space]
     [Header("Conditionals")]
-    [SerializeField] bool canMove;
-    [SerializeField] bool canCam;
-    [SerializeField] bool canAction;
+    [SerializeField] public bool canMove;
+    [SerializeField] public bool canCam;
+    [SerializeField] public bool canAction;
 
     void Start()
     {
