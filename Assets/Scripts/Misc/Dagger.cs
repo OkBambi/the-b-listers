@@ -33,13 +33,13 @@ public class Dagger : MonoBehaviour
         {
             Debug.Log(hit.collider.name);
 
-            //IDamage dmg = hit.collider.GetComponent<IDamage>();
+            IDamage dmg = hit.collider.GetComponent<IDamage>();
 
-            //if (dmg != null)
-            //{
-            //    //HIT EM
-            //    dmg.takeDamage(shootDamage);
-            //}
+            if (dmg != null)
+            {
+                //HIT EM
+                dmg.takeDamage(projColor, 1);
+            }
         }
 
         lastPos = transform.position;
