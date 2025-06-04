@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] PlayerShooting weapon;
     [SerializeField] ColorSwapping colorSwapper;
     [SerializeField] Schmoves schmover;
+    [SerializeField] PlayerArm arm;
 
     [Space]
     [SerializeField] CameraSpring cameraSpring;
@@ -43,6 +44,8 @@ public class Player : MonoBehaviour
 
             schmover.UpdateInput(currentColor);
         }
+
+        arm.UpdateArm(currentColor);
     }
 
     void LateUpdate()
