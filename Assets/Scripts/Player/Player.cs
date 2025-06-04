@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
         {
             colorSwapper.UpdateColor(ref currentColor);
 
-            weapon.UpdateWeapon(currentColor);
+            weapon.UpdateWeapon(currentColor, arm);
 
             schmover.UpdateInput(currentColor);
         }

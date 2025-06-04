@@ -30,7 +30,7 @@ public class PlayerShooting : MonoBehaviour
         camShaker = GameObject.FindFirstObjectByType<CameraShake>();
     }
 
-    public void UpdateWeapon(PrimaryColor playerColor)
+    public void UpdateWeapon(PrimaryColor playerColor, PlayerArm playerArm)
     {
         shootTimer += Time.deltaTime;
 
@@ -64,6 +64,7 @@ public class PlayerShooting : MonoBehaviour
                     }
 
                     StartCoroutine(camShaker.Shake(0.05f, 0.006f));
+                    StartCoroutine(playerArm.Recoil(0.05f, 0.006f, 0.005f));
                     b.GetComponent<Dagger>().Initialize(playerColor, bulletSpeed, bulletLifeTime, ignoreLayer);
                 }
             }
@@ -102,7 +103,7 @@ public class PlayerShooting : MonoBehaviour
 
                     b.GetComponent<Dagger>().Initialize(playerColor, bulletSpeed, bulletLifeTime, ignoreLayer);
                 }
-
+                StartCoroutine(playerArm.Recoil(0.07f, 0.006f, 0.1f));
                 StartCoroutine(camShaker.Shake(0.06f, 0.08f));
             }
 
