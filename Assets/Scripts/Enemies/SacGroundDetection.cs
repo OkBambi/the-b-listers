@@ -1,10 +1,16 @@
 using UnityEngine;
 
-public class SacGroundDetection : MonoBehaviour
+public class SacGroundDetection : MonoBehaviour, IColor
 {
     [SerializeField] Renderer model;
   
     string groundTag = "groundTag";
+
+    public void SetColor(IColor.primaryColor myColor)
+    {
+        IColor.primaryColor = myColor;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void OnCollisionEnter(Collision collision)
     {
