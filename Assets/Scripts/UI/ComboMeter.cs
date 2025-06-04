@@ -20,6 +20,6 @@ public class ComboMeter : MonoBehaviour
 
     void UpdateGrade()
     {
-        comboGradeText.text = "<size=0.7><color=#FF0000>P</size></color><size=0.3><color=black>RIMARY</size></color>";
+        comboGradeText.text = "<size=130><color=#FF0000>P</size></color><size=90><color=black>RIMARY</size></color>";
     }
 }
