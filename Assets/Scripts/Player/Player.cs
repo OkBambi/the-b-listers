@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     [SerializeField] Schmoves schmover;
 
     [Space]
+    [SerializeField] CameraSpring cameraSpring;
+
+    [Space]
     [SerializeField] PrimaryColor currentColor;
 
     [Space]
@@ -40,6 +43,13 @@ public class Player : MonoBehaviour
 
             schmover.UpdateInput(currentColor);
         }
+    }
+
+    void LateUpdate()
+    {
+        float deltaTime = Time.deltaTime;
+
+        cameraSpring.UpdateSpring(deltaTime, Vector3.up);
     }
 }
 
