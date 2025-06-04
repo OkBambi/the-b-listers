@@ -56,8 +56,6 @@ public class StopWatch : MonoBehaviour
         if(counter == 3)
         {
             counter = 0;
-            // Destroy object in use for testing
-            
 
             SacSpit();
         }
