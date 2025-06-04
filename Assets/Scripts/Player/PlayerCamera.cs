@@ -23,7 +23,8 @@ public class PlayerCamera : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        InitializeSettings();
+
+        Camera.main.fieldOfView = fov;
 
         initialRotation = transform.localRotation;
     }

@@ -61,7 +61,7 @@ public class Dummy : MonoBehaviour, IDamage
     IEnumerator FlashWhite()
     {
         model.material.color = Color.white;
-        yield return new WaitForSeconds(0.08f);
+        yield return new WaitForSeconds(0.03f);
         model.material.color = colorOriginal;
     }
 }

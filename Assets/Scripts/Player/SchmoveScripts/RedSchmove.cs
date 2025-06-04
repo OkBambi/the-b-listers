@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RedSchmove : MonoBehaviour, ISchmove
@@ -50,6 +51,7 @@ public class RedSchmove : MonoBehaviour, ISchmove
                     Vector3 whereTo = (rb.transform.position - hit.point).normalized;
 
                     rb.AddForce(-whereTo * hookForce, ForceMode.Impulse);
+                    //rb.MovePosition(whereTo * Time.deltaTime * hookForce);
                 }
                 else
                 {

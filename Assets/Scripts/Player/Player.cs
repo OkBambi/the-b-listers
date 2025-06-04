@@ -11,6 +11,12 @@ public class Player : MonoBehaviour
     [Space]
     [SerializeField] PrimaryColor currentColor;
 
+    [Space]
+    [Header("Conditionals")]
+    [SerializeField] bool canMove;
+    [SerializeField] bool canCam;
+    [SerializeField] bool canAction;
+
     void Start()
     {
         playerMovement.Initialize();
@@ -20,14 +26,20 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        playerMovement.UpdateBody();
-        playerCamera.UpdateCamera(playerMovement.IsGrounded());
+        if (canMove)
+            playerMovement.UpdateBody();
 
-        colorSwapper.UpdateColor(ref currentColor);
+        if (canCam)
+            playerCamera.UpdateCamera(playerMovement.IsGrounded());
 
-        weapon.UpdateWeapon(currentColor);
+        if (canAction)
+        {
+            colorSwapper.UpdateColor(ref currentColor);
 
-        schmover.UpdateInput(currentColor);
+            weapon.UpdateWeapon(currentColor);
+
+            schmover.UpdateInput(currentColor);
+        }
     }
 }
 
