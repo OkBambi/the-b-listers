@@ -4,6 +4,9 @@ public class Player : MonoBehaviour
 {
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerCamera playerCamera;
+    [SerializeField] ColorSwapping colorSwapper;
+
+    [SerializeField] PrimaryColor currentColor;
 
     void Start()
     {
@@ -15,5 +18,14 @@ public class Player : MonoBehaviour
     {
         playerMovement.UpdateBody();
         playerCamera.UpdateCamera(playerMovement.IsGrounded());
+
+        colorSwapper.UpdateColor(ref currentColor);
     }
+}
+
+public enum PrimaryColor
+{
+    RED,
+    YELLOW,
+    BLUE
 }

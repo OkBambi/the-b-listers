@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 255140903}
   - component: {fileID: 255140904}
+  - component: {fileID: 255140905}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -166,6 +167,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 1626997531}
   playerCamera: {fileID: 1745250178}
+  colorSwapper: {fileID: 255140905}
+  currentColor: 0
+--- !u!114 &255140905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255140902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c708b9acd44ffd48a36464740fed2f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &990596079
 GameObject:
   m_ObjectHideFlags: 0
