@@ -167,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 1626997531}
   playerCamera: {fileID: 1745250178}
+  weapon: {fileID: 750269387}
   colorSwapper: {fileID: 255140905}
   currentColor: 0
 --- !u!114 &255140905
@@ -225,6 +226,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13a819a71b8ff74aa16e2ff3b652d6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 919132149155446097, guid: 9be5542eb30fec542ae383ecc9ef858d, type: 3}
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 72
+  range: 0
+  damage: 1
+  tapThreshold: 0.12
+  fireRate: 0.14
+  shotCooldown: 0.25
+  bulletAmount: 0
+  spreadAngle: 25
 --- !u!1 &990596079
 GameObject:
   m_ObjectHideFlags: 0
