@@ -7,11 +7,13 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        
+        playerMovement.Initliaze();
+        playerMovement.Initliaze();
     }
 
     void Update()
     {
-        
+        playerMovement.UpdateBody();
+        playerCamera.UpdateCamera();
     }
 }
