@@ -103,7 +103,7 @@ public class PlayerShooting : MonoBehaviour
                     b.GetComponent<Dagger>().Initialize(playerColor, bulletSpeed, bulletLifeTime, ignoreLayer);
                 }
 
-                StartCoroutine(camShaker.Shake(0.04f, 0.1f));
+                StartCoroutine(camShaker.Shake(0.08f, 0.1f));
             }
 
             holdTime = 0;
