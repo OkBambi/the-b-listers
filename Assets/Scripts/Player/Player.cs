@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] PrimaryColor currentColor;
 
     [Space]
+    [Header("Conditionals")]
     [SerializeField] bool canMove;
     [SerializeField] bool canCam;
     [SerializeField] bool canAction;

@@ -33,6 +33,7 @@ public class Dagger : MonoBehaviour
         {
             Debug.Log(hit.collider.name);
 
+            //check for damage
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
             if (dmg != null)
