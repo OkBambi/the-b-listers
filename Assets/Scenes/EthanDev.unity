@@ -2815,9 +2815,15 @@ MonoBehaviour:
   bulletLifeTime: 3
   tapThreshold: 0.14
   fireRate: 0.08
+  rb: {fileID: 1626997533}
+  playerCam: {fileID: 1745250177}
   shotCooldown: 0.4
   bulletAmount: 20
   spreadAngle: 25
+  rocketJumpAngle: 25
+  rocketJumpForce: 20
+  maxRocketJumps: 2
+  currentRocketJumps: 0
 --- !u!1 &753234221
 GameObject:
   m_ObjectHideFlags: 0
@@ -5597,6 +5603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8003fae51cb8945a36cd645dd9e591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shooter: {fileID: 750269387}
   rb: {fileID: 1626997533}
   speed: 80
   jumpVel: 15
@@ -5813,7 +5820,7 @@ GameObject:
   - component: {fileID: 1767125253}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Floor
+  m_TagString: groundTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6836,6 +6843,10 @@ PrefabInstance:
     - target: {fileID: 9219631178073521806, guid: 3e9473688baf3ca4195096f0eaddb40d, type: 3}
       propertyPath: m_Name
       value: Map
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219631178073521806, guid: 3e9473688baf3ca4195096f0eaddb40d, type: 3}
+      propertyPath: m_TagString
+      value: groundTag
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

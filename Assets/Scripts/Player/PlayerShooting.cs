@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
@@ -15,13 +16,20 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] float fireRate = 0.14f;
 
     [Header("Shotgun")]
+    [SerializeField] Rigidbody rb;
+    [SerializeField] Transform playerCam;
     [SerializeField] float shotCooldown = 0.25f;
     [SerializeField] int bulletAmount;
     [SerializeField] float spreadAngle = 25f;
+    [Space]
+    [SerializeField] float rocketJumpAngle;
+    [SerializeField] float rocketJumpForce;
+    [SerializeField] int maxRocketJumps;
 
     float shootTimer;
     bool isHolding;
     float holdTime;
+    [HideInInspector] public int currentRocketJumps;
 
     CameraShake camShaker;
 
@@ -46,7 +54,7 @@ public class PlayerShooting : MonoBehaviour
                 {
                     shootTimer = 0;
                     GameObject b = Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
-                    b.transform.Rotate(0, 0, Random.Range(-360, 360));
+                    b.transform.Rotate(0, 0, UnityEngine.Random.Range(-360, 360));
                     switch(playerColor)
                     {
                         case PrimaryColor.RED:
@@ -78,13 +86,25 @@ public class PlayerShooting : MonoBehaviour
             {
                 //shotgun
                 shootTimer = 0;
+
+                float dotProduct = Vector3.Dot(playerCam.forward, -Vector3.up);
+                float inverCos = Mathf.Acos(dotProduct);
+                float angle = Mathf.Rad2Deg * inverCos;
+
+                if (angle < rocketJumpAngle && currentRocketJumps < maxRocketJumps)
+                {
+                    print("ROCKET MANNNNN");
+                    currentRocketJumps++;
+                    rb.AddForce(Vector3.up * rocketJumpForce, ForceMode.Impulse);
+                }
+
                 for (int i = 0; i < bulletAmount; i++)
                 {
                     GameObject b = Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
                     b.transform.Rotate(
-                        Random.Range(-spreadAngle, spreadAngle), 
-                        Random.Range(-spreadAngle, spreadAngle), 
-                        Random.Range(-360, 360));
+                        UnityEngine.Random.Range(-spreadAngle, spreadAngle),
+                        UnityEngine.Random.Range(-spreadAngle, spreadAngle),
+                        UnityEngine.Random.Range(-360, 360));
                     switch (playerColor)
                     {
                         case PrimaryColor.RED:
