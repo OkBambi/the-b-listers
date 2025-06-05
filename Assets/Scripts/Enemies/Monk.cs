@@ -34,7 +34,7 @@ public class Monk : MonoBehaviour, IDamage
 
         if (PlayerInRange)
         {
-            GameManager
+
         }
 
     }

@@ -92,13 +92,15 @@ public class GameManager : MonoBehaviour
     public void OnCreditInfo()
     {
         isPaused = true;
-
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void OnGameInfo()
     {
         isPaused = true;
-
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
 }
