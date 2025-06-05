@@ -7,15 +7,19 @@ public class Player : MonoBehaviour
     [SerializeField] PlayerShooting weapon;
     [SerializeField] ColorSwapping colorSwapper;
     [SerializeField] Schmoves schmover;
+    [SerializeField] PlayerArm arm;
+
+    [Space]
+    [SerializeField] CameraSpring cameraSpring;
 
     [Space]
     [SerializeField] PrimaryColor currentColor;
 
     [Space]
     [Header("Conditionals")]
-    [SerializeField] bool canMove;
-    [SerializeField] bool canCam;
-    [SerializeField] bool canAction;
+    [SerializeField] public bool canMove;
+    [SerializeField] public bool canCam;
+    [SerializeField] public bool canAction;
 
     void Start()
     {
@@ -36,10 +40,19 @@ public class Player : MonoBehaviour
         {
             colorSwapper.UpdateColor(ref currentColor);
 
-            weapon.UpdateWeapon(currentColor);
+            weapon.UpdateWeapon(currentColor, arm);
 
             schmover.UpdateInput(currentColor);
         }
+
+        arm.UpdateArm(currentColor);
+    }
+
+    void LateUpdate()
+    {
+        float deltaTime = Time.deltaTime;
+
+        cameraSpring.UpdateSpring(deltaTime, Vector3.up);
     }
 }
 

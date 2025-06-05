@@ -15,9 +15,7 @@ public class Schmoves : MonoBehaviour
 
     [Header("Blue Schmove")] // Pulse Charge
     [SerializeField] float cooldownBlue;
-    [SerializeField] float blueWindup;
-    [SerializeField] float timeBetweenPulses;
-    [SerializeField] float pulseRadius;
+    [SerializeField] BlueSchmove blueSchmover;
 
     public void UpdateInput(PrimaryColor playerColor)
     {
@@ -28,9 +26,13 @@ public class Schmoves : MonoBehaviour
                 case PrimaryColor.RED:
                     redSchmover.Activate();
                     break;
+                case PrimaryColor.BLUE:
+                    blueSchmover.Activate();
+                    break;
                 default:
                     redSchmover.Activate();
                     break;
+
             }
         }
     }
