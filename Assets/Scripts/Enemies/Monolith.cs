@@ -3,14 +3,19 @@ using UnityEngine.InputSystem.XR;
 
 public class Monolith : EnemyBase
 {
-    [SerializeField] CharacterController controller;
     [SerializeField] GameObject myBoid;
     [SerializeField] int speed;
+    [SerializeField] float rotationRadius = 2f;
+    [SerializeField] float angularSpeed = 2f;
+    [SerializeField]  float posX, posY, angle= 0f;
+
+    private Rigidbody rb;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         ColorSelection(setColor);
-
+        rb = GetComponent<Rigidbody>();
     }
 
     Vector3 moveDir;
@@ -31,17 +36,14 @@ public class Monolith : EnemyBase
 
     void movement()
     {
+        posX = rb.position.x + Mathf.Cos(angle) * rotationRadius;
+        posY = rb.position.y + Mathf.Sin(angle) * rotationRadius;
+        transform.position = new Vector3(posX, posY, transform.position.z);
+        angle += angularSpeed * Time.deltaTime;
 
-        moveDir = (Input.GetAxis("Horizontal") * transform.right)
-                + (Input.GetAxis("Vertical") * transform.forward);
-
-        controller.Move(moveDir * speed * Time.deltaTime);
-
-        //jump
-
-        controller.Move(playerVel * Time.deltaTime);
-
-
-        //transform.position += moveDir * speed * Time.deltaTime;
+        if (angle >= 360f)
+        {
+            angle = 0f;
+        }
     }
 }
