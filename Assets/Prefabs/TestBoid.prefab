@@ -55,6 +55,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   stageGround: {fileID: 0}
+  player: {fileID: 0}
   protectedRange: 2
   visualRange: 20
   minSpeed: 2
@@ -63,11 +64,11 @@ MonoBehaviour:
   rotateSpeed: 0
   separationWeight: 10
   alignmentWeight: 10
-  cohesionWeight: 10
+  cohesionWeight: 2
   stageWeight: 5
+  playerWeight: 5
   groundAvoidance: 250
   skyAvoidance: 50
-  playerAttraction: 1
   maxHeight: 10
   minHeight: 5
 --- !u!54 &5077083023810088317

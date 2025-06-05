@@ -28,13 +28,13 @@ public class TestBoidAI : MonoBehaviour
     [SerializeField] float alignmentWeight = 1.0f;
     [SerializeField] float cohesionWeight = 1.2f;
     [SerializeField] float stageWeight = 0.5f;
+    [SerializeField] float playerWeight = 1f;
 
     //[SerializeField] float avoidanceWeight = 5.0f;
     [Space]
     [SerializeField] float groundAvoidance = 10f;
     [SerializeField] float skyAvoidance = 2f;
 
-    [SerializeField] float playerAttraction = 1.0f;
     [SerializeField] float maxHeight = 50f;
     [SerializeField] float minHeight = 5;
 
@@ -42,6 +42,7 @@ public class TestBoidAI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //finding the ground
         GameObject[] objects = FindObjectsByType<GameObject>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         foreach(GameObject potentialGround in objects)
         {
@@ -51,7 +52,12 @@ public class TestBoidAI : MonoBehaviour
                 break;
             }
         }
-        
+
+        //finding the player
+        if (FindAnyObjectByType<Player>() != null)
+            player = FindAnyObjectByType<Player>().gameObject;
+
+        //finding other boids
         UpdateBoidAwareness();
     }
 
@@ -73,11 +79,12 @@ public class TestBoidAI : MonoBehaviour
         Cohesion();
 
         //the boids should 'magnitize towards the player'
+        PlayerMagnetism();
 
         //the boids should keep moving
         ConstantMovement();
 
-        //th boids should look in the direction of movement
+        //the boids should look in the direction of movement
         LookAtMoveDirection();
 
     }
@@ -117,14 +124,12 @@ public class TestBoidAI : MonoBehaviour
             rb.linearVelocity = rb.linearVelocity.normalized * minSpeed;
         else if (rb.linearVelocity.magnitude > maxSpeed)
             rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
-        
     }
 
     void LookAtMoveDirection()
     {
         transform.LookAt(transform.position + rb.linearVelocity);
     }
-
 
     void Avoidance()
     {
@@ -134,9 +139,7 @@ public class TestBoidAI : MonoBehaviour
         {
             float distanceToBoid = Vector3.Distance(transform.position, boid.position);
             if (distanceToBoid <= protectedRange)
-            {
                 rb.AddForce( (((transform.position - boid.position) * protectedRange) - (transform.position - boid.position)) * separationWeight * Time.deltaTime, ForceMode.Acceleration);
-            }
         }
     }
 
@@ -164,7 +167,6 @@ public class TestBoidAI : MonoBehaviour
             //using the average velocity, move the boid in that direction
             rb.AddForce(averageVelocity * separationWeight * Time.deltaTime, ForceMode.Acceleration);
         }
-            
     }
 
     void Cohesion()
@@ -223,5 +225,10 @@ public class TestBoidAI : MonoBehaviour
             rb.AddForce((stageGround.transform.position - transform.position) * stageWeight * Time.deltaTime);
 
         #endregion
+    }
+
+    void PlayerMagnetism()
+    {
+        rb.AddForce((player.transform.position - transform.position) * playerWeight * Time.deltaTime, ForceMode.Acceleration);
     }
 }
