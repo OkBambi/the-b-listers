@@ -16,7 +16,7 @@ public class BlueSchmove : MonoBehaviour
     [SerializeField] float stickySpeed;
 
 
-    bool activated, attached;
+    bool activated, attached, isStuck;
     int pulsesDone;
     Rigidbody holderRb;
     int maxPulses = 3;
@@ -39,8 +39,8 @@ public class BlueSchmove : MonoBehaviour
                 {
                     attached = true;
                     holderRb = rb;
-                    rb.gameObject.transform.parent = hit.transform;
-                    rb.useGravity = false;
+                    rb.isKinematic = false;
+                    rb.transform.parent = hit.transform;
                 }
             }
             else
@@ -55,10 +55,15 @@ public class BlueSchmove : MonoBehaviour
                     //    dmg.takeDamage(PrimaryColor.OMNI, 2);
                     //}
                 }
+                isStuck = true;
                 StartCoroutine(Pulse());
                 activated = false;
                 attached = false;
             }
+        }
+        if (isStuck)
+        {
+            rb.transform.position = rb.transform.parent.localPosition;
         }
     }
 
@@ -73,7 +78,6 @@ public class BlueSchmove : MonoBehaviour
     {
         while (pulsesDone < maxPulses)
         {
-            rb.position = rb.gameObject.transform.parent.position;
             model.material.color = Color.red;
             yield return new WaitForSeconds(timeBetweenPulses);
             model.material.color = Color.white;
@@ -81,6 +85,7 @@ public class BlueSchmove : MonoBehaviour
             pulsesDone++;
         }
         Destroy(rb.gameObject);
+        trial = false;
     }
 
     void StickToHit()
