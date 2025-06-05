@@ -6,18 +6,13 @@ public class EnemyBase : MonoBehaviour
     public PrimaryColor setColor;
     [Space]
     public int hp;
+    public int score = 50;
 
     string nameStr;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         ColorSelection(setColor);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     protected void ColorSelection(PrimaryColor newColor)
