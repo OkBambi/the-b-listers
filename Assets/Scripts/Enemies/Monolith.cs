@@ -7,7 +7,7 @@ public class Monolith : EnemyBase
     [SerializeField] int speed;
     [SerializeField] float rotationRadius = 2f;
     [SerializeField] float angularSpeed = 2f;
-    [SerializeField]  float posX, posY, angle= 0f;
+    [SerializeField]  float posX, posZ, angle= 0f;
 
     private Rigidbody rb;
 
@@ -37,8 +37,8 @@ public class Monolith : EnemyBase
     void movement()
     {
         posX = rb.position.x + Mathf.Cos(angle) * rotationRadius;
-        posY = rb.position.y + Mathf.Sin(angle) * rotationRadius;
-        transform.position = new Vector3(posX, posY, transform.position.z);
+        posZ = rb.position.z + Mathf.Sin(angle) * rotationRadius;
+        transform.position = new Vector3(posX, transform.position.y, posZ);
         angle += angularSpeed * Time.deltaTime;
 
         if (angle >= 360f)
