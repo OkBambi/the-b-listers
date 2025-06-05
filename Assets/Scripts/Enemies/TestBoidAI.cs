@@ -9,6 +9,7 @@ public class TestBoidAI : MonoBehaviour
     public List<Rigidbody> boids;
     [SerializeField] LayerMask hitLayer;
     [SerializeField] GameObject stageGround;
+    [SerializeField] GameObject player;
 
     [Header("Ranges")]
     [SerializeField] float protectedRange;
@@ -71,13 +72,12 @@ public class TestBoidAI : MonoBehaviour
         //the boids should stay near the group
         Cohesion();
 
-        //the boids should stay on the stage
-        
-
         //the boids should 'magnitize towards the player'
 
         //the boids should keep moving
-        //ConstantMovement();
+        ConstantMovement();
+
+        //th boids should look in the direction of movement
         LookAtMoveDirection();
 
     }
@@ -111,8 +111,13 @@ public class TestBoidAI : MonoBehaviour
 
     void ConstantMovement()
     {
-        currentSpeed = Mathf.Clamp(currentSpeed, minSpeed, maxSpeed);
-        rb.AddForce(transform.forward * currentSpeed * Time.deltaTime);
+        //if the magnitude of the linear velocity is less than the minimum speed
+        //grab the unit vector of the linear velocity and multiply it by the minSpeed
+        if (rb.linearVelocity.magnitude < minSpeed)
+            rb.linearVelocity = rb.linearVelocity.normalized * minSpeed;
+        else if (rb.linearVelocity.magnitude > maxSpeed)
+            rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
+        
     }
 
     void LookAtMoveDirection()
@@ -214,13 +219,9 @@ public class TestBoidAI : MonoBehaviour
         #region Staying on Stage
 
         //THIS DOESNT WORK :)
-        if (Vector3.Distance(stageGround.transform.position, transform.position) >= stageGround.transform.localScale.x)
+        if (Vector3.Distance(stageGround.transform.position, transform.position) >= stageGround.transform.localScale.x * 4.5)
             rb.AddForce((stageGround.transform.position - transform.position) * stageWeight * Time.deltaTime);
 
         #endregion
-
-
-
-
     }
 }

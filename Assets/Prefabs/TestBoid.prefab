@@ -55,15 +55,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   stageGround: {fileID: 0}
-  protectedRange: 5
+  protectedRange: 2
   visualRange: 20
-  minSpeed: 0
-  maxSpeed: 0
+  minSpeed: 2
+  maxSpeed: 8
   currentSpeed: 0
   rotateSpeed: 0
   separationWeight: 10
   alignmentWeight: 10
-  cohesionWeight: 5
+  cohesionWeight: 10
   stageWeight: 5
   groundAvoidance: 250
   skyAvoidance: 50
