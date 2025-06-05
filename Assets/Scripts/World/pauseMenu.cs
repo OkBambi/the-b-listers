@@ -31,6 +31,7 @@ public class pauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
         GameObject.FindFirstObjectByType<Player>().canAction = true;
         GameObject.FindFirstObjectByType<Player>().canCam = true;
         GameObject.FindFirstObjectByType<Player>().canAction = true;
