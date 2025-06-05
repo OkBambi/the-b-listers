@@ -1,8 +1,25 @@
 using UnityEngine;
+using System.Collections;
+using UnityEngine.AI;
 
-public class Monk : MonoBehaviour
+public class Monk : MonoBehaviour, IDamage
 {
+
     [SerializeField] float Casttimer;
+
+    [SerializeField] NavMeshAgent agent;
+
+    [SerializeField] Transform Casting;
+    [SerializeField] GameObject wave;
+    [SerializeField] float gongBonkRate;
+
+    //noise 
+    Color colorOriginal;
+
+    float GongBonkTimer;
+
+    bool PlayerInRange;
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -15,6 +32,10 @@ public class Monk : MonoBehaviour
     void Update()
     {
 
+        if (PlayerInRange)
+        {
+            GameManager
+        }
 
     }
     void MonkCastTimer()
@@ -46,5 +67,10 @@ public class Monk : MonoBehaviour
 
         }
 
+    }
+
+    public void takeDamage(PrimaryColor hitColor, int amount)
+    {
+        throw new System.NotImplementedException();
     }
 }
