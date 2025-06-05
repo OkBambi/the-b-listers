@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 public class BlueSchmove : MonoBehaviour
 {
@@ -37,13 +38,14 @@ public class BlueSchmove : MonoBehaviour
                 {
                     attached = true;
                     holderRb = rb;
+                    rb.gameObject.transform.parent = hit.transform;
+                    rb.useGravity = false;
                 }
             }
             else
             {
                 if (Physics.Raycast(holderRb.transform.position, holderRb.transform.forward, out hit, pulseRadius, ~ignoreLayer))
                 {
-                    rb.transform.position = hit.transform.position;
                     IDamage dmg = hit.collider.GetComponent<IDamage>();
                     StickToHit();
 
@@ -75,6 +77,7 @@ public class BlueSchmove : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenPulses);
             pulsesDone++;
         }
+        Destroy(rb.gameObject);
     }
 
     void StickToHit()
