@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class TestBoidAI : MonoBehaviour
+public class TestBoidAI : EnemyBase
 {
     [Header("Components")]
     [SerializeField] Rigidbody rb;
@@ -40,8 +40,9 @@ public class TestBoidAI : MonoBehaviour
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
+        ColorSelection(setColor);
         //finding the ground
         GameObject[] objects = FindObjectsByType<GameObject>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         foreach(GameObject potentialGround in objects)
@@ -56,9 +57,17 @@ public class TestBoidAI : MonoBehaviour
         //finding the player
         if (FindAnyObjectByType<Player>() != null)
             player = FindAnyObjectByType<Player>().gameObject;
+        else
+        {
+            //testing condition
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
 
-        //finding other boids
-        UpdateBoidAwareness();
+            
+
+
+            //finding other boids
+            UpdateBoidAwareness();
     }
 
     // Update is called once per frame
@@ -70,13 +79,9 @@ public class TestBoidAI : MonoBehaviour
         StageAwareness();
 
         //the boids should not touch eachother
-        Avoidance();
-
         //the boids should move in alignment with the group
-        Alignment();
-
         //the boids should stay near the group
-        Cohesion();
+        BoidMovement();
 
         //the boids should 'magnitize towards the player'
         PlayerMagnetism();
@@ -86,33 +91,57 @@ public class TestBoidAI : MonoBehaviour
 
         //the boids should look in the direction of movement
         LookAtMoveDirection();
-
     }
 
     void UpdateBoidAwareness()
     {
-        //this method will need to be fixed later, mainly for testing purposes
-        //when new boids spawn, the pre-existing boids will need to be updated
-        
         TestBoidAI[] activeboids = FindObjectsByType<TestBoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         for (int boidCount = 0; boidCount < activeboids.Length; boidCount++)
-        {   
-            if (activeboids[boidCount] != this)
-            {
-                boids.Add(activeboids[boidCount].GetComponent<Rigidbody>());
+        {
+            activeboids[boidCount].boids.Add(rb);
+        }
+    }
 
-                //if (!activeboids[boidCount].boids.Contains(rb) && !activeboids[boidCount].boids.Contains(rb))
-                //{
-                //    activeboids[boidCount].boids.Add(rb);
-                //}
-                //maybe instead of this boid updating it's own list, new boids will update all boids?
-                //this is where we would have a single manager for the boids
-                //else
-                //{
-                //    activeboids[boidCount].boids.Remove(this.transform);
-                //}
+    void BoidMovement()
+    {
+        //variable  initialization
+        int boidsInRange = 0;
+        Vector3 velocityTotal = new Vector3(0, 0, 0);
+        Vector3 totalLocations = new Vector3(0, 0, 0);
+
+        foreach (Rigidbody boid in boids)
+        {
+            float distanceToBoid = Vector3.Distance(transform.position, boid.position);
+
+            //Avoidance
+            //loop through the boids and see how close each one is to this boid
+            //if the boid is too close, move away
+            if (distanceToBoid <= protectedRange)
+                rb.AddForce((((transform.position - boid.position) * protectedRange) - (transform.position - boid.position)) * separationWeight * Time.deltaTime, ForceMode.Acceleration);
+            
+
+            if (distanceToBoid <= visualRange)
+            {
+                velocityTotal += boid.linearVelocity;
+                totalLocations += boid.transform.position;
+                ++boidsInRange;
             }
 
+
+            if (boidsInRange > 0)
+            {
+                //Alignment
+                //calculate the average velocity of all the boids
+                Vector3 averageVelocity = velocityTotal / boidsInRange;
+                //using the average velocity, move the boid in that direction
+                rb.AddForce(averageVelocity * separationWeight * Time.deltaTime, ForceMode.Acceleration);
+
+                //Cohesion
+                //get the average location of all the boids
+                Vector3 averageLocation = totalLocations / boidsInRange;
+                //move the boid towards the average location
+                rb.AddForce((averageLocation - transform.position) * cohesionWeight * Time.deltaTime, ForceMode.Acceleration);
+            }
         }
     }
 
@@ -129,70 +158,6 @@ public class TestBoidAI : MonoBehaviour
     void LookAtMoveDirection()
     {
         transform.LookAt(transform.position + rb.linearVelocity);
-    }
-
-    void Avoidance()
-    {
-        //loop through the boids and see how close each one is to this boid
-        //if the boid is too close, move away
-        foreach(Rigidbody boid in boids)
-        {
-            float distanceToBoid = Vector3.Distance(transform.position, boid.position);
-            if (distanceToBoid <= protectedRange)
-                rb.AddForce( (((transform.position - boid.position) * protectedRange) - (transform.position - boid.position)) * separationWeight * Time.deltaTime, ForceMode.Acceleration);
-        }
-    }
-
-    void Alignment()
-    {
-        Vector3 velocityTotal = new Vector3(0, 0, 0);
-        int boidsInRange = 0;
-
-        //get all the boids in visual range
-        foreach (Rigidbody boid in boids)
-        {
-            float distanceToBoid = Vector3.Distance(transform.position, boid.position);
-
-            if (distanceToBoid <= visualRange)
-            {
-                velocityTotal += boid.linearVelocity;
-                ++boidsInRange;
-            }
-        }
-        
-        if (boidsInRange > 0)
-        {
-            //calculate the average velocity of all the boids
-            Vector3 averageVelocity = velocityTotal / boidsInRange;
-            //using the average velocity, move the boid in that direction
-            rb.AddForce(averageVelocity * separationWeight * Time.deltaTime, ForceMode.Acceleration);
-        }
-    }
-
-    void Cohesion()
-    {
-        Vector3 totalLocations = new Vector3(0, 0, 0);
-        int boidsInRange = 0;
-
-        //get all the boids in visual range
-        foreach (Rigidbody boid in boids)
-        {
-            float distanceToBoid = Vector3.Distance(transform.position, boid.position);
-
-            if (distanceToBoid <= visualRange)
-            {
-                totalLocations += boid.transform.position;
-                ++boidsInRange;
-            }
-        }
-        if (boidsInRange > 0)
-        {
-            //get the average location of all the boids
-            Vector3 averageLocation = totalLocations / boidsInRange;
-
-            //move the boid towards the average location
-            rb.AddForce((averageLocation - transform.position) * cohesionWeight * Time.deltaTime, ForceMode.Acceleration);
-        }
     }
 
     void StageAwareness()
@@ -225,9 +190,9 @@ public class TestBoidAI : MonoBehaviour
 
         #region Staying on Stage
 
-        //THIS DOESNT WORK :)
+        //THIS WORKS
         if (Vector3.Distance(stageGround.transform.position, transform.position) >= stageGround.transform.localScale.x * 4.5)
-            rb.AddForce((stageGround.transform.position - transform.position) * stageWeight * Time.deltaTime);
+            rb.AddForce((stageGround.transform.position - transform.position) * stageWeight * Time.deltaTime, ForceMode.Acceleration);
 
         #endregion
     }
@@ -235,5 +200,14 @@ public class TestBoidAI : MonoBehaviour
     void PlayerMagnetism()
     {
         rb.AddForce((player.transform.position - transform.position).normalized * playerWeight * Time.deltaTime, ForceMode.Acceleration);
+    }
+
+    private void OnDestroy()
+    {
+        TestBoidAI[] activeboids = FindObjectsByType<TestBoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        for (int boidCount = 0; boidCount < activeboids.Length; boidCount++)
+        {
+            activeboids[boidCount].boids.Remove(rb);
+        }
     }
 }
