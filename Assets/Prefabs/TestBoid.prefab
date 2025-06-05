@@ -56,19 +56,19 @@ MonoBehaviour:
     m_Bits: 512
   stageGround: {fileID: 0}
   player: {fileID: 0}
-  protectedRange: 2
+  protectedRange: 1
   visualRange: 20
-  minSpeed: 2
-  maxSpeed: 8
+  minSpeed: 2.5
+  maxSpeed: 10
   currentSpeed: 0
   rotateSpeed: 0
-  separationWeight: 10
-  alignmentWeight: 10
+  separationWeight: 5
+  alignmentWeight: 4
   cohesionWeight: 2
   stageWeight: 5
-  playerWeight: 5
-  groundAvoidance: 250
-  skyAvoidance: 50
+  playerWeight: 50
+  groundAvoidance: 100
+  skyAvoidance: 25
   maxHeight: 10
   minHeight: 5
 --- !u!54 &5077083023810088317
@@ -80,8 +80,8 @@ Rigidbody:
   m_GameObject: {fileID: 2362246457872072167}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0.1
-  m_AngularDrag: 0.05
+  m_Drag: 0.05
+  m_AngularDrag: 0.5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

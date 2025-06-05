@@ -202,13 +202,18 @@ public class TestBoidAI : MonoBehaviour
         //so we dont want the boid to hit the floor, like really dont touch the floor,
         RaycastHit hit;
 
-        Debug.DrawRay(transform.position, -Vector3.up * minHeight, Color.red);
-        if (Physics.SphereCast(transform.position, 0.25f, -Vector3.up, out hit, minHeight, hitLayer))
+        //boids shouldnt dive over the player, disable this ground detection when approaching the player
+        Vector3 toPlayer = player.transform.position - transform.position;
+        if (Vector3.Angle(toPlayer.normalized, transform.forward) >= 5f)
         {
-            Debug.Log("send out cast");
-            Debug.Log(hit.collider.name);
-            rb.AddForce(Vector3.up * (minHeight - (transform.position.y - hit.collider.transform.position.y)) * groundAvoidance * Time.deltaTime, ForceMode.Acceleration);
+            Debug.DrawRay(transform.position, -Vector3.up * minHeight, Color.red);
+            if (Physics.SphereCast(transform.position, 0.25f, -Vector3.up, out hit, minHeight, hitLayer))
+            {
+                rb.AddForce(Vector3.up * (minHeight - (transform.position.y - hit.collider.transform.position.y)) * groundAvoidance * Time.deltaTime, ForceMode.Acceleration);
+            }
         }
+
+        
 
         //id say that we have more of a soft cap on the height, so they can breach the limit like a fish out of water
         if (transform.position.y >= maxHeight)
@@ -229,6 +234,6 @@ public class TestBoidAI : MonoBehaviour
 
     void PlayerMagnetism()
     {
-        rb.AddForce((player.transform.position - transform.position) * playerWeight * Time.deltaTime, ForceMode.Acceleration);
+        rb.AddForce((player.transform.position - transform.position).normalized * playerWeight * Time.deltaTime, ForceMode.Acceleration);
     }
 }
