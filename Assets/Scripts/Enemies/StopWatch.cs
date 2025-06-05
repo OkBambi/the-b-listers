@@ -3,13 +3,14 @@ using UnityEngine;
 public class StopWatch : EnemyBase
 {
     [SerializeField] GameObject SpitSac;
-   
+    
     int counter;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         counter = 0;
+        ColorSelection(setColor);
     }
 
     // Update is called once per frame
@@ -27,7 +28,6 @@ public class StopWatch : EnemyBase
         if(counter == 3)
         {
             counter = 0;
-
             SacSpit();
         }
     }
