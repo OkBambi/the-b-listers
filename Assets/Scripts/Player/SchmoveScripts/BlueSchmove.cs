@@ -39,21 +39,21 @@ public class BlueSchmove : MonoBehaviour
                 {
                     attached = true;
                     holderRb = rb;
-                    rb.isKinematic = false;
+                    //rb.isKinematic = false;
                     rb.transform.parent = hit.transform;
                 }
             }
             else
             {
-                if (Physics.Raycast(holderRb.transform.position, holderRb.transform.forward, out hit, pulseRadius, ~ignoreLayer))
+                if (Physics.SphereCast(holderRb.transform.position, pulseRadius, holderRb.transform.forward, out hit, pulseRadius, ~ignoreLayer))
                 {
                     IDamage dmg = hit.collider.GetComponent<IDamage>();
                     StickToHit();
-
-                    //if (dmg != null)
-                    //{
-                    //    dmg.takeDamage(PrimaryColor.OMNI, 2);
-                    //}
+                    if (dmg != null)
+                    {
+                        Debug.Log("NO");
+                        dmg.takeDamage(PrimaryColor.OMNI, 2);
+                    }
                 }
                 isStuck = true;
                 StartCoroutine(Pulse());
@@ -85,12 +85,11 @@ public class BlueSchmove : MonoBehaviour
             pulsesDone++;
         }
         Destroy(rb.gameObject);
-        trial = false;
+        isStuck = false;
     }
 
     void StickToHit()
     {
 
-        
     }
 }
