@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -70,12 +71,13 @@ public class TestBoidAI : EnemyBase
             //testing condition
             player = GameObject.FindGameObjectWithTag("Player");
         }
-
-            
-
-
             //finding other boids
             UpdateBoidAwareness();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(NoiseWeights());
     }
 
     // Update is called once per frame
@@ -87,7 +89,7 @@ public class TestBoidAI : EnemyBase
         StageAwareness();
 
         //apply noise
-        NoiseWeights();
+        //we apply noise through a coroutine
 
         //the boids should not touch eachother
         //the boids should move in alignment with the group
@@ -155,14 +157,18 @@ public class TestBoidAI : EnemyBase
         }
     }
 
-    void NoiseWeights()
+    IEnumerator NoiseWeights()
     {
-        separationNoise = Random.Range(noiseMin, noiseMax);
-        alignmentNoise = Random.Range(noiseMin, noiseMax);
-        cohesionNoise = Random.Range(noiseMin, noiseMax);  
-        stageNoise = Random.Range(noiseMin, noiseMax);
-        playerNoise = Random.Range(noiseMin, noiseMax);
+        while (this.isActiveAndEnabled)
+        {
+            separationNoise = Random.Range(noiseMin, noiseMax);
+            alignmentNoise = Random.Range(noiseMin, noiseMax);
+            cohesionNoise = Random.Range(noiseMin, noiseMax);
+            stageNoise = Random.Range(noiseMin, noiseMax);
+            playerNoise = Random.Range(noiseMin, noiseMax);
 
+            yield return new WaitForSeconds(Random.Range(2f, 5f));
+        }
     }
 
     void ConstantMovement()
@@ -189,7 +195,7 @@ public class TestBoidAI : EnemyBase
 
         //boids shouldnt dive over the player, disable this ground detection when approaching the player
         Vector3 toPlayer = player.transform.position - transform.position;
-        if (Vector3.Angle(toPlayer.normalized, transform.forward) >= 5f)
+        if (Vector3.Angle(toPlayer.normalized, transform.forward) <= 5f)
         {
             minHeight = 2f;
         }

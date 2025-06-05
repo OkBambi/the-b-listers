@@ -61,12 +61,14 @@ MonoBehaviour:
   protectedRange: 3
   visualRange: 20
   minSpeed: 7.5
-  maxSpeed: 15
+  maxSpeed: 12.5
   separationWeight: 3
-  alignmentWeight: 0
-  cohesionWeight: 0.01
+  alignmentWeight: 1
+  cohesionWeight: 0.5
   stageWeight: 5
-  playerWeight: 2000
+  playerWeight: 1000
+  noiseMin: 0.5
+  noiseMax: 1.5
   groundAvoidance: 100
   skyAvoidance: 25
   maxHeight: 10
