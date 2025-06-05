@@ -15,10 +15,11 @@ public class BlueSchmove : MonoBehaviour
     [SerializeField] float pulseSpeed;
     [SerializeField] float stickySpeed;
 
+
     bool activated, attached;
     int pulsesDone;
-    int maxPulses = 3;
     Rigidbody holderRb;
+    int maxPulses = 3;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -49,10 +50,10 @@ public class BlueSchmove : MonoBehaviour
                     IDamage dmg = hit.collider.GetComponent<IDamage>();
                     StickToHit();
 
-                    if (dmg != null)
-                    {
-                        dmg.takeDamage(PrimaryColor.OMNI, 2);
-                    }
+                    //if (dmg != null)
+                    //{
+                    //    dmg.takeDamage(PrimaryColor.OMNI, 2);
+                    //}
                 }
                 StartCoroutine(Pulse());
                 activated = false;
@@ -60,6 +61,7 @@ public class BlueSchmove : MonoBehaviour
             }
         }
     }
+
 
     public void Activate()
     {
@@ -71,6 +73,7 @@ public class BlueSchmove : MonoBehaviour
     {
         while (pulsesDone < maxPulses)
         {
+            rb.position = rb.gameObject.transform.parent.position;
             model.material.color = Color.red;
             yield return new WaitForSeconds(timeBetweenPulses);
             model.material.color = Color.white;

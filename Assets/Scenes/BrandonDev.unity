@@ -188,7 +188,12 @@ MonoBehaviour:
   weapon: {fileID: 804753430}
   colorSwapper: {fileID: 29013497}
   schmover: {fileID: 29013496}
+  arm: {fileID: 0}
+  cameraSpring: {fileID: 0}
   currentColor: 0
+  canMove: 0
+  canCam: 0
+  canAction: 0
 --- !u!4 &29013499
 Transform:
   m_ObjectHideFlags: 0
@@ -361,6 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0a103c26e0caaf49bc14cdd3cd4bc19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   rb: {fileID: 154733986}
   ignoreLayer:
     serializedVersion: 2
@@ -1440,6 +1446,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sticky
       objectReference: {fileID: 0}
+    - target: {fileID: 3894515733671336552, guid: a740b1abc3084d44b8ea37a8483dd656, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6618629636542978020, guid: a740b1abc3084d44b8ea37a8483dd656, type: 3}
       propertyPath: m_IsKinematic
       value: 0
@@ -1454,7 +1464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7616235035785350638, guid: a740b1abc3084d44b8ea37a8483dd656, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.25
+      value: 8.7
       objectReference: {fileID: 0}
     - target: {fileID: 7616235035785350638, guid: a740b1abc3084d44b8ea37a8483dd656, type: 3}
       propertyPath: m_LocalRotation.w
