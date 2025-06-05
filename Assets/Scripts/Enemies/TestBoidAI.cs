@@ -19,9 +19,7 @@ public class TestBoidAI : EnemyBase
     [Header("Speeds")]
     [SerializeField] float minSpeed;
     [SerializeField] float maxSpeed;
-    [SerializeField] float currentSpeed;
 
-    [SerializeField] float rotateSpeed;
     [Space]
     [Header("Weights")]
     [SerializeField] float separationWeight = 8f;
@@ -30,8 +28,18 @@ public class TestBoidAI : EnemyBase
     [SerializeField] float stageWeight = 0.5f;
     [SerializeField] float playerWeight = 1f;
 
-    //[SerializeField] float avoidanceWeight = 5.0f;
+    [SerializeField] float noiseMin = 0.8f;
+    [SerializeField] float noiseMax = 1.2f;
+
+    private float separationNoise = 1.2f;
+    private float alignmentNoise = 1.2f;
+    private float cohesionNoise = 1.2f;
+    private float stageNoise = 1.2f;
+    private float playerNoise = 1.2f;
+
+    
     [Space]
+    [Header("Constraints")]
     [SerializeField] float groundAvoidance = 10f;
     [SerializeField] float skyAvoidance = 2f;
 
@@ -78,6 +86,9 @@ public class TestBoidAI : EnemyBase
         //they should also stay on stage
         StageAwareness();
 
+        //apply noise
+        NoiseWeights();
+
         //the boids should not touch eachother
         //the boids should move in alignment with the group
         //the boids should stay near the group
@@ -117,7 +128,7 @@ public class TestBoidAI : EnemyBase
             //loop through the boids and see how close each one is to this boid
             //if the boid is too close, move away
             if (distanceToBoid <= protectedRange)
-                rb.AddForce((((transform.position - boid.position) * protectedRange) - (transform.position - boid.position)) * separationWeight * Time.deltaTime, ForceMode.Acceleration);
+                rb.AddForce((((transform.position - boid.position) * protectedRange) - (transform.position - boid.position)) * separationWeight * separationNoise * Time.deltaTime, ForceMode.Acceleration);
             
 
             if (distanceToBoid <= visualRange)
@@ -127,22 +138,31 @@ public class TestBoidAI : EnemyBase
                 ++boidsInRange;
             }
 
-
             if (boidsInRange > 0)
             {
                 //Alignment
                 //calculate the average velocity of all the boids
                 Vector3 averageVelocity = velocityTotal / boidsInRange;
                 //using the average velocity, move the boid in that direction
-                rb.AddForce(averageVelocity * separationWeight * Time.deltaTime, ForceMode.Acceleration);
+                rb.AddForce(averageVelocity * alignmentWeight * alignmentNoise * Time.deltaTime, ForceMode.Acceleration);
 
                 //Cohesion
                 //get the average location of all the boids
                 Vector3 averageLocation = totalLocations / boidsInRange;
                 //move the boid towards the average location
-                rb.AddForce((averageLocation - transform.position) * cohesionWeight * Time.deltaTime, ForceMode.Acceleration);
+                rb.AddForce((averageLocation - transform.position) * cohesionWeight * cohesionNoise * Time.deltaTime, ForceMode.Acceleration);
             }
         }
+    }
+
+    void NoiseWeights()
+    {
+        separationNoise = Random.Range(noiseMin, noiseMax);
+        alignmentNoise = Random.Range(noiseMin, noiseMax);
+        cohesionNoise = Random.Range(noiseMin, noiseMax);  
+        stageNoise = Random.Range(noiseMin, noiseMax);
+        playerNoise = Random.Range(noiseMin, noiseMax);
+
     }
 
     void ConstantMovement()
@@ -171,15 +191,17 @@ public class TestBoidAI : EnemyBase
         Vector3 toPlayer = player.transform.position - transform.position;
         if (Vector3.Angle(toPlayer.normalized, transform.forward) >= 5f)
         {
-            Debug.DrawRay(transform.position, -Vector3.up * minHeight, Color.red);
-            if (Physics.SphereCast(transform.position, 0.25f, -Vector3.up, out hit, minHeight, hitLayer))
-            {
-                rb.AddForce(Vector3.up * (minHeight - (transform.position.y - hit.collider.transform.position.y)) * groundAvoidance * Time.deltaTime, ForceMode.Acceleration);
-            }
+            minHeight = 2f;
+        }
+        else
+        {
+            minHeight = 5f;
         }
 
-        
-
+        if (transform.position.y <= minHeight)
+        {
+            rb.AddForce(Vector3.up * (minHeight - transform.position.y) * groundAvoidance * Time.deltaTime, ForceMode.Acceleration);
+        }
         //id say that we have more of a soft cap on the height, so they can breach the limit like a fish out of water
         if (transform.position.y >= maxHeight)
         {
@@ -191,15 +213,15 @@ public class TestBoidAI : EnemyBase
         #region Staying on Stage
 
         //THIS WORKS
-        if (Vector3.Distance(stageGround.transform.position, transform.position) >= stageGround.transform.localScale.x * 4.5)
-            rb.AddForce((stageGround.transform.position - transform.position) * stageWeight * Time.deltaTime, ForceMode.Acceleration);
+        if (Vector3.Distance(stageGround.transform.position, transform.position) >= stageGround.transform.localScale.x * 0.45)
+            rb.AddForce((stageGround.transform.position - transform.position) * stageWeight * stageNoise * Time.deltaTime, ForceMode.Acceleration);
 
         #endregion
     }
 
     void PlayerMagnetism()
     {
-        rb.AddForce((player.transform.position - transform.position).normalized * playerWeight * Time.deltaTime, ForceMode.Acceleration);
+        rb.AddForce((player.transform.position - transform.position).normalized * playerWeight * playerNoise * Time.deltaTime, ForceMode.Acceleration);
     }
 
     private void OnDestroy()
