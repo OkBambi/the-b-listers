@@ -4,6 +4,7 @@ using UnityEngine.InputSystem.HID;
 public class StickyMechanics : MonoBehaviour
 {
     bool stuck;
+    int dmgAmount;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,7 +17,7 @@ public class StickyMechanics : MonoBehaviour
         
     }
 
-    public bool getStuckVal()
+    public bool GetStuckVal()
     {
         return stuck;
     }
@@ -37,33 +38,32 @@ public class StickyMechanics : MonoBehaviour
         }
         else
         {
-            dmgOnEnter(other);
+            DmgOnEnter(other);
         }
     }
 
-    private void dmgOnEnter(Collider other)
+
+
+    private void DmgOnEnter(Collider other)
     {
         IDamage dmg = other.gameObject.GetComponent<IDamage>();
         if (dmg != null)
         {
-            dmg.takeDamage(PrimaryColor.OMNI, 2);
+            dmg.takeDamage(PrimaryColor.OMNI, dmgAmount);
         }
     }
 
-    public void dmgParent()
+    public void DmgParent()
     {
         IDamage dmg = transform.parent.GetComponent<IDamage>();
         if (dmg != null)
         {
-            dmg.takeDamage(PrimaryColor.OMNI, 2);
+            dmg.takeDamage(PrimaryColor.OMNI, dmgAmount);
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public void SetPulseDmg(int dmg)
     {
-        if (other.isTrigger)
-        {
-            return;
-        }
+        dmgAmount = dmg;
     }
 }
