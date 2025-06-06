@@ -1301,6 +1301,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4cd28803f765d34baa178b28d4d51e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BASE_COMBO_DECAY: 0
+  totalScore: 0
+  currentComboScore: 0
+  comboGrade: 0
+  comboHoldTimer: 0
+  currentMult: 0
 --- !u!4 &371824703
 Transform:
   m_ObjectHideFlags: 0
@@ -2856,7 +2862,7 @@ MonoBehaviour:
     m_Bits: 72
   damage: 1
   bulletSpeed: 40
-  bulletLifeTime: 3
+  bulletLifeTime: 2
   tapThreshold: 0.14
   fireRate: 0.08
   rb: {fileID: 1626997533}

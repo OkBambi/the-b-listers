@@ -46,7 +46,7 @@ public class Dagger : MonoBehaviour
                 float reflectionAngle = 180f - angleOfIncidence;
 
                 //step 3: rotate dagger
-                transform.Rotate(Vector3.right, angleOfIncidence);
+                transform.Rotate(Vector3.right, reflectionAngle);
             }
 
             //check for damage
