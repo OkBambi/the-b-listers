@@ -12,20 +12,24 @@ public class BlueSchmove : MonoBehaviour
 
     [SerializeField] float blueWindup;
     [SerializeField] float timeBetweenPulses;
-    [SerializeField] float pulseRadius;
+    [SerializeField] float pulseMaxRadius;
     [SerializeField] float pulseSpeed;
     [SerializeField] float stickySpeed;
 
 
-    bool activated, attached, isStuck;
+    bool activated, startPulseTimer, isStuck;
     int pulsesDone;
     Rigidbody holderRb;
     int maxPulses = 3;
+    float origRadius;
+    SphereCollider sphereCollider;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         activated = true;//test for now
         rb.linearVelocity = new Vector3(0,0,stickySpeed);
+        sphereCollider = rb.gameObject.GetComponent<SphereCollider>();
+        origRadius = sphereCollider.radius;
     }
 
     // Update is called once per frame
@@ -42,14 +46,23 @@ public class BlueSchmove : MonoBehaviour
             }
             else
             {
-                rb.gameObject.GetComponent<SphereCollider>().radius += pulseSpeed * Time.deltaTime;
-                //IDamage dmg = hit.collider.GetComponent<IDamage>();
-                //if (dmg != null)
-                //{
-                //    Debug.Log("NO");
-                //    dmg.takeDamage(PrimaryColor.OMNI, 2);
-                //}
-                StartCoroutine(Pulse());
+                if (sphereCollider.radius < pulseMaxRadius && !startPulseTimer)
+                {
+                    sphereCollider.radius += pulseSpeed * Time.deltaTime;
+                }
+                else
+                {
+                    if(!startPulseTimer)
+                    {
+                        StartCoroutine(Pulse());
+                    }
+                }
+                    //IDamage dmg = hit.collider.GetComponent<IDamage>();
+                    //if (dmg != null)
+                    //{
+                    //    Debug.Log("NO");
+                    //    dmg.takeDamage(PrimaryColor.OMNI, 2);
+                    //}
                 //activated = false;
             }
         }
@@ -114,15 +127,9 @@ public class BlueSchmove : MonoBehaviour
 
     IEnumerator Pulse()
     {
-        while (pulsesDone < maxPulses)
-        {
-            model.material.color = Color.red;
-            yield return new WaitForSeconds(timeBetweenPulses);
-            model.material.color = Color.white;
-            yield return new WaitForSeconds(timeBetweenPulses);
-            pulsesDone++;
-        }
-        Destroy(rb.gameObject);
-        isStuck = false;
+        startPulseTimer = true;
+        sphereCollider.radius = origRadius;
+        yield return new WaitForSeconds(timeBetweenPulses);
+        startPulseTimer = false;
     }
 }
