@@ -3,7 +3,7 @@ using UnityEngine.InputSystem.HID;
 
 public class StickToObject : MonoBehaviour
 {
-    bool stuck;
+    public bool stuck;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

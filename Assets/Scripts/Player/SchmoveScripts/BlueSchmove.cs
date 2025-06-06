@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
 
@@ -32,6 +33,26 @@ public class BlueSchmove : MonoBehaviour
     {
         if (activated)
         {
+            if(!isStuck)
+            {
+                if (rb.gameObject.GetComponent<StickToObject>().stuck)
+                {
+                    isStuck = true;
+                }
+            }
+            else
+            {
+                rb.gameObject.GetComponent<SphereCollider>().radius += pulseSpeed * Time.deltaTime;
+                //IDamage dmg = hit.collider.GetComponent<IDamage>();
+                //if (dmg != null)
+                //{
+                //    Debug.Log("NO");
+                //    dmg.takeDamage(PrimaryColor.OMNI, 2);
+                //}
+                StartCoroutine(Pulse());
+                //activated = false;
+            }
+        }
             //if (!attached)
             //{
             //    RaycastHit hit;
@@ -79,27 +100,10 @@ public class BlueSchmove : MonoBehaviour
             //    activated = false;
             //    attached = false;
             //}
-        }
         //if (isStuck)
         //{
         //    rb.transform.position = rb.transform.parent.localPosition;
         //}
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("does it work");
-        if (other.isTrigger)
-        {
-            return;
-        }
-        Stuck();
-    }
-
-    public void Stuck()
-    {
-        isStuck = true;
-        rb.linearVelocity = new Vector3(0, 0, 0);
     }
 
     public void Activate()
@@ -120,10 +124,5 @@ public class BlueSchmove : MonoBehaviour
         }
         Destroy(rb.gameObject);
         isStuck = false;
-    }
-
-    void StickToHit()
-    {
-
     }
 }
