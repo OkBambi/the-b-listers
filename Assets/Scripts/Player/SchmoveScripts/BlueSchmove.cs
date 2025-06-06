@@ -39,7 +39,7 @@ public class BlueSchmove : MonoBehaviour
         {
             if(!isStuck)
             {
-                if (rb.gameObject.GetComponent<StickToObject>().stuck)
+                if (rb.GetComponent<StickyMechanics>().getStuckVal())
                 {
                     isStuck = true;
                 }
@@ -54,6 +54,7 @@ public class BlueSchmove : MonoBehaviour
                 {
                     if(!startPulseTimer)
                     {
+                        rb.gameObject.GetComponent<StickyMechanics>().dmgParent();
                         StartCoroutine(Pulse());
                     }
                 }
