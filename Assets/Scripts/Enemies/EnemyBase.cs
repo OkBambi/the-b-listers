@@ -13,6 +13,7 @@ public class EnemyBase : MonoBehaviour
     void Start()
     {
         ColorSelection(setColor);
+        UpdateBoidAwareness();
     }
 
     protected void ColorSelection(PrimaryColor newColor)
@@ -38,5 +39,24 @@ public class EnemyBase : MonoBehaviour
                 nameStr = "Omni";
                 break;
         }
+    }
+
+    //CALL THIS METHOD IN THE START OF ALL ENEMIES
+    protected void UpdateBoidAwareness()
+    {
+        //this will update all other active boids with this current boid
+        //for enemies that dont care about boids, they need to update all the boids,
+        //but they wont have a boid list themselves, so they dont care to begin with
+
+        //this basically means that all enemies will need to call this function on startup so that boids care about boids and other enemies,
+        //but non boids dont care
+
+        BoidAI[] activeboids = FindObjectsByType<BoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        for (int boidCount = 0; boidCount < activeboids.Length; boidCount++)
+        {
+            activeboids[boidCount].boids.Add(GetComponent<Rigidbody>());
+        }
+
+
     }
 }

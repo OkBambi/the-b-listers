@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class TestBoidAI : EnemyBase
+public class BoidAI : EnemyBase
 {
     [Header("Components")]
     [SerializeField] Rigidbody rb;
     public List<Rigidbody> boids;
+    public List<Rigidbody> otherEnemies;
     [SerializeField] LayerMask hitLayer;
     [SerializeField] GameObject stageGround;
     [SerializeField] GameObject player;
@@ -38,7 +39,6 @@ public class TestBoidAI : EnemyBase
     private float stageNoise = 1.2f;
     private float playerNoise = 1.2f;
 
-    
     [Space]
     [Header("Constraints")]
     [SerializeField] float groundAvoidance = 10f;
@@ -51,7 +51,6 @@ public class TestBoidAI : EnemyBase
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        ColorSelection(setColor);
         //finding the ground
         GameObject[] objects = FindObjectsByType<GameObject>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         foreach(GameObject potentialGround in objects)
@@ -71,12 +70,12 @@ public class TestBoidAI : EnemyBase
             //testing condition
             player = GameObject.FindGameObjectWithTag("Player");
         }
-            //finding other boids
-            UpdateBoidAwareness();
     }
 
     private void Start()
     {
+        ColorSelection(setColor);
+        base.UpdateBoidAwareness();
         StartCoroutine(NoiseWeights());
     }
 
@@ -106,15 +105,6 @@ public class TestBoidAI : EnemyBase
         LookAtMoveDirection();
     }
 
-    void UpdateBoidAwareness()
-    {
-        TestBoidAI[] activeboids = FindObjectsByType<TestBoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-        for (int boidCount = 0; boidCount < activeboids.Length; boidCount++)
-        {
-            activeboids[boidCount].boids.Add(rb);
-        }
-    }
-
     void BoidMovement()
     {
         //variable  initialization
@@ -131,7 +121,7 @@ public class TestBoidAI : EnemyBase
             //if the boid is too close, move away
             if (distanceToBoid <= protectedRange)
                 rb.AddForce((((transform.position - boid.position) * protectedRange) - (transform.position - boid.position)) * separationWeight * separationNoise * Time.deltaTime, ForceMode.Acceleration);
-            
+          
 
             if (distanceToBoid <= visualRange)
             {
@@ -196,23 +186,16 @@ public class TestBoidAI : EnemyBase
         //boids shouldnt dive over the player, disable this ground detection when approaching the player
         Vector3 toPlayer = player.transform.position - transform.position;
         if (Vector3.Angle(toPlayer.normalized, transform.forward) <= 5f)
-        {
             minHeight = 2f;
-        }
         else
-        {
             minHeight = 5f;
-        }
+
 
         if (transform.position.y <= minHeight)
-        {
             rb.AddForce(Vector3.up * (minHeight - transform.position.y) * groundAvoidance * Time.deltaTime, ForceMode.Acceleration);
-        }
         //id say that we have more of a soft cap on the height, so they can breach the limit like a fish out of water
         if (transform.position.y >= maxHeight)
-        {
             rb.AddForce(-Vector3.up * (transform.position.y - maxHeight) * skyAvoidance * Time.deltaTime, ForceMode.Acceleration);
-        }
 
         #endregion
 
@@ -232,7 +215,7 @@ public class TestBoidAI : EnemyBase
 
     private void OnDestroy()
     {
-        TestBoidAI[] activeboids = FindObjectsByType<TestBoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        BoidAI[] activeboids = FindObjectsByType<BoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         for (int boidCount = 0; boidCount < activeboids.Length; boidCount++)
         {
             activeboids[boidCount].boids.Remove(rb);
