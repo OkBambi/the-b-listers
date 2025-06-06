@@ -92,7 +92,10 @@ public class EnemyManager : MonoBehaviour
     #region EnemySpawning
     public void SpawnEnemy()
     {
+        //safety checks
         if (!isSpawningEnemies) return;
+        if (currentEC >= AEC) return;
+
         Vector3 spawnLocation = FindAndValidateSpawnLocation();
 
         //retry in one second if theres no good spots right now
@@ -137,7 +140,6 @@ public class EnemyManager : MonoBehaviour
                 //else we miss the platform or hit an enemy, try a different spot
             }
             if (attemptCount > 1000) break;
-
         }
         while (!isValidSpawn);
 
