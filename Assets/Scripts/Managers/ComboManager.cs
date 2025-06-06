@@ -50,16 +50,6 @@ public class ComboManager : MonoBehaviour
     {
         CheckGrade();
 
-        //lua equiv
-        //if count and grade and count.Value > 0 then
-        //    local multiplier = decayMultipliers[grade.Value] or 0
-        //    if multiplier > 0 then
-        //        local decayAmount = DECAY_BASE_RATE * multiplier * deltaTime
-        //        count.Value = math.max(0, count.Value - decayAmount)
-        //        updateComboGrade(player)
-        //    end
-        //end
-
         if (currentComboScore > 0)
         {
             float mult = comboMults[(int)comboGrade];
@@ -86,7 +76,8 @@ public class ComboManager : MonoBehaviour
     public void AddScore(float amount)
     {
         currentComboScore += amount * comboMults[(int)comboGrade];
-        totalScore += amount * comboMults[(int)comboGrade]
+        currentComboScore = Mathf.Clamp(currentComboScore, 0, 1500);
+        totalScore += amount * comboMults[(int)comboGrade];
     }
 }
 public enum ComboGrade
