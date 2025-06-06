@@ -50,6 +50,19 @@ public class ComboManager : MonoBehaviour
         8f     //P
     };
 
+    static Dictionary<string, string> comboWords = new Dictionary<string, string>()
+    {
+        {"", ""},
+        {"D", "EADLY"},
+        {"C", "HROMATIC"},
+        {"B", "LOODTHIRSTY"},
+        {"A", "NNIHILATOR"},
+        {"S", "PECTRAL"},
+        {"SS", "UPREME"},
+        {"SSS", "ADISTIC"},
+        {"P", "RIMARY"}
+    };
+
     void Start()
     {
         instance = this;
@@ -110,7 +123,7 @@ public enum ComboGrade
     D = 1,      //DEADLY
     C = 2,      //CHROMATIC
     B = 3,      //BLOODTHIRSTY
-    A = 4,      //ANNIHILATE
+    A = 4,      //ANNIHILATOR
     S = 5,      //SPECTRAL
     SS = 6,     //SSUPREME
     SSS = 7,    //SSSADISTIC
