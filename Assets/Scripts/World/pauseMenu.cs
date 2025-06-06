@@ -31,6 +31,7 @@ public class pauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
         GameObject.FindFirstObjectByType<Player>().canAction = true;
         GameObject.FindFirstObjectByType<Player>().canCam = true;
         GameObject.FindFirstObjectByType<Player>().canAction = true;
@@ -42,10 +43,10 @@ public class pauseMenu : MonoBehaviour
     public void Paused()
     {
         pauseMenuUI.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
         GameObject.FindFirstObjectByType<Player>().canAction = false;
         GameObject.FindFirstObjectByType<Player>().canCam = false;
         GameObject.FindFirstObjectByType<Player>().canAction = false;
-        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Time.timeScale = 0.001f;
         paused = true;
