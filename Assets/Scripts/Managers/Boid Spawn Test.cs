@@ -16,5 +16,9 @@ public class BoidSpawnTest : MonoBehaviour
         {
             Instantiate(boids);
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            EnemyManager.instance.SpawnFirstEnemy();
+        }
     }
 }

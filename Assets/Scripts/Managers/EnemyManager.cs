@@ -90,6 +90,14 @@ public class EnemyManager : MonoBehaviour
 
 
     #region EnemySpawning
+    //i still need to add the spawning buffer/animation
+
+    //call this to actually start the enemies commin (like starting the game or picking up the dagger
+    public void SpawnFirstEnemy()
+    {
+        SpawnEnemy();
+    }
+
     public void SpawnEnemy()
     {
         //safety checks
