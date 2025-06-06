@@ -3,12 +3,12 @@ using UnityEngine;
 public interface IAEC
 {
     //call this when an AEC enemy spawn
-    void OnAECAwake()
+    public void OnAECAwake()
     {
         EnemyManager.instance.OnAECAwake();
     }
     //call this when an AEC enemy dies
-    void OnAECDestroy()
+    public void OnAECDestroy()
     {
         EnemyManager.instance.OnAECDestroy();
     }
