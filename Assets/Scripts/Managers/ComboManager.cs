@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class ComboManager : MonoBehaviour
 {
     public static ComboManager instance;
 
+    [Header("Stats")]
     [SerializeField] float BASE_COMBO_DECAY = 20;
     [Space]
     [SerializeField] float totalScore;
@@ -14,6 +17,12 @@ public class ComboManager : MonoBehaviour
     [SerializeField] ComboGrade comboGrade;
     //[SerializeField] float comboHoldTimer;
     //[SerializeField] float currentMult;
+
+    [Header("UI")]
+    [SerializeField] TextMeshProUGUI comboGradeUGUI;
+    [SerializeField] TextMeshProUGUI comboMultUGUI;
+    [SerializeField] TextMeshProUGUI totalScoreUGUI;
+    [SerializeField] Image comboBar;
 
     static List<int> comboFloors = new List<int>() //score required for each grade
     {
@@ -49,16 +58,13 @@ public class ComboManager : MonoBehaviour
     void Update()
     {
         CheckGrade();
+        UIShenanigans();
 
         if (currentComboScore > 0)
         {
             float mult = comboMults[(int)comboGrade];
-
-            if (mult > 0)
-            {
-                float decayAmount = BASE_COMBO_DECAY * mult * Time.deltaTime;
-                currentComboScore = Mathf.Clamp(currentComboScore - decayAmount, 0, currentComboScore);
-            }
+            float decayAmount = BASE_COMBO_DECAY * mult * Time.deltaTime;
+            currentComboScore = Mathf.Clamp(currentComboScore - decayAmount, 0, currentComboScore);
         }
 
         if (Input.GetKeyDown(KeyCode.G))
@@ -84,6 +90,18 @@ public class ComboManager : MonoBehaviour
         currentComboScore += amount * comboMults[(int)comboGrade];
         currentComboScore = Mathf.Clamp(currentComboScore, 0, 2500);
         totalScore += amount * comboMults[(int)comboGrade];
+    }
+
+    void UIShenanigans()
+    {
+        //combo grade. we need to separate the ComboGrade letter from the rest of the word
+        if(comboGrade > 0)
+        {
+            
+        }
+
+        totalScoreUGUI.text = totalScore.ToString();
+        comboMultUGUI.text = (comboMults[(int)comboGrade].ToString() + "x");
     }
 }
 public enum ComboGrade
