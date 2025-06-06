@@ -24,16 +24,13 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
       instance = this;
-        player = GameObject.FindGameObjectWithTag("Player");
-        PlayerMovement = player.GetComponent<PlayerMovement>();
-
         TimeScaleOrigin = Time.timeScale;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (MenuActive == null)
             {
@@ -52,6 +49,9 @@ public class GameManager : MonoBehaviour
     {
         isPaused = !isPaused;
 
+        GameObject.FindFirstObjectByType<Player>().canAction = false;
+        GameObject.FindFirstObjectByType<Player>().canCam = false;
+        GameObject.FindFirstObjectByType<Player>().canAction = false;
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -62,6 +62,9 @@ public class GameManager : MonoBehaviour
     {
         isPaused = !isPaused;
 
+        GameObject.FindFirstObjectByType<Player>().canAction = true;
+        GameObject.FindFirstObjectByType<Player>().canCam = true;
+        GameObject.FindFirstObjectByType<Player>().canAction = true;
         Time.timeScale = TimeScaleOrigin;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -72,12 +75,7 @@ public class GameManager : MonoBehaviour
     public void LoadSettings()
     {
 
-    }
-
-    public void OnApplicationQuit()
-    {
-        Application.Quit();
-    }
+    }   
 
     public void OnLoseCondition()
     {
@@ -102,5 +100,8 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
-
+    public void OnApplicationQuit()
+    {
+        Application.Quit();
+    }
 }
