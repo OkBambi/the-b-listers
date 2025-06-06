@@ -12,8 +12,8 @@ public class ComboManager : MonoBehaviour
     [SerializeField] float totalScore;
     [SerializeField] float currentComboScore;
     [SerializeField] ComboGrade comboGrade;
-    [SerializeField] float comboHoldTimer;
-    [SerializeField] float currentMult;
+    //[SerializeField] float comboHoldTimer;
+    //[SerializeField] float currentMult;
 
     static List<int> comboFloors = new List<int>() //score required for each grade
     {
@@ -30,7 +30,7 @@ public class ComboManager : MonoBehaviour
 
     static List<float> comboMults = new List<float>() //used for both score mult and decay mult
     {
-        0f,    //none
+        1f,    //none
         1f,    //D
         1.25f, //C
         1.5f,  //B
@@ -57,8 +57,14 @@ public class ComboManager : MonoBehaviour
             if (mult > 0)
             {
                 float decayAmount = BASE_COMBO_DECAY * mult * Time.deltaTime;
-                currentComboScore = Mathf.Clamp(currentComboScore, 0, currentComboScore);
+                currentComboScore = Mathf.Clamp(currentComboScore - decayAmount, 0, currentComboScore);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            print("Adding score");
+            AddScore(100);
         }
     }
 
@@ -76,7 +82,7 @@ public class ComboManager : MonoBehaviour
     public void AddScore(float amount)
     {
         currentComboScore += amount * comboMults[(int)comboGrade];
-        currentComboScore = Mathf.Clamp(currentComboScore, 0, 1500);
+        currentComboScore = Mathf.Clamp(currentComboScore, 0, 2500);
         totalScore += amount * comboMults[(int)comboGrade];
     }
 }
