@@ -1272,6 +1272,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6541328089830894451, guid: 54cd83a611bd25d4aa146d1e1f2891d6, type: 3}
   m_PrefabInstance: {fileID: 173469880}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &371824701
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 371824703}
+  - component: {fileID: 371824702}
+  m_Layer: 0
+  m_Name: ComboManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &371824702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371824701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4cd28803f765d34baa178b28d4d51e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &371824703
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371824701}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &411986071
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2821,7 +2865,7 @@ MonoBehaviour:
   bulletAmount: 20
   spreadAngle: 25
   rocketJumpAngle: 25
-  rocketJumpForce: 20
+  rocketJumpForce: 18
   maxRocketJumps: 2
   currentRocketJumps: 0
 --- !u!1 &753234221
@@ -6865,3 +6909,4 @@ SceneRoots:
   - {fileID: 1556284016}
   - {fileID: 1183099603}
   - {fileID: 5051117997620746442}
+  - {fileID: 371824703}
