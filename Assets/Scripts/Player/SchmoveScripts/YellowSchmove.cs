@@ -58,6 +58,8 @@ public class YellowSchmove : MonoBehaviour
                     beam.transform.localScale = new Vector3(Mathf.Clamp(chargeLevel * 2, 1f, 50f), 100, Mathf.Clamp(chargeLevel * 5, 1f, 50f));
                     beam.railgunDmg = chargeLevel * railgunDmg;
                     rb.AddForce(shootingPoint.forward * chargeLevel * railgunKnockback, ForceMode.Impulse);
+
+                    ComboManager.instance.AddScore(-100 * chargeLevel); //may need to change this later
                 }
 
                 Time.timeScale = originalTimeScale;
