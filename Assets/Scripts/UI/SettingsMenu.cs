@@ -7,9 +7,8 @@ using TMPro;
 
 public class SettingsMenu : MonoBehaviour
 {
-    //[SerializeField] TextMeshProUGUI text;
-
     //audio variable
+    public AudioMixer audioMixer;
 
     //res stuff
     public TMP_Dropdown resolutionDropdown;
@@ -31,7 +30,7 @@ public class SettingsMenu : MonoBehaviour
             string option = resolutions[i].width + " x " + resolutions[i].height;   //a nicely formated string will be crated for them
             options.Add(option);    //then gets added to the list
 
-            if (resolutions[i].width == Screen.currentResolution.width && 
+            if (resolutions[i].width == Screen.currentResolution.width &&
                 resolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionIndex = i;
@@ -44,10 +43,13 @@ public class SettingsMenu : MonoBehaviour
 
 
     //area for vol
-
+    public void SetVolume(float volume)
+    {
+        audioMixer.SetFloat("Volume", volume);
+    }
 
     //if wanting graphics
-    public void SetQuality (int qualityIndex)
+    public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
     }
