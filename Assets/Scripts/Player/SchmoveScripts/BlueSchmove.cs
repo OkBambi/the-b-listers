@@ -8,7 +8,7 @@ public class BlueSchmove : MonoBehaviour
 {
     [SerializeField] Rigidbody rb;
 
-    //[SerializeField] float blueWindup;
+    [SerializeField] float blueWindup;
     [SerializeField] float stickySpeed;
     [SerializeField] float timeBetweenPulses;
     [SerializeField] float pulseMaxRadius;
@@ -19,10 +19,10 @@ public class BlueSchmove : MonoBehaviour
 
     [SerializeField] Transform shootingPoint;
 
-    bool activated, startPulseTimer, isStuck;
+    bool activated, startPulseTimer, isStuck, primed;
     int pulsesDone;
     float origRadius;
-    //float currentWindUp;
+    float currentWindUp;
     SphereCollider sphereCollider;
     GameObject stickyCopy;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -36,35 +36,46 @@ public class BlueSchmove : MonoBehaviour
     {
         if (activated)
         {
-            if (!isStuck)
+            currentWindUp += Time.deltaTime;
+            if(!primed)
             {
-                if (rb.gameObject.GetComponent<StickyMechanics>().GetStuckVal())
+                if(currentWindUp > blueWindup)
                 {
-                    isStuck = true;
+                    WindUp();
                 }
             }
             else
             {
-                if (sphereCollider.radius < pulseMaxRadius && !startPulseTimer)
+                if (!isStuck)
                 {
-                    
-                    sphereCollider.radius += pulseSpeed * Time.deltaTime;
+                    if (rb.gameObject.GetComponent<StickyMechanics>().GetStuckVal())
+                    {
+                        isStuck = true;
+                    }
                 }
                 else
                 {
-                    if(amountOfPulses > pulsesDone)
+                    if (sphereCollider.radius < pulseMaxRadius && !startPulseTimer)
                     {
-                        if (!startPulseTimer)
-                        {
-                            rb.gameObject.GetComponent<StickyMechanics>().DmgParent();
-                            pulsesDone++;
-                            StartCoroutine(Pulse());
-                        }
+
+                        sphereCollider.radius += pulseSpeed * Time.deltaTime;
                     }
                     else
                     {
-                        activated = false;
-                        Destroy(rb.gameObject);
+                        if (amountOfPulses > pulsesDone)
+                        {
+                            if (!startPulseTimer)
+                            {
+                                rb.gameObject.GetComponent<StickyMechanics>().DmgParent();
+                                pulsesDone++;
+                                StartCoroutine(Pulse());
+                            }
+                        }
+                        else
+                        {
+                            Destroy(rb.gameObject);
+                            Reset();
+                        }
                     }
                 }
             }
@@ -73,15 +84,26 @@ public class BlueSchmove : MonoBehaviour
 
     public void Activate()
     {
+        activated = true;
+    }
+
+    private void WindUp()
+    {
         stickyCopy = Instantiate(sticky, shootingPoint.position, Quaternion.identity);
         rb = stickyCopy.GetComponent<Rigidbody>();
         sphereCollider = rb.gameObject.GetComponent<SphereCollider>();
         origRadius = sphereCollider.radius;
         rb.gameObject.GetComponent<StickyMechanics>().SetPulseDmg(pulseDmg);
-        pulsesDone = 0;
         rb.linearVelocity = -shootingPoint.forward * stickySpeed;
-        activated = true;
+        primed = true;
+    }
 
+    private void Reset()
+    {
+        pulsesDone = 0;
+        currentWindUp = 0;
+        primed = false;
+        activated = false;
     }
 
     IEnumerator Pulse()
