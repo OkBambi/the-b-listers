@@ -23,33 +23,55 @@ public class Monk : MonoBehaviour, IDamage
     void Start()
     {
         Casttimer = 0f;
+        StartCoroutine(Cast());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (PlayerInRange)
+        playerDir = GameManager.instance.transform.position - transform.position;
+        agent.SetDestination(GameManager.instance.player.transform.position);
+        if (Casttimer > gongBonkRate)
         {
-            agent.SetDestination(GameManager.instance.player.transform.position);
-            if (Casttimer > gongBonkRate)
-            {
-                Cast();
-            }
-            if (agent.remainingDistance <= agent.stoppingDistance)
-            {
-                FaceTarget();
-            }
+            Cast();
+        }
+        if (agent.remainingDistance <= agent.stoppingDistance)
+        {
+            FaceTarget();
+
         }
     }
 
-    void Cast()
+    IEnumerator Cast()
     {
         //projectile
         Instantiate(wave, transform.position, Quaternion.identity);
-        //if player is in the sphere cast
-        // lock the player color choice for 3 seconds
-        //wait a moment
-        //swap through the colors
+
+        if (PlayerInRange)
+        {
+            //if player is in the sphere cast
+
+            yield return new WaitForSeconds(0.1f);
+            // lock the player color choice for 3 seconds
+            //wait a moment
+            //swap through the colors
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerInRange = false;
+        }
     }
 
     void FaceTarget()
