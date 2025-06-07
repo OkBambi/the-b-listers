@@ -94,6 +94,7 @@ public class ComboManager : MonoBehaviour
     {
         CheckGrade();
         UIShenanigans();
+        //please just let me use LeanTween
         PopUI();
         UIBar();
 
@@ -140,11 +141,6 @@ public class ComboManager : MonoBehaviour
                     comboBar.fillAmount = progress;
                 }
             }
-            else
-            {
-                //safety measure
-                comboBar.fillAmount = 0;
-            }
         }
     }
 
@@ -180,13 +176,6 @@ public class ComboManager : MonoBehaviour
                 float scale = EaseInQuint(1.1f, 1f, t);
                 comboGradeUGUI.rectTransform.localScale = new Vector3(scale, scale, scale);
                 comboMultUGUI.rectTransform.localScale = new Vector3(scale, scale, scale);
-            }
-            //WE'RE FREEEE (do this to ensure it goes back to 1,1,1 and not like 1.001 etc etc)
-            else
-            {
-                isPopping = false;
-                comboGradeUGUI.rectTransform.localScale = Vector3.one;
-                comboMultUGUI.rectTransform.localScale = Vector3.one;
             }
         }
 
