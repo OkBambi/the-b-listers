@@ -249,6 +249,13 @@ public class ComboManager : MonoBehaviour
         popScore = true;
     }
 
+    public void RemoveScore(float amount)
+    {
+        currentComboScore -= amount;
+        totalScore -= amount;
+        popScore = true;
+    }
+
     void UIShenanigans()
     {
         //color stuff
