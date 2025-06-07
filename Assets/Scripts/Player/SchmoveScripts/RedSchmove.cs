@@ -14,6 +14,10 @@ public class RedSchmove : MonoBehaviour, ISchmove
     [SerializeField] float hookDist;
     [SerializeField] float hookForce;
 
+    [Space]
+    [SerializeField] GameObject indicator;
+    GameObject i;
+
     float holdTime;
     bool timeToSlam;
 
@@ -43,7 +47,7 @@ public class RedSchmove : MonoBehaviour, ISchmove
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, hookDist, ~ignoreLayer))
             {
                 Debug.Log(hit.collider.name);
-                //Gizmos.DrawSphere(hit.normal, 30f);
+                i.transform.position = hit.point;
             }
 
             if (holdTime >= hangTime)
@@ -63,6 +67,7 @@ public class RedSchmove : MonoBehaviour, ISchmove
                     rb.AddForce(-transform.up * hookForce, ForceMode.Impulse);
                 }
 
+                Destroy(i);
                 player.canMove = true;
                 player.canAction = true;
             }
@@ -72,6 +77,7 @@ public class RedSchmove : MonoBehaviour, ISchmove
     public void Activate()
     {
         holdTime = 0;
+        i = Instantiate(indicator);
         activated = true;
     }
 }
