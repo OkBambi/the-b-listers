@@ -8,24 +8,27 @@ public class BlueSchmove : MonoBehaviour
 {
     [SerializeField] Rigidbody rb;
 
-    [SerializeField] float blueWindup;
+    //[SerializeField] float blueWindup;
     [SerializeField] float stickySpeed;
     [SerializeField] float timeBetweenPulses;
     [SerializeField] float pulseMaxRadius;
     [SerializeField] float pulseSpeed;
     [SerializeField] float amountOfPulses;
     [SerializeField] int pulseDmg;
+    [SerializeField] GameObject sticky;
+
+    [SerializeField] Transform shootingPoint;
 
     bool activated, startPulseTimer, isStuck;
     int pulsesDone;
-    Rigidbody holderRb;
-    int maxPulses = 3;
     float origRadius;
+    //float currentWindUp;
     SphereCollider sphereCollider;
+    GameObject stickyCopy;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Activate();
+        
     }
 
     // Update is called once per frame
@@ -33,7 +36,7 @@ public class BlueSchmove : MonoBehaviour
     {
         if (activated)
         {
-            if(!isStuck)
+            if (!isStuck)
             {
                 if (rb.gameObject.GetComponent<StickyMechanics>().GetStuckVal())
                 {
@@ -44,6 +47,7 @@ public class BlueSchmove : MonoBehaviour
             {
                 if (sphereCollider.radius < pulseMaxRadius && !startPulseTimer)
                 {
+                    
                     sphereCollider.radius += pulseSpeed * Time.deltaTime;
                 }
                 else
@@ -69,12 +73,15 @@ public class BlueSchmove : MonoBehaviour
 
     public void Activate()
     {
-        pulsesDone = 0;
-        rb.linearVelocity = new Vector3(0, 0, stickySpeed);
+        stickyCopy = Instantiate(sticky, shootingPoint.position, Quaternion.identity);
+        rb = stickyCopy.GetComponent<Rigidbody>();
         sphereCollider = rb.gameObject.GetComponent<SphereCollider>();
         origRadius = sphereCollider.radius;
         rb.gameObject.GetComponent<StickyMechanics>().SetPulseDmg(pulseDmg);
+        pulsesDone = 0;
+        rb.linearVelocity = -shootingPoint.forward * stickySpeed;
         activated = true;
+
     }
 
     IEnumerator Pulse()

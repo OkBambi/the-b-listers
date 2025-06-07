@@ -3,7 +3,7 @@ using UnityEngine.InputSystem.HID;
 
 public class StickyMechanics : MonoBehaviour
 {
-    bool stuck;
+    public bool stuck;
     int dmgAmount;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,6 +35,8 @@ public class StickyMechanics : MonoBehaviour
             Rigidbody rb = transform.GetComponent<Rigidbody>();
             rb.useGravity = false;
             rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            Debug.Log("6");
         }
         else
         {
