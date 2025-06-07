@@ -55,7 +55,7 @@ public class BoidAI : EnemyBase
         GameObject[] objects = FindObjectsByType<GameObject>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         foreach(GameObject potentialGround in objects)
         {
-            if(potentialGround.layer == LayerMask.NameToLayer("Ground"))
+            if(potentialGround.layer == LayerMask.NameToLayer("Ground") || potentialGround.CompareTag("groundTag"))
             {
                 stageGround = potentialGround;
                 break;
@@ -64,7 +64,7 @@ public class BoidAI : EnemyBase
 
         //finding the player
         if (FindAnyObjectByType<Player>() != null)
-            player = FindAnyObjectByType<Player>().gameObject;
+            player = FindAnyObjectByType<PlayerMovement>().gameObject;
         else
         {
             //testing condition

@@ -49,10 +49,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 417695561548203754}
   setColor: 1
-  hp: 10
+  hp: 5
   score: 80
   rb: {fileID: 5077083023810088317}
   boids: []
+  otherEnemies: []
   hitLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -115,11 +116,11 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 1.3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6151354618804541070
 PrefabInstance:
