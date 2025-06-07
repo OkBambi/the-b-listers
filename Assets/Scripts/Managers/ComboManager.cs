@@ -142,6 +142,7 @@ public class ComboManager : MonoBehaviour
             }
             else
             {
+                //safety measure
                 comboBar.fillAmount = 0;
             }
         }
