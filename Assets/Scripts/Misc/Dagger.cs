@@ -11,6 +11,7 @@ public class Dagger : MonoBehaviour
     [SerializeField] PrimaryColor projColor;
 
     Vector3 lastPos;
+    bool reflected;
 
     public void Initialize(PrimaryColor _color, float _speed, float _lifeTime, LayerMask _ignoreMask)
     {
@@ -33,9 +34,10 @@ public class Dagger : MonoBehaviour
         {
             Debug.Log(hit.collider.name);
 
-            if(hit.collider.CompareTag("groundTag"))
+            if(hit.collider.CompareTag("groundTag") && !reflected)
             {
                 //REFLECT
+                reflected = true;
                 Vector3 reflectionDir = Vector3.Reflect(transform.forward, hit.normal);
 
                 transform.position = hit.point;
