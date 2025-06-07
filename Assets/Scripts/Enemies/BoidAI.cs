@@ -213,13 +213,23 @@ public class BoidAI : EnemyBase
         rb.AddForce((player.transform.position - transform.position).normalized * playerWeight * playerNoise * Time.deltaTime, ForceMode.Acceleration);
     }
 
-    private void OnDestroy()
+    private void RemoveSelfFromTargetList()
     {
         BoidAI[] activeboids = FindObjectsByType<BoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         for (int boidCount = 0; boidCount < activeboids.Length; boidCount++)
         {
             activeboids[boidCount].boids.Remove(rb);
         }
-        ComboManager.instance.AddScore(score);
+    }
+
+    public override void DeathCheck()
+    {
+        if (hp <= 0)
+        {
+            RemoveSelfFromTargetList();
+            ComboManager.instance.AddScore(score);
+            Destroy(gameObject);
+            return;
+        }
     }
 }
