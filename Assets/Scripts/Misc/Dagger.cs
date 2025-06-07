@@ -36,17 +36,10 @@ public class Dagger : MonoBehaviour
             if(hit.collider.CompareTag("groundTag"))
             {
                 //REFLECT
+                Vector3 reflectionDir = Vector3.Reflect(transform.forward, hit.normal);
 
-                //step 1: get angle of incidence with Vector3.Up
-                float dotProduct = Vector3.Dot(transform.forward, Vector3.up);
-                float inverCos = Mathf.Acos(dotProduct);
-                float angleOfIncidence = Mathf.Rad2Deg * inverCos;
-
-                //step 2: calculate angle of reflection
-                float reflectionAngle = 180f - angleOfIncidence;
-
-                //step 3: rotate dagger
-                transform.Rotate(Vector3.right, reflectionAngle);
+                transform.position = hit.point;
+                transform.forward = reflectionDir.normalized;
             }
 
             //check for damage

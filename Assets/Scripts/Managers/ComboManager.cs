@@ -24,6 +24,8 @@ public class ComboManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI totalScoreUGUI;
     [SerializeField] Image comboBar;
 
+    ComboGrade previousGrade;
+
     static List<int> comboFloors = new List<int>() //score required for each grade
     {
         0,      //none
@@ -90,12 +92,22 @@ public class ComboManager : MonoBehaviour
 
     void CheckGrade()
     {
+        ComboGrade newGrade = comboGrade;
+
         for (int floor = 0; floor < comboFloors.Count(); floor++) //something something Guilty Gear Strive
         {
             if(currentComboScore >= comboFloors[floor])
             {
-                comboGrade = (ComboGrade)floor;
+                newGrade = (ComboGrade)floor;
             }
+        }
+
+        if (newGrade != comboGrade)
+        {
+            previousGrade = comboGrade;
+            comboGrade = newGrade;
+
+            //pop the size of the grade text if its new for flair
         }
     }
 
@@ -120,7 +132,7 @@ public class ComboManager : MonoBehaviour
         }
 
         totalScoreUGUI.text = totalScore.ToString();
-        comboMultUGUI.text = (comboMults[(int)comboGrade].ToString() + "x");
+        comboMultUGUI.text = (comboMults[(int)comboGrade].ToString("0.00") + "x");
     }
 }
 public enum ComboGrade
