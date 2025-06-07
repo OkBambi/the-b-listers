@@ -72,10 +72,15 @@ public class Player : MonoBehaviour, IDamage
         canAction = false;
         canMove = false;
         canCam = false;
-        
-        //save score
 
+        //save score
         //check for highscore
+        int highScore = PlayerPrefs.GetInt("Highscore");
+        
+        if (ComboManager.instance.GetScore() > highScore)
+        {
+            GameManager.instance.SaveHighscore(ComboManager.instance.GetScore());
+        }
 
         //lose menu
     }

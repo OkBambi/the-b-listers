@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject MenuGameInfo;
 
     public GameObject player;
-    public PlayerMovement PlayerMovement;
+    public Player playerScript;
 
     public bool isPaused;
 
@@ -85,6 +85,16 @@ public class GameManager : MonoBehaviour
     public void OnWinCondition()
     {
 
+    }
+
+    public int LoadHighscore()
+    {
+        return PlayerPrefs.GetInt("Highscore");
+    }
+
+    public void SaveHighscore(int _highscore)
+    {
+        PlayerPrefs.SetInt("Highscore", _highscore);
     }
 
     public void OnCreditInfo()

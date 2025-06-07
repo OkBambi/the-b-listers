@@ -289,6 +289,11 @@ public class ComboManager : MonoBehaviour
         totalScoreUGUI.text = totalScore.ToString();
         comboMultUGUI.text = (comboMults[(int)comboGrade].ToString("0.00") + "x");
     }
+
+    public int GetScore()
+    {
+        return Mathf.CeilToInt(totalScore);
+    }
 }
 
 public enum ComboGrade
