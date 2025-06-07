@@ -312,15 +312,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  blueWindup: 1
-  stickySpeed: 50
+  blueWindup: 0.5
+  stickySpeed: 20
   timeBetweenPulses: 1
   pulseMaxRadius: 10
   pulseSpeed: 3
   amountOfPulses: 3
   pulseDmg: 2
-  shootingPoint: {fileID: 1549681978}
   sticky: {fileID: 2220030932939769073, guid: a740b1abc3084d44b8ea37a8483dd656, type: 3}
+  shootingPoint: {fileID: 1549681978}
 --- !u!1 &292810580
 GameObject:
   m_ObjectHideFlags: 0
@@ -2195,7 +2195,7 @@ GameObject:
   - component: {fileID: 2114408935}
   - component: {fileID: 2114408934}
   - component: {fileID: 2114408933}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2215,14 +2215,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownRed: 5
-  redSchmover: {fileID: 0}
+  redSchmover: {fileID: 144151707}
   cooldownYel: 0
   chargeTime: 0
   slowMod: 0
   railDist: 0
   railgunDmg: 0
   cooldownBlue: 0
-  blueSchmover: {fileID: 0}
+  blueSchmover: {fileID: 144151709}
 --- !u!114 &2114408934
 MonoBehaviour:
   m_ObjectHideFlags: 0

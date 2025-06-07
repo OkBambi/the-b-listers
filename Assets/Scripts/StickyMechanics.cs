@@ -36,7 +36,6 @@ public class StickyMechanics : MonoBehaviour
             rb.useGravity = false;
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-            Debug.Log("6");
         }
         else
         {

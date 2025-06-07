@@ -55,27 +55,34 @@ public class BlueSchmove : MonoBehaviour
                 }
                 else
                 {
-                    if (sphereCollider.radius < pulseMaxRadius && !startPulseTimer)
+                    if(sphereCollider != null)
                     {
-
-                        sphereCollider.radius += pulseSpeed * Time.deltaTime;
-                    }
-                    else
-                    {
-                        if (amountOfPulses > pulsesDone)
+                        if (sphereCollider.radius < pulseMaxRadius && !startPulseTimer)
                         {
-                            if (!startPulseTimer)
-                            {
-                                rb.gameObject.GetComponent<StickyMechanics>().DmgParent();
-                                pulsesDone++;
-                                StartCoroutine(Pulse());
-                            }
+
+                            sphereCollider.radius += pulseSpeed * Time.deltaTime;
                         }
                         else
                         {
-                            Destroy(rb.gameObject);
-                            Reset();
+                            if (amountOfPulses > pulsesDone)
+                            {
+                                if (!startPulseTimer)
+                                {
+                                    rb.gameObject.GetComponent<StickyMechanics>().DmgParent();
+                                    pulsesDone++;
+                                    StartCoroutine(Pulse());
+                                }
+                            }
+                            else
+                            {
+                                Destroy(rb.gameObject);
+                                Reset();
+                            }
                         }
+                    }
+                    else
+                    {
+                        Reset();
                     }
                 }
             }
