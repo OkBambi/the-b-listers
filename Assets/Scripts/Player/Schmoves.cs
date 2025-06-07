@@ -12,6 +12,7 @@ public class Schmoves : MonoBehaviour
     [SerializeField] float slowMod;
     [SerializeField] float railDist;
     [SerializeField] int railgunDmg;
+    [SerializeField] YellowSchmove yellowSchmover;
 
     [Header("Blue Schmove")] // Pulse Charge
     [SerializeField] float cooldownBlue;
@@ -30,7 +31,7 @@ public class Schmoves : MonoBehaviour
                     blueSchmover.Activate();
                     break;
                 default:
-                    redSchmover.Activate();
+                    yellowSchmover.Activate();
                     break;
 
             }
