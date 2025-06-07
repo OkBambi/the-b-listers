@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StopWatch : EnemyBase
+public class StopWatch : EnemyBase, IDamage
 {
     [SerializeField] GameObject SpitSac;
     
@@ -43,8 +43,5 @@ public class StopWatch : EnemyBase
         mySac.setColor = this.setColor;
     }
 
-    private void OnDestroy()
-    {
-        OnAECDestroy();
-    }
+    
 }

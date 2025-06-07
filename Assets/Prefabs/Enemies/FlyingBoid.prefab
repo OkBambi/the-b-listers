@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 500169324898610405}
   - component: {fileID: 5077083023810088317}
   - component: {fileID: 4219752573881016424}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FlyingBoid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,10 +49,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 417695561548203754}
   setColor: 2
-  hp: 5
+  hp: 2
   score: 50
   rb: {fileID: 5077083023810088317}
   boids: []
+  otherEnemies: []
   hitLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -119,7 +120,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.8
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6151354618804541070
 PrefabInstance:
