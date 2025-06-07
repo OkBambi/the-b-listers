@@ -13,11 +13,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject player;
     public PlayerMovement PlayerMovement;
-
     public bool isPaused;
-
     float TimeScaleOrigin;
-
     int gameGoalCount;
 
     void Awake()
