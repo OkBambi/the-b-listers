@@ -3,24 +3,27 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class SettingsMenu : MonoBehaviour
 {
+    //[SerializeField] TextMeshProUGUI text;
+
     //audio variable
 
     //res stuff
-    public Dropdown resolutionDropdown;
+    public TMP_Dropdown resolutionDropdown;
     Resolution[] resolutions;
 
     void Start()
     {
         //resolution
         resolutions = Screen.resolutions;
-        resolutionDropdown.ClearOptions();  //clear out all the optins in the resolution dropdown
+        resolutionDropdown.ClearOptions();  //clear all existing options from the dropdown
 
-        List<string> options = new List<string>();  //creat a list of strings that will be our options
+        List<string> options = new List<string>();  //create a list of options to populate the dropdown
 
-        int currentResolutionIndex = 0;
+        int currentResolutionIndex = 0; //track the index of the current screen resolution
         //loop for each element in our array
         for (int i = 0; i < resolutions.Length; i++)
         {
@@ -40,12 +43,19 @@ public class SettingsMenu : MonoBehaviour
     }
 
 
-    //area for fvx vol
+    //area for vol
 
 
     //if wanting graphics
     public void SetQuality (int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
+    }
+
+    //this sets the resolution when the clicked value from the dropdown changes
+    public void SetResolution(int resolutionIndex)
+    {
+        Resolution resolution = resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 }
