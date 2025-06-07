@@ -67,5 +67,6 @@ public class EnemyBase : MonoBehaviour
     public void OnAECDestroy()
     {
         EnemyManager.instance.OnAECDestroy();
+        ComboManager.instance.AddScore(score);
     }
 }

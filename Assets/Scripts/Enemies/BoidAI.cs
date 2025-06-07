@@ -220,5 +220,6 @@ public class BoidAI : EnemyBase
         {
             activeboids[boidCount].boids.Remove(rb);
         }
+        ComboManager.instance.AddScore(score);
     }
 }

@@ -16,4 +16,9 @@ public class SacGroundDetection : EnemyBase
             Destroy(gameObject);
         }
     }
+
+    private void OnDestroy()
+    {
+        ComboManager.instance.AddScore(score);
+    }
 }
