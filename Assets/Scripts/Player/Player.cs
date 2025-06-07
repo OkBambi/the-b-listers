@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamage
 {
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerCamera playerCamera;
@@ -53,6 +53,16 @@ public class Player : MonoBehaviour
         float deltaTime = Time.deltaTime;
 
         cameraSpring.UpdateSpring(deltaTime, Vector3.up);
+    }
+
+    public PrimaryColor GetPlayerColor()
+    {
+        return currentColor;
+    }
+
+    public void takeDamage(PrimaryColor hitColor, int amount)
+    {
+        //DIE.
     }
 }
 

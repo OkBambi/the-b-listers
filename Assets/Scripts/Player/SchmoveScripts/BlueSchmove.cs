@@ -1,27 +1,34 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 public class BlueSchmove : MonoBehaviour
 {
     [SerializeField] Rigidbody rb;
-    [SerializeField] LayerMask ignoreLayer;
-    [SerializeField] Renderer model;
 
     [SerializeField] float blueWindup;
-    [SerializeField] float timeBetweenPulses;
-    [SerializeField] float pulseRadius;
-    [SerializeField] float pulseSpeed;
     [SerializeField] float stickySpeed;
+    [SerializeField] float timeBetweenPulses;
+    [SerializeField] float pulseMaxRadius;
+    [SerializeField] float pulseSpeed;
+    [SerializeField] float amountOfPulses;
+    [SerializeField] int pulseDmg;
+    [SerializeField] GameObject sticky;
 
-    bool activated, attached;
+    [SerializeField] Transform shootingPoint;
+
+    bool activated, startPulseTimer, isStuck, primed;
     int pulsesDone;
-    int maxPulses = 3;
-    Rigidbody holderRb;
+    float origRadius;
+    float currentWindUp;
+    SphereCollider sphereCollider;
+    GameObject stickyCopy;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        activated = true;//test for now
+        
     }
 
     // Update is called once per frame
@@ -29,57 +36,88 @@ public class BlueSchmove : MonoBehaviour
     {
         if (activated)
         {
-            RaycastHit hit;
-            if (!attached)
+            currentWindUp += Time.deltaTime;
+            if(!primed)
             {
-                rb.AddForce(transform.forward * stickySpeed * Time.deltaTime, ForceMode.Impulse);
-                if (Physics.Raycast(rb.transform.position, rb.transform.forward, out hit, 1, ~ignoreLayer))//distance is just that it needs to be close
+                if(currentWindUp > blueWindup)
                 {
-                    attached = true;
-                    holderRb = rb;
+                    WindUp();
                 }
             }
             else
             {
-                if (Physics.Raycast(holderRb.transform.position, holderRb.transform.forward, out hit, pulseRadius, ~ignoreLayer))
+                if (!isStuck)
                 {
-                    rb.transform.position = hit.transform.position;
-                    IDamage dmg = hit.collider.GetComponent<IDamage>();
-                    StickToHit();
-
-                    if (dmg != null)
+                    if (rb.gameObject.GetComponent<StickyMechanics>().GetStuckVal())
                     {
-                        dmg.takeDamage(PrimaryColor.OMNI, 2);
+                        isStuck = true;
                     }
                 }
-                StartCoroutine(Pulse());
-                activated = false;
-                attached = false;
+                else
+                {
+                    if(sphereCollider != null)
+                    {
+                        if (sphereCollider.radius < pulseMaxRadius && !startPulseTimer)
+                        {
+
+                            sphereCollider.radius += pulseSpeed * Time.deltaTime;
+                        }
+                        else
+                        {
+                            if (amountOfPulses > pulsesDone)
+                            {
+                                if (!startPulseTimer)
+                                {
+                                    rb.gameObject.GetComponent<StickyMechanics>().DmgParent();
+                                    pulsesDone++;
+                                    StartCoroutine(Pulse());
+                                }
+                            }
+                            else
+                            {
+                                Destroy(rb.gameObject);
+                                Reset();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Reset();
+                    }
+                }
             }
         }
     }
 
     public void Activate()
     {
-        pulsesDone = 0;
         activated = true;
+    }
+
+    private void WindUp()
+    {
+        stickyCopy = Instantiate(sticky, shootingPoint.position, Quaternion.identity);
+        rb = stickyCopy.GetComponent<Rigidbody>();
+        sphereCollider = rb.gameObject.GetComponent<SphereCollider>();
+        origRadius = sphereCollider.radius;
+        rb.gameObject.GetComponent<StickyMechanics>().SetPulseDmg(pulseDmg);
+        rb.linearVelocity = -shootingPoint.forward * stickySpeed;
+        primed = true;
+    }
+
+    private void Reset()
+    {
+        pulsesDone = 0;
+        currentWindUp = 0;
+        primed = false;
+        activated = false;
     }
 
     IEnumerator Pulse()
     {
-        while (pulsesDone < maxPulses)
-        {
-            model.material.color = Color.red;
-            yield return new WaitForSeconds(timeBetweenPulses);
-            model.material.color = Color.white;
-            yield return new WaitForSeconds(timeBetweenPulses);
-            pulsesDone++;
-        }
-    }
-
-    void StickToHit()
-    {
-
-        
+        startPulseTimer = true;
+        sphereCollider.radius = origRadius;
+        yield return new WaitForSeconds(timeBetweenPulses);
+        startPulseTimer = false;
     }
 }
