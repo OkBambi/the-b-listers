@@ -23,12 +23,19 @@ public class ComboManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI totalScoreUGUI;
     [SerializeField] Image comboBar;
 
+    //for combo stuff
     bool popTime;
     float popTimer = 0f;
     float popDuration = 0.05f;
     bool isPopping = false;
 
     ComboGrade previousGrade;
+
+    //for score stuff
+    bool popScore;
+    float scoreTimer = 0f;
+    float scorePopDuration = 0.05f;
+    bool isScorePopping = false;
 
     static List<int> comboFloors = new List<int>() //score required for each grade
     {
@@ -102,7 +109,7 @@ public class ComboManager : MonoBehaviour
             popTimer = 0f;
         }
 
-        //roblox has spoiled me with EasingType.Quint, now i must google how to do so on my own
+        //roblox has spoiled me with EasingStyle.Quint, now i must google how to do so on my own
         //nvm github to the rescue (but yes i understand how Quint actually works, its just t^5)
         if (isPopping)
         {
@@ -125,11 +132,47 @@ public class ComboManager : MonoBehaviour
                 comboGradeUGUI.rectTransform.localScale = new Vector3(scale, scale, scale);
                 comboMultUGUI.rectTransform.localScale = new Vector3(scale, scale, scale);
             }
-            //WE'RE FREEEE
+            //WE'RE FREEEE (do this to ensure it goes back to 1,1,1 and not like 1.001 etc etc)
             else
             {
                 isPopping = false;
                 comboGradeUGUI.rectTransform.localScale = Vector3.one;
+                comboMultUGUI.rectTransform.localScale = Vector3.one;
+            }
+        }
+
+        if (popScore)
+        {
+            //we just want to call popTime once, so immediately turn it to false
+            popScore = false;
+            isScorePopping = true;
+            scoreTimer = 0f;
+        }
+
+        //bro this code feels so UGGLLLYYY
+        if (isScorePopping)
+        {
+            scoreTimer += Time.deltaTime;
+
+            //first half: go up
+            if (scoreTimer <= scorePopDuration)
+            {
+                float t = scoreTimer / scorePopDuration;
+                float scale = EaseInQuint(1f, 1.1f, t);
+                totalScoreUGUI.rectTransform.localScale = new Vector3(scale, scale, scale);
+            }
+            //go back down
+            else if (scoreTimer <= scorePopDuration * 2)
+            {
+                float t = (scoreTimer - scorePopDuration) / scorePopDuration;
+                float scale = EaseInQuint(1.1f, 1f, t);
+                totalScoreUGUI.rectTransform.localScale = new Vector3(scale, scale, scale);
+            }
+            //WE'RE FREEEE (do this to ensure it goes back to 1,1,1 and not like 1.001 etc etc)
+            else
+            {
+                isScorePopping = false;
+                totalScoreUGUI.rectTransform.localScale = Vector3.one;
             }
         }
 
@@ -168,6 +211,7 @@ public class ComboManager : MonoBehaviour
         currentComboScore += amount * comboMults[(int)comboGrade];
         currentComboScore = Mathf.Clamp(currentComboScore, 0, 2500);
         totalScore += amount * comboMults[(int)comboGrade];
+        popScore = true;
     }
 
     void UIShenanigans()
