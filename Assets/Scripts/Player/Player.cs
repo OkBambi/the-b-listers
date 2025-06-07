@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamage
 {
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerCamera playerCamera;
@@ -58,6 +58,11 @@ public class Player : MonoBehaviour
     public PrimaryColor GetPlayerColor()
     {
         return currentColor;
+    }
+
+    public void takeDamage(PrimaryColor hitColor, int amount)
+    {
+        //DIE.
     }
 }
 
