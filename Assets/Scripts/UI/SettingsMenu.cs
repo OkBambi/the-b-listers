@@ -9,6 +9,8 @@ public class SettingsMenu : MonoBehaviour
 
 
     //for the resolution
+    //low, medium, high
+    //other res can be added to the dropdown if wanted, bit bugged
     public void SetQuality (int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
