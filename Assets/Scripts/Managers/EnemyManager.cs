@@ -1,9 +1,21 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager instance;
+    [Space]
+    //this is the thing that shows where an enemy will spawn in a few moments
+
+    //Enemy model is spawned, and they are visible. But they are pure WHITE, with a glossy material (make a temp one, ill shader the hell out of it later)
+    //Enemy model currently lacks any AI, is static, and you can move through it(no collider)
+    //Other enemies will still try to avoid it though, so boids, monks, etc
+    //Enemy model will begin with blink, flashing 3 times before
+
+    [SerializeField] GameObject spawnIndicator;
+
     [Space]
     //so we have a list of enemies that spawn in a repeating order
     [SerializeField] List<GameObject> spawnList;
@@ -113,7 +125,20 @@ public class EnemyManager : MonoBehaviour
             return;
         }
 
-        Instantiate(spawnList[spawnIndex].transform, spawnLocation, Quaternion.identity);
+        //spawn the indicator which will telegraph the enemy spawn
+        SpawnIndicator sp = Instantiate(spawnIndicator, spawnLocation, Quaternion.identity).GetComponent<SpawnIndicator>();
+        sp.enemyToSpawn = spawnList[spawnIndex];
+        sp.enemyMesh = spawnList[spawnIndex].GetComponentInChildren<MeshFilter>().sharedMesh;
+        sp.SetMesh(spawnList[spawnIndex].GetComponentInChildren<MeshFilter>().sharedMesh);
+
+        //adjust visuals to make it look good for specific enemies
+        if (spawnList[spawnIndex].name == "AngryBoid")
+        {
+            sp.modelFrame.transform.localScale = new Vector3(50f, 50f, 50f);
+            sp.modelFrame.transform.rotation = Quaternion.Euler(-60f, 0, 45);
+            
+        }
+
 
         if (spawnIndex < spawnList.Count)
             ++spawnIndex;
@@ -143,7 +168,7 @@ public class EnemyManager : MonoBehaviour
                     hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
                 {
                     isValidSpawn = true;
-                    return hit.point;
+                    return hit.point + new Vector3(0, 2f, 0);
                 }
                 //else we miss the platform or hit an enemy, try a different spot
             }
