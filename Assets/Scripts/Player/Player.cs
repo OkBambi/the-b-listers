@@ -54,6 +54,11 @@ public class Player : MonoBehaviour
 
         cameraSpring.UpdateSpring(deltaTime, Vector3.up);
     }
+
+    public PrimaryColor GetPlayerColor()
+    {
+        return currentColor;
+    }
 }
 
 public enum PrimaryColor

@@ -37,6 +37,8 @@ public class ComboManager : MonoBehaviour
     float scorePopDuration = 0.05f;
     bool isScorePopping = false;
 
+    Player player;
+
     static List<int> comboFloors = new List<int>() //score required for each grade
     {
         0,      //none
@@ -88,6 +90,8 @@ public class ComboManager : MonoBehaviour
         instance = this;
 
         comboGradeUGUI.text = "";
+
+        player = GameObject.FindFirstObjectByType<Player>();
     }
 
     void Update()
@@ -247,14 +251,38 @@ public class ComboManager : MonoBehaviour
 
     void UIShenanigans()
     {
+        //color stuff
+        Color setColor = Color.white;
+        string colorString = string.Empty;
+
+        switch (player.GetPlayerColor())
+        {
+            case PrimaryColor.RED:
+                setColor = Color.red;
+                colorString = "red";
+                break;
+            case PrimaryColor.YELLOW:
+                setColor = Color.yellow;
+                colorString = "yellow";
+                break;
+            case PrimaryColor.BLUE:
+                setColor = Color.blue;
+                colorString = "blue";
+                break;
+        }
+
+        totalScoreUGUI.color = setColor;
+        comboMultUGUI.color = setColor;
+        comboGradeUGUI.color = setColor;
+
         //combo grade. we need to separate the ComboGrade letter from the rest of the word
-        if(currentComboScore > 0)
+        if (currentComboScore > 0)
         {
             string start = comboWords.ElementAt((int)comboGrade).Key;
             string rest = comboWords.ElementAt((int)comboGrade).Value;
 
             //lets fancy this up
-            comboGradeUGUI.text = "<size=120><color=red>"+start+
+            comboGradeUGUI.text = "<size=120><color="+colorString+">"+start+
                 "</size></color><size=90><color=black>"+rest+"</size></color>";
         }
 
