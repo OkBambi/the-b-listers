@@ -66,6 +66,8 @@ public class ComboManager : MonoBehaviour
     void Start()
     {
         instance = this;
+
+        comboGradeUGUI.text = "";
     }
 
     void Update()
@@ -75,8 +77,7 @@ public class ComboManager : MonoBehaviour
 
         if (currentComboScore > 0)
         {
-            float mult = comboMults[(int)comboGrade];
-            float decayAmount = BASE_COMBO_DECAY * mult * Time.deltaTime;
+            float decayAmount = BASE_COMBO_DECAY * comboMults[(int)comboGrade] * Time.deltaTime;
             currentComboScore = Mathf.Clamp(currentComboScore - decayAmount, 0, currentComboScore);
         }
 
@@ -110,7 +111,12 @@ public class ComboManager : MonoBehaviour
         //combo grade. we need to separate the ComboGrade letter from the rest of the word
         if(comboGrade > 0)
         {
-            
+            string start = comboWords.ElementAt((int)comboGrade).Key;
+            string rest = comboWords.ElementAt((int)comboGrade).Value;
+
+            //lets fancy this up
+            comboGradeUGUI.text = "<size=120><color=red>"+start+
+                "</size></color><size=90><color=black>"+rest+"</size></color>";
         }
 
         totalScoreUGUI.text = totalScore.ToString();
