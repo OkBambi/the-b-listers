@@ -94,6 +94,8 @@ public class ComboManager : MonoBehaviour
     {
         CheckGrade();
         UIShenanigans();
+        PopUI();
+        UIBar();
 
         if (currentComboScore > 0)
         {
@@ -101,6 +103,52 @@ public class ComboManager : MonoBehaviour
             currentComboScore = Mathf.Clamp(currentComboScore - decayAmount, 0, currentComboScore);
         }
 
+        //TESTING STUFF
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            AddScore(100);
+        }
+    }
+
+    void UIBar()
+    {
+        if (currentComboScore > 0)
+        {
+            if (currentComboScore > 0)
+            {
+                //for the combo bar
+                //we need to get
+                //1. the floor (minimum) score for each level
+                //2. the maximum score (how much is between each floor)
+
+                //then we need to make a progress takes the current score minus the floor,
+                //and clamps that to a range of 0 and 1 for the image fill
+
+                //for P we need a special case since there's no higher threshold to grab
+                if (comboGrade == ComboGrade.P)
+                {
+                    float floor = comboFloors[(int)comboGrade];
+                    float progress = Mathf.Clamp((currentComboScore - floor) / 1000, 0, 1); //since we can go 1000 above 1500
+                    comboBar.fillAmount = progress;
+                }
+                else
+                {
+                    float threshold = comboFloors[(int)comboGrade + 1];
+                    float floor = comboFloors[(int)comboGrade];
+                    float range = threshold - floor;
+                    float progress = Mathf.Clamp((currentComboScore - floor) / range, 0, 1);
+                    comboBar.fillAmount = progress;
+                }
+            }
+            else
+            {
+                comboBar.fillAmount = 0;
+            }
+        }
+    }
+
+    void PopUI()
+    {
         if (popTime)
         {
             //we just want to call popTime once, so immediately turn it to false
@@ -141,9 +189,9 @@ public class ComboManager : MonoBehaviour
             }
         }
 
+        //same thing but for the score UI
         if (popScore)
         {
-            //we just want to call popTime once, so immediately turn it to false
             popScore = false;
             isScorePopping = true;
             scoreTimer = 0f;
@@ -174,13 +222,6 @@ public class ComboManager : MonoBehaviour
                 isScorePopping = false;
                 totalScoreUGUI.rectTransform.localScale = Vector3.one;
             }
-        }
-
-        //TESTING STUFF
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            print("Adding score");
-            AddScore(100);
         }
     }
 
@@ -217,7 +258,7 @@ public class ComboManager : MonoBehaviour
     void UIShenanigans()
     {
         //combo grade. we need to separate the ComboGrade letter from the rest of the word
-        if(comboGrade > 0)
+        if(currentComboScore > 0)
         {
             string start = comboWords.ElementAt((int)comboGrade).Key;
             string rest = comboWords.ElementAt((int)comboGrade).Value;
