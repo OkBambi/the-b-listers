@@ -20,11 +20,11 @@ public class GameManager : MonoBehaviour
 
     int gameGoalCount;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-      instance = this;
+        instance = this;
         TimeScaleOrigin = Time.timeScale;
+        Cursor.lockState=CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour
     public void statePause()
     {
         isPaused = !isPaused;
-
         GameObject.FindFirstObjectByType<Player>().canAction = false;
         GameObject.FindFirstObjectByType<Player>().canCam = false;
         GameObject.FindFirstObjectByType<Player>().canAction = false;
@@ -65,9 +64,9 @@ public class GameManager : MonoBehaviour
         GameObject.FindFirstObjectByType<Player>().canAction = true;
         GameObject.FindFirstObjectByType<Player>().canCam = true;
         GameObject.FindFirstObjectByType<Player>().canAction = true;
+
         Time.timeScale = TimeScaleOrigin;
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
         MenuActive.SetActive(false);
         MenuActive = null;
     }
@@ -75,13 +74,13 @@ public class GameManager : MonoBehaviour
     public void LoadSettings()
     {
 
-    }   
+    }
 
     public void OnLoseCondition()
     {
 
     }
-    
+
     public void OnWinCondition()
     {
 
