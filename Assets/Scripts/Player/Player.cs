@@ -63,6 +63,21 @@ public class Player : MonoBehaviour, IDamage
     public void takeDamage(PrimaryColor hitColor, int amount)
     {
         //DIE.
+        Die();
+    }
+
+    void Die()
+    {
+        //disable player stuff
+        canAction = false;
+        canMove = false;
+        canCam = false;
+        
+        //save score
+
+        //check for highscore
+
+        //lose menu
     }
 }
 
