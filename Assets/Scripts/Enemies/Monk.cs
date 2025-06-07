@@ -10,17 +10,18 @@ public class Monk : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
 
     [SerializeField] Transform Casting;
+
+  
     [SerializeField] GameObject wave;
     [SerializeField] float gongBonkRate;
 
     //noise 
     Color colorOriginal;
 
-    float GongBonkTimer;
 
     bool PlayerInRange;
 
-
+    float Lock_Color_Timer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
