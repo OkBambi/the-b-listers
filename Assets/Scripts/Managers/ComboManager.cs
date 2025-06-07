@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ComboManager : MonoBehaviour
@@ -23,6 +22,11 @@ public class ComboManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI comboMultUGUI;
     [SerializeField] TextMeshProUGUI totalScoreUGUI;
     [SerializeField] Image comboBar;
+
+    bool popTime;
+    float popTimer = 0f;
+    float popDuration = 0.05f;
+    bool isPopping = false;
 
     ComboGrade previousGrade;
 
@@ -65,6 +69,13 @@ public class ComboManager : MonoBehaviour
         {"P", "RIMARY"}
     };
 
+    //THANK YOU cjddmut
+    public static float EaseInQuint(float start, float end, float value)
+    {
+        end -= start;
+        return end * value * value * value * value * value + start;
+    }
+
     void Start()
     {
         instance = this;
@@ -83,6 +94,46 @@ public class ComboManager : MonoBehaviour
             currentComboScore = Mathf.Clamp(currentComboScore - decayAmount, 0, currentComboScore);
         }
 
+        if (popTime)
+        {
+            //we just want to call popTime once, so immediately turn it to false
+            popTime = false;
+            isPopping = true;
+            popTimer = 0f;
+        }
+
+        //roblox has spoiled me with EasingType.Quint, now i must google how to do so on my own
+        //nvm github to the rescue (but yes i understand how Quint actually works, its just t^5)
+        if (isPopping)
+        {
+            //smth smth shootTimer
+            popTimer += Time.deltaTime;
+
+            //first half: go up
+            if (popTimer <= popDuration)
+            {
+                float t = popTimer / popDuration;
+                float scale = EaseInQuint(1f, 1.1f, t);
+                comboGradeUGUI.rectTransform.localScale = new Vector3(scale, scale, scale);
+                comboMultUGUI.rectTransform.localScale = new Vector3(scale, scale, scale);
+            }
+            //go back down
+            else if (popTimer <= popDuration * 2)
+            {
+                float t = (popTimer - popDuration) / popDuration;
+                float scale = EaseInQuint(1.1f, 1f, t);
+                comboGradeUGUI.rectTransform.localScale = new Vector3(scale, scale, scale);
+                comboMultUGUI.rectTransform.localScale = new Vector3(scale, scale, scale);
+            }
+            //WE'RE FREEEE
+            else
+            {
+                isPopping = false;
+                comboGradeUGUI.rectTransform.localScale = Vector3.one;
+            }
+        }
+
+        //TESTING STUFF
         if (Input.GetKeyDown(KeyCode.G))
         {
             print("Adding score");
@@ -108,6 +159,7 @@ public class ComboManager : MonoBehaviour
             comboGrade = newGrade;
 
             //pop the size of the grade text if its new for flair
+            popTime = true;
         }
     }
 
@@ -135,6 +187,7 @@ public class ComboManager : MonoBehaviour
         comboMultUGUI.text = (comboMults[(int)comboGrade].ToString("0.00") + "x");
     }
 }
+
 public enum ComboGrade
 {
     None = 0,
