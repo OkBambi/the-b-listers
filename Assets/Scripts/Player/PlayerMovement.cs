@@ -115,4 +115,12 @@ public class PlayerMovement : MonoBehaviour
             shooter.currentRocketJumps = 0;
         }
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.CompareTag("groundTag"))
+        {
+            isGrounded = false;
+        }
+    }
 }
