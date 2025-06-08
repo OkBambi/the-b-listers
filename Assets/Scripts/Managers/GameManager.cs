@@ -84,7 +84,10 @@ public class GameManager : MonoBehaviour
     {
 
     }
+    public void SaveHighscore(int HighScores)
+    {
 
+    }
     public void OnCreditInfo()
     {
         isPaused = true;
