@@ -55,7 +55,7 @@ public class BlueSchmove : MonoBehaviour
                 }
                 else
                 {
-                    if(sphereCollider != null)
+                    if(sphereCollider != null) // for incase the enemy it is attached to is killed.
                     {
                         if (sphereCollider.radius < pulseMaxRadius && !startPulseTimer)
                         {
@@ -92,6 +92,11 @@ public class BlueSchmove : MonoBehaviour
     public void Activate()
     {
         activated = true;
+        if (rb != null) //makes it so you are able to shoot another if it falls off the map and cooldown is over.
+        {
+            Destroy(rb.gameObject);
+            Reset();
+        }
     }
 
     private void WindUp()
