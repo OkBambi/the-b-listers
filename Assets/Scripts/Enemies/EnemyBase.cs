@@ -114,10 +114,12 @@ public class EnemyBase : MonoBehaviour, IDamage
 
     public IEnumerator Flash()
     {
-        Debug.Log("flash");
         model.materials = flashMats;
         yield return new WaitForSeconds(0.05f);
         model.materials = matList;
+
+        //honestly simple is better i think
+
         //    while (red != Color.white.r || green != Color.white.g || blue != Color.white.b)
         //    {
         //        red = Mathf.Lerp(red, Color.white.r, 0.1f);
