@@ -23,6 +23,8 @@ public class SpawnIndicator : MonoBehaviour
 
     [SerializeField] Color baseColour;
     [SerializeField] Color flashColour;
+    private Material[] flashMats;
+
     [SerializeField] float flashTime = 0.01f;
     [SerializeField] float red;
     [SerializeField] float green;
@@ -41,6 +43,13 @@ public class SpawnIndicator : MonoBehaviour
         red = baseColour.r;
         green = baseColour.g;
         blue = baseColour.b;
+
+        flashMats = new Material[renderer.materials.Length];
+        for (int materialIndex = 0; materialIndex < renderer.materials.Length; ++materialIndex)
+        {
+            flashMats[materialIndex] = new Material(EnemyManager.instance.spawnMat);
+        }
+        renderer.materials = flashMats; 
         StartCoroutine(Flash());
     }
 
@@ -80,9 +89,13 @@ public class SpawnIndicator : MonoBehaviour
             {
                 blue = flashColour.b;
             }
-            renderer.material.color = new Color(red, green, blue);
+
+            foreach (Material material in renderer.materials)
+            {
+                material.color = new Color(red, green, blue);
+            }
             
-            yield return new WaitForSeconds(0.01f);
+            yield return null;
         }
         
     }

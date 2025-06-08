@@ -38,6 +38,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] int tickerLimit = 5;
     //when the ticker reaches 5 enemy kills, it will increase the AEC by 1;
 
+    public Material flashMat;
+    public Material spawnMat;
     private void Awake()
     {
         instance = this;

@@ -1,9 +1,18 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyBase : MonoBehaviour, IDamage
 {
     public Renderer model;
     public PrimaryColor setColor;
+
+    //FlashWhite
+    private Color baseColor;
+    private float red;
+    private float green;
+    private float blue;
+    private Material[] matList;
+    private Material[] flashMats;
     [Space]
     public int hp;
     public int score = 50;
@@ -38,6 +47,15 @@ public class EnemyBase : MonoBehaviour, IDamage
                 model.material.color = Color.black;
                 nameStr = "Omni";
                 break;
+        }
+        baseColor = model.material.color;
+
+        matList = model.materials;
+        flashMats = new Material[matList.Length];
+
+        for (int materialIndex = 0; materialIndex < matList.Length; ++materialIndex)
+        {
+            flashMats[materialIndex] = new Material(EnemyManager.instance.flashMat);
         }
     }
 
@@ -76,6 +94,11 @@ public class EnemyBase : MonoBehaviour, IDamage
         {
             hp -= amount;
             DeathCheck();
+
+            //flash white
+            StartCoroutine(Flash());
+
+
         }
     }
 
@@ -87,5 +110,64 @@ public class EnemyBase : MonoBehaviour, IDamage
             Destroy(gameObject);
             return;
         }
+    }
+
+    public IEnumerator Flash()
+    {
+        Debug.Log("flash");
+        model.materials = flashMats;
+        yield return new WaitForSeconds(0.05f);
+        model.materials = matList;
+        //    while (red != Color.white.r || green != Color.white.g || blue != Color.white.b)
+        //    {
+        //        red = Mathf.Lerp(red, Color.white.r, 0.1f);
+        //        if (Mathf.Abs(red - Color.white.r) <= 0.05f)
+        //        {
+        //            red = Color.white.r;
+        //        }
+
+        //        green = Mathf.Lerp(green, Color.white.g, 0.1f);
+        //        if (Mathf.Abs(green - Color.white.g) <= 0.05f)
+        //        {
+        //            green = Color.white.g;
+        //        }
+
+        //        blue = Mathf.Lerp(blue, Color.white.b, 0.1f);
+        //        if (Mathf.Abs(blue - Color.white.b) <= 0.05f)
+        //        {
+        //            blue = Color.white.b;
+        //        }
+
+        //        model.material.color = new Color(red, green, blue);
+
+        //        yield return null;
+        //    }
+
+        //    while (red != baseColor.r || green != baseColor.g || blue != baseColor.b)
+        //    {
+        //        red = Mathf.Lerp(red, baseColor.r, 0.1f);
+        //        if (Mathf.Abs(red - baseColor.r) <= 0.05f)
+        //        {
+        //            red = baseColor.r;
+        //        }
+
+        //        green = Mathf.Lerp(green, baseColor.g, 0.1f);
+        //        if (Mathf.Abs(green - baseColor.g) <= 0.05f)
+        //        {
+        //            green = baseColor.g;
+        //        }
+
+        //        blue = Mathf.Lerp(blue, baseColor.b, 0.1f);
+        //        if (Mathf.Abs(blue - baseColor.b) <= 0.05f)
+        //        {
+        //            blue = baseColor.b;
+        //        }
+
+        //        model.material.color = new Color(red, green, blue);
+
+        //        yield return null;
+        //    }
+        //    yield return null;
+        //}
     }
 }
