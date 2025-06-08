@@ -85,7 +85,7 @@ public class ComboManager : MonoBehaviour
         return end * value * value * value * value * value + start;
     }
 
-    void Start()
+    void Awake()
     {
         instance = this;
 
