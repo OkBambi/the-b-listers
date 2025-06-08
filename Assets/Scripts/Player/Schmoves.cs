@@ -113,12 +113,12 @@ public class Schmoves : MonoBehaviour
             if (cooldownYel > 0)
             {
                 cooldownYel = Mathf.Clamp(cooldownYel - Time.deltaTime, 0, 100);
-                blueIsCD = true;
+                yellowIsCD = true;
             }
             if (cooldownBlue > 0)
             {
                 cooldownBlue = Mathf.Clamp(cooldownBlue - Time.deltaTime, 0, 100);
-                yellowIsCD = true;
+                blueIsCD = true;
             }
 
 
@@ -222,7 +222,7 @@ public class Schmoves : MonoBehaviour
                 rectY = Mathf.Lerp(rectY, 34.41f, finishSpeed / 2);
             }
 
-            BlueCD_UI.sizeDelta = new Vector2(rectX, rectY);
+            YellowCD_UI.sizeDelta = new Vector2(rectX, rectY);
             ++currentDuration;
             yield return null;
         }
@@ -257,7 +257,7 @@ public class Schmoves : MonoBehaviour
                 rectY = Mathf.Lerp(rectY, 34.41f, finishSpeed / 2);
             }
 
-            YellowCD_UI.sizeDelta = new Vector2(rectX, rectY);
+            BlueCD_UI.sizeDelta = new Vector2(rectX, rectY);
             ++currentDuration;
             yield return null;
         }
