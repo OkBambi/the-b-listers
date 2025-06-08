@@ -439,6 +439,58 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &1230269940167307801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6514899439045897677}
+  - component: {fileID: 4355698267488723538}
+  m_Layer: 0
+  m_Name: ComboManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6514899439045897677
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230269940167307801}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 9.17, y: -3, z: 26.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3990897285812716556}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4355698267488723538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230269940167307801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4cd28803f765d34baa178b28d4d51e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BASE_COMBO_DECAY: 20
+  totalScore: 0
+  currentComboScore: 0
+  comboGrade: 0
+  comboGradeUGUI: {fileID: 3926077872513076663}
+  comboMultUGUI: {fileID: 1959939607356650458}
+  totalScoreUGUI: {fileID: 4627887047571319929}
+  comboBar: {fileID: 6653757312140948442}
 --- !u!1 &1387979432631367341
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,6 +1605,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1894056257291709011}
+  - {fileID: 6514899439045897677}
   - {fileID: 4801531642344972535}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1608,14 +1661,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownRed: 0
   maxCooldownRed: 5
-  redSchmover: {fileID: 0}
+  redSchmover: {fileID: 5987268029696910072}
   cooldownYel: 0
   maxCooldownYel: 5
   chargeTime: 0
   slowMod: 0
   railDist: 0
   railgunDmg: 0
-  yellowSchmover: {fileID: 0}
+  yellowSchmover: {fileID: 5129570411807864807}
   cooldownBlue: 0
   maxCooldownBlue: 5
   blueSchmover: {fileID: 0}
@@ -2917,6 +2970,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1924007176610526850, guid: 54bf02cc4b0be8a44be5ca03058d2b8b, type: 3}
   m_PrefabInstance: {fileID: 70501187334855889}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5129570411807864807 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5176216418705681206, guid: 54bf02cc4b0be8a44be5ca03058d2b8b, type: 3}
+  m_PrefabInstance: {fileID: 70501187334855889}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df33bc2da0abdc8468d3bc65bef97b75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5987268029696910072 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6047618490753711657, guid: 54bf02cc4b0be8a44be5ca03058d2b8b, type: 3}
+  m_PrefabInstance: {fileID: 70501187334855889}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0a103c26e0caaf49bc14cdd3cd4bc19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6206548049380582271
 PrefabInstance:
   m_ObjectHideFlags: 0

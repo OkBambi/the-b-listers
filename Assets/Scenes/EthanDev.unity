@@ -243,28 +243,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6541328089830894451, guid: 54cd83a611bd25d4aa146d1e1f2891d6, type: 3}
   m_PrefabInstance: {fileID: 630767251}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &83047995 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5129570411807864807, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
-  m_PrefabInstance: {fileID: 1502398662}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df33bc2da0abdc8468d3bc65bef97b75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &83047996 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5987268029696910072, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
-  m_PrefabInstance: {fileID: 1502398662}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0a103c26e0caaf49bc14cdd3cd4bc19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &87402425 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6541328089830894451, guid: 54cd83a611bd25d4aa146d1e1f2891d6, type: 3}
@@ -880,58 +858,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6541328089830894451, guid: 54cd83a611bd25d4aa146d1e1f2891d6, type: 3}
   m_PrefabInstance: {fileID: 173469880}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &371824701
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 371824703}
-  - component: {fileID: 371824702}
-  m_Layer: 0
-  m_Name: ComboManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &371824702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 371824701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4cd28803f765d34baa178b28d4d51e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BASE_COMBO_DECAY: 20
-  totalScore: 0
-  currentComboScore: 0
-  comboGrade: 0
-  comboGradeUGUI: {fileID: 0}
-  comboMultUGUI: {fileID: 0}
-  totalScoreUGUI: {fileID: 0}
-  comboBar: {fileID: 0}
---- !u!4 &371824703
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 371824701}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &411986071
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4295,14 +4221,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3363300360428369280, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
-      propertyPath: redSchmover
-      value: 
-      objectReference: {fileID: 83047996}
-    - target: {fileID: 3363300360428369280, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
-      propertyPath: yellowSchmover
-      value: 
-      objectReference: {fileID: 83047995}
     - target: {fileID: 3923875554569662914, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5578,5 +5496,4 @@ SceneRoots:
   - {fileID: 1556284016}
   - {fileID: 1183099603}
   - {fileID: 5051117997620746442}
-  - {fileID: 371824703}
   - {fileID: 151817890787570298}
