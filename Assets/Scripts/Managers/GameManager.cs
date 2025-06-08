@@ -102,4 +102,14 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public int LoadHighscore()
+    {
+        return PlayerPrefs.GetInt("Highscore");
+    }
+
+    public void SaveHighscore(int _highscore)
+    {
+        PlayerPrefs.SetInt("Highscore", _highscore);
+    }
 }
