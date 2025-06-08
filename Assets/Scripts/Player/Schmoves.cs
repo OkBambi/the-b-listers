@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -35,6 +36,7 @@ public class Schmoves : MonoBehaviour
                     {
                         redSchmover.Activate();
                         cooldownRed = maxCooldownRed;
+                        RedCD_M2.color = Color.gray;
                         StartCoroutine(UpdateCoolDownUI());
                     }
                     break;
@@ -43,6 +45,7 @@ public class Schmoves : MonoBehaviour
                     {
                         blueSchmover.Activate();
                         cooldownBlue = maxCooldownBlue;
+                        BlueCD_M2.color = Color.gray;
                         StartCoroutine(UpdateCoolDownUI());
                     }
                     break;
@@ -51,6 +54,7 @@ public class Schmoves : MonoBehaviour
                     {
                         yellowSchmover.Activate();
                         cooldownYel = maxCooldownYel;
+                        YellowCD_M2.color = Color.gray;
                         //the coroutine starts when you release the railgun
                     }
                     break;
@@ -70,6 +74,11 @@ public class Schmoves : MonoBehaviour
     [SerializeField] float YellowCD;
     [SerializeField] float BlueCD;
 
+    [Header("CoolDownText")]
+    [SerializeField] TextMeshProUGUI RedCD_M2;
+    [SerializeField] TextMeshProUGUI YellowCD_M2;
+    [SerializeField] TextMeshProUGUI BlueCD_M2;
+
     private bool isUpdating;
 
     [Header("CoolDownFinish")]
@@ -83,6 +92,7 @@ public class Schmoves : MonoBehaviour
         BlueCD = BlueCD_UI.localScale.x;
     }
 
+    #region Animations
     public IEnumerator UpdateCoolDownUI()
     {
         bool redIsCD = false;
@@ -155,6 +165,7 @@ public class Schmoves : MonoBehaviour
         int currentDuration = 0;
         float rectX = 50f;
         float rectY = 34.41f;
+        RedCD_M2.color = Color.white;
 
         while (true)
         {
@@ -189,6 +200,7 @@ public class Schmoves : MonoBehaviour
         int currentDuration = 0;
         float rectX = 50f;
         float rectY = 34.41f;
+        YellowCD_M2.color = Color.white;
 
         while (true)
         {
@@ -223,6 +235,7 @@ public class Schmoves : MonoBehaviour
         int currentDuration = 0;
         float rectX = 50f;
         float rectY = 34.41f;
+        BlueCD_M2.color = Color.white;
 
         while (true)
         {
@@ -250,4 +263,7 @@ public class Schmoves : MonoBehaviour
         }
         yield return null;
     }
+    #endregion
+
+
 }
