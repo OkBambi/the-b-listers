@@ -44,17 +44,25 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
 
 
-        //initialises the slider and display value based on current mixer value
-        float currentVolume;
-        if (audioMixer.GetFloat("Volume", out currentVolume))
+        if (audioMixer != null && volumeSlider != null && volText != null)
         {
-            //if using logarithmic values (e.g., -80 to 0 dB)
-            float normalised = Mathf.InverseLerp(-80f, 0f, currentVolume);
-            float percent = normalised * 100f;
-            volumeSlider.value = percent;
-
-            if (volText != null)
-                volText.text = Mathf.RoundToInt(percent).ToString();
+            float currentVolume;
+            if (audioMixer.GetFloat("Volume", out currentVolume))
+            {
+                volumeSlider.value = currentVolume;
+                volText.text = ConvertDbToPercentage(currentVolume).ToString("F0") + "%"; // Convert dB to a more readable percentage
+            }
+            else
+            {
+                //fallback if parameter not found or other issue
+                Debug.LogWarning("AudioMixer parameter 'Volume' not found or could not be retrieved. Ensure it's exposed correctly.");
+                volumeSlider.value = 0; //defaults to 0
+                volText.text = "0%";
+            }
+        }
+        else
+        {
+            Debug.LogWarning("AudioMixer, Volume Slider, or Volume Text is not assigned in the Inspector.");
         }
     }
 
@@ -62,14 +70,14 @@ public class SettingsMenu : MonoBehaviour
     //area for vol
     public void SetVolume(float volume)
     {
-        //converts slider percentage (0–100) to mixer value (log scale)
-        float volumeDB = Mathf.Lerp(-80f, 0f, volume / 100f);
-
-        audioMixer.SetFloat("Volume", volume);
+        if (audioMixer != null)
+        {
+            audioMixer.SetFloat("Volume", volume); //og
+        }
 
         if (volText != null)
         {
-            volText.text = Mathf.RoundToInt(volume).ToString();
+            volText.text = ConvertDbToPercentage(volume).ToString("F0") + "%";
         }
     }
 
@@ -86,4 +94,9 @@ public class SettingsMenu : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
+    private float ConvertDbToPercentage(float db)
+    {
+        float linear = Mathf.Pow(10, db / 20);
+        return linear * 100;
+    }
 }
