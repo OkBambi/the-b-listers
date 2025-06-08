@@ -45,6 +45,8 @@ public class YellowSchmove : MonoBehaviour
             if (chargeTime >= chargeLevelDuration[Mathf.Clamp(chargeLevel, 0, chargeLevelDuration.Count - 1)])
             {
                 chargeTime = 0f;
+
+                //if (ComboManager.instance.currentScore >= chargeLevel * 100)
                 chargeLevel = Mathf.Clamp(++chargeLevel, 0, chargeLevelDuration.Count);
             }
 
@@ -60,6 +62,7 @@ public class YellowSchmove : MonoBehaviour
                     rb.AddForce(shootingPoint.forward * chargeLevel * railgunKnockback, ForceMode.Impulse);
 
                     ComboManager.instance.AddScore(-100 * chargeLevel); //may need to change this later
+                    StartCoroutine(player.gameObject.GetComponent<Schmoves>().UpdateCoolDownUI());
                 }
 
                 Time.timeScale = originalTimeScale;
@@ -72,6 +75,8 @@ public class YellowSchmove : MonoBehaviour
 
     public void Activate()
     {
+        //score check
+        //if (ComboManager.instance.currentScore >= 100)
         chargeTime = 0;
         activated = true;
     }
