@@ -30,7 +30,7 @@ public class Dagger : MonoBehaviour
         float rayDist = rayDir.magnitude;
 
         RaycastHit hit;
-        if (Physics.Raycast(lastPos, transform.forward, out hit, rayDist, ~ignoreMask))
+        if (Physics.Raycast(lastPos, rayDir, out hit, rayDist, ~ignoreMask))
         {
             Debug.Log(hit.collider.name);
 
