@@ -63,6 +63,26 @@ public class Player : MonoBehaviour, IDamage
     public void takeDamage(PrimaryColor hitColor, int amount)
     {
         //DIE.
+        Die();
+    }
+
+    void Die()
+    {
+        //disable player stuff
+        canAction = false;
+        canMove = false;
+        canCam = false;
+
+        //save score
+        //check for highscore
+        int highScore = PlayerPrefs.GetInt("Highscore");
+        
+        if (ComboManager.instance.GetScore() > highScore)
+        {
+            GameManager.instance.SaveHighscore(ComboManager.instance.GetScore());
+        }
+
+        //lose menu
     }
 }
 

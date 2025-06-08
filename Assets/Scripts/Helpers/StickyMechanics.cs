@@ -30,7 +30,14 @@ public class StickyMechanics : MonoBehaviour
         }
         if(!stuck)
         {
-            transform.SetParent(other.transform);
+            if(other.CompareTag("groundTag")) //makes the sticky not get squashed when touching the floor
+            {
+                transform.SetParent(other.transform.parent);
+            }
+            else
+            {
+                transform.SetParent(other.transform);
+            }
             stuck = true;
             Rigidbody rb = transform.GetComponent<Rigidbody>();
             rb.useGravity = false;

@@ -55,7 +55,7 @@ public class BoidAI : EnemyBase
         GameObject[] objects = FindObjectsByType<GameObject>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         foreach(GameObject potentialGround in objects)
         {
-            if(potentialGround.layer == LayerMask.NameToLayer("Ground"))
+            if(potentialGround.layer == LayerMask.NameToLayer("Ground") || potentialGround.CompareTag("groundTag"))
             {
                 stageGround = potentialGround;
                 break;
@@ -64,7 +64,7 @@ public class BoidAI : EnemyBase
 
         //finding the player
         if (FindAnyObjectByType<Player>() != null)
-            player = FindAnyObjectByType<Player>().gameObject;
+            player = FindAnyObjectByType<PlayerMovement>().gameObject;
         else
         {
             //testing condition
@@ -213,13 +213,23 @@ public class BoidAI : EnemyBase
         rb.AddForce((player.transform.position - transform.position).normalized * playerWeight * playerNoise * Time.deltaTime, ForceMode.Acceleration);
     }
 
-    private void OnDestroy()
+    private void RemoveSelfFromTargetList()
     {
         BoidAI[] activeboids = FindObjectsByType<BoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         for (int boidCount = 0; boidCount < activeboids.Length; boidCount++)
         {
             activeboids[boidCount].boids.Remove(rb);
         }
-        ComboManager.instance.AddScore(score);
+    }
+
+    public override void DeathCheck()
+    {
+        if (hp <= 0)
+        {
+            RemoveSelfFromTargetList();
+            ComboManager.instance.AddScore(score);
+            Destroy(gameObject);
+            return;
+        }
     }
 }

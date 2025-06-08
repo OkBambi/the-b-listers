@@ -249,6 +249,13 @@ public class ComboManager : MonoBehaviour
         popScore = true;
     }
 
+    public void RemoveScore(float amount)
+    {
+        currentComboScore -= amount;
+        totalScore -= amount;
+        popScore = true;
+    }
+
     void UIShenanigans()
     {
         //color stuff
@@ -288,6 +295,11 @@ public class ComboManager : MonoBehaviour
 
         totalScoreUGUI.text = totalScore.ToString();
         comboMultUGUI.text = (comboMults[(int)comboGrade].ToString("0.00") + "x");
+    }
+
+    public int GetScore()
+    {
+        return Mathf.CeilToInt(totalScore);
     }
 }
 

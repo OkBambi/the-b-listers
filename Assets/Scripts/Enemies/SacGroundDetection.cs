@@ -17,8 +17,13 @@ public class SacGroundDetection : EnemyBase
         }
     }
 
-    private void OnDestroy()
+    public override void DeathCheck()
     {
-        ComboManager.instance.AddScore(score);
+        if (hp <= 0)
+        {
+            ComboManager.instance.AddScore(score);
+            Destroy(gameObject);
+            return;
+        }
     }
 }

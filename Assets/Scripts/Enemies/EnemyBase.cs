@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyBase : MonoBehaviour
+public class EnemyBase : MonoBehaviour, IDamage
 {
     public Renderer model;
     public PrimaryColor setColor;
@@ -68,5 +68,24 @@ public class EnemyBase : MonoBehaviour
     {
         EnemyManager.instance.OnAECDestroy();
         ComboManager.instance.AddScore(score);
+    }
+
+    public void takeDamage(PrimaryColor hitColor, int amount)
+    {
+        if (hitColor == setColor || hitColor == PrimaryColor.OMNI || setColor == PrimaryColor.OMNI)
+        {
+            hp -= amount;
+            DeathCheck();
+        }
+    }
+
+    public virtual void DeathCheck()
+    {
+        if (hp <= 0)
+        {
+            OnAECDestroy();
+            Destroy(gameObject);
+            return;
+        }
     }
 }
