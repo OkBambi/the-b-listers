@@ -7,16 +7,24 @@ using UnityEngine.SceneManagement;
 //Placed in order of how they look on tbe main menu
 public class MainMenuScript : MonoBehaviour
 {
+    public void PlayButton()
+    {
+        //Uncomment this when ready to use. And in the PLay bitton in unity, change from getactive to PlayButton()
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //when play is pressed, the game will start. currently is using a temp scene name
+        SceneManager.LoadScene("SampleScene");
+    }
+
+    public void QuitButton()
+    {
+        Debug.Log("Quitting..");
+        Application.Quit();
+    }
+
     //not really needed, but its for the settings page
     public void SettingsButton()
     {
         SceneManager.LoadScene("Settings");
-    }
-
-    public void PlayButton()
-    {
-        //when play is pressed, the game will start. currently is using a temp scene name
-        SceneManager.LoadScene("SampleScene");
     }
 
     //button thing for credits
@@ -29,12 +37,6 @@ public class MainMenuScript : MonoBehaviour
     public void GameInfoButton()
     {
         SceneManager.LoadScene("Game Info");
-    }
-
-    public void QuitButton()
-    {
-        Debug.Log("Quitting..");
-        Application.Quit();
     }
 
 }
