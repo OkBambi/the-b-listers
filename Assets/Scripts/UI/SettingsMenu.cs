@@ -7,12 +7,15 @@ using TMPro;
 
 public class SettingsMenu : MonoBehaviour
 {
-    //audio variable
+    //audio variables
     public AudioMixer audioMixer;
+    public Slider volumeSlider;
+    public TextMeshProUGUI volText;
 
     //res stuff
     public TMP_Dropdown resolutionDropdown;
     Resolution[] resolutions;
+
 
     void Start()
     {
@@ -39,13 +42,35 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.AddOptions(options); //once done, it gets back added to the res dropdown
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+
+
+        //initialises the slider and display value based on current mixer value
+        float currentVolume;
+        if (audioMixer.GetFloat("Volume", out currentVolume))
+        {
+            //if using logarithmic values (e.g., -80 to 0 dB)
+            float normalised = Mathf.InverseLerp(-80f, 0f, currentVolume);
+            float percent = normalised * 100f;
+            volumeSlider.value = percent;
+
+            if (volText != null)
+                volText.text = Mathf.RoundToInt(percent).ToString();
+        }
     }
 
 
     //area for vol
     public void SetVolume(float volume)
     {
+        //converts slider percentage (0–100) to mixer value (log scale)
+        float volumeDB = Mathf.Lerp(-80f, 0f, volume / 100f);
+
         audioMixer.SetFloat("Volume", volume);
+
+        if (volText != null)
+        {
+            volText.text = Mathf.RoundToInt(volume).ToString();
+        }
     }
 
     //if wanting graphics
@@ -60,4 +85,5 @@ public class SettingsMenu : MonoBehaviour
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
+
 }
