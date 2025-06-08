@@ -20,7 +20,9 @@ public class RedSchmove : MonoBehaviour, ISchmove
 
     [Space]
     [SerializeField] GameObject indicator;
+    [SerializeField] GameObject dmgIndic;
     GameObject i;
+    GameObject d;
 
     float holdTime;
     bool timeToSlam;
@@ -52,6 +54,7 @@ public class RedSchmove : MonoBehaviour, ISchmove
             {
                 Debug.Log(hit.collider.name);
                 i.transform.position = hit.point;
+                d.transform.position = hit.point;
             }
 
             if (holdTime >= hangTime)
@@ -73,7 +76,7 @@ public class RedSchmove : MonoBehaviour, ISchmove
 
                 //check for hits
                 RaycastHit[] slamTargets = Physics.SphereCastAll
-                    (hit.point, damageRadius, hit.normal, damageRadius, ~ignoreLayer);
+                    (hit.point, damageRadius, hit.normal, 1f, ~ignoreLayer);
 
                 foreach (var target in slamTargets)
                 {
@@ -88,6 +91,7 @@ public class RedSchmove : MonoBehaviour, ISchmove
                 }
 
                 Destroy(i);
+                Destroy(d);
                 player.canMove = true;
                 player.canAction = true;
             }
@@ -98,6 +102,7 @@ public class RedSchmove : MonoBehaviour, ISchmove
     {
         holdTime = 0;
         i = Instantiate(indicator);
+        d = Instantiate(dmgIndic);
         activated = true;
     }
 }
