@@ -15,6 +15,10 @@ public class RedSchmove : MonoBehaviour, ISchmove
     [SerializeField] float hookForce;
 
     [Space]
+    [SerializeField] float damageRadius;
+    [SerializeField] int damage;
+
+    [Space]
     [SerializeField] GameObject indicator;
     GameObject i;
 
@@ -65,6 +69,22 @@ public class RedSchmove : MonoBehaviour, ISchmove
                 {
                     //if nothing was returned, slam directly down. if you fall into the void this way, so be it.
                     rb.AddForce(-transform.up * hookForce, ForceMode.Impulse);
+                }
+
+                //check for hits
+                RaycastHit[] slamTargets = Physics.SphereCastAll
+                    (hit.point, damageRadius, hit.normal, damageRadius, ~ignoreLayer);
+
+                foreach (var target in slamTargets)
+                {
+                    Debug.Log(target.collider.gameObject.name);
+
+                    IDamage dmg = target.collider.GetComponent<IDamage>();
+
+                    if (dmg != null)
+                    {
+                        dmg.takeDamage(PrimaryColor.OMNI, damage);
+                    }
                 }
 
                 Destroy(i);

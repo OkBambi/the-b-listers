@@ -1282,6 +1282,7 @@ MonoBehaviour:
   slowMod: 0
   railDist: 0
   railgunDmg: 0
+  yellowSchmover: {fileID: 0}
   cooldownBlue: 0
   blueSchmover: {fileID: 0}
 --- !u!1001 &312430970
@@ -7048,6 +7049,8 @@ MonoBehaviour:
   hangTime: 0.75
   hookDist: 400
   hookForce: 400
+  damageRadius: 10
+  damage: 5
   indicator: {fileID: 6171642501292978191, guid: f3a4cd50e9378de418d41ababb92c29a, type: 3}
 --- !u!4 &1897385562
 Transform:
