@@ -68,9 +68,9 @@ public class BlueSchmove : MonoBehaviour
                             {
                                 if (!startPulseTimer)
                                 {
-                                    rb.gameObject.GetComponent<StickyMechanics>().DmgParent();
                                     pulsesDone++;
                                     StartCoroutine(Pulse());
+                                    rb.gameObject.GetComponent<StickyMechanics>().DmgParent();
                                 }
                             }
                             else
@@ -111,6 +111,7 @@ public class BlueSchmove : MonoBehaviour
         currentWindUp = 0;
         primed = false;
         activated = false;
+        isStuck = false;
     }
 
     IEnumerator Pulse()
