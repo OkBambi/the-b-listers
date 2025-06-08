@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class YellowSchmove : MonoBehaviour
 {
@@ -10,6 +13,9 @@ public class YellowSchmove : MonoBehaviour
     [Space]
     [Header("SchmoveObjects")]
     [SerializeField] GameObject YELLOWBEAAAM;
+    [SerializeField] Image ChargeGaugeUI;
+    [SerializeField] TextMeshProUGUI ChargeCounterUI;
+
     [Space]
     [Header("Charge")]
     [SerializeField] float chargeTime;
@@ -30,6 +36,7 @@ public class YellowSchmove : MonoBehaviour
     {
         originalTimeScale = Time.timeScale;
         player = GameObject.FindFirstObjectByType<Player>();
+        ChargeGaugeUI.fillMethod = Image.FillMethod.Radial360;
     }
 
     void Update()
@@ -48,7 +55,18 @@ public class YellowSchmove : MonoBehaviour
 
                 //if (ComboManager.instance.currentScore >= chargeLevel * 100)
                 chargeLevel = Mathf.Clamp(++chargeLevel, 0, chargeLevelDuration.Count);
+                ChargeCounterUI.text = chargeLevel.ToString();
             }
+
+            if (chargeLevel == 3)
+            {
+                ChargeGaugeUI.fillAmount = 1f;
+            }
+            else
+            {
+                ChargeGaugeUI.fillAmount = chargeTime / chargeLevelDuration[chargeLevel];
+            }
+
 
             //IMMA FIRRIN MY LAZER (Railgun)
             if (Input.GetMouseButtonUp(1))
