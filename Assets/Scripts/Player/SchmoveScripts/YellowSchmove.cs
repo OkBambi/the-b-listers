@@ -98,7 +98,7 @@ public class YellowSchmove : MonoBehaviour
     public void Activate()
     {
         //score check
-        //if (ComboManager.instance.currentScore >= 100)
+        //if (ComboManager.instance.GetScore() < 100) return;
         ChargeGaugeUI.gameObject.SetActive(true);
         chargeTime = 0;
         activated = true;
