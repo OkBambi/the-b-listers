@@ -30,8 +30,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (canMove)
-            playerMovement.UpdateBody();
 
         if (canCam)
             playerCamera.UpdateCamera(playerMovement.IsGrounded());
@@ -52,7 +50,34 @@ public class Player : MonoBehaviour
     {
         float deltaTime = Time.deltaTime;
 
+        if (canMove)
+            playerMovement.UpdateBody();
+
         cameraSpring.UpdateSpring(deltaTime, Vector3.up);
+    }
+
+    public PrimaryColor GetPlayerColor()
+    {
+        return currentColor;
+    }
+
+    public void Die()
+    {
+        //disable player stuff
+        canAction = false;
+        canMove = false;
+        canCam = false;
+
+        //save score
+        //check for highscore
+        int highScore = PlayerPrefs.GetInt("Highscore");
+        
+        if (ComboManager.instance.GetScore() > highScore)
+        {
+            GameManager.instance.SaveHighscore(ComboManager.instance.GetScore());
+        }
+
+        //lose menu
     }
 }
 

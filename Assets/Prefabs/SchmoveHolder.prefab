@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7587775474305076640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1924007176610526850}
+  - component: {fileID: 6047618490753711657}
+  - component: {fileID: 5176216418705681206}
+  m_Layer: 0
+  m_Name: SchmoveHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1924007176610526850
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7587775474305076640}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6047618490753711657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7587775474305076640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0a103c26e0caaf49bc14cdd3cd4bc19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  rb: {fileID: 0}
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 328
+  launchForce: 50
+  hangTime: 0.75
+  hookDist: 400
+  hookForce: 400
+  damageRadius: 10
+  damage: 5
+  indicator: {fileID: 6171642501292978191, guid: f3a4cd50e9378de418d41ababb92c29a, type: 3}
+  dmgIndic: {fileID: 6171642501292978191, guid: c4cecdcab9a0d674d871ab09bb1741ec, type: 3}
+--- !u!114 &5176216418705681206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7587775474305076640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df33bc2da0abdc8468d3bc65bef97b75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  rb: {fileID: 0}
+  shootingPoint: {fileID: 0}
+  YELLOWBEAAAM: {fileID: 1550552765679704896, guid: a7ad2a7800978484e8a9b1f7ab56a0ca, type: 3}
+  chargeTime: 0
+  chargeLevel: 0
+  chargeLevelDuration:
+  - 0.1
+  - 1
+  - 1
+  slowMod: 2
+  railgunDmg: 3
+  railgunKnockback: 10
+  originalTimeScale: 0

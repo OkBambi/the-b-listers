@@ -11,6 +11,7 @@ public class Dagger : MonoBehaviour
     [SerializeField] PrimaryColor projColor;
 
     Vector3 lastPos;
+    bool reflected;
 
     public void Initialize(PrimaryColor _color, float _speed, float _lifeTime, LayerMask _ignoreMask)
     {
@@ -29,9 +30,19 @@ public class Dagger : MonoBehaviour
         float rayDist = rayDir.magnitude;
 
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, rayDist, ~ignoreMask))
+        if (Physics.Raycast(lastPos, rayDir, out hit, rayDist, ~ignoreMask))
         {
             Debug.Log(hit.collider.name);
+
+            if(hit.collider.CompareTag("groundTag") && !reflected)
+            {
+                //REFLECT
+                reflected = true;
+                Vector3 reflectionDir = Vector3.Reflect(transform.forward, hit.normal);
+
+                transform.position = hit.point;
+                transform.forward = reflectionDir.normalized;
+            }
 
             //check for damage
             IDamage dmg = hit.collider.GetComponent<IDamage>();

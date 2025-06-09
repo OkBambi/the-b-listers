@@ -3,12 +3,7 @@ using UnityEngine;
 public class BoidSpawnTest : MonoBehaviour
 {
     public GameObject boids;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
+    public EnemyBase target;
     // Update is called once per frame
     void Update()
     {
@@ -16,5 +11,15 @@ public class BoidSpawnTest : MonoBehaviour
         {
             Instantiate(boids);
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            EnemyManager.instance.SpawnFirstEnemy();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            target.takeDamage(PrimaryColor.RED, 2);
+        }
+
     }
 }

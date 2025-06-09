@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IDamage
 {
+    [SerializeField] PlayerShooting shooter;
     [SerializeField] Rigidbody rb;
 
     [Header("Movement")]
@@ -97,11 +98,35 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, 1f);
+        //return Physics.Raycast(transform.position, -Vector3.up, 1f);
+        return isGrounded;
     }
 
     public float MoveSpeed()
     {
         return rb.linearVelocity.magnitude;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("groundTag"))
+        {
+            isGrounded = true;
+            shooter.currentRocketJumps = 0;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.CompareTag("groundTag"))
+        {
+            isGrounded = false;
+        }
+    }
+
+    public void takeDamage(PrimaryColor hitColor, int amount)
+    {
+        Debug.Log("Fall.");
+        transform.parent.GetComponent<Player>().Die();
     }
 }

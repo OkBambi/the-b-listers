@@ -1,16 +1,21 @@
 using UnityEngine;
 
-public class StopWatch : EnemyBase
+public class StopWatch : EnemyBase, IDamage
 {
     [SerializeField] GameObject SpitSac;
     
     int counter;
 
+    private void Awake()
+    {
+        OnAECAwake();
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         counter = 0;
         ColorSelection(setColor);
+        //UpdateBoidAwareness(); this will need to be commented out once/if the stopwatch gets a rigidbody
     }
 
     // Update is called once per frame
@@ -37,4 +42,6 @@ public class StopWatch : EnemyBase
         SacGroundDetection mySac = Instantiate(SpitSac,transform.position,Quaternion.identity).GetComponent<SacGroundDetection>();
         mySac.setColor = this.setColor;
     }
+
+    
 }
