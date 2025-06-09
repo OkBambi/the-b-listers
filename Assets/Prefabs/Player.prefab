@@ -2772,7 +2772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooter: {fileID: 604676823186195933}
   rb: {fileID: 2110646623958653997}
-  speed: 80
+  speed: 23
   jumpVel: 15
   jumpMax: 1
   dashForce: 20
@@ -3006,7 +3006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48b274693800dcf4aa7bfc63f5a5ddd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sens: 400
+  sens: 150
   lockVertMin: -90
   lockVertMax: 90
   invertY: 0
@@ -3162,7 +3162,7 @@ PrefabInstance:
       objectReference: {fileID: 6544136719575331733}
     - target: {fileID: 5176216418705681206, guid: 54bf02cc4b0be8a44be5ca03058d2b8b, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5176216418705681206, guid: 54bf02cc4b0be8a44be5ca03058d2b8b, type: 3}
       propertyPath: ChargeGaugeUI
@@ -3204,7 +3204,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 70501187334855889}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df33bc2da0abdc8468d3bc65bef97b75, type: 3}
   m_Name: 
