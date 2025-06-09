@@ -90,10 +90,7 @@ public class GameManager : MonoBehaviour
         MenuActive = MenuWin;
         MenuActive.SetActive(true);
     }
-    public void SaveHighscore(int HighScores)
-    {
 
-    }
     public void OnCreditInfo()
     {
         isPaused = true;
