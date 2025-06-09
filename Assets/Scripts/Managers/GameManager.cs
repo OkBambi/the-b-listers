@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject MenuGameInfo;
 
     public GameObject player;
-    public PlayerMovement PlayerMovement;
+    public Player playerScript;
     public bool isPaused;
     float TimeScaleOrigin;
 
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
-        PlayerMovement = player.GetComponent<PlayerMovement>();
+        playerScript = player.transform.parent.GetComponent<Player>();
         TimeScaleOrigin = Time.timeScale;
         Cursor.lockState=CursorLockMode.Locked;
     }
@@ -46,9 +46,6 @@ public class GameManager : MonoBehaviour
     public void statePause()
     {
         isPaused = !isPaused;
-        GameObject.FindFirstObjectByType<Player>().canAction = false;
-        GameObject.FindFirstObjectByType<Player>().canCam = false;
-        GameObject.FindFirstObjectByType<Player>().canAction = false;
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -58,10 +55,6 @@ public class GameManager : MonoBehaviour
     public void stateUnPause()
     {
         isPaused = !isPaused;
-
-        GameObject.FindFirstObjectByType<Player>().canAction = true;
-        GameObject.FindFirstObjectByType<Player>().canCam = true;
-        GameObject.FindFirstObjectByType<Player>().canAction = true;
 
         Time.timeScale = TimeScaleOrigin;
         Cursor.visible = false;
@@ -79,6 +72,10 @@ public class GameManager : MonoBehaviour
     {
         statePause();
         //turn on the lose menu
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        MenuActive = MenuLose;
+        MenuActive.SetActive(true);
     }
 
     public void OnWinCondition()

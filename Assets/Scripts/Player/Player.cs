@@ -31,18 +31,20 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-
-        if (canCam)
-            playerCamera.UpdateCamera(playerMovement.IsGrounded());
-
-        if (canColor)
-            colorSwapper.UpdateColor(ref currentColor);
-
-        if (canAction)
+        if (!GameManager.instance.isPaused)
         {
-            weapon.UpdateWeapon(currentColor, arm);
+            if (canCam)
+                playerCamera.UpdateCamera(playerMovement.IsGrounded());
 
-            schmover.UpdateInput(currentColor);
+            if (canColor)
+                colorSwapper.UpdateColor(ref currentColor);
+
+            if (canAction)
+            {
+                weapon.UpdateWeapon(currentColor, arm);
+
+                schmover.UpdateInput(currentColor);
+            }
         }
 
         arm.UpdateArm(currentColor);
@@ -50,12 +52,15 @@ public class Player : MonoBehaviour
 
     void LateUpdate()
     {
-        float deltaTime = Time.deltaTime;
+        if (!GameManager.instance.isPaused)
+        {
+            float deltaTime = Time.deltaTime;
 
-        if (canMove)
-            playerMovement.UpdateBody();
+            if (canMove)
+                playerMovement.UpdateBody();
 
-        cameraSpring.UpdateSpring(deltaTime, Vector3.up);
+            cameraSpring.UpdateSpring(deltaTime, Vector3.up);
+        }
     }
 
     public PrimaryColor GetPlayerColor()

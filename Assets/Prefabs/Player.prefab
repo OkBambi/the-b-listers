@@ -363,6 +363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textForTimer: {fileID: 2375659699713022005}
   timeRemainingInSeconds: 61
+  isCounting: 0
 --- !u!114 &2375659699713022005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1859,7 +1860,8 @@ MonoBehaviour:
   currentColor: 0
   canMove: 1
   canCam: 1
-  canAction: 1
+  canAction: 0
+  canColor: 1
 --- !u!114 &3476259932098106770
 MonoBehaviour:
   m_ObjectHideFlags: 0
