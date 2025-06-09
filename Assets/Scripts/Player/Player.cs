@@ -17,9 +17,10 @@ public class Player : MonoBehaviour
 
     [Space]
     [Header("Conditionals")]
-    [SerializeField] public bool canMove;
-    [SerializeField] public bool canCam;
-    [SerializeField] public bool canAction;
+    public bool canMove;
+    public bool canCam;
+    public bool canAction;
+    public bool canColor;
 
     void Start()
     {
@@ -34,10 +35,11 @@ public class Player : MonoBehaviour
         if (canCam)
             playerCamera.UpdateCamera(playerMovement.IsGrounded());
 
-        if (canAction)
-        {
+        if (canColor)
             colorSwapper.UpdateColor(ref currentColor);
 
+        if (canAction)
+        {
             weapon.UpdateWeapon(currentColor, arm);
 
             schmover.UpdateInput(currentColor);
@@ -67,6 +69,7 @@ public class Player : MonoBehaviour
         canAction = false;
         canMove = false;
         canCam = false;
+        canColor = false;
 
         //save score
         //check for highscore
