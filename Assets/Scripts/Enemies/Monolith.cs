@@ -31,8 +31,9 @@ public class Monolith : EnemyBase
 
     public void SpawnBoid()
     {
-        //Boid myNewBoid = Instantiate(myBoid, transform.position, Quaternion.identity).GetComponent<Boid>();
-        //myNewBoid.setColor = this.setColor;
+        //five normal one angry
+        BoidAI myNewBoid = Instantiate(myBoid, transform.position, Quaternion.identity).GetComponent<BoidAI>();
+        myNewBoid.setColor = this.setColor;
     }
 
     void movement()
