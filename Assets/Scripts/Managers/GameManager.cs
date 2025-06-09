@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject MenuGameInfo;
 
     public GameObject player;
-    public PlayerMovement PlayerMovement;
+    public Player playerScript;
     public bool isPaused;
     float TimeScaleOrigin;
 
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
-        PlayerMovement = player.GetComponent<PlayerMovement>();
+        playerScript = player.transform.parent.GetComponent<Player>();
         TimeScaleOrigin = Time.timeScale;
         Cursor.lockState=CursorLockMode.Locked;
     }
