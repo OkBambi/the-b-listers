@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     public PlayerMovement PlayerMovement;
     public bool isPaused;
     float TimeScaleOrigin;
-    int gameGoalCount;
 
     void Awake()
     {
@@ -82,7 +81,12 @@ public class GameManager : MonoBehaviour
 
     public void OnWinCondition()
     {
-
+        GameObject.FindFirstObjectByType<Player>().Die();
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        MenuActive = MenuWin;
+        MenuActive.SetActive(true);
     }
 
     public void OnCreditInfo()
