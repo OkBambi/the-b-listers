@@ -706,11 +706,6 @@ Transform:
   - {fileID: 107138660}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1237460454 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7261247534326979501, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
-  m_PrefabInstance: {fileID: 1822789858}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1365053809
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,18 +949,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 390799457790547258, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
-      propertyPath: speed
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 2167425743756339866, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3363300360428369280, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
-      propertyPath: blueSchmover
-      value: 
-      objectReference: {fileID: 2121108636}
     - target: {fileID: 3923875554569662914, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1013,38 +996,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7617638535204852081, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2121108636}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
---- !u!1 &2121108634 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7617638535204852081, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
-  m_PrefabInstance: {fileID: 1822789858}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2121108636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2121108634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e346e686c64515418e4a9a2efbad242, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 6618629636542978020, guid: a740b1abc3084d44b8ea37a8483dd656, type: 3}
-  blueWindup: 2
-  stickySpeed: 10
-  timeBetweenPulses: 1
-  pulseMaxRadius: 10
-  pulseSpeed: 2
-  amountOfPulses: 3
-  pulseDmg: 1
-  sticky: {fileID: 2220030932939769073, guid: a740b1abc3084d44b8ea37a8483dd656, type: 3}
-  shootingPoint: {fileID: 1237460454}
 --- !u!1001 &774146266479024841
 PrefabInstance:
   m_ObjectHideFlags: 0
