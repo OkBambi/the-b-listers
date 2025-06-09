@@ -12,10 +12,11 @@ public class Monolith : EnemyBase
     private Rigidbody rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Start()
     {
-        ColorSelection(setColor);
         rb = GetComponent<Rigidbody>();
+        ColorSelection(setColor);
+        UpdateBoidAwareness();
     }
 
     Vector3 moveDir;

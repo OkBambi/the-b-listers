@@ -43,6 +43,7 @@ public class BoidAI : EnemyBase
     [Header("Constraints")]
     [SerializeField] float groundAvoidance = 10f;
     [SerializeField] float skyAvoidance = 2f;
+    [SerializeField] float startUpForce = 10f;
 
     [SerializeField] float maxHeight = 50f;
     [SerializeField] float minHeight = 5;
@@ -70,9 +71,11 @@ public class BoidAI : EnemyBase
             //testing condition
             player = GameObject.FindGameObjectWithTag("Player");
         }
+        Debug.Log("boom");
+        rb.AddForce(Vector3.up * startUpForce * Time.deltaTime, ForceMode.Acceleration);
     }
 
-    private void Start()
+    protected override void Start()
     {
         ColorSelection(setColor);
         base.UpdateBoidAwareness();

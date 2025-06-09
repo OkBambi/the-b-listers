@@ -11,11 +11,11 @@ public class StopWatch : EnemyBase, IDamage
         OnAECAwake();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Start()
     {
         counter = 0;
         ColorSelection(setColor);
-        //UpdateBoidAwareness(); this will need to be commented out once/if the stopwatch gets a rigidbody
+        base.UpdateBoidAwareness(); //this will need to be commented out once/if the stopwatch gets a rigidbody
     }
 
     // Update is called once per frame
