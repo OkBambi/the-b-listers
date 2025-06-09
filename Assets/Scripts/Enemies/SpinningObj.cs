@@ -4,7 +4,7 @@ public class SpinningObj : MonoBehaviour
 {
     // Adjust this to control the spinning speed
     public float rotationSpeed = 50f;
-    public float otherrotationspeed = 50f;
+    //public float otherrotationspeed = 50f;
 
 
     // Update is called once per frame
