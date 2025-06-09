@@ -78,6 +78,7 @@ public class Player : MonoBehaviour
         }
 
         //lose menu
+        GameManager.instance.OnLoseCondition();
     }
 }
 
