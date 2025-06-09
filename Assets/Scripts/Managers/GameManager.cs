@@ -46,9 +46,6 @@ public class GameManager : MonoBehaviour
     public void statePause()
     {
         isPaused = !isPaused;
-        GameObject.FindFirstObjectByType<Player>().canAction = false;
-        GameObject.FindFirstObjectByType<Player>().canCam = false;
-        GameObject.FindFirstObjectByType<Player>().canAction = false;
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -58,10 +55,6 @@ public class GameManager : MonoBehaviour
     public void stateUnPause()
     {
         isPaused = !isPaused;
-
-        GameObject.FindFirstObjectByType<Player>().canAction = true;
-        GameObject.FindFirstObjectByType<Player>().canCam = true;
-        GameObject.FindFirstObjectByType<Player>().canAction = true;
 
         Time.timeScale = TimeScaleOrigin;
         Cursor.visible = false;
