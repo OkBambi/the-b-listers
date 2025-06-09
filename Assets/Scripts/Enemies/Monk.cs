@@ -2,16 +2,14 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 
-public class Monk : MonoBehaviour, IDamage
+public class Monk : EnemyBase
 {
-    [SerializeField] int HP;
     [SerializeField] int FaceTargetSpeed;
     [SerializeField] float Casttimer;
     [SerializeField] float gongBonkRate;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Transform Casting;
     [SerializeField] GameObject wave;
-    [SerializeField] Renderer model;
 
     //noise 
     Color colorOriginal;
@@ -22,7 +20,7 @@ public class Monk : MonoBehaviour, IDamage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Casttimer = 0f;
+        ColorSelection(setColor);
         StartCoroutine(Cast());
     }
 
@@ -78,9 +76,5 @@ public class Monk : MonoBehaviour, IDamage
     {
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * FaceTargetSpeed);
-    }
-    public void takeDamage(PrimaryColor hitColor, int amount)
-    {
-        throw new System.NotImplementedException();
     }
 }
