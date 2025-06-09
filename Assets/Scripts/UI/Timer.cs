@@ -6,6 +6,7 @@ public class Timer : MonoBehaviour
     [SerializeField] TextMeshProUGUI textForTimer;
     [SerializeField] float timeRemainingInSeconds;
 
+    public bool isCounting;
     int minutes;
     int seconds;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -17,6 +18,8 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isCounting) return;
+
         if (timeRemainingInSeconds > 0)
         {
             timeRemainingInSeconds -= Time.deltaTime;
