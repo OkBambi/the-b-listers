@@ -30,8 +30,6 @@ public class Player : MonoBehaviour, IDamage
 
     void Update()
     {
-        if (canMove)
-            playerMovement.UpdateBody();
 
         if (canCam)
             playerCamera.UpdateCamera(playerMovement.IsGrounded());
@@ -51,6 +49,9 @@ public class Player : MonoBehaviour, IDamage
     void LateUpdate()
     {
         float deltaTime = Time.deltaTime;
+
+        if (canMove)
+            playerMovement.UpdateBody();
 
         cameraSpring.UpdateSpring(deltaTime, Vector3.up);
     }
