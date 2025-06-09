@@ -18,8 +18,9 @@ public class Monk : EnemyBase
     Vector3 playerDir;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Start()
     {
+        GetComponent<Rigidbody>();
         ColorSelection(setColor);
         StartCoroutine(Cast());
     }
