@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class FOVSlider : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class FOVSlider : MonoBehaviour
 
     //this can be optional but im putting this here if wanted
     //this is for the text element that will display the fov value
-    public Text fovText;
+    //could use TMP?
+    public TextMeshProUGUI fovText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,7 +24,8 @@ public class FOVSlider : MonoBehaviour
         //this updates the text initially
         if (fovText != null )
         {
-            fovText.text = "FOV: " + fovSlider.value.ToString("F0");    //displays it as a whole number
+            //fovText.text = "FOV: " + fovSlider.value.ToString("F0");
+            fovText.text = fovSlider.value.ToString("F0");    //displays it as a whole number
         }
     }
 
@@ -41,7 +44,8 @@ public class FOVSlider : MonoBehaviour
         //again, if added text, this updates the text just like the above one
         if (fovText != null )
         {
-            fovText.text = "FOV: " + newFOV.ToString("F0");
+            //fovText.text = "FOV: " + newFOV.ToString("F0");
+            fovText.text = newFOV.ToString("F0");
         }
     }
 }

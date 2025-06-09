@@ -1,0 +1,34 @@
+using TMPro;
+using UnityEngine;
+
+public class Timer : MonoBehaviour
+{
+    [SerializeField] TextMeshProUGUI textForTimer;
+    [SerializeField] float timeRemainingInSeconds;
+
+    int minutes;
+    int seconds;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (timeRemainingInSeconds > 0)
+        {
+            timeRemainingInSeconds -= Time.deltaTime;
+        }
+        else
+        {
+            timeRemainingInSeconds = 0;
+            GameManager.instance.OnWinCondition();
+        }
+
+        minutes = Mathf.FloorToInt(timeRemainingInSeconds / 60);
+        seconds = Mathf.FloorToInt(timeRemainingInSeconds % 60);
+        textForTimer.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+    }
+}
