@@ -21,7 +21,7 @@ public class Timer : MonoBehaviour
         {
             timeRemainingInSeconds -= Time.deltaTime;
         }
-        else
+        else if (timeRemainingInSeconds <= 0)
         {
             timeRemainingInSeconds = 0;
             GameManager.instance.OnWinCondition();

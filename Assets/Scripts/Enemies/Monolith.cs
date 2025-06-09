@@ -9,6 +9,7 @@ public class Monolith : EnemyBase
     [SerializeField] GameObject angryBoid;
     [SerializeField] float rotationRadius = 2f;
     [SerializeField] float angularSpeed = 2f;
+    [SerializeField] float rotationSpeed = 1f;
     [SerializeField] float posX, posZ, angle= 0f;
     [SerializeField] float timeBetweenSpawns;
     [SerializeField] int normalBoidSpawnAmt;
@@ -49,7 +50,7 @@ public class Monolith : EnemyBase
         for (int spawnCount = 0; spawnCount < angryBoidSpawnAmt; spawnCount++)//angry spawn
         {
             angryBoid = Instantiate(angryBoid, transform.position, Quaternion.identity);
-            //angryBoid.gameObject.GetComponent<BoidAI>().setColor = ;
+            //angryBoid.gameObject.GetComponent<BoidAI>().setColor = this.setColor;
         }
 
         isSpawning = false;
@@ -59,6 +60,7 @@ public class Monolith : EnemyBase
     {
         posX = rb.position.x + Mathf.Cos(angle) * rotationRadius;
         posZ = rb.position.z + Mathf.Sin(angle) * rotationRadius;
+        transform.RotateAround(Vector3.zero, Vector3.up, rotationSpeed);//allows the monolith to spin around on the y-axis
         transform.position = new Vector3(posX, transform.position.y, posZ);
         angle += angularSpeed * Time.deltaTime;
 

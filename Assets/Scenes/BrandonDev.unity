@@ -949,6 +949,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1869178123625032615, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
+      propertyPath: timeRemainingInSeconds
+      value: 61
+      objectReference: {fileID: 0}
+    - target: {fileID: 2375659699713022005, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
+      propertyPath: m_text
+      value: 1:00
+      objectReference: {fileID: 0}
     - target: {fileID: 3923875554569662914, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1190,13 +1198,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1828080855419459858, guid: dfded8a8a08bc8442abc2c8ce672f55c, type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 2165423631476957154, guid: dfded8a8a08bc8442abc2c8ce672f55c, type: 3}
       propertyPath: m_Name
       value: CyMonolith2 Omni
       objectReference: {fileID: 0}
     - target: {fileID: 5864781156695054292, guid: dfded8a8a08bc8442abc2c8ce672f55c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.9898396
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 5864781156695054292, guid: dfded8a8a08bc8442abc2c8ce672f55c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1204,7 +1216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5864781156695054292, guid: dfded8a8a08bc8442abc2c8ce672f55c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.686634
+      value: -48.75
       objectReference: {fileID: 0}
     - target: {fileID: 5864781156695054292, guid: dfded8a8a08bc8442abc2c8ce672f55c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1238,6 +1250,14 @@ PrefabInstance:
       propertyPath: model
       value: 
       objectReference: {fileID: 3068022898109598804}
+    - target: {fileID: 7874027634725235887, guid: dfded8a8a08bc8442abc2c8ce672f55c, type: 3}
+      propertyPath: angularSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7874027634725235887, guid: dfded8a8a08bc8442abc2c8ce672f55c, type: 3}
+      propertyPath: rotationRadius
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
