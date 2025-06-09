@@ -2736,7 +2736,7 @@ GameObject:
   - component: {fileID: 565149941041569523}
   m_Layer: 3
   m_Name: PlayerModel
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2772,7 +2772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooter: {fileID: 604676823186195933}
   rb: {fileID: 2110646623958653997}
-  speed: 23
+  speed: 80
   jumpVel: 15
   jumpMax: 1
   dashForce: 20
@@ -3006,7 +3006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48b274693800dcf4aa7bfc63f5a5ddd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sens: 150
+  sens: 400
   lockVertMin: -90
   lockVertMax: 90
   invertY: 0
