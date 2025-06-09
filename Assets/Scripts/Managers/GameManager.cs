@@ -71,12 +71,14 @@ public class GameManager : MonoBehaviour
 
     public void LoadSettings()
     {
+        
 
     }
 
     public void OnLoseCondition()
     {
-
+        statePause();
+        //turn on the lose menu
     }
 
     public void OnWinCondition()
@@ -104,7 +106,11 @@ public class GameManager : MonoBehaviour
     }
     public void OnApplicationQuit()
     {
+#if !UNITY_EDITOR
         Application.Quit();
+#else
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 
     public int LoadHighscore()
