@@ -12,7 +12,7 @@ public class MainMenuScript : MonoBehaviour
         //Uncomment this when ready to use. And in the PLay bitton in unity, change from getactive to PlayButton()
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         //when play is pressed, the game will start. currently is using a temp scene name
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("PlayScene");
     }
 
     public void QuitButton()
