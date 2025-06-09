@@ -26,15 +26,11 @@ public class YellowSchmove : MonoBehaviour
     [SerializeField] float slowMod;
     [SerializeField] int railgunDmg;
     [SerializeField] int railgunKnockback;
-    [Space]
-    [Header("Time")]
-    [SerializeField] float originalTimeScale;
 
     bool activated;
 
     void Start()
     {
-        originalTimeScale = Time.timeScale;
         player = GameObject.FindFirstObjectByType<Player>();
         ChargeGaugeUI.fillMethod = Image.FillMethod.Radial360;
     }
@@ -44,7 +40,6 @@ public class YellowSchmove : MonoBehaviour
 
         if (activated)
         {
-            Time.timeScale = originalTimeScale / slowMod;
             //charging the railgun
             chargeTime += Time.deltaTime * 2;
             player.canAction = false;
@@ -93,7 +88,6 @@ public class YellowSchmove : MonoBehaviour
                 ChargeCounterUI.fontSize = 50;
                 ChargeGaugeUI.gameObject.SetActive(false);
 
-                Time.timeScale = originalTimeScale;
                 chargeLevel = 0;
                 player.canAction = true;
                 activated = false;
