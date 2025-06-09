@@ -1,15 +1,21 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
 public class Monolith : EnemyBase
 {
-    [SerializeField] GameObject myBoid;
-    [SerializeField] int speed;
+    [SerializeField] GameObject normalBoid;
+    [SerializeField] GameObject angryBoid;
     [SerializeField] float rotationRadius = 2f;
     [SerializeField] float angularSpeed = 2f;
-    [SerializeField]  float posX, posZ, angle= 0f;
+    [SerializeField] float posX, posZ, angle= 0f;
+    [SerializeField] float timeBetweenSpawns;
+    [SerializeField] int normalBoidSpawnAmt;
+    [SerializeField] int angryBoidSpawnAmt;
 
     private Rigidbody rb;
+    bool isSpawning;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -19,21 +25,34 @@ public class Monolith : EnemyBase
         UpdateBoidAwareness();
     }
 
-    Vector3 moveDir;
-    Vector3 playerVel;
-
     // Update is called once per frame
     void Update()
     {
         movement();
 
+        if (!isSpawning)
+        {
+            StartCoroutine(SpawnBoids());
+        }
     }
 
-    public void SpawnBoid()
+    IEnumerator SpawnBoids()
     {
-        //five normal one angry
-        BoidAI myNewBoid = Instantiate(myBoid, transform.position, Quaternion.identity).GetComponent<BoidAI>();
-        myNewBoid.setColor = this.setColor;
+        isSpawning = true;
+        yield return new WaitForSeconds(timeBetweenSpawns);
+        for (int spawnCount = 0; spawnCount < normalBoidSpawnAmt; spawnCount++)//normal spawn
+        {
+            normalBoid = Instantiate(normalBoid, transform.position, Quaternion.identity);
+            //normalBoid.gameObject.GetComponent<BoidAI>().setColor = this.setColor;
+        }
+
+        for (int spawnCount = 0; spawnCount < angryBoidSpawnAmt; spawnCount++)//angry spawn
+        {
+            angryBoid = Instantiate(angryBoid, transform.position, Quaternion.identity);
+            //angryBoid.gameObject.GetComponent<BoidAI>().setColor = ;
+        }
+
+        isSpawning = false;
     }
 
     void movement()
