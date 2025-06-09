@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IDamage
 {
     [SerializeField] PlayerShooting shooter;
     [SerializeField] Rigidbody rb;
@@ -122,5 +122,11 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = false;
         }
+    }
+
+    public void takeDamage(PrimaryColor hitColor, int amount)
+    {
+        Debug.Log("Fall.");
+        transform.parent.GetComponent<Player>().Die();
     }
 }

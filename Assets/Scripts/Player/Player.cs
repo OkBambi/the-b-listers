@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamage
+public class Player : MonoBehaviour
 {
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerCamera playerCamera;
@@ -30,8 +30,6 @@ public class Player : MonoBehaviour, IDamage
 
     void Update()
     {
-        if (canMove)
-            playerMovement.UpdateBody();
 
         if (canCam)
             playerCamera.UpdateCamera(playerMovement.IsGrounded());
@@ -52,6 +50,9 @@ public class Player : MonoBehaviour, IDamage
     {
         float deltaTime = Time.deltaTime;
 
+        if (canMove)
+            playerMovement.UpdateBody();
+
         cameraSpring.UpdateSpring(deltaTime, Vector3.up);
     }
 
@@ -60,13 +61,7 @@ public class Player : MonoBehaviour, IDamage
         return currentColor;
     }
 
-    public void takeDamage(PrimaryColor hitColor, int amount)
-    {
-        //DIE.
-        Die();
-    }
-
-    void Die()
+    public void Die()
     {
         //disable player stuff
         canAction = false;
@@ -83,6 +78,7 @@ public class Player : MonoBehaviour, IDamage
         }
 
         //lose menu
+        GameManager.instance.OnLoseCondition();
     }
 }
 

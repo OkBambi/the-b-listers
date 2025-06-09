@@ -100,6 +100,7 @@ public class RedSchmove : MonoBehaviour, ISchmove
 
     public void Activate()
     {
+        AudioManager.instance.Play("Red_Launch");
         holdTime = 0;
         i = Instantiate(indicator);
         d = Instantiate(dmgIndic);

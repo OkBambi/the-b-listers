@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     public PlayerMovement PlayerMovement;
     public bool isPaused;
     float TimeScaleOrigin;
-    int gameGoalCount;
 
     void Awake()
     {
@@ -72,17 +71,24 @@ public class GameManager : MonoBehaviour
 
     public void LoadSettings()
     {
+        
 
     }
 
     public void OnLoseCondition()
     {
-
+        statePause();
+        //turn on the lose menu
     }
 
     public void OnWinCondition()
     {
-
+        GameObject.FindFirstObjectByType<Player>().Die();
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        MenuActive = MenuWin;
+        MenuActive.SetActive(true);
     }
     public void SaveHighscore(int HighScores)
     {
@@ -103,6 +109,20 @@ public class GameManager : MonoBehaviour
     }
     public void OnApplicationQuit()
     {
+#if !UNITY_EDITOR
         Application.Quit();
+#else
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
+
+    public int LoadHighscore()
+    {
+        return PlayerPrefs.GetInt("Highscore");
+    }
+
+    public void SaveHighscore(int _highscore)
+    {
+        PlayerPrefs.SetInt("Highscore", _highscore);
     }
 }
