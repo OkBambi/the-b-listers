@@ -27,7 +27,7 @@ public class Schmoves : MonoBehaviour
 
     public void UpdateInput(PrimaryColor playerColor)
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && ComboManager.instance.GetScore() >= 100)
         {
             switch(playerColor)
             {
@@ -37,6 +37,7 @@ public class Schmoves : MonoBehaviour
                         redSchmover.Activate();
                         cooldownRed = maxCooldownRed;
                         RedCD_M2.color = Color.gray;
+                        ComboManager.instance.RemoveScore(100);
                         StartCoroutine(UpdateCoolDownUI());
                     }
                     break;
@@ -46,6 +47,7 @@ public class Schmoves : MonoBehaviour
                         blueSchmover.Activate();
                         cooldownBlue = maxCooldownBlue;
                         BlueCD_M2.color = Color.gray;
+                        ComboManager.instance.RemoveScore(100);
                         StartCoroutine(UpdateCoolDownUI());
                     }
                     break;
