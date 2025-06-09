@@ -19,7 +19,7 @@ public class EnemyBase : MonoBehaviour, IDamage
 
     string nameStr;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected virtual void Start()
     {
         ColorSelection(setColor);
         UpdateBoidAwareness();

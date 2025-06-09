@@ -72,7 +72,7 @@ public class BoidAI : EnemyBase
         }
     }
 
-    private void Start()
+    protected override void Start()
     {
         ColorSelection(setColor);
         base.UpdateBoidAwareness();
