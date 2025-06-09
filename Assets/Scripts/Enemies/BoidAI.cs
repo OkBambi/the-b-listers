@@ -52,6 +52,7 @@ public class BoidAI : EnemyBase
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        setColor = (PrimaryColor)Random.Range(0, 3);
         //finding the ground
         GameObject[] objects = FindObjectsByType<GameObject>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         foreach(GameObject potentialGround in objects)

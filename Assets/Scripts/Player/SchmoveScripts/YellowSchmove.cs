@@ -41,11 +41,11 @@ public class YellowSchmove : MonoBehaviour
         if (activated)
         {
             //charging the railgun
-            chargeTime += Time.deltaTime * 2;
+            chargeTime += Time.deltaTime;
             player.canAction = false;
-            
 
-            if (chargeTime >= chargeLevelDuration[Mathf.Clamp(chargeLevel, 0, chargeLevelDuration.Count - 1)])
+
+            if (chargeTime >= chargeLevelDuration[Mathf.Clamp(chargeLevel, 0, chargeLevelDuration.Count - 1)] && ComboManager.instance.GetScore() >= 100 * (chargeLevel + 1))
             {
                 chargeTime = 0f;
 
@@ -79,7 +79,7 @@ public class YellowSchmove : MonoBehaviour
                     rb.AddForce(shootingPoint.forward * chargeLevel * railgunKnockback, ForceMode.Impulse);
                     AudioManager.instance.Play("Yellow_Fire");
 
-                    ComboManager.instance.AddScore(-100 * chargeLevel); //may need to change this later
+                    ComboManager.instance.RemoveScore(100 * chargeLevel); //may need to change this later
                     StartCoroutine(player.gameObject.GetComponent<Schmoves>().UpdateCoolDownUI());
                 }
                 //ui resetting
@@ -98,7 +98,6 @@ public class YellowSchmove : MonoBehaviour
     public void Activate()
     {
         //score check
-        //if (ComboManager.instance.GetScore() < 100) return;
         ChargeGaugeUI.gameObject.SetActive(true);
         chargeTime = 0;
         activated = true;
