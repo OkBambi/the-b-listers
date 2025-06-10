@@ -58,6 +58,6 @@ public class Monolith : EnemyBase
     {
         transform.RotateAround(Vector3.zero, Vector3.up, rotationSpeed  * Time.deltaTime);//allows the monolith to spin around the center point
         transform.Rotate(new Vector3(0, rotationSpeed , 0) * Time.deltaTime);//allows the monolith to rotate around the y axis.
-        
+        //fix
     }
 }
