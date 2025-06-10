@@ -18,6 +18,7 @@ public class EnemyBase : MonoBehaviour, IDamage
     [Space]
     public int hp;
     public int score = 50;
+    protected bool isAlive = true;
 
     string nameStr;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -110,7 +111,8 @@ public class EnemyBase : MonoBehaviour, IDamage
         if (hitColor == setColor || hitColor == PrimaryColor.OMNI || setColor == PrimaryColor.OMNI)
         {
             hp -= amount;
-            DeathCheck();
+            if (isAlive)
+                DeathCheck();
 
             //flash white
             StartCoroutine(Flash());
@@ -126,6 +128,7 @@ public class EnemyBase : MonoBehaviour, IDamage
     {
         if (hp <= 0)
         {
+            isAlive = false;
             OnAECDestroy();
             RemoveSelfFromTargetList();
             Destroy(gameObject);
