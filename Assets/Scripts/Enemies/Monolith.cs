@@ -44,13 +44,11 @@ public class Monolith : EnemyBase
         for (int spawnCount = 0; spawnCount < normalBoidSpawnAmt; spawnCount++)//normal spawn
         {
             normalBoid = Instantiate(normalBoid, transform.position, Quaternion.identity);
-            //normalBoid.gameObject.GetComponent<BoidAI>().setColor = this.setColor;
         }
 
         for (int spawnCount = 0; spawnCount < angryBoidSpawnAmt; spawnCount++)//angry spawn
         {
             angryBoid = Instantiate(angryBoid, transform.position, Quaternion.identity);
-            //angryBoid.gameObject.GetComponent<BoidAI>().setColor = this.setColor;
         }
 
         isSpawning = false;
