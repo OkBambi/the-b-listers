@@ -30,11 +30,13 @@ public class PlayerMovement : MonoBehaviour, IDamage
 
     }
 
+    public void UpdateInput()
+    {
+        Space();
+    }
+
     public void UpdateBody()
     {
-
-        Space();
-
         moveDir = (Input.GetAxis("Horizontal") * transform.right)
                 + (Input.GetAxis("Vertical") * transform.forward);
 

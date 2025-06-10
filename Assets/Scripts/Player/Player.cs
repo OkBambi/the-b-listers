@@ -33,6 +33,9 @@ public class Player : MonoBehaviour
     {
         if (!GameManager.instance.isPaused)
         {
+            if (canMove)
+                playerMovement.UpdateInput();
+
             if (canCam)
                 playerCamera.UpdateCamera(playerMovement.IsGrounded());
 
