@@ -36,13 +36,11 @@ public class BlueSchmove : MonoBehaviour
     {
         if (activated)
         {
-            Debug.Log("no no");
             currentWindUp += Time.deltaTime;
             if(!primed)
             {
                 if(currentWindUp > blueWindup)
                 {
-                    Debug.Log("Getting there");
                     WindUp();
                 }
             }
@@ -52,7 +50,6 @@ public class BlueSchmove : MonoBehaviour
                 {
                     if (rb.gameObject.GetComponent<StickyMechanics>().GetStuckVal())
                     {
-                        Debug.Log("holy moly");
                         isStuck = true;
                         Destroy(stickyParent);
                     }
@@ -95,11 +92,9 @@ public class BlueSchmove : MonoBehaviour
 
     public void Activate()
     {
-        Debug.Log("i work");
         activated = true;
         if (stickyParent != null) //makes it so you are able to shoot another if it falls off the map and cooldown is over.
         {
-            Debug.Log("kill");
             Destroy(rb.gameObject);
             Reset();
         }
