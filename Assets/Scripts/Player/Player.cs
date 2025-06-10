@@ -56,11 +56,15 @@ public class Player : MonoBehaviour
         {
             float deltaTime = Time.deltaTime;
 
-            if (canMove)
-                playerMovement.UpdateBody();
-
             cameraSpring.UpdateSpring(deltaTime, Vector3.up);
         }
+    }
+
+    void FixedUpdate()
+    {
+        if (!GameManager.instance.isPaused)
+            if (canMove)
+                playerMovement.UpdateBody();
     }
 
     public PrimaryColor GetPlayerColor()

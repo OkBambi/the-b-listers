@@ -32,8 +32,6 @@ public class PlayerMovement : MonoBehaviour, IDamage
 
     public void UpdateBody()
     {
-        isGrounded = IsGrounded();
-
         //groundcheck
         if (isGrounded)
         {
@@ -46,7 +44,7 @@ public class PlayerMovement : MonoBehaviour, IDamage
                 + (Input.GetAxis("Vertical") * transform.forward);
 
         //transform.Translate(moveDir * speed * Time.deltaTime);
-        rb.MovePosition(transform.position + moveDir * Time.deltaTime * speed);
+        rb.MovePosition(transform.position + moveDir * Time.fixedDeltaTime * speed);
 
         //jump, dash, etc etc
         Space();
