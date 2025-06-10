@@ -145,19 +145,13 @@ public class EnemyManager : MonoBehaviour
             case "Monolith Blue":
                 sp.enemyMesh = enemyMeshList[0];
                 sp.SetMesh(enemyMeshList[0]);
+                sp.modelFrame.transform.localScale = new Vector3(220f, 100f, 450f);
+                sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 180f, 0);
                 break;
         }
 
-        sp.enemyMesh = spawnList[spawnIndex].GetComponentInChildren<MeshFilter>().sharedMesh;
-        sp.SetMesh(spawnList[spawnIndex].GetComponentInChildren<MeshFilter>().sharedMesh);
-
-        //adjust visuals to make it look good for specific enemies
-        if (spawnList[spawnIndex].name == "AngryBoid")
-        {
-            sp.modelFrame.transform.localScale = new Vector3(50f, 50f, 50f);
-            sp.modelFrame.transform.rotation = Quaternion.Euler(-60f, 0, 45);
-            
-        }
+        //sp.enemyMesh = spawnList[spawnIndex].GetComponentInChildren<MeshFilter>().sharedMesh;
+        //sp.SetMesh(spawnList[spawnIndex].GetComponentInChildren<MeshFilter>().sharedMesh);
 
 
         if (spawnIndex < spawnList.Count - 1)

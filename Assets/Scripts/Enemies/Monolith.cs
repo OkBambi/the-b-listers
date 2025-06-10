@@ -58,14 +58,16 @@ public class Monolith : EnemyBase
         }
 
         isSpawning = false;
+        StartCoroutine(Shake(0.2f, 0.1f));
+        StartCoroutine(GrowAndShrink(0.2f, 0.1f));
     }
 
     void movement()
     {
-        posX = rb.position.x + Mathf.Cos(angle) * rotationRadius;
-        posZ = rb.position.z + Mathf.Sin(angle) * rotationRadius;
-        transform.RotateAround(Vector3.zero, Vector3.up, rotationSpeed);//allows the monolith to spin around on the y-axis
-        transform.position = new Vector3(posX, transform.position.y, posZ);
+        //posX = rb.position.x + Mathf.Cos(angle) * rotationRadius;
+        //posZ = rb.position.z + Mathf.Sin(angle) * rotationRadius;
+        transform.RotateAround(Vector3.zero, Vector3.up, rotationSpeed * Time.deltaTime);//allows the monolith to spin around on the y-axis
+        //transform.position = new Vector3(posX, transform.position.y, posZ);
         angle += angularSpeed * Time.deltaTime;
 
         if (angle >= 360f)
