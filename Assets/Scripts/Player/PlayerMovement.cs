@@ -32,13 +32,8 @@ public class PlayerMovement : MonoBehaviour, IDamage
 
     public void UpdateBody()
     {
-        //groundcheck
-        if (isGrounded)
-        {
-            jumpCount = 0;
-            canDash = true;
-        }
 
+        Space();
 
         moveDir = (Input.GetAxis("Horizontal") * transform.right)
                 + (Input.GetAxis("Vertical") * transform.forward);
@@ -47,18 +42,18 @@ public class PlayerMovement : MonoBehaviour, IDamage
         rb.MovePosition(transform.position + moveDir * speed);
 
         //jump, dash, etc etc
-        Space();
+        
     }
 
     void Space()
     {
         if (Input.GetButtonDown("Jump"))
         {
-            if (IsGrounded())
+            print("i am PRESSING SPACE.");
+            if (isGrounded)
             {
                 if (jumpCount < jumpMax)
                 {
-                    Debug.Log("Jump");
                     rb.AddForce(transform.up * jumpVel, ForceMode.Impulse);
                     jumpCount++;
                 }
@@ -96,7 +91,6 @@ public class PlayerMovement : MonoBehaviour, IDamage
 
     public bool IsGrounded()
     {
-        //return Physics.Raycast(transform.position, -Vector3.up, 1f);
         return isGrounded;
     }
 
@@ -109,7 +103,10 @@ public class PlayerMovement : MonoBehaviour, IDamage
     {
         if (collision.transform.CompareTag("groundTag"))
         {
+            print("Ground! sweet ground!");
+            canDash = true;
             isGrounded = true;
+            jumpCount = 0;
             shooter.currentRocketJumps = 0;
         }
     }
@@ -118,7 +115,8 @@ public class PlayerMovement : MonoBehaviour, IDamage
     {
         if (collision.transform.CompareTag("groundTag"))
         {
-            isGrounded = false;
+            if (isGrounded)
+                isGrounded = false;
         }
     }
 
