@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour, IDamage
                 + (Input.GetAxis("Vertical") * transform.forward);
 
         //transform.Translate(moveDir * speed * Time.deltaTime);
-        rb.MovePosition(transform.position + moveDir * Time.fixedDeltaTime * speed);
+        rb.MovePosition(transform.position + moveDir * speed);
 
         //jump, dash, etc etc
         Space();
