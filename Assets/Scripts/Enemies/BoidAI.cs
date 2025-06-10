@@ -221,6 +221,7 @@ public class BoidAI : EnemyBase
     {
         if (hp <= 0)
         {
+            isAlive = false;
             RemoveSelfFromTargetList();
             ComboManager.instance.AddScore(score);
             Destroy(gameObject);
