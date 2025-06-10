@@ -52,6 +52,8 @@ public class Monolith : EnemyBase
         }
 
         isSpawning = false;
+        StartCoroutine(Shake(0.2f, 0.1f));
+        StartCoroutine(GrowAndShrink(0.2f, 0.1f));
     }
 
     void movement()
