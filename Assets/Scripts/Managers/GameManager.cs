@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = TimeScaleOrigin;
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         MenuActive.SetActive(false);
         MenuActive = null;
     }
