@@ -34,7 +34,6 @@ public class BlueSchmove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Hello");
         if (activated)
         {
             Debug.Log("no no");
