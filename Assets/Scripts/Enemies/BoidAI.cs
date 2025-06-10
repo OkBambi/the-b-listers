@@ -52,7 +52,7 @@ public class BoidAI : EnemyBase
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        setColor = (PrimaryColor)Random.Range(0, 3);
+        RandomizeColor();
         //finding the ground
         GameObject[] objects = FindObjectsByType<GameObject>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         foreach(GameObject potentialGround in objects)
@@ -215,15 +215,6 @@ public class BoidAI : EnemyBase
     void PlayerMagnetism()
     {
         rb.AddForce((player.transform.position - transform.position).normalized * playerWeight * playerNoise * Time.deltaTime, ForceMode.Acceleration);
-    }
-
-    private void RemoveSelfFromTargetList()
-    {
-        BoidAI[] activeboids = FindObjectsByType<BoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-        for (int boidCount = 0; boidCount < activeboids.Length; boidCount++)
-        {
-            activeboids[boidCount].boids.Remove(rb);
-        }
     }
 
     public override void DeathCheck()

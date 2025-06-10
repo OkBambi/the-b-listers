@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef31d8fe4939d124aa5dcaa958b4ff3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
+  model: {fileID: 18385959327173046}
   setColor: 2
   hitVfx: {fileID: 3182796100078218705, guid: 29f4ce75b6fb46e4c84cf17f94908403, type: 3}
   hp: 2
@@ -136,6 +136,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: boid_Smoll
       objectReference: {fileID: 0}
+    - target: {fileID: 114233628731459960, guid: 27f1411428b6cb14d88fe0f69667a0b2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 783070316602659778, guid: 27f1411428b6cb14d88fe0f69667a0b2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -176,11 +180,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: 7709378783892922089, guid: 27f1411428b6cb14d88fe0f69667a0b2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27f1411428b6cb14d88fe0f69667a0b2, type: 3}
+--- !u!23 &18385959327173046 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1915484020844456109, guid: 27f1411428b6cb14d88fe0f69667a0b2, type: 3}
+  m_PrefabInstance: {fileID: 1933305928758845723}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1155873908387410649 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 783070316602659778, guid: 27f1411428b6cb14d88fe0f69667a0b2, type: 3}

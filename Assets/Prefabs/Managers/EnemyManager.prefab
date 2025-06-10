@@ -45,12 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnIndicator: {fileID: 2154301081254528053, guid: f3fd4b52a85ee384ea0270dc71410e28, type: 3}
-  spawnList: []
+  spawnList:
+  - {fileID: 3250090548069639627, guid: f656110bc7523f64fa6243933dfb80e6, type: 3}
   spawnIndex: 0
   isSpawningEnemies: 1
   AEC: 1
   currentEC: 0
   ticker: 0
-  tickerLimit: 0
-  flashMat: {fileID: 2100000, guid: 54085be83f96b2140b76b27a82ac5ff4, type: 2}
+  tickerLimit: 5
+  flashMat: {fileID: 2100000, guid: 4e2ac4c7dde5e004991669290cf9854e, type: 2}
   spawnMat: {fileID: 2100000, guid: 8585a7ffea418de459820ee65dec99bc, type: 2}
