@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
 
     public void OnLoseCondition()
     {
-        statePause();
+        //statePause();
         //turn on the lose menu
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
