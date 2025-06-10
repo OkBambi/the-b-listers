@@ -19,6 +19,8 @@ public class SpawnIndicator : MonoBehaviour
     [SerializeField] MeshFilter meshFilter;
     public GameObject modelFrame;
     public Mesh enemyMesh; //this will be set when this is instantiated
+
+    [SerializeField] List<Mesh> enemyMeshList;
     public GameObject enemyToSpawn;
 
     [SerializeField] Color baseColour;
