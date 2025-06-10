@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 03665b1be78860141a2eed7e9ccb9c0d, type: 2}
+  - {fileID: 2100000, guid: 73302e13fb9762948999538a8cbde4de, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 8486163034962767583}
   - component: {fileID: 1416103597751790197}
   - component: {fileID: 8606670122920064903}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Monolith Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,13 +135,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 2113569448872471947}
   setColor: 2
+  hitVfx: {fileID: 3182796100078218705, guid: 29f4ce75b6fb46e4c84cf17f94908403, type: 3}
   hp: 10
   score: 50
   normalBoid: {fileID: 2362246457872072167, guid: ce58a9cfec8e4114f968e35d5b3c1659, type: 3}
   angryBoid: {fileID: 2362246457872072167, guid: 6581e6b4722d46842a8031936ae54856, type: 3}
   rotationRadius: 2
   angularSpeed: 2
-  rotationSpeed: 1
+  rotationSpeed: 10
   posX: 0
   posZ: 0
   angle: 0

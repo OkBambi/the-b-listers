@@ -44,30 +44,22 @@ public class Monolith : EnemyBase
         for (int spawnCount = 0; spawnCount < normalBoidSpawnAmt; spawnCount++)//normal spawn
         {
             normalBoid = Instantiate(normalBoid, transform.position, Quaternion.identity);
-            //normalBoid.gameObject.GetComponent<BoidAI>().setColor = this.setColor;
         }
 
         for (int spawnCount = 0; spawnCount < angryBoidSpawnAmt; spawnCount++)//angry spawn
         {
             angryBoid = Instantiate(angryBoid, transform.position, Quaternion.identity);
-            //angryBoid.gameObject.GetComponent<BoidAI>().setColor = this.setColor;
         }
 
         isSpawning = false;
+        StartCoroutine(Shake(0.2f, 0.1f));
+        StartCoroutine(GrowAndShrink(0.2f, 0.1f));
     }
 
     void movement()
     {
-        //transform.RotateAround(Vector3.zero, Vector3.up,   * Time.deltaTime);//allows the monolith to spin around the center point
-        //transform.Rotate(new Vector3(0,  , 0) * Time.deltaTime);//allows the monolith to rotate around the y axis.
-        posX = rb.position.x + Mathf.Cos(angle) * rotationRadius;
-        posZ = rb.position.z + Mathf.Sin(angle) * rotationRadius;
-        transform.position = new Vector3(posX, transform.position.y, posZ);
-        angle += angularSpeed * Time.deltaTime;
-
-        if (angle >= 360f)
-        {
-            angle = 0f;
-        }
+        transform.RotateAround(Vector3.zero, Vector3.up, rotationSpeed  * Time.deltaTime);//allows the monolith to spin around the center point
+        transform.Rotate(new Vector3(0, rotationSpeed , 0) * Time.deltaTime);//allows the monolith to rotate around the y axis.
+        //fix
     }
 }

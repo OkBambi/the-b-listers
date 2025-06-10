@@ -27,43 +27,60 @@ public class Schmoves : MonoBehaviour
 
     public void UpdateInput(PrimaryColor playerColor)
     {
-        if (Input.GetMouseButtonDown(1) && ComboManager.instance.GetScore() >= 100)
+        if (Input.GetMouseButtonDown(1))
         {
-            switch(playerColor)
+            if (ComboManager.instance.GetScore() >= 100)
             {
-                case PrimaryColor.RED:
-                    if (cooldownRed <= 0)
-                    {
-                        redSchmover.Activate();
-                        cooldownRed = maxCooldownRed;
-                        RedCD_M2.color = Color.gray;
-                        ComboManager.instance.RemoveScore(100);
-                        StartCoroutine(UpdateCoolDownUI());
-                    }
-                    break;
-                case PrimaryColor.BLUE:
-                    if (cooldownBlue <= 0)
-                    {
-                        blueSchmover.Activate();
-                        cooldownBlue = maxCooldownBlue;
-                        BlueCD_M2.color = Color.gray;
-                        ComboManager.instance.RemoveScore(100);
-                        StartCoroutine(UpdateCoolDownUI());
-                    }
-                    break;
-                default:
-                    if (cooldownYel <= 0)
-                    {
-                        yellowSchmover.Activate();
-                        cooldownYel = maxCooldownYel;
-                        YellowCD_M2.color = Color.gray;
-                        //the coroutine starts when you release the railgun
-                    }
-                    break;
-
+                switch (playerColor)
+                {
+                    case PrimaryColor.RED:
+                        if (cooldownRed <= 0)
+                        {
+                            redSchmover.Activate();
+                            cooldownRed = maxCooldownRed;
+                            RedCD_M2.color = Color.gray;
+                            ComboManager.instance.RemoveScore(100);
+                            StartCoroutine(UpdateCoolDownUI());
+                        }
+                        break;
+                    case PrimaryColor.BLUE:
+                        if (cooldownBlue <= 0)
+                        {
+                            blueSchmover.Activate();
+                            cooldownBlue = maxCooldownBlue;
+                            BlueCD_M2.color = Color.gray;
+                            ComboManager.instance.RemoveScore(100);
+                            StartCoroutine(UpdateCoolDownUI());
+                        }
+                        break;
+                    default:
+                        if (cooldownYel <= 0)
+                        {
+                            yellowSchmover.Activate();
+                            cooldownYel = maxCooldownYel;
+                            YellowCD_M2.color = Color.gray;
+                            //the coroutine starts when you release the railgun
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                //invalid score
+                StartCoroutine(InvalidFlash());
             }
         }
     }
+
+    IEnumerator InvalidFlash()
+    {
+        invalidScore.SetActive(true);
+        yield return new WaitForSeconds(0.4f);
+        invalidScore.SetActive(false);
+    }
+
+    [Header("Informational UI")]
+    [SerializeField] GameObject invalidScore;
 
     //UI
     [Header("CoolDownBars")]
