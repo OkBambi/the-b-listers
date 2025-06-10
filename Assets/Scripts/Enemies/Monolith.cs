@@ -18,12 +18,6 @@ public class Monolith : EnemyBase
     private Rigidbody rb;
     bool isSpawning;
 
-    private void Awake()
-    {
-        RandomizeColor();
-        OnAECAwake();
-    }
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
@@ -49,30 +43,21 @@ public class Monolith : EnemyBase
         yield return new WaitForSeconds(timeBetweenSpawns);
         for (int spawnCount = 0; spawnCount < normalBoidSpawnAmt; spawnCount++)//normal spawn
         {
-            Instantiate(normalBoid, transform.position, Quaternion.identity);
+            normalBoid = Instantiate(normalBoid, transform.position, Quaternion.identity);
         }
 
         for (int spawnCount = 0; spawnCount < angryBoidSpawnAmt; spawnCount++)//angry spawn
         {
-            Instantiate(angryBoid, transform.position, Quaternion.identity);
+            angryBoid = Instantiate(angryBoid, transform.position, Quaternion.identity);
         }
 
         isSpawning = false;
-        StartCoroutine(Shake(0.2f, 0.1f));
-        StartCoroutine(GrowAndShrink(0.2f, 0.1f));
     }
 
     void movement()
     {
-        //posX = rb.position.x + Mathf.Cos(angle) * rotationRadius;
-        //posZ = rb.position.z + Mathf.Sin(angle) * rotationRadius;
-        transform.RotateAround(Vector3.zero, Vector3.up, rotationSpeed * Time.deltaTime);//allows the monolith to spin around on the y-axis
-        //transform.position = new Vector3(posX, transform.position.y, posZ);
-        angle += angularSpeed * Time.deltaTime;
-
-        if (angle >= 360f)
-        {
-            angle = 0f;
-        }
+        transform.RotateAround(Vector3.zero, Vector3.up, rotationSpeed  * Time.deltaTime);//allows the monolith to spin around the center point
+        transform.Rotate(new Vector3(0, rotationSpeed , 0) * Time.deltaTime);//allows the monolith to rotate around the y axis.
+        //fix
     }
 }
