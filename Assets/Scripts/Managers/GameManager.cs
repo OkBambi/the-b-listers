@@ -80,10 +80,9 @@ public class GameManager : MonoBehaviour
 
     public void OnWinCondition()
     {
+        statePause();
         GameObject.FindFirstObjectByType<Player>().Die();
-        Time.timeScale = 0;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        MenuActive.SetActive(false);//so lose menu from die does not appear
         MenuActive = MenuWin;
         MenuActive.SetActive(true);
     }
