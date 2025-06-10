@@ -18,6 +18,12 @@ public class Monolith : EnemyBase
     private Rigidbody rb;
     bool isSpawning;
 
+    private void Awake()
+    {
+        RandomizeColor();
+        OnAECAwake();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
@@ -43,14 +49,22 @@ public class Monolith : EnemyBase
         yield return new WaitForSeconds(timeBetweenSpawns);
         for (int spawnCount = 0; spawnCount < normalBoidSpawnAmt; spawnCount++)//normal spawn
         {
+<<<<<<< Updated upstream
             normalBoid = Instantiate(normalBoid, transform.position, Quaternion.identity);
             //normalBoid.gameObject.GetComponent<BoidAI>().setColor = this.setColor;
+=======
+            Instantiate(normalBoid, transform.position, Quaternion.identity);
+>>>>>>> Stashed changes
         }
 
         for (int spawnCount = 0; spawnCount < angryBoidSpawnAmt; spawnCount++)//angry spawn
         {
+<<<<<<< Updated upstream
             angryBoid = Instantiate(angryBoid, transform.position, Quaternion.identity);
             //angryBoid.gameObject.GetComponent<BoidAI>().setColor = this.setColor;
+=======
+            Instantiate(angryBoid, transform.position, Quaternion.identity);
+>>>>>>> Stashed changes
         }
 
         isSpawning = false;

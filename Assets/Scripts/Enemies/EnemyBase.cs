@@ -25,6 +25,11 @@ public class EnemyBase : MonoBehaviour, IDamage
         UpdateBoidAwareness();
     }
 
+    protected void RandomizeColor()
+    {
+        setColor = (PrimaryColor)Random.Range(0, 3);
+    }
+
     protected void ColorSelection(PrimaryColor newColor)
     {
         setColor = newColor;
@@ -76,6 +81,16 @@ public class EnemyBase : MonoBehaviour, IDamage
         }
     }
 
+    //CALL THIS METHOD IN THE DEATH OF ALL ENEMIES
+    protected void RemoveSelfFromTargetList()
+    {
+        BoidAI[] activeboids = FindObjectsByType<BoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        for (int boidCount = 0; boidCount < activeboids.Length; boidCount++)
+        {
+            activeboids[boidCount].boids.Remove(GetComponent<Rigidbody>());
+        }
+    }
+
     //call this when an AEC enemy spawn
     public void OnAECAwake()
     {
@@ -97,6 +112,8 @@ public class EnemyBase : MonoBehaviour, IDamage
 
             //flash white
             StartCoroutine(Flash());
+            StartCoroutine(Shake(0.2f, 0.1f));
+            StartCoroutine(GrowAndShrink(0.2f, 0.05f));
 
 
         }
@@ -107,6 +124,7 @@ public class EnemyBase : MonoBehaviour, IDamage
         if (hp <= 0)
         {
             OnAECDestroy();
+            RemoveSelfFromTargetList();
             Destroy(gameObject);
             return;
         }
@@ -117,59 +135,45 @@ public class EnemyBase : MonoBehaviour, IDamage
         model.materials = flashMats;
         yield return new WaitForSeconds(0.05f);
         model.materials = matList;
+    }
 
-        //honestly simple is better i think
+    public IEnumerator Shake(float duration, float magnitude)
+    {
+        Vector3 originalPos = transform.localPosition;
 
-        //    while (red != Color.white.r || green != Color.white.g || blue != Color.white.b)
-        //    {
-        //        red = Mathf.Lerp(red, Color.white.r, 0.1f);
-        //        if (Mathf.Abs(red - Color.white.r) <= 0.05f)
-        //        {
-        //            red = Color.white.r;
-        //        }
+        float elapsed = 0.0f;
 
-        //        green = Mathf.Lerp(green, Color.white.g, 0.1f);
-        //        if (Mathf.Abs(green - Color.white.g) <= 0.05f)
-        //        {
-        //            green = Color.white.g;
-        //        }
+        while (elapsed < duration)
+        {
+            float _x = Random.Range(-1f, 1f) * magnitude;
+            float _y = Random.Range(-1f, 1f) * magnitude;
 
-        //        blue = Mathf.Lerp(blue, Color.white.b, 0.1f);
-        //        if (Mathf.Abs(blue - Color.white.b) <= 0.05f)
-        //        {
-        //            blue = Color.white.b;
-        //        }
+            transform.localPosition += new Vector3(_x, _y, 0);
 
-        //        model.material.color = new Color(red, green, blue);
+            elapsed += Time.deltaTime;
 
-        //        yield return null;
-        //    }
+            yield return null;
+        }
+        transform.localPosition = originalPos;
+    }
 
-        //    while (red != baseColor.r || green != baseColor.g || blue != baseColor.b)
-        //    {
-        //        red = Mathf.Lerp(red, baseColor.r, 0.1f);
-        //        if (Mathf.Abs(red - baseColor.r) <= 0.05f)
-        //        {
-        //            red = baseColor.r;
-        //        }
+    public IEnumerator GrowAndShrink(float duration, float magnitude)
+    {
+        Vector3 originalSize = transform.localScale;
 
-        //        green = Mathf.Lerp(green, baseColor.g, 0.1f);
-        //        if (Mathf.Abs(green - baseColor.g) <= 0.05f)
-        //        {
-        //            green = baseColor.g;
-        //        }
+        float elapsed = 0.0f;
 
-        //        blue = Mathf.Lerp(blue, baseColor.b, 0.1f);
-        //        if (Mathf.Abs(blue - baseColor.b) <= 0.05f)
-        //        {
-        //            blue = baseColor.b;
-        //        }
+        while (elapsed < duration)
+        {
+            float _x = Random.Range(-1f, 1f) * magnitude;
+            float _y = Random.Range(-1f, 1f) * magnitude;
 
-        //        model.material.color = new Color(red, green, blue);
+            transform.localScale += new Vector3(_x, _y, 0);
 
-        //        yield return null;
-        //    }
-        //    yield return null;
-        //}
+            elapsed += Time.deltaTime;
+
+            yield return null;
+        }
+        transform.localScale = originalSize;
     }
 }

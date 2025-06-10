@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
@@ -19,6 +20,7 @@ public class EnemyManager : MonoBehaviour
     [Space]
     //so we have a list of enemies that spawn in a repeating order
     [SerializeField] List<GameObject> spawnList;
+    [SerializeField] List<Mesh> enemyMeshList;
 
     //this will track what enemy to spawn
     [SerializeField] int spawnIndex;
@@ -109,16 +111,23 @@ public class EnemyManager : MonoBehaviour
     //call this to actually start the enemies commin (like starting the game or picking up the dagger
     public void SpawnFirstEnemy()
     {
-        SpawnEnemy();
+        SpawnEnemy(true);
     }
 
-    public void SpawnEnemy()
+
+    public void SpawnEnemy(bool isFirstSpawn = false)
     {
         //safety checks
         if (!isSpawningEnemies) return;
         if (currentEC >= AEC) return;
 
-        Vector3 spawnLocation = FindAndValidateSpawnLocation();
+        Vector3 spawnLocation;
+
+        if (!isFirstSpawn)
+            spawnLocation = FindAndValidateSpawnLocation();
+        else
+            spawnLocation = new Vector3(0, 10f, 15f);
+
 
         //retry in one second if theres no good spots right now
         if (spawnLocation == Vector3.zero)
@@ -130,6 +139,16 @@ public class EnemyManager : MonoBehaviour
         //spawn the indicator which will telegraph the enemy spawn
         SpawnIndicator sp = Instantiate(spawnIndicator, spawnLocation, Quaternion.identity).GetComponent<SpawnIndicator>();
         sp.enemyToSpawn = spawnList[spawnIndex];
+
+        //what the spawn indicator will actually show
+        switch (sp.enemyToSpawn.name)
+        {
+            case "Monolith Blue":
+                sp.enemyMesh = enemyMeshList[0];
+                sp.SetMesh(enemyMeshList[0]);
+                break;
+        }
+
         sp.enemyMesh = spawnList[spawnIndex].GetComponentInChildren<MeshFilter>().sharedMesh;
         sp.SetMesh(spawnList[spawnIndex].GetComponentInChildren<MeshFilter>().sharedMesh);
 
@@ -142,7 +161,7 @@ public class EnemyManager : MonoBehaviour
         }
 
 
-        if (spawnIndex < spawnList.Count)
+        if (spawnIndex < spawnList.Count - 1)
             ++spawnIndex;
         else
             spawnIndex = 0;
