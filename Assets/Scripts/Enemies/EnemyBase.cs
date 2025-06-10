@@ -6,6 +6,8 @@ public class EnemyBase : MonoBehaviour, IDamage
     public Renderer model;
     public PrimaryColor setColor;
 
+    [SerializeField] GameObject hitVfx;
+
     //FlashWhite
     private Color baseColor;
     private float red;
@@ -98,7 +100,8 @@ public class EnemyBase : MonoBehaviour, IDamage
             //flash white
             StartCoroutine(Flash());
 
-
+            if (hitVfx)
+                Instantiate(hitVfx, transform.position, Quaternion.identity);
         }
     }
 
