@@ -1,26 +1,81 @@
+using System;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem.HID;
+using System.Collections;
 
 public class StickyMechanics : MonoBehaviour
 {
-    public bool stuck;
+    [SerializeField] Rigidbody rb;
+
+    [SerializeField] float blueWindup;
+    [SerializeField] float stickySpeed;
+    [SerializeField] float timeBetweenPulses;
+    [SerializeField] float pulseMaxRadius;
+    [SerializeField] float pulseSpeed;
+    [SerializeField] float amountOfPulses;
+    [SerializeField] int pulseDmg;
+
+    bool activated, startPulseTimer, isStuck, primed;
+    int pulsesDone;
+    float origRadius;
+    float currentWindUp;
+    SphereCollider sphereCollider;
+    GameObject stickyParent;
+    Transform shootingPoint;
     int dmgAmount;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        stuck = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    public bool GetStuckVal()
-    {
-        return stuck;
+        if (activated)
+        {
+            currentWindUp += Time.deltaTime;
+            if (!primed)
+            {
+                if (currentWindUp > blueWindup)
+                {
+                    WindUp();
+                }
+            }
+            else
+            {
+                if (sphereCollider != null) // for incase the enemy it is attached to is killed.
+                {
+                    if (sphereCollider.radius < pulseMaxRadius && !startPulseTimer)
+                    {
+                        sphereCollider.radius += pulseSpeed * Time.deltaTime;
+                        transform.localScale += new Vector3(pulseSpeed * Time.deltaTime, pulseSpeed * Time.deltaTime, pulseSpeed * Time.deltaTime);
+                    }
+                    else
+                    {
+                        if (amountOfPulses > pulsesDone)
+                        {
+                            if (!startPulseTimer)
+                            {
+                                pulsesDone++;
+                                StartCoroutine(Pulse());
+                                //gameObject.GetComponent<StickyMechanics>().DmgParent();
+                            }
+                        }
+                        else
+                        {
+                            Destroy(gameObject);
+                            Reset();
+                        }
+                    }
+                }
+                else
+                {
+                    Reset();
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,11 +84,12 @@ public class StickyMechanics : MonoBehaviour
         {
             return;
         }
-        if(!stuck)
+        if(!isStuck)
         {
-            if(other.CompareTag("groundTag")) //makes the sticky not get squashed when touching the floor
+            if (other.CompareTag("groundTag")) //makes the sticky not get squashed when touching the floor
             {
                 transform.SetParent(other.transform.parent);
+                gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             }
             else
             {
@@ -42,8 +98,8 @@ public class StickyMechanics : MonoBehaviour
                 //allows the sticky to stay with the enemy
                 transform.GetComponent<PositionConstraint>().constraintActive = true;
             }
-            stuck = true;
-            Rigidbody rb = transform.GetComponent<Rigidbody>();
+            Destroy(stickyParent);
+            isStuck = true;
             rb.useGravity = false;
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
@@ -53,8 +109,6 @@ public class StickyMechanics : MonoBehaviour
             DmgOnEnter(other);
         }
     }
-
-
 
     private void DmgOnEnter(Collider other)
     {
@@ -77,5 +131,40 @@ public class StickyMechanics : MonoBehaviour
     public void SetPulseDmg(int dmg)
     {
         dmgAmount = dmg;
+    }
+
+    private void Reset()
+    {
+        pulsesDone = 0;
+        currentWindUp = 0;
+        primed = false;
+        activated = false;
+        isStuck = false;
+    }
+
+    private void WindUp()
+    {
+        rb = gameObject.GetComponent<Rigidbody>();
+        sphereCollider = gameObject.GetComponent<SphereCollider>();
+        origRadius = sphereCollider.radius;
+        gameObject.GetComponent<StickyMechanics>().SetPulseDmg(pulseDmg);
+        primed = true;
+    }
+
+    public void setActive(Transform _shootingPoint, GameObject _stickyParent)
+    {
+        activated = true;
+        shootingPoint = _shootingPoint;
+        stickyParent = _stickyParent;
+        gameObject.GetComponent<Rigidbody>().linearVelocity = -shootingPoint.forward * stickySpeed;
+    }
+
+    IEnumerator Pulse()
+    {
+        startPulseTimer = true;
+        sphereCollider.radius = origRadius;
+        gameObject.transform.localScale = new Vector3(origRadius, origRadius, origRadius);
+        yield return new WaitForSeconds(timeBetweenPulses);
+        startPulseTimer = false;
     }
 }
