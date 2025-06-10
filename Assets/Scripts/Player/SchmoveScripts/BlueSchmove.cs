@@ -24,7 +24,7 @@ public class BlueSchmove : MonoBehaviour
     float origRadius;
     float currentWindUp;
     SphereCollider sphereCollider;
-    GameObject stickyCopy;
+    GameObject stickyParent;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,13 +34,16 @@ public class BlueSchmove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Hello");
         if (activated)
         {
+            Debug.Log("no no");
             currentWindUp += Time.deltaTime;
             if(!primed)
             {
                 if(currentWindUp > blueWindup)
                 {
+                    Debug.Log("Getting there");
                     WindUp();
                 }
             }
@@ -50,7 +53,9 @@ public class BlueSchmove : MonoBehaviour
                 {
                     if (rb.gameObject.GetComponent<StickyMechanics>().GetStuckVal())
                     {
+                        Debug.Log("holy moly");
                         isStuck = true;
+                        Destroy(stickyParent);
                     }
                 }
                 else
@@ -70,7 +75,7 @@ public class BlueSchmove : MonoBehaviour
                                 {
                                     pulsesDone++;
                                     StartCoroutine(Pulse());
-                                    rb.gameObject.GetComponent<StickyMechanics>().DmgParent();
+                                    //stickyCopy.GetComponent<StickyMechanics>().DmgParent();
                                 }
                             }
                             else
@@ -91,9 +96,11 @@ public class BlueSchmove : MonoBehaviour
 
     public void Activate()
     {
+        Debug.Log("i work");
         activated = true;
-        if (rb != null) //makes it so you are able to shoot another if it falls off the map and cooldown is over.
+        if (stickyParent != null) //makes it so you are able to shoot another if it falls off the map and cooldown is over.
         {
+            Debug.Log("kill");
             Destroy(rb.gameObject);
             Reset();
         }
@@ -101,8 +108,8 @@ public class BlueSchmove : MonoBehaviour
 
     private void WindUp()
     {
-        stickyCopy = Instantiate(sticky, shootingPoint.position, Quaternion.identity);
-        rb = stickyCopy.GetComponent<Rigidbody>();
+        stickyParent = Instantiate(sticky, shootingPoint.position, Quaternion.identity);
+        rb = stickyParent.transform.GetChild(0).gameObject.GetComponent<Rigidbody>();
         sphereCollider = rb.gameObject.GetComponent<SphereCollider>();
         origRadius = sphereCollider.radius;
         rb.gameObject.GetComponent<StickyMechanics>().SetPulseDmg(pulseDmg);

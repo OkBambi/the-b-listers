@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.InputSystem.HID;
 
 public class StickyMechanics : MonoBehaviour
@@ -37,6 +38,9 @@ public class StickyMechanics : MonoBehaviour
             else
             {
                 transform.SetParent(other.transform);
+
+                //allows the sticky to stay with the enemy
+                transform.GetComponent<PositionConstraint>().constraintActive = true;
             }
             stuck = true;
             Rigidbody rb = transform.GetComponent<Rigidbody>();
