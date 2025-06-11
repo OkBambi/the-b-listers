@@ -23,7 +23,6 @@ public class YellowSchmove : MonoBehaviour
     [SerializeField] List<float> chargeLevelDuration;
     [Space]
     [Header("Stats")]
-    [SerializeField] float slowMod;
     [SerializeField] int railgunDmg;
     [SerializeField] int railgunKnockback;
 
