@@ -33,7 +33,7 @@ public class GameStartDagger : MonoBehaviour
     {
         other.GetComponentInParent<Player>().canAction = true;
         other.GetComponentInParent<Player>().canColor = true;
-        other.GetComponentInChildren<Timer>().isCounting = true;
+        GameManager.instance.timer.isCounting = true;
         EnemyManager.instance.SpawnFirstEnemy();
         Destroy(gameObject);
     }
