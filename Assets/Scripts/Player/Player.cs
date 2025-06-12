@@ -24,6 +24,10 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+
+        colorSwapper = GameManager.instance.colorSwapper;
+        schmover = GameManager.instance.schmover;
+
         playerMovement.Initialize();
         playerCamera.Initialize();
         weapon.Initialize();
