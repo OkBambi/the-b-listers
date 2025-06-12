@@ -30,7 +30,10 @@ public class YellowSchmove : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindFirstObjectByType<Player>();
+        player = GameManager.instance.playerScript;
+        rb = player.GetComponentInChildren<Rigidbody>();
+        shootingPoint = GameManager.instance.shootingPoint;
+
         ChargeGaugeUI.fillMethod = Image.FillMethod.Radial360;
     }
 
@@ -79,7 +82,7 @@ public class YellowSchmove : MonoBehaviour
                     AudioManager.instance.Play("Yellow_Fire");
 
                     ComboManager.instance.RemoveScore(100 * chargeLevel); //may need to change this later
-                    StartCoroutine(player.gameObject.GetComponent<Schmoves>().UpdateCoolDownUI());
+                    StartCoroutine(GameManager.instance.schmover.UpdateCoolDownUI());
                 }
                 //ui resetting
                 ChargeCounterUI.color = Color.white;

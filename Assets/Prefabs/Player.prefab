@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 7261247534326979501}
   m_Layer: 0
   m_Name: ShootingPoint
-  m_TagString: Untagged
+  m_TagString: ShootingPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1813,8 +1813,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3990897285812716556}
   - component: {fileID: 6544136719575331733}
-  - component: {fileID: 3476259932098106770}
-  - component: {fileID: 3363300360428369280}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1855,8 +1853,8 @@ MonoBehaviour:
   playerMovement: {fileID: 390799457790547258}
   playerCamera: {fileID: 5482371460204653065}
   weapon: {fileID: 604676823186195933}
-  colorSwapper: {fileID: 3476259932098106770}
-  schmover: {fileID: 3363300360428369280}
+  colorSwapper: {fileID: 0}
+  schmover: {fileID: 0}
   arm: {fileID: 8614291771727828583}
   cameraSpring: {fileID: 1610465393823980015}
   currentColor: 0
@@ -1864,58 +1862,6 @@ MonoBehaviour:
   canCam: 1
   canAction: 0
   canColor: 1
---- !u!114 &3476259932098106770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3923875554569662914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c708b9acd44ffd48a36464740fed2f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  red_m2: {fileID: 1493494801037217345}
-  yellow_m2: {fileID: 4348250010123501351}
-  blue_m2: {fileID: 1440788960097204510}
---- !u!114 &3363300360428369280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3923875554569662914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be47bc718739caa48adbf04e8da6dee9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownRed: 0
-  maxCooldownRed: 5
-  redSchmover: {fileID: 5987268029696910072}
-  cooldownYel: 0
-  maxCooldownYel: 5
-  chargeTime: 0
-  slowMod: 0
-  railDist: 0
-  railgunDmg: 0
-  yellowSchmover: {fileID: 5129570411807864807}
-  cooldownBlue: 0
-  maxCooldownBlue: 5
-  blueSchmover: {fileID: 3768833384617383192}
-  invalidScore: {fileID: 7705283083933155897}
-  RedCD_UI: {fileID: 8923641449972891574}
-  YellowCD_UI: {fileID: 5260538353284309444}
-  BlueCD_UI: {fileID: 5664679854944500453}
-  RedCD: 0
-  YellowCD: 0
-  BlueCD: 0
-  RedCD_M2: {fileID: 9090404404524478895}
-  YellowCD_M2: {fileID: 1482412405764772372}
-  BlueCD_M2: {fileID: 8133651640617205669}
-  finishSpeed: 0.4
-  animationDurations: 0a00000014000000
 --- !u!1 &4348250010123501351
 GameObject:
   m_ObjectHideFlags: 0
