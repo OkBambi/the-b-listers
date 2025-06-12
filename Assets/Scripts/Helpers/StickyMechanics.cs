@@ -50,7 +50,7 @@ public class StickyMechanics : MonoBehaviour
                     if (sphereCollider.radius < pulseMaxRadius && !startPulseTimer)
                     {
                         sphereCollider.radius += pulseSpeed * Time.deltaTime;
-                        transform.localScale += new Vector3(pulseSpeed * Time.deltaTime, pulseSpeed * Time.deltaTime, pulseSpeed * Time.deltaTime);
+                        transform.GetChild(0).localScale += new Vector3(pulseSpeed * Time.deltaTime, pulseSpeed * Time.deltaTime, pulseSpeed * Time.deltaTime);
                     }
                     else
                     {
@@ -163,7 +163,7 @@ public class StickyMechanics : MonoBehaviour
     {
         startPulseTimer = true;
         sphereCollider.radius = origRadius;
-        gameObject.transform.localScale = new Vector3(origRadius, origRadius, origRadius);
+        gameObject.transform.GetChild(0).localScale = new Vector3(origRadius, origRadius, origRadius);
         yield return new WaitForSeconds(timeBetweenPulses);
         startPulseTimer = false;
     }
