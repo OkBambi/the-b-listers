@@ -384,7 +384,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5:00
+  m_text: 1:00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2782,6 +2782,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sticky: {fileID: 1324958590143355762, guid: 6345268441266d446bf945b5297a9311, type: 3}
   shootingPoint: {fileID: 7261247534326979501}
+  blueWindup: 1
+  stickySpeed: 40
+  timeBetweenPulses: 2
+  pulseMaxRadius: 15
+  pulseSpeed: 3
+  amountOfPulses: 3
+  pulseDmg: 2
 --- !u!1 &7705283083933155897
 GameObject:
   m_ObjectHideFlags: 0
