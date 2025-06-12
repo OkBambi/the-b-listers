@@ -13,8 +13,8 @@ public class ButtonFunction : MonoBehaviour
     public void onRestart()
     {
         Debug.Log("Reloading State...");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.instance.stateUnPause();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     }
     public void onSettings()
