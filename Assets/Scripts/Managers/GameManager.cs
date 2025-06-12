@@ -21,7 +21,9 @@ public class GameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.transform.parent.GetComponent<Player>();
-        TimeScaleOrigin = Time.timeScale;
+        //TimeScaleOrigin = Time.timeScale;
+        TimeScaleOrigin = 1f;
+        Time.timeScale = TimeScaleOrigin;
         Cursor.lockState=CursorLockMode.Locked;
     }
 
