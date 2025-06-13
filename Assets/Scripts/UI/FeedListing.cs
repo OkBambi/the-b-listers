@@ -13,12 +13,6 @@ public class FeedListing : MonoBehaviour
         Destroy(gameObject, 5f);//kills feed if it lasts longer then 5 seconds.
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SetScoreAndHow(string _modifier, string _scoreAmount, string _killedOrUsed)
     {
         modifier.text = _modifier;

@@ -17,10 +17,4 @@ public class ComboFeed : MonoBehaviour
         FeedListing feedListing = newScoreFeed.GetComponent<FeedListing>();
         feedListing.SetScoreAndHow(_modifier, _score, _killedOrUsed);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
