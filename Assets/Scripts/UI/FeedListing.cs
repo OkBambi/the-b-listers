@@ -19,7 +19,7 @@ public class FeedListing : MonoBehaviour
         
     }
 
-    public void SetScoreAAndHow(string _modifier, string _scoreAmount, string _killedOrUsed)
+    public void SetScoreAndHow(string _modifier, string _scoreAmount, string _killedOrUsed)
     {
         modifier.text = _modifier;
         scoreAmount.text = _scoreAmount;
