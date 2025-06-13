@@ -32,7 +32,6 @@ public class SpawnIndicator : MonoBehaviour
     [SerializeField] float green;
     [SerializeField] float blue;
 
-    [SerializeField] List<float> flashDelays;
     [SerializeField] int flashIndex = 0;
 
     public void SetMesh(Mesh newMesh)

@@ -7,16 +7,10 @@ public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager instance;
     [Space]
-    //this is the thing that shows where an enemy will spawn in a few moments
-
-    //Enemy model is spawned, and they are visible. But they are pure WHITE, with a glossy material (make a temp one, ill shader the hell out of it later)
-    //Enemy model currently lacks any AI, is static, and you can move through it(no collider)
-    //Other enemies will still try to avoid it though, so boids, monks, etc
-    //Enemy model will begin with blink, flashing 3 times before
 
     [SerializeField] GameObject spawnIndicator;
-
     [Space]
+
     //so we have a list of enemies that spawn in a repeating order
     [SerializeField] List<GameObject> spawnList;
     [SerializeField] List<Mesh> enemyMeshList;
@@ -26,6 +20,12 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] bool isSpawningEnemies = true;
     [Space]
+
+    [Header("Boid Stuff")]
+    //so we stop getting stuff on awake
+    //this is the list of objects tht boids should consider
+    [SerializeField] public List<Rigidbody> boidReferences;
+    [SerializeField] public GameObject stage;
 
     //and we have a spawn limit on the enemies
     [SerializeField] int AEC;
@@ -44,6 +44,15 @@ public class EnemyManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        GameObject[] objects = FindObjectsByType<GameObject>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        foreach (GameObject potentialGround in objects)
+        {
+            if (potentialGround.layer == LayerMask.NameToLayer("Ground") || potentialGround.CompareTag("groundTag"))
+            {
+                stage = potentialGround;
+                break;
+            }
+        }
     }
 
     #region AEC
@@ -86,7 +95,6 @@ public class EnemyManager : MonoBehaviour
     #region IAEC Interface Methods()
     public void OnAECDestroy()
     {
-        Debug.Log("huh");
         IncrementTicker();
         DecrementCurrentEC();
         Invoke("SpawnEnemy", 1.0f);
