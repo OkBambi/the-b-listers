@@ -104,6 +104,7 @@ public class EnemyBase : MonoBehaviour, IDamage
     {
         EnemyManager.instance.OnAECDestroy();
         ComboManager.instance.AddScore(score);
+        ComboFeed.theInstance.AddNewComboFeed("+", score.ToString(), gameObject.name);
     }
 
     public void takeDamage(PrimaryColor hitColor, int amount)

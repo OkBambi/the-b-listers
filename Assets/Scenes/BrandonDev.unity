@@ -212,9 +212,9 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 3
+  m_Spacing: 0.5
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -320,6 +320,14 @@ PrefabInstance:
     - target: {fileID: 1392586728937957284, guid: 2ff37f62bb686324893e075301874d31, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1780064764996489613, guid: 2ff37f62bb686324893e075301874d31, type: 3}
+      propertyPath: isCounting
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1780064764996489613, guid: 2ff37f62bb686324893e075301874d31, type: 3}
+      propertyPath: timeRemainingInSeconds
+      value: 301
       objectReference: {fileID: 0}
     - target: {fileID: 2542089594242470374, guid: 2ff37f62bb686324893e075301874d31, type: 3}
       propertyPath: m_AnchorMax.x
