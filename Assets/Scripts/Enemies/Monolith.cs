@@ -45,7 +45,8 @@ public class Monolith : EnemyBase
     IEnumerator SpawnBoids()
     {
         isSpawning = true;
-        yield return new WaitForSeconds(timeBetweenSpawns);
+        //thiss should make it so that the first boid spawn for monoliths is almost instant, but afterwards, it will be the correct amount of time
+        yield return new WaitForSeconds(timeBetweenSpawns / 4f);
         for (int spawnCount = 0; spawnCount < normalBoidSpawnAmt; spawnCount++)//normal spawn
         {
             Instantiate(normalBoid, transform.position, Quaternion.identity);
@@ -55,6 +56,7 @@ public class Monolith : EnemyBase
         {
             Instantiate(angryBoid, transform.position, Quaternion.identity);
         }
+        yield return new WaitForSeconds(timeBetweenSpawns * (3f / 4f));
 
         isSpawning = false;
         StartCoroutine(ShakePos(0.2f, 0.1f));
