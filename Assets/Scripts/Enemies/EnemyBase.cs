@@ -114,8 +114,8 @@ public class EnemyBase : MonoBehaviour, IDamage
 
             //flash white
             StartCoroutine(Flash());
-            StartCoroutine(Shake(0.2f, 0.1f));
-            StartCoroutine(GrowAndShrink(0.2f, 0.05f));
+            StartCoroutine(ShakePos(0.2f, 0.1f));
+            StartCoroutine(ShakeSize(0.2f, 0.05f));
 
             if (hitVfx)
                 Instantiate(hitVfx, transform.position, Quaternion.identity);
@@ -141,7 +141,7 @@ public class EnemyBase : MonoBehaviour, IDamage
         model.materials = matList;
     }
 
-    public IEnumerator Shake(float duration, float magnitude)
+    public IEnumerator ShakePos(float duration, float magnitude)
     {
         Vector3 originalPos = transform.localPosition;
 
@@ -161,10 +161,9 @@ public class EnemyBase : MonoBehaviour, IDamage
         transform.localPosition = originalPos;
     }
 
-    public IEnumerator GrowAndShrink(float duration, float magnitude)
+    public IEnumerator ShakeSize(float duration, float magnitude)
     {
         Vector3 originalSize = transform.localScale;
-
         float elapsed = 0.0f;
 
         while (elapsed < duration)
