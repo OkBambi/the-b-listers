@@ -570,10 +570,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d12db83e32143a4095848f2cc2918d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model: {fileID: 1279930247}
+  setColor: 0
+  hitVfx: {fileID: 0}
+  hp: 0
+  score: 50
   player: {fileID: 0}
-  agent: {fileID: 0}
-  zagDistance: 0
-  zagAngle: 0
+  agent: {fileID: 1279930251}
+  speed: 5
+  angularSpeed: 1000
+  acceleration: 100
+  zagDistance: 10
+  zagAngle: 45
   isZagLeft: 0
 --- !u!4 &1279930250
 Transform:
@@ -584,7 +592,7 @@ Transform:
   m_GameObject: {fileID: 1279930245}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 1.583333, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1030,9 +1038,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Death
       objectReference: {fileID: 0}
-    - target: {fileID: 4389833372961180222, guid: 29bfaa1fd7e2e4f428a53eb34f6e2edf, type: 3}
-      propertyPath: m_Layer
-      value: 11
+    - target: {fileID: 6403612677990607449, guid: 29bfaa1fd7e2e4f428a53eb34f6e2edf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6403612677990607449, guid: 29bfaa1fd7e2e4f428a53eb34f6e2edf, type: 3}
       propertyPath: m_LocalPosition.y
