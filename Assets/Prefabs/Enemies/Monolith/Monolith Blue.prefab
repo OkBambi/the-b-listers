@@ -32,7 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7538881498690505960}
+  - {fileID: 1102105888364885537}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 359.999, z: 0}
 --- !u!114 &8486163034962767583
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeee18499cba96f4e9eb026b2c5a85f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 7601417522863143011}
+  model: {fileID: 2233886209212747086}
   setColor: 2
   hitVfx: {fileID: 3182796100078218705, guid: 29f4ce75b6fb46e4c84cf17f94908403, type: 3}
   hp: 10
@@ -109,93 +109,74 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
-  m_Height: 8
+  m_Radius: 2.3
+  m_Height: 8.5
   m_Direction: 1
   m_Center: {x: 0.15, y: -0.5, z: 0}
---- !u!1 &5067568376764910618
-GameObject:
+--- !u!1001 &631011965730787786
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7538881498690505960}
-  - component: {fileID: 3906711630729331587}
-  - component: {fileID: 7601417522863143011}
-  m_Layer: 8
-  m_Name: MonolithV2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7538881498690505960
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5067568376764910618}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0.3, y: 0, z: 0}
-  m_LocalScale: {x: 219.11308, y: 100, z: 449.96042}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3465193193178887799}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 180}
---- !u!33 &3906711630729331587
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3465193193178887799}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 937ad50a9de1f4b49866eaa49623acf3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 937ad50a9de1f4b49866eaa49623acf3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 937ad50a9de1f4b49866eaa49623acf3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 937ad50a9de1f4b49866eaa49623acf3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.000002014
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 937ad50a9de1f4b49866eaa49623acf3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.0000020140005
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 937ad50a9de1f4b49866eaa49623acf3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 937ad50a9de1f4b49866eaa49623acf3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 937ad50a9de1f4b49866eaa49623acf3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 937ad50a9de1f4b49866eaa49623acf3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 937ad50a9de1f4b49866eaa49623acf3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 937ad50a9de1f4b49866eaa49623acf3, type: 3}
+      propertyPath: m_Name
+      value: Monolithv3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 937ad50a9de1f4b49866eaa49623acf3, type: 3}
+--- !u!4 &1102105888364885537 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 937ad50a9de1f4b49866eaa49623acf3, type: 3}
+  m_PrefabInstance: {fileID: 631011965730787786}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5067568376764910618}
-  m_Mesh: {fileID: -3350443479388304855, guid: e34fe5ee3a348ef4aa2a160d0278a0fb, type: 3}
---- !u!23 &7601417522863143011
+--- !u!23 &2233886209212747086 stripped
 MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 937ad50a9de1f4b49866eaa49623acf3, type: 3}
+  m_PrefabInstance: {fileID: 631011965730787786}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5067568376764910618}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 73302e13fb9762948999538a8cbde4de, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
