@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebd3f19b20dc3b41bf5d0ded6235b34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderer: {fileID: 3199319461880701028}
+  indicatorRenderer: {fileID: 3199319461880701028}
   meshFilter: {fileID: 2931291115488889766}
   modelFrame: {fileID: 4040497191039829889}
   enemyMesh: {fileID: 0}
@@ -53,11 +53,7 @@ MonoBehaviour:
   enemyToSpawn: {fileID: 6231302798631813185, guid: 7ed7745af944518419003a8c42af1c57, type: 3}
   baseColour: {r: 1, g: 1, b: 1, a: 1}
   flashColour: {r: 0, g: 0, b: 0, a: 1}
-  flashTime: 0.025
-  red: 0
-  green: 0
-  blue: 0
-  flashIndex: 0
+  flashSpeed: 0.025
 --- !u!1 &4040497191039829889
 GameObject:
   m_ObjectHideFlags: 0

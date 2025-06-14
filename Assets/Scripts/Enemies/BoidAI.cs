@@ -6,10 +6,10 @@ using UnityEngine;
 public class BoidAI : EnemyBase
 {
     [Header("Components")]
-    [SerializeField] Rigidbody rb;
+    [SerializeField] protected Rigidbody rb;
     
     [SerializeField] GameObject stageGround;
-    [SerializeField] GameObject player;
+    [SerializeField] protected GameObject player;
 
     [Header("Ranges")]
     [SerializeField] float protectedRange;
@@ -69,7 +69,7 @@ public class BoidAI : EnemyBase
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
 
         //the boids should not touch the ground and should not go too high
@@ -137,7 +137,7 @@ public class BoidAI : EnemyBase
         }
     }
 
-    IEnumerator NoiseWeights()
+    protected IEnumerator NoiseWeights()
     {
         while (this.isActiveAndEnabled)
         {
