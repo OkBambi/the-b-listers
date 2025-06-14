@@ -8,13 +8,13 @@ public class StickyMechanics : MonoBehaviour
 {
     [SerializeField] Rigidbody rb;
 
-    [SerializeField] float blueWindup;
-    [SerializeField] float stickySpeed;
-    [SerializeField] float timeBetweenPulses;
-    [SerializeField] float pulseMaxRadius;
-    [SerializeField] float pulseSpeed;
-    [SerializeField] float amountOfPulses;
-    [SerializeField] int pulseDmg;
+    float blueWindup;
+    float stickySpeed;
+    float timeBetweenPulses;
+    float pulseMaxRadius;
+    float pulseSpeed;
+    float amountOfPulses;
+    int pulseDmg;
 
     bool activated, startPulseTimer, isStuck, primed;
     int pulsesDone;
@@ -50,7 +50,7 @@ public class StickyMechanics : MonoBehaviour
                     if (sphereCollider.radius < pulseMaxRadius && !startPulseTimer)
                     {
                         sphereCollider.radius += pulseSpeed * Time.deltaTime;
-                        transform.localScale += new Vector3(pulseSpeed * Time.deltaTime, pulseSpeed * Time.deltaTime, pulseSpeed * Time.deltaTime);
+                        transform.GetChild(0).localScale += new Vector3(pulseSpeed * Time.deltaTime, pulseSpeed * Time.deltaTime, pulseSpeed * Time.deltaTime);
                     }
                     else
                     {
@@ -151,11 +151,18 @@ public class StickyMechanics : MonoBehaviour
         primed = true;
     }
 
-    public void setActive(Transform _shootingPoint, GameObject _stickyParent)
+    public void setActive(Transform _shootingPoint, GameObject _stickyParent, float _blueWindup, float _stickySpeed, float _timeBetweenPulses, float _pulseMaxRadius, float _pulseSpeed, float _amountOfPulses, int _pulseDmg)
     {
         activated = true;
         shootingPoint = _shootingPoint;
         stickyParent = _stickyParent;
+        blueWindup = _blueWindup;
+        stickySpeed = _stickySpeed;
+        timeBetweenPulses = _timeBetweenPulses;
+        pulseMaxRadius = _pulseMaxRadius;
+        pulseSpeed = _pulseSpeed;
+        amountOfPulses = _amountOfPulses;
+        pulseDmg = _pulseDmg;
         gameObject.GetComponent<Rigidbody>().linearVelocity = -shootingPoint.forward * stickySpeed;
     }
 
@@ -163,7 +170,7 @@ public class StickyMechanics : MonoBehaviour
     {
         startPulseTimer = true;
         sphereCollider.radius = origRadius;
-        gameObject.transform.localScale = new Vector3(origRadius, origRadius, origRadius);
+        gameObject.transform.GetChild(0).localScale = new Vector3(origRadius, origRadius, origRadius);
         yield return new WaitForSeconds(timeBetweenPulses);
         startPulseTimer = false;
     }

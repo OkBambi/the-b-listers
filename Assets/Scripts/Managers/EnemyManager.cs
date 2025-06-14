@@ -7,16 +7,10 @@ public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager instance;
     [Space]
-    //this is the thing that shows where an enemy will spawn in a few moments
-
-    //Enemy model is spawned, and they are visible. But they are pure WHITE, with a glossy material (make a temp one, ill shader the hell out of it later)
-    //Enemy model currently lacks any AI, is static, and you can move through it(no collider)
-    //Other enemies will still try to avoid it though, so boids, monks, etc
-    //Enemy model will begin with blink, flashing 3 times before
 
     [SerializeField] GameObject spawnIndicator;
-
     [Space]
+
     //so we have a list of enemies that spawn in a repeating order
     [SerializeField] List<GameObject> spawnList;
     [SerializeField] List<Mesh> enemyMeshList;
@@ -26,6 +20,12 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] bool isSpawningEnemies = true;
     [Space]
+
+    [Header("Boid Stuff")]
+    //so we stop getting stuff on awake
+    //this is the list of objects tht boids should consider
+    [SerializeField] public List<Rigidbody> boidReferences;
+    [SerializeField] public GameObject stage;
 
     //and we have a spawn limit on the enemies
     [SerializeField] int AEC;
@@ -44,6 +44,15 @@ public class EnemyManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        GameObject[] objects = FindObjectsByType<GameObject>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        foreach (GameObject potentialGround in objects)
+        {
+            if (potentialGround.layer == LayerMask.NameToLayer("Ground") || potentialGround.CompareTag("groundTag"))
+            {
+                stage = potentialGround;
+                break;
+            }
+        }
     }
 
     #region AEC
@@ -88,12 +97,12 @@ public class EnemyManager : MonoBehaviour
     {
         IncrementTicker();
         DecrementCurrentEC();
-        SpawnEnemy();
+        Invoke("SpawnEnemy", 1.0f);
         if (ticker >= tickerLimit)
         {
             ResetTicker();
             IncrementAEC();
-            SpawnEnemy();
+            Invoke("SpawnEnemy", 1.0f);
         }
     }
 
@@ -105,27 +114,14 @@ public class EnemyManager : MonoBehaviour
 
 
     #region EnemySpawning
-    //i still need to add the spawning buffer/animation
 
-    //call this to actually start the enemies commin (like starting the game or picking up the dagger
     public void SpawnFirstEnemy()
-    {
-        SpawnEnemy(true);
-    }
-
-
-    public void SpawnEnemy(bool isFirstSpawn = false)
     {
         //safety checks
         if (!isSpawningEnemies) return;
         if (currentEC >= AEC) return;
 
-        Vector3 spawnLocation;
-
-        if (!isFirstSpawn)
-            spawnLocation = FindAndValidateSpawnLocation();
-        else
-            spawnLocation = new Vector3(0, 10f, 15f);
+        Vector3 spawnLocation = new Vector3(0, 6f, 15f);
 
 
         //retry in one second if theres no good spots right now
@@ -146,13 +142,46 @@ public class EnemyManager : MonoBehaviour
                 sp.enemyMesh = enemyMeshList[0];
                 sp.SetMesh(enemyMeshList[0]);
                 sp.modelFrame.transform.localScale = new Vector3(220f, 100f, 450f);
-                sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 180f, 0);
+                sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 180f, 0f);
                 break;
         }
 
-        //sp.enemyMesh = spawnList[spawnIndex].GetComponentInChildren<MeshFilter>().sharedMesh;
-        //sp.SetMesh(spawnList[spawnIndex].GetComponentInChildren<MeshFilter>().sharedMesh);
+        if (spawnIndex < spawnList.Count - 1)
+            ++spawnIndex;
+        else
+            spawnIndex = 0;
+    }
 
+    public void SpawnEnemy()
+    {
+        //safety checks
+        if (!isSpawningEnemies) return;
+        if (currentEC >= AEC) return;
+
+        Vector3 spawnLocation = FindAndValidateSpawnLocation();
+
+
+        //retry in one second if theres no good spots right now
+        if (spawnLocation == Vector3.zero)
+        {
+            Invoke("SpawnEnemy", 1f);
+            return;
+        }
+
+        //spawn the indicator which will telegraph the enemy spawn
+        SpawnIndicator sp = Instantiate(spawnIndicator, spawnLocation + new Vector3(0f, 4f, 0f), Quaternion.identity).GetComponent<SpawnIndicator>();
+        sp.enemyToSpawn = spawnList[spawnIndex];
+
+        //what the spawn indicator will actually show
+        switch (sp.enemyToSpawn.name)
+        {
+            case "Monolith Blue":
+                sp.enemyMesh = enemyMeshList[0];
+                sp.SetMesh(enemyMeshList[0]);
+                sp.modelFrame.transform.localScale = new Vector3(220f, 100f, 450f);
+                sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, Random.Range(0, 360), 0);
+                break;
+        }
 
         if (spawnIndex < spawnList.Count - 1)
             ++spawnIndex;

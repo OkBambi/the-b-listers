@@ -29,7 +29,8 @@ public class RedSchmove : MonoBehaviour, ISchmove
 
     void Start()
     {
-        player = GameObject.FindFirstObjectByType<Player>();
+        player = GameManager.instance.playerScript;
+        rb = player.GetComponentInChildren<Rigidbody>();
     }
 
     void Update()

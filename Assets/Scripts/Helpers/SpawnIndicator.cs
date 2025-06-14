@@ -15,7 +15,7 @@ public class SpawnIndicator : MonoBehaviour
 
     //How i think I'm going to do this is that this prefab will bethe one to actually spawn the enemies,
     //and the enemy manager will instantiate and control these.
-    public Renderer renderer;
+    public Renderer indicatorRenderer;
     [SerializeField] MeshFilter meshFilter;
     public GameObject modelFrame;
     public Mesh enemyMesh; //this will be set when this is instantiated
@@ -27,13 +27,12 @@ public class SpawnIndicator : MonoBehaviour
     [SerializeField] Color flashColour;
     private Material[] flashMats;
 
-    [SerializeField] float flashTime = 0.01f;
-    [SerializeField] float red;
-    [SerializeField] float green;
-    [SerializeField] float blue;
+    [SerializeField] float flashSpeed = 0.01f;
+    private float red;
+    private float green;
+    private float blue;
 
-    [SerializeField] List<float> flashDelays;
-    [SerializeField] int flashIndex = 0;
+    private int flashIndex = 0;
 
     public void SetMesh(Mesh newMesh)
     {
@@ -46,12 +45,12 @@ public class SpawnIndicator : MonoBehaviour
         green = baseColour.g;
         blue = baseColour.b;
 
-        flashMats = new Material[renderer.materials.Length];
-        for (int materialIndex = 0; materialIndex < renderer.materials.Length; ++materialIndex)
+        flashMats = new Material[indicatorRenderer.materials.Length];
+        for (int materialIndex = 0; materialIndex < indicatorRenderer.materials.Length; ++materialIndex)
         {
             flashMats[materialIndex] = new Material(EnemyManager.instance.spawnMat);
         }
-        renderer.materials = flashMats; 
+        indicatorRenderer.materials = flashMats; 
         StartCoroutine(Flash());
     }
 
@@ -74,25 +73,25 @@ public class SpawnIndicator : MonoBehaviour
                 }
             }
 
-            red = Mathf.Lerp(red, flashColour.r, flashTime);
+            red = Mathf.Lerp(red, flashColour.r, flashSpeed);
             if (Mathf.Abs(red - flashColour.r) <= 0.05f)
             {
                 red = flashColour.r;
             }
 
-            green = Mathf.Lerp(green, flashColour.g, flashTime);
+            green = Mathf.Lerp(green, flashColour.g, flashSpeed);
             if (Mathf.Abs(green - flashColour.g) <= 0.05f)
             {
                 green = flashColour.g;
             }
 
-            blue = Mathf.Lerp(blue, flashColour.b, flashTime);
+            blue = Mathf.Lerp(blue, flashColour.b, flashSpeed);
             if (Mathf.Abs(blue - flashColour.b) <= 0.05f)
             {
                 blue = flashColour.b;
             }
 
-            foreach (Material material in renderer.materials)
+            foreach (Material material in indicatorRenderer.materials)
             {
                 material.color = new Color(red, green, blue);
             }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Schmoves : MonoBehaviour
 {
@@ -84,9 +85,9 @@ public class Schmoves : MonoBehaviour
 
     //UI
     [Header("CoolDownBars")]
-    [SerializeField] RectTransform RedCD_UI;
-    [SerializeField] RectTransform YellowCD_UI;
-    [SerializeField] RectTransform BlueCD_UI;
+    [SerializeField] Image RedCD_UI;
+    [SerializeField] Image YellowCD_UI;
+    [SerializeField] Image BlueCD_UI;
 
     [Header("CoolDownLerps")]
     [SerializeField] float RedCD;
@@ -106,9 +107,9 @@ public class Schmoves : MonoBehaviour
 
     private void Awake()
     {
-        RedCD = RedCD_UI.localScale.x;
-        YellowCD = YellowCD_UI.localScale.x;
-        BlueCD = BlueCD_UI.localScale.x;
+        RedCD = RedCD_UI.rectTransform.localScale.x;
+        YellowCD = YellowCD_UI.rectTransform.localScale.x;
+        BlueCD = BlueCD_UI.rectTransform.localScale.x;
     }
 
     #region Animations
@@ -144,31 +145,31 @@ public class Schmoves : MonoBehaviour
             if (redIsCD && cooldownRed == 0)
             {
                 redIsCD = false;
-                StartCoroutine(CooldownCompleteRed());
+                StartCoroutine(CooldownComplete(RedCD_UI));
             }
 
             if (yellowIsCD && cooldownYel == 0)
             {
                 yellowIsCD = false;
-                StartCoroutine(CooldownCompleteYellow());
+                StartCoroutine(CooldownComplete(YellowCD_UI));
             }
 
             if (blueIsCD && cooldownBlue == 0)
             {
                 blueIsCD = false;
-                StartCoroutine(CooldownCompleteBlue());
+                StartCoroutine(CooldownComplete(BlueCD_UI));
             }
 
             RedCD = 50f + (200f * (cooldownRed / maxCooldownRed));
-            RedCD_UI.sizeDelta = new Vector2(RedCD, 34.41f);
+            RedCD_UI.rectTransform.sizeDelta = new Vector2(RedCD, 34.41f);
 
             YellowCD = 50f + (200f * (cooldownYel / maxCooldownYel));
-            YellowCD_UI.sizeDelta = new Vector2(YellowCD, 34.41f);
+            YellowCD_UI.rectTransform.sizeDelta = new Vector2(YellowCD, 34.41f);
 
             BlueCD = 50f + (200f * (cooldownBlue / maxCooldownBlue));
-            BlueCD_UI.sizeDelta = new Vector2(BlueCD, 34.41f);
+            BlueCD_UI.rectTransform.sizeDelta = new Vector2(BlueCD, 34.41f);
 
-            if (RedCD_UI.sizeDelta.x == 50 && YellowCD_UI.sizeDelta.x == 50 && BlueCD_UI.sizeDelta.x == 50)
+            if (RedCD_UI.rectTransform.sizeDelta.x == 50 && YellowCD_UI.rectTransform.sizeDelta.x == 50 && BlueCD_UI.rectTransform.sizeDelta.x == 50)
                 break;
 
             yield return null;
@@ -178,13 +179,28 @@ public class Schmoves : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator CooldownCompleteRed()
+    IEnumerator CooldownComplete(Image colourBar)
     {
         int animationPhase = 0;
         int currentDuration = 0;
         float rectX = 50f;
         float rectY = 34.41f;
-        RedCD_M2.color = Color.white;
+
+        Color originalColour = colourBar.color;
+        colourBar.color = Color.black;
+
+        switch (colourBar.name)
+        {
+            case "Red":
+                RedCD_M2.color = Color.white;
+                break;
+            case "Yellow":
+                YellowCD_M2.color = Color.white;
+                break;
+            case "Blue":
+                BlueCD_M2.color = Color.white;
+                break;
+        }
 
         while (true)
         {
@@ -206,80 +222,14 @@ public class Schmoves : MonoBehaviour
                 rectY = Mathf.Lerp(rectY, 34.41f, finishSpeed / 2);
             }
 
-            RedCD_UI.sizeDelta = new Vector2(rectX, rectY);
+            colourBar.rectTransform.sizeDelta = new Vector2(rectX, rectY);
             ++currentDuration;
             yield return null;
         }
-        yield return null;
-    }
+        colourBar.color = originalColour;
 
-    IEnumerator CooldownCompleteYellow()
-    {
-        int animationPhase = 0;
-        int currentDuration = 0;
-        float rectX = 50f;
-        float rectY = 34.41f;
-        YellowCD_M2.color = Color.white;
+        
 
-        while (true)
-        {
-            if (animationPhase == 2) break;
-            if (currentDuration >= animationDurations[animationPhase])
-            {
-                currentDuration = 0;
-                ++animationPhase;
-            }
-
-            if (animationPhase == 0)
-            {
-                rectX = Mathf.Lerp(rectX, 400f, finishSpeed * 2);
-                rectY = Mathf.Lerp(rectY, 3f, finishSpeed / 2);
-            }
-            else
-            {
-                rectX = Mathf.Lerp(rectX, 50f, finishSpeed);
-                rectY = Mathf.Lerp(rectY, 34.41f, finishSpeed / 2);
-            }
-
-            YellowCD_UI.sizeDelta = new Vector2(rectX, rectY);
-            ++currentDuration;
-            yield return null;
-        }
-        yield return null;
-    }
-
-    IEnumerator CooldownCompleteBlue()
-    {
-        int animationPhase = 0;
-        int currentDuration = 0;
-        float rectX = 50f;
-        float rectY = 34.41f;
-        BlueCD_M2.color = Color.white;
-
-        while (true)
-        {
-            if (animationPhase == 2) break;
-            if (currentDuration >= animationDurations[animationPhase])
-            {
-                currentDuration = 0;
-                ++animationPhase;
-            }
-
-            if (animationPhase == 0)
-            {
-                rectX = Mathf.Lerp(rectX, 400f, finishSpeed * 2);
-                rectY = Mathf.Lerp(rectY, 3f, finishSpeed / 2);
-            }
-            else
-            {
-                rectX = Mathf.Lerp(rectX, 50f, finishSpeed);
-                rectY = Mathf.Lerp(rectY, 34.41f, finishSpeed / 2);
-            }
-
-            BlueCD_UI.sizeDelta = new Vector2(rectX, rectY);
-            ++currentDuration;
-            yield return null;
-        }
         yield return null;
     }
     #endregion

@@ -6,12 +6,10 @@ using UnityEngine;
 public class BoidAI : EnemyBase
 {
     [Header("Components")]
-    [SerializeField] Rigidbody rb;
-    public List<Rigidbody> boids;
-    public List<Rigidbody> otherEnemies;
-    [SerializeField] LayerMask hitLayer;
+    [SerializeField] protected Rigidbody rb;
+    
     [SerializeField] GameObject stageGround;
-    [SerializeField] GameObject player;
+    [SerializeField] protected GameObject player;
 
     [Header("Ranges")]
     [SerializeField] float protectedRange;
@@ -30,6 +28,8 @@ public class BoidAI : EnemyBase
     [SerializeField] float stageWeight = 0.5f;
     [SerializeField] float playerWeight = 1f;
 
+    [Space]
+    [Header("Noise")]
     [SerializeField] float noiseMin = 0.8f;
     [SerializeField] float noiseMax = 1.2f;
 
@@ -54,25 +54,10 @@ public class BoidAI : EnemyBase
     {
         RandomizeColor();
         //finding the ground
-        GameObject[] objects = FindObjectsByType<GameObject>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-        foreach(GameObject potentialGround in objects)
-        {
-            if(potentialGround.layer == LayerMask.NameToLayer("Ground") || potentialGround.CompareTag("groundTag"))
-            {
-                stageGround = potentialGround;
-                break;
-            }
-        }
+        stageGround = EnemyManager.instance.stage;
 
         //finding the player
-        if (FindAnyObjectByType<Player>() != null)
-            player = FindAnyObjectByType<PlayerMovement>().gameObject;
-        else
-        {
-            //testing condition
-            player = GameObject.FindGameObjectWithTag("Player");
-        }
-        Debug.Log("boom");
+        player = GameManager.instance.player;
         rb.AddForce(Vector3.up * startUpForce * Time.deltaTime, ForceMode.Acceleration);
     }
 
@@ -84,7 +69,7 @@ public class BoidAI : EnemyBase
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
 
         //the boids should not touch the ground and should not go too high
@@ -112,46 +97,47 @@ public class BoidAI : EnemyBase
     void BoidMovement()
     {
         //variable  initialization
-        int boidsInRange = 0;
+        int enemiesInRange = 0;
         Vector3 velocityTotal = new Vector3(0, 0, 0);
         Vector3 totalLocations = new Vector3(0, 0, 0);
 
-        foreach (Rigidbody boid in boids)
+        foreach (Rigidbody enemy in EnemyManager.instance.boidReferences)
         {
-            float distanceToBoid = Vector3.Distance(transform.position, boid.position);
+            if (enemy == rb) continue;
+            float distanceToBoid = Vector3.Distance(transform.position, enemy.position);
 
             //Avoidance
             //loop through the boids and see how close each one is to this boid
             //if the boid is too close, move away
             if (distanceToBoid <= protectedRange)
-                rb.AddForce((((transform.position - boid.position) * protectedRange) - (transform.position - boid.position)) * separationWeight * separationNoise * Time.deltaTime, ForceMode.Acceleration);
+                rb.AddForce((((transform.position - enemy.position) * protectedRange) - (transform.position - enemy.position)) * separationWeight * separationNoise * Time.deltaTime, ForceMode.Acceleration);
           
 
             if (distanceToBoid <= visualRange)
             {
-                velocityTotal += boid.linearVelocity;
-                totalLocations += boid.transform.position;
-                ++boidsInRange;
+                velocityTotal += enemy.linearVelocity;
+                totalLocations += enemy.transform.position;
+                ++enemiesInRange;
             }
+        }
 
-            if (boidsInRange > 0)
-            {
-                //Alignment
-                //calculate the average velocity of all the boids
-                Vector3 averageVelocity = velocityTotal / boidsInRange;
-                //using the average velocity, move the boid in that direction
-                rb.AddForce(averageVelocity * alignmentWeight * alignmentNoise * Time.deltaTime, ForceMode.Acceleration);
+        if (enemiesInRange > 0)
+        {
+            //Alignment
+            //calculate the average velocity of all the boids
+            Vector3 averageVelocity = velocityTotal / enemiesInRange;
+            //using the average velocity, move the boid in that direction
+            rb.AddForce(averageVelocity * alignmentWeight * alignmentNoise * Time.deltaTime, ForceMode.Acceleration);
 
-                //Cohesion
-                //get the average location of all the boids
-                Vector3 averageLocation = totalLocations / boidsInRange;
-                //move the boid towards the average location
-                rb.AddForce((averageLocation - transform.position) * cohesionWeight * cohesionNoise * Time.deltaTime, ForceMode.Acceleration);
-            }
+            //Cohesion
+            //get the average location of all the boids
+            Vector3 averageLocation = totalLocations / enemiesInRange;
+            //move the boid towards the average location
+            rb.AddForce((averageLocation - transform.position) * cohesionWeight * cohesionNoise * Time.deltaTime, ForceMode.Acceleration);
         }
     }
 
-    IEnumerator NoiseWeights()
+    protected IEnumerator NoiseWeights()
     {
         while (this.isActiveAndEnabled)
         {
@@ -183,9 +169,6 @@ public class BoidAI : EnemyBase
     void StageAwareness()
     {
         #region Height Control
-
-        //so we dont want the boid to hit the floor, like really dont touch the floor,
-        RaycastHit hit;
 
         //boids shouldnt dive over the player, disable this ground detection when approaching the player
         Vector3 toPlayer = player.transform.position - transform.position;
@@ -221,6 +204,7 @@ public class BoidAI : EnemyBase
     {
         if (hp <= 0)
         {
+            isAlive = false;
             RemoveSelfFromTargetList();
             ComboManager.instance.AddScore(score);
             Destroy(gameObject);

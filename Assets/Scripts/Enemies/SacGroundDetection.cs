@@ -21,6 +21,7 @@ public class SacGroundDetection : EnemyBase
     {
         if (hp <= 0)
         {
+            isAlive = false;
             ComboManager.instance.AddScore(score);
             Destroy(gameObject);
             return;

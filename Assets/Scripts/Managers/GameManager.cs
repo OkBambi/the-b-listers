@@ -16,12 +16,22 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     float TimeScaleOrigin;
 
+    [Space]
+    [Header("Player Stuff")]
+    public Transform shootingPoint;
+    public ColorSwapping colorSwapper;
+    public Schmoves schmover;
+    public Timer timer;
+
     void Awake()
     {
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.transform.parent.GetComponent<Player>();
-        TimeScaleOrigin = Time.timeScale;
+        shootingPoint = GameObject.FindGameObjectWithTag("ShootingPoint").transform;
+        //TimeScaleOrigin = Time.timeScale;
+        TimeScaleOrigin = 1f;
+        Time.timeScale = TimeScaleOrigin;
         Cursor.lockState=CursorLockMode.Locked;
     }
 
@@ -71,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void OnLoseCondition()
     {
-        statePause();
+        //statePause();
         //turn on the lose menu
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;

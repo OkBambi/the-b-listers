@@ -18,6 +18,7 @@ public class EnemyBase : MonoBehaviour, IDamage
     [Space]
     public int hp;
     public int score = 50;
+    protected bool isAlive = true;
 
     string nameStr;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -69,28 +70,26 @@ public class EnemyBase : MonoBehaviour, IDamage
     //CALL THIS METHOD IN THE START OF ALL ENEMIES
     protected void UpdateBoidAwareness()
     {
-        //this will update all other active boids with this current boid
-        //for enemies that dont care about boids, they need to update all the boids,
-        //but they wont have a boid list themselves, so they dont care to begin with
+        //this code is being refactored, when an enemy spawns, it should add its own rigid body to the boidreferences rigidbody list in the enemy manager
+        //this rigid body list is what all boids will use
 
-        //this basically means that all enemies will need to call this function on startup so that boids care about boids and other enemies,
-        //but non boids dont care
-
-        BoidAI[] activeboids = FindObjectsByType<BoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-        for (int boidCount = 0; boidCount < activeboids.Length; boidCount++)
-        {
-            activeboids[boidCount].boids.Add(GetComponent<Rigidbody>());
-        }
+        EnemyManager.instance.boidReferences.Add(GetComponent<Rigidbody>());
+        //BoidAI[] activeboids = FindObjectsByType<BoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        //for (int boidCount = 0; boidCount < activeboids.Length; boidCount++)
+        //{
+        //    activeboids[boidCount].boids.Add(GetComponent<Rigidbody>());
+        //}
     }
 
     //CALL THIS METHOD IN THE DEATH OF ALL ENEMIES
     protected void RemoveSelfFromTargetList()
     {
-        BoidAI[] activeboids = FindObjectsByType<BoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-        for (int boidCount = 0; boidCount < activeboids.Length; boidCount++)
-        {
-            activeboids[boidCount].boids.Remove(GetComponent<Rigidbody>());
-        }
+        EnemyManager.instance.boidReferences.Remove(GetComponent<Rigidbody>());
+        //BoidAI[] activeboids = FindObjectsByType<BoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        //for (int boidCount = 0; boidCount < activeboids.Length; boidCount++)
+        //{
+        //    activeboids[boidCount].boids.Remove(GetComponent<Rigidbody>());
+        //}
     }
 
     //call this when an AEC enemy spawn
@@ -110,7 +109,8 @@ public class EnemyBase : MonoBehaviour, IDamage
         if (hitColor == setColor || hitColor == PrimaryColor.OMNI || setColor == PrimaryColor.OMNI)
         {
             hp -= amount;
-            DeathCheck();
+            if (isAlive)
+                DeathCheck();
 
             //flash white
             StartCoroutine(Flash());
@@ -126,6 +126,7 @@ public class EnemyBase : MonoBehaviour, IDamage
     {
         if (hp <= 0)
         {
+            isAlive = false;
             OnAECDestroy();
             RemoveSelfFromTargetList();
             Destroy(gameObject);
