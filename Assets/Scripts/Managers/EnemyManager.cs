@@ -141,8 +141,8 @@ public class EnemyManager : MonoBehaviour
             case "Monolith Blue":
                 sp.enemyMesh = enemyMeshList[0];
                 sp.SetMesh(enemyMeshList[0]);
-                sp.modelFrame.transform.localScale = new Vector3(220f, 100f, 450f);
-                sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 180f, 0f);
+                sp.modelFrame.transform.localScale = new Vector3(162f, 67f, 322f);
+                sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 180f);
                 break;
         }
 
