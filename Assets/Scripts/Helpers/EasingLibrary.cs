@@ -47,6 +47,22 @@ using UnityEngine;
 //every.
 //line.
 
+/*
+ * EXAMPLE USAGE:
+ * 
+ * using static EasingLibrary; (at the top)
+ * 
+ * private Ease ease;
+ * private Function func;
+ * 
+ * void Awake()
+ * {
+ *     ease = Ease.EaseInOutQuad;
+ *     func = GetEasingFunction(ease); //DO THIS IN AWAKE OR START
+ * }
+ * 
+ */
+
 
 public static class EasingLibrary
 {

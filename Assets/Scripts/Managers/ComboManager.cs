@@ -79,13 +79,6 @@ public class ComboManager : MonoBehaviour
         {"P", "RIMARY"}
     };
 
-    //THANK YOU cjddmut
-    //public static float EaseInQuint(float start, float end, float value)
-    //{
-    //    end -= start;
-    //    return end * value * value * value * value * value + start;
-    //}
-
     private Ease ease;
     private Function func;
 
@@ -98,7 +91,7 @@ public class ComboManager : MonoBehaviour
 
         player = GameObject.FindFirstObjectByType<Player>();
 
-        ease = Ease.EaseInOutQuad;
+        ease = Ease.EaseInQuint;
         func = GetEasingFunction(ease); //DO THIS IN AWAKE OR START
     }
 
