@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class Schmoves : MonoBehaviour
@@ -41,6 +42,7 @@ public class Schmoves : MonoBehaviour
                             cooldownRed = maxCooldownRed;
                             RedCD_M2.color = Color.gray;
                             ComboManager.instance.RemoveScore(100);
+                            ComboFeed.theInstance.AddNewComboFeed("-", "100", "redSchmove");
                             StartCoroutine(UpdateCoolDownUI());
                         }
                         break;
@@ -51,6 +53,7 @@ public class Schmoves : MonoBehaviour
                             cooldownBlue = maxCooldownBlue;
                             BlueCD_M2.color = Color.gray;
                             ComboManager.instance.RemoveScore(100);
+                            ComboFeed.theInstance.AddNewComboFeed("-", "100", "blueSchmove");
                             StartCoroutine(UpdateCoolDownUI());
                         }
                         break;
