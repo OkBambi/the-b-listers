@@ -79,7 +79,7 @@ public class ComboManager : MonoBehaviour
         {"P", "RIMARY"}
     };
 
-    private Ease ease;
+    [SerializeField] Ease ease;
     private Function func;
 
 
