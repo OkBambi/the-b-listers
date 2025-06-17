@@ -19,4 +19,9 @@ public class FeedListing : MonoBehaviour
         scoreAmount.text = _scoreAmount;
         killedOrUsed.text = _killedOrUsed;
     }
+
+    public string GetScoreAndHow()
+    {
+        return modifier + " " + scoreAmount + " " + killedOrUsed;
+    }
 }
