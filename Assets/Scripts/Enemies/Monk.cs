@@ -7,14 +7,16 @@ public class Monk : EnemyBase
     [SerializeField] int FaceTargetSpeed;
     [SerializeField] float Casttimer;
     [SerializeField] float gongBonkRate;
+    [SerializeField] float pauseDuration;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Transform Casting;
-    [SerializeField] GameObject wave;
+    [SerializeField] GameObject Wave;
 
     //noise 
     Color colorOriginal;
     bool PlayerInRange;
     float Lock_Color_Timer;
+    
     Vector3 playerDir;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,6 +25,7 @@ public class Monk : EnemyBase
         GetComponent<Rigidbody>();
         ColorSelection(setColor);
         StartCoroutine(Cast());
+        agent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -32,27 +35,46 @@ public class Monk : EnemyBase
         agent.SetDestination(GameManager.instance.player.transform.position);
         if (Casttimer > gongBonkRate)
         {
+            PauseForAMoment();
             Cast();
         }
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             FaceTarget();
-
         }
     }
+
+    public void PauseForAMoment()
+    {
+        agent.isStopped = true;
+        StartCoroutine(isroaming(pauseDuration));
+    }
+    IEnumerator isroaming(float pauseDuration)
+    {
+        yield return new WaitForSeconds(pauseDuration);
+        agent.isStopped = false;
+    }
+
 
     IEnumerator Cast()
     {
         //projectile
-        Instantiate(wave, transform.position, Quaternion.identity);
+        Instantiate(Wave, transform.position, Quaternion.identity);
 
+        //if player is in the sphere cast
         if (PlayerInRange)
         {
-            //if player is in the sphere cast
+            //stop walking 
+            PauseForAMoment();
 
             yield return new WaitForSeconds(0.1f);
+
             // lock the player color choice for 3 seconds
+            GameManager.instance.playerScript.canColor = false;
+
             //wait a moment
+
+
             //swap through the colors
         }
     }
