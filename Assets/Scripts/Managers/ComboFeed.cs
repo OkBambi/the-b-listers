@@ -30,7 +30,7 @@ public class ComboFeed : MonoBehaviour
     private void AddToQueue(GameObject _newScoreFeed)
     {
         currentFeedList.Enqueue(_newScoreFeed);
-        AddScoreToFile(_newScoreFeed);
+        //AddScoreToFile(_newScoreFeed);//fix this bum
         if (currentFeedList.Count > maxFeedLength)
         {
             Destroy(currentFeedList.Dequeue());
