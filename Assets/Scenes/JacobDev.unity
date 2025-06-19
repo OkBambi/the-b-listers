@@ -144,17 +144,25 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: 222186b0f62d1a342b1f8f4e7a68890d, type: 2}
+    - target: {fileID: 2712315048522273597, guid: d8bd98e295cf7054d8f8cfdd8d8643ba, type: 3}
+      propertyPath: m_Speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712315048522273597, guid: d8bd98e295cf7054d8f8cfdd8d8643ba, type: 3}
+      propertyPath: m_Acceleration
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3799675440555860099, guid: d8bd98e295cf7054d8f8cfdd8d8643ba, type: 3}
       propertyPath: m_Name
       value: MonkTemp
       objectReference: {fileID: 0}
     - target: {fileID: 6449908427671037049, guid: d8bd98e295cf7054d8f8cfdd8d8643ba, type: 3}
       propertyPath: StopTime
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6449908427671037049, guid: d8bd98e295cf7054d8f8cfdd8d8643ba, type: 3}
       propertyPath: roamDist
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 9082692475498291305, guid: d8bd98e295cf7054d8f8cfdd8d8643ba, type: 3}
       propertyPath: m_LocalPosition.x
@@ -762,6 +770,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -678588488315902003, guid: e94422e52e06f6a458418bf3aa526233, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -678588488315902003, guid: e94422e52e06f6a458418bf3aa526233, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 222186b0f62d1a342b1f8f4e7a68890d, type: 2}
     - target: {fileID: 919132149155446097, guid: e94422e52e06f6a458418bf3aa526233, type: 3}
       propertyPath: m_Name
       value: Boid1_2
@@ -1203,6 +1219,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4683669308469848369, guid: de55abcf07fdbce4e94f716179e890b0, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -4683669308469848369, guid: de55abcf07fdbce4e94f716179e890b0, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 222186b0f62d1a342b1f8f4e7a68890d, type: 2}
     - target: {fileID: 919132149155446097, guid: de55abcf07fdbce4e94f716179e890b0, type: 3}
       propertyPath: m_Name
       value: Boid1_1
