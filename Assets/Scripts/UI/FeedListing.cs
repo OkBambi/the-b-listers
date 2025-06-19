@@ -19,9 +19,9 @@ public class FeedListing : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        if (timer >= timeTillKilled - 2)
+        if (timer >= timeTillKilled - 3)
         {
-            //MoveText(); Fix this bud
+            ChangeAlpha();
         }
     }
 
@@ -37,8 +37,10 @@ public class FeedListing : MonoBehaviour
         return modifier.text + " " + scoreAmount.text + " " + killedOrUsed.text;
     }
 
-    private void MoveText()
+    private void ChangeAlpha()
     {
-        //gameObject.GetComponent<RectTransform>().anchoredPosition3D += Time.deltaTime;
+        modifier.CrossFadeAlpha(0, 3, true);
+        scoreAmount.CrossFadeAlpha(0, 3, true);
+        killedOrUsed.CrossFadeAlpha(0, 3, true);
     }
 }
