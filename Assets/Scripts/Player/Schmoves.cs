@@ -43,7 +43,7 @@ public class Schmoves : MonoBehaviour
                             RedCD_M2.color = Color.gray;
                             ComboManager.instance.RemoveScore(100);
                             ComboFeed.theInstance.AddNewComboFeed("-", "100", "redSchmove");
-                            StartCoroutine(UpdateCoolDownUI());
+                            StartCoroutine(UpdateCoolDownUIRed());
                         }
                         break;
                     case PrimaryColor.BLUE:
@@ -54,7 +54,7 @@ public class Schmoves : MonoBehaviour
                             BlueCD_M2.color = Color.gray;
                             ComboManager.instance.RemoveScore(100);
                             ComboFeed.theInstance.AddNewComboFeed("-", "100", "blueSchmove");
-                            StartCoroutine(UpdateCoolDownUI());
+                            StartCoroutine(UpdateCoolDownUIBlue());
                         }
                         break;
                     default:
@@ -116,14 +116,9 @@ public class Schmoves : MonoBehaviour
     }
 
     #region Animations
-    public IEnumerator UpdateCoolDownUI()
+    public IEnumerator UpdateCoolDownUIRed()
     {
-        if (isUpdating) yield return null;
-
         bool redIsCD = false;
-        bool yellowIsCD = false;
-        bool blueIsCD = false;
-
 
         do
         {
@@ -132,16 +127,6 @@ public class Schmoves : MonoBehaviour
             {
                 cooldownRed = Mathf.Clamp(cooldownRed - Time.deltaTime, 0f, 100f);
                 redIsCD = true;
-            }
-            if (cooldownYel > 0)
-            {
-                cooldownYel = Mathf.Clamp(cooldownYel - Time.deltaTime, 0, 100);
-                yellowIsCD = true;
-            }
-            if (cooldownBlue > 0)
-            {
-                cooldownBlue = Mathf.Clamp(cooldownBlue - Time.deltaTime, 0, 100);
-                blueIsCD = true;
             }
 
 
@@ -152,10 +137,67 @@ public class Schmoves : MonoBehaviour
                 StartCoroutine(CooldownComplete(RedCD_UI));
             }
 
+            RedCD = 50f + (200f * (cooldownRed / maxCooldownRed));
+            RedCD_UI.rectTransform.sizeDelta = new Vector2(RedCD, 34.41f);
+
+            if (RedCD_UI.rectTransform.sizeDelta.x == 50)
+            {
+                Debug.Log("break out");
+                break;
+            }
+
+            yield return null;
+        } while (true);
+
+        isUpdating = false;
+        yield return null;
+    }
+
+    public IEnumerator UpdateCoolDownUIYellow()
+    {
+        bool yellowIsCD = false;
+
+        do
+        {
+            if (cooldownYel > 0)
+            {
+                cooldownYel = Mathf.Clamp(cooldownYel - Time.deltaTime, 0, 100);
+                yellowIsCD = true;
+            }
+
             if (yellowIsCD && cooldownYel == 0)
             {
                 yellowIsCD = false;
                 StartCoroutine(CooldownComplete(YellowCD_UI));
+            }
+
+            YellowCD = 50f + (200f * (cooldownYel / maxCooldownYel));
+            YellowCD_UI.rectTransform.sizeDelta = new Vector2(YellowCD, 34.41f);
+
+            if (YellowCD_UI.rectTransform.sizeDelta.x == 50)
+            {
+                Debug.Log("break out");
+                break;
+            }
+
+            yield return null;
+        } while (true);
+
+        isUpdating = false;
+        yield return null;
+    }
+
+    public IEnumerator UpdateCoolDownUIBlue()
+    {
+        bool blueIsCD = false;
+
+
+        do
+        {
+            if (cooldownBlue > 0)
+            {
+                cooldownBlue = Mathf.Clamp(cooldownBlue - Time.deltaTime, 0, 100);
+                blueIsCD = true;
             }
 
             if (blueIsCD && cooldownBlue == 0)
@@ -164,18 +206,10 @@ public class Schmoves : MonoBehaviour
                 StartCoroutine(CooldownComplete(BlueCD_UI));
             }
 
-            RedCD = 50f + (200f * (cooldownRed / maxCooldownRed));
-            RedCD_UI.rectTransform.sizeDelta = new Vector2(RedCD, 34.41f);
-
-            YellowCD = 50f + (200f * (cooldownYel / maxCooldownYel));
-            YellowCD_UI.rectTransform.sizeDelta = new Vector2(YellowCD, 34.41f);
-
             BlueCD = 50f + (200f * (cooldownBlue / maxCooldownBlue));
             BlueCD_UI.rectTransform.sizeDelta = new Vector2(BlueCD, 34.41f);
 
-            if (RedCD_UI.rectTransform.sizeDelta.x == 50 &&
-                YellowCD_UI.rectTransform.sizeDelta.x == 50 &&
-                BlueCD_UI.rectTransform.sizeDelta.x == 50)
+            if (BlueCD_UI.rectTransform.sizeDelta.x == 50)
             {
                 Debug.Log("break out");
                 break;
