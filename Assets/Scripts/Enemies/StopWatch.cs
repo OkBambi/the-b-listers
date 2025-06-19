@@ -68,4 +68,13 @@ public class StopWatch : EnemyBase, IDamage
         rb.useGravity = false;
         rb.linearVelocity = Vector3.zero;
     }
+
+    void OnCollisionCheck(Collision collision)
+    {
+        // Check if the collision is with the ground layer
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            EndSlam();
+        }
+    }
 }
