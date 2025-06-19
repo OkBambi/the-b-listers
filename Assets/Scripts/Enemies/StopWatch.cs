@@ -15,16 +15,16 @@ public class StopWatch : EnemyBase, IDamage
     {
         OnAECAwake();
 
-        rb = GetComponent<Rigidbody>();
-        // Keep gravity off initially
-        rb.useGravity = false;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
         counter = 0;
         ColorSelection(setColor);
-        base.UpdateBoidAwareness(); //this will need to be commented out once/if the stopwatch gets a rigidbody
+        //base.UpdateBoidAwareness(); //this will need to be commented out once/if the stopwatch gets a rigidbody
+        rb = GetComponent<Rigidbody>();
+        // Keep gravity off initially
+        rb.useGravity = false;
     }
 
     // Update is called once per frame
@@ -34,14 +34,20 @@ public class StopWatch : EnemyBase, IDamage
         {
             CountDownTimer();
         }
+
+        if (isSlamming)
+        {
+            OnGroundCheck(rb.GetComponent<Collision>());
+        }
     }
 
     void CountDownTimer()
     {
         counter++;
-        if(counter == 3)
+        if(counter == 3 && !isSlamming)
         {
             counter = 0;
+            StartSlam();
             //SacSpit();
         }
     }
@@ -60,6 +66,14 @@ public class StopWatch : EnemyBase, IDamage
         // apply downward force
         rb.AddForce(Vector3.down * slamForce, ForceMode.Impulse); 
     }
+    private void OnGroundCheck(Collision collision)
+    {
+        // Check if the collision is with the ground layer
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            EndSlam();
+        }
+    }
 
     void EndSlam()
     {
@@ -69,12 +83,4 @@ public class StopWatch : EnemyBase, IDamage
         rb.linearVelocity = Vector3.zero;
     }
 
-    void OnCollisionCheck(Collision collision)
-    {
-        // Check if the collision is with the ground layer
-        if (collision.gameObject.CompareTag("Floor"))
-        {
-            EndSlam();
-        }
-    }
 }
