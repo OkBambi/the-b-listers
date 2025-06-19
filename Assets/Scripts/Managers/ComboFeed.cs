@@ -12,7 +12,7 @@ public class ComboFeed : MonoBehaviour
     [SerializeField] int maxFeedLength;
 
     private Queue<GameObject> currentFeedList = new Queue<GameObject>();
-    public List<String> finalScoreList = new List<String>();
+    private List<String> finalScoreList = new List<String>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,5 +35,10 @@ public class ComboFeed : MonoBehaviour
         {
             Destroy(currentFeedList.Dequeue());
         }
+    }
+
+    public List<String> GetFinalScoreList()
+    {
+        return finalScoreList;
     }
 }
