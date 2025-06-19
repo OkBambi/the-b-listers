@@ -3,12 +3,21 @@ using UnityEngine;
 public class StopWatch : EnemyBase, IDamage
 {
     //[SerializeField] GameObject SpitSac;
-    
+
     int counter;
+
+    private Rigidbody rb;
+    public float slamForce; // Adjust this value for the desired slam force
+
+    private bool isSlamming;
 
     private void Awake()
     {
         OnAECAwake();
+
+        rb = GetComponent<Rigidbody>();
+        // Keep gravity off initially
+        rb.useGravity = false;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -43,5 +52,12 @@ public class StopWatch : EnemyBase, IDamage
     //    mySac.setColor = this.setColor;
     //}
 
-    
+    void StartSlam()
+    {
+        isSlamming = true;
+        // Turn on gravity
+        rb.useGravity = true;
+        // apply downward force
+        rb.AddForce(Vector3.down * slamForce, ForceMode.Impulse); 
+    }
 }
