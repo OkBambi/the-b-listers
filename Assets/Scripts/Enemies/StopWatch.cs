@@ -14,7 +14,6 @@ public class StopWatch : EnemyBase, IDamage
     private void Awake()
     {
         OnAECAwake();
-
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -33,11 +32,6 @@ public class StopWatch : EnemyBase, IDamage
         if (Input.GetKeyDown(KeyCode.T)) 
         {
             CountDownTimer();
-        }
-
-        if (isSlamming)
-        {
-            OnGroundCheck(rb.GetComponent<Collision>());
         }
     }
 
@@ -66,17 +60,17 @@ public class StopWatch : EnemyBase, IDamage
         // apply downward force
         rb.AddForce(Vector3.down * slamForce, ForceMode.Impulse); 
     }
-    private void OnGroundCheck(Collision collision)
+    
+    private void OnTriggerEnter(Collider other)
     {
-        // Check if the collision is with the ground layer
-        if (collision.gameObject.CompareTag("Floor"))
+        if (other.gameObject.CompareTag("groundTag") && isSlamming)
         {
             EndSlam();
         }
     }
-
     void EndSlam()
     {
+        Debug.Log("Slam Ended");
         isSlamming = false;
         // Turn off gravity
         rb.useGravity = false;
