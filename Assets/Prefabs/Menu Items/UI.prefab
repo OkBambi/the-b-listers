@@ -4435,9 +4435,9 @@ MonoBehaviour:
   shootingPoint: {fileID: 0}
   blueWindup: 1
   stickySpeed: 40
-  timeBetweenPulses: 2
-  pulseMaxRadius: 15
-  pulseSpeed: 5
+  timeBetweenPulses: 1
+  pulseMaxRadius: 40
+  pulseSpeed: 200
   amountOfPulses: 3
   pulseDmg: 1
 --- !u!1 &6807639528664673185
@@ -5311,6 +5311,7 @@ MonoBehaviour:
   comboMultUGUI: {fileID: 6458756855347946596}
   totalScoreUGUI: {fileID: 5771937175862872668}
   comboBar: {fileID: 8702706620798052471}
+  ease: 0
 --- !u!1 &7740294914428156270
 GameObject:
   m_ObjectHideFlags: 0
