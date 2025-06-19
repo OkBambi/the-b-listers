@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -10,13 +11,12 @@ public class ComboFeed : MonoBehaviour
     [SerializeField] GameObject feedListingPrefab;
     [SerializeField] int maxFeedLength;
 
-    private string scoreFileName = "ScoreFile.txt";
     private Queue<GameObject> currentFeedList = new Queue<GameObject>();
+    public List<String> finalScoreList = new List<String>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         theInstance = this;
-        File.WriteAllText(scoreFileName, "");
     }
 
     public void AddNewComboFeed(string _modifier, string _score, string _killedOrUsed) //allows you to add to the kill feed (modifier is what is done to the score. Example + or -)
@@ -30,16 +30,10 @@ public class ComboFeed : MonoBehaviour
     private void AddToQueue(GameObject _newScoreFeed)
     {
         currentFeedList.Enqueue(_newScoreFeed);
-        //AddScoreToFile(_newScoreFeed);//fix this bum
+        finalScoreList.Add(_newScoreFeed.GetComponent<FeedListing>().GetScoreAndHow());
         if (currentFeedList.Count > maxFeedLength)
         {
             Destroy(currentFeedList.Dequeue());
         }
-    }
-
-    private void AddScoreToFile(GameObject _newScoreFeed)
-    {
-        StreamWriter writer = new StreamWriter(scoreFileName, true);
-        writer.Write(_newScoreFeed.GetComponent<FeedListing>().GetScoreAndHow());
     }
 }
