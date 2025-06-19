@@ -4,20 +4,29 @@ using UnityEngine.AI;
 
 public class Monk : EnemyBase
 {
-    [SerializeField] int FaceTargetSpeed;
-    [SerializeField] float Casttimer;
-    [SerializeField] float gongBonkRate;
-    [SerializeField] float pauseDuration;
-    [SerializeField] NavMeshAgent agent;
+    //casting
     [SerializeField] Transform Casting;
     [SerializeField] GameObject Wave;
+    [SerializeField] float Casttimer;
+    [SerializeField] float gongBonkRate;
+    [SerializeField] float lockedColorTimer;
+    [SerializeField] float pauseToCastTimer;
 
-    //noise 
+
+    //roaming movement
+    [SerializeField] int FaceTargetSpeed;
+    [SerializeField] NavMeshAgent agent;
+    [SerializeField] int roamDist;
+    [SerializeField] int StopTime;
+    float roamTimer;
+
+
     Color colorOriginal;
     bool PlayerInRange;
-    float Lock_Color_Timer;
+
     
     Vector3 playerDir;
+    Vector3 startingPOS;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -31,11 +40,13 @@ public class Monk : EnemyBase
     // Update is called once per frame
     void Update()
     {
-        playerDir = GameManager.instance.transform.position - transform.position;
-        agent.SetDestination(GameManager.instance.player.transform.position);
+        roamCheck();
+        roamTimer += Time.deltaTime;
+
         if (Casttimer > gongBonkRate)
         {
             PauseForAMoment();
+
             Cast();
         }
         if (agent.remainingDistance <= agent.stoppingDistance)
@@ -47,7 +58,7 @@ public class Monk : EnemyBase
     public void PauseForAMoment()
     {
         agent.isStopped = true;
-        StartCoroutine(isroaming(pauseDuration));
+        StartCoroutine(isroaming(pauseToCastTimer));
     }
     IEnumerator isroaming(float pauseDuration)
     {
@@ -55,6 +66,27 @@ public class Monk : EnemyBase
         agent.isStopped = false;
     }
 
+
+    void roamCheck()
+    {
+        if(roamTimer >= StopTime)
+        {
+            roam();
+        }
+    }
+
+    void roam()
+    {
+        roamTimer = 0;
+        agent.stoppingDistance = 0;
+
+        Vector3 ranPOS = Random.insideUnitSphere * roamDist;
+        ranPOS += startingPOS;
+
+        NavMeshHit hit;
+        NavMesh.SamplePosition(ranPOS, out hit, roamDist, 1);
+        agent.SetDestination(hit.position);
+    }
 
     IEnumerator Cast()
     {
