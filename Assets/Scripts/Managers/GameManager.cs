@@ -62,6 +62,20 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void BackButton()
+    {
+        MenuActive.SetActive(false);
+        MenuActive = MenuPause;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+
+    }
+    public void SettingsActive()
+    {
+        MenuActive = MenuSettings;
+        MenuActive.SetActive(true);
+    }
     public void stateUnPause()
     {
         isPaused = !isPaused;
