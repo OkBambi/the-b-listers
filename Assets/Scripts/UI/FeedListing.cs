@@ -39,6 +39,6 @@ public class FeedListing : MonoBehaviour
 
     private void MoveText()
     {
-        gameObject.GetComponent<RectTransform>().anchoredPosition3D += Time.deltaTime;
+        //gameObject.GetComponent<RectTransform>().anchoredPosition3D += Time.deltaTime;
     }
 }
