@@ -24,7 +24,7 @@ public class Monk : EnemyBase
     Color colorOriginal;
     bool PlayerInRange;
 
-    
+
     Vector3 playerDir;
     Vector3 startingPOS;
 
@@ -41,7 +41,10 @@ public class Monk : EnemyBase
     void Update()
     {
         roamCheck();
-        roamTimer += Time.deltaTime;
+        if (agent.remainingDistance < 0.01f && agent.remainingDistance < 0.01f)
+        {
+            roamTimer += Time.deltaTime;
+        }
 
         if (Casttimer > gongBonkRate)
         {
@@ -69,7 +72,7 @@ public class Monk : EnemyBase
 
     void roamCheck()
     {
-        if(roamTimer >= StopTime)
+        if (roamTimer >= StopTime)
         {
             roam();
         }
