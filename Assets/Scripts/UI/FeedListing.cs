@@ -22,6 +22,6 @@ public class FeedListing : MonoBehaviour
 
     public string GetScoreAndHow()
     {
-        return modifier + " " + scoreAmount + " " + killedOrUsed;
+        return modifier.text + " " + scoreAmount.text + " " + killedOrUsed.text;
     }
 }
