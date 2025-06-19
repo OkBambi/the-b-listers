@@ -3,6 +3,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static EasingLibrary;
 
 public class ComboManager : MonoBehaviour
 {
@@ -78,12 +79,9 @@ public class ComboManager : MonoBehaviour
         {"P", "RIMARY"}
     };
 
-    //THANK YOU cjddmut
-    public static float EaseInQuint(float start, float end, float value)
-    {
-        end -= start;
-        return end * value * value * value * value * value + start;
-    }
+    [SerializeField] Ease ease;
+    private Function func;
+
 
     void Awake()
     {
@@ -92,6 +90,9 @@ public class ComboManager : MonoBehaviour
         comboGradeUGUI.text = "";
 
         player = GameObject.FindFirstObjectByType<Player>();
+
+        ease = Ease.EaseInQuint;
+        func = GetEasingFunction(ease); //DO THIS IN AWAKE OR START
     }
 
     void Update()
