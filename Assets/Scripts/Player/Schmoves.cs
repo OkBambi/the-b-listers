@@ -108,22 +108,22 @@ public class Schmoves : MonoBehaviour
     [SerializeField] float finishSpeed;
     [SerializeField] List<int> animationDurations;
 
-    private void Awake()
+    private void Start()
     {
-        RedCD = RedCD_UI.rectTransform.localScale.x;
-        YellowCD = YellowCD_UI.rectTransform.localScale.x;
-        BlueCD = BlueCD_UI.rectTransform.localScale.x;
+        RedCD = RedCD_UI.rectTransform.sizeDelta.x;
+        YellowCD = YellowCD_UI.rectTransform.sizeDelta.x;
+        BlueCD = BlueCD_UI.rectTransform.sizeDelta.x;
     }
 
     #region Animations
     public IEnumerator UpdateCoolDownUI()
     {
+        if (isUpdating) yield return null;
+
         bool redIsCD = false;
         bool yellowIsCD = false;
         bool blueIsCD = false;
 
-
-        if (isUpdating) yield return null;
 
         do
         {
@@ -148,6 +148,7 @@ public class Schmoves : MonoBehaviour
             if (redIsCD && cooldownRed == 0)
             {
                 redIsCD = false;
+                Debug.Log("twice?");
                 StartCoroutine(CooldownComplete(RedCD_UI));
             }
 
@@ -172,8 +173,13 @@ public class Schmoves : MonoBehaviour
             BlueCD = 50f + (200f * (cooldownBlue / maxCooldownBlue));
             BlueCD_UI.rectTransform.sizeDelta = new Vector2(BlueCD, 34.41f);
 
-            if (RedCD_UI.rectTransform.sizeDelta.x == 50 && YellowCD_UI.rectTransform.sizeDelta.x == 50 && BlueCD_UI.rectTransform.sizeDelta.x == 50)
+            if (RedCD_UI.rectTransform.sizeDelta.x == 50 &&
+                YellowCD_UI.rectTransform.sizeDelta.x == 50 &&
+                BlueCD_UI.rectTransform.sizeDelta.x == 50)
+            {
+                Debug.Log("break out");
                 break;
+            }
 
             yield return null;
         } while (true);
@@ -229,6 +235,7 @@ public class Schmoves : MonoBehaviour
             ++currentDuration;
             yield return null;
         }
+        Debug.Log(originalColour);
         colourBar.color = originalColour;
 
         
