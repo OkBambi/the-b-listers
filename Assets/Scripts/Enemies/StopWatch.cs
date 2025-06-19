@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class StopWatch : EnemyBase, IDamage
 {
-    [SerializeField] GameObject SpitSac;
+    //[SerializeField] GameObject SpitSac;
     
     int counter;
 
@@ -33,15 +33,15 @@ public class StopWatch : EnemyBase, IDamage
         if(counter == 3)
         {
             counter = 0;
-            SacSpit();
+            //SacSpit();
         }
     }
 
-    void SacSpit()
-    {
-        SacGroundDetection mySac = Instantiate(SpitSac,transform.position,Quaternion.identity).GetComponent<SacGroundDetection>();
-        mySac.setColor = this.setColor;
-    }
+    //void SacSpit()
+    //{
+    //    SacGroundDetection mySac = Instantiate(SpitSac,transform.position,Quaternion.identity).GetComponent<SacGroundDetection>();
+    //    mySac.setColor = this.setColor;
+    //}
 
     
 }
