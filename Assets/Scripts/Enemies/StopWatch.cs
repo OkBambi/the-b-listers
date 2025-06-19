@@ -60,4 +60,12 @@ public class StopWatch : EnemyBase, IDamage
         // apply downward force
         rb.AddForce(Vector3.down * slamForce, ForceMode.Impulse); 
     }
+
+    void EndSlam()
+    {
+        isSlamming = false;
+        // Turn off gravity
+        rb.useGravity = false;
+        rb.linearVelocity = Vector3.zero;
+    }
 }
