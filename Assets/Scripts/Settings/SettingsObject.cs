@@ -23,7 +23,8 @@ public class SettingsObject : ScriptableObject
 
     [Space]
     [Header("Sounds")]
-    [Range(0f, 1f)] public float VFX;
+    [Range(0f, 1f)] public float VFXVolume;
+    [Range(0f, 1f)] public float MusicVolume;
 
     [Space]
     [Header("Controls")]

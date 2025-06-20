@@ -102,14 +102,25 @@ public class SettingsManager : MonoBehaviour
     }
     #endregion
 
-    #region VFX
-    public float VFX()
+    #region VFXVolume
+    public float VFXVolume()
     {
-        return settings.VFX;
+        return settings.VFXVolume;
     }
-    public void VFX(float _VFX)
+    public void VFXVolume(float _VFXVolume)
     {
-        settings.VFX = _VFX;
+        settings.VFXVolume = _VFXVolume;
+    }
+    #endregion
+
+    #region VFXVolume
+    public float MusicVolume()
+    {
+        return settings.MusicVolume;
+    }
+    public void MusicVolume(float _MusicVolume)
+    {
+        settings.MusicVolume = _MusicVolume;
     }
     #endregion
 

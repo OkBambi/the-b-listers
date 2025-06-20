@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -6,12 +7,13 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
-    public Sound[] playerSounds;
+    public Sound[] PlayerSounds;
     public Sound[] WeaponSounds;
     public Sound[] SchmoveSounds;
     public Sound[] UISounds;
     public Sound[] EnemySounds;
     public Sound[] WorldSounds;
+    public Sound[] Music;
 
 
     void Awake()
@@ -20,7 +22,7 @@ public class AudioManager : MonoBehaviour
 
         List<Sound[]> allSounds = new List<Sound[]>
         {
-            playerSounds,
+            PlayerSounds,
             WeaponSounds,
             SchmoveSounds,
             UISounds,
@@ -34,9 +36,18 @@ public class AudioManager : MonoBehaviour
             {
                 s.source = gameObject.AddComponent<AudioSource>();
                 s.source.clip = s.clip;
-                s.source.volume = s.volume;
+                s.source.volume = s.volume * SettingsManager.instance.VFXVolume();
                 s.source.pitch = s.pitch;
             }
+        }
+
+        //music
+        foreach (Sound s in Music)
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+            s.source.volume = s.volume * SettingsManager.instance.MusicVolume();
+            s.source.pitch = s.pitch;
         }
 
     }
@@ -45,7 +56,7 @@ public class AudioManager : MonoBehaviour
     {
         List<Sound[]> allSounds = new List<Sound[]>
         {
-            playerSounds,
+            PlayerSounds,
             WeaponSounds,
             SchmoveSounds,
             UISounds,
@@ -69,7 +80,7 @@ public class AudioManager : MonoBehaviour
     {
         List<Sound[]> allSounds = new List<Sound[]>
         {
-            playerSounds,
+            PlayerSounds,
             WeaponSounds,
             SchmoveSounds,
             UISounds,
@@ -86,6 +97,35 @@ public class AudioManager : MonoBehaviour
                     s.source.Stop();
                 }
             }
+        }
+    }
+
+    public void UpdateVFXVolume()
+    {
+        List<Sound[]> allSounds = new List<Sound[]>
+        {
+            PlayerSounds,
+            WeaponSounds,
+            SchmoveSounds,
+            UISounds,
+            EnemySounds,
+            WorldSounds
+        };
+
+        foreach (Sound[] array in allSounds)
+        {
+            foreach (Sound s in array)
+            {
+                s.source.volume = s.volume * SettingsManager.instance.VFXVolume();
+            }
+        }
+    }
+
+    public void UpdateMusicVolume()
+    {
+        foreach (Sound s in Music)
+        {
+            s.source.volume = s.volume * SettingsManager.instance.MusicVolume();
         }
     }
 }
