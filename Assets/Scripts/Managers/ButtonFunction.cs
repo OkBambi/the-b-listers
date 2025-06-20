@@ -8,6 +8,7 @@ public class ButtonFunction : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public Toggle ArcadeToggler;
+    public Toggle OutlineToggler;
 
     [SerializeField] GameObject MainCamera;
     [SerializeField] GameObject ArcadeCamera;
@@ -26,7 +27,7 @@ public class ButtonFunction : MonoBehaviour
     }
     public void onSettings()
     {
-        GameManager.instance.SettingsActive();
+        GameManager.instance.StateSettings();
     }
 
     public void onCredits()
@@ -47,6 +48,21 @@ public class ButtonFunction : MonoBehaviour
             Debug.Log("default Camera");
             MainCamera.SetActive(true);
             ArcadeCamera.SetActive(false);
+        }
+    }
+
+    public void ontoggleOutline(bool ison)
+    {
+        if (OutlineToggler.isOn)
+        {
+            Debug.Log("Filter On");
+
+        
+        }
+        else
+        {
+            Debug.Log("default Camera");
+            
         }
     }
     public void BackButtonClick()

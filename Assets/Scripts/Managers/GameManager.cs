@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
 
 
     }
-    public void SettingsActive()
+    public void StateSettings()
     {
         MenuActive = MenuSettings;
         MenuActive.SetActive(true);
