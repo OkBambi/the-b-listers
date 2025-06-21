@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5203889532178899139}
   - component: {fileID: 1333978804274274902}
+  - component: {fileID: 2767710586769983899}
   m_Layer: 0
   m_Name: TheSplats
   m_TagString: Untagged
@@ -87,3 +88,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2767710586769983899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529820831358149147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9473525f6eff0c47a7032b949cb0bb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSize: 0.8
+  maxSize: 1.5
+  sprites:
+  - {fileID: 21300000, guid: 711587f32e124f24381f758b8022d38f, type: 3}

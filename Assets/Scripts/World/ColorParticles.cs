@@ -19,8 +19,7 @@ public class ColorParticles : MonoBehaviour
         {
             GameObject theSplat = Instantiate(splatsPrefab, collisionEvents[index].intersection, Quaternion.identity);
             theSplat.transform.SetParent(splatsHolder, true);
-            Splats splatsScript = theSplat.GetComponent<Splats>();
-            //splatsScript.Initialize(Splats.SplatLocation);
+            theSplat.GetComponent<Splats>().Initialize();
         }
     }
 }

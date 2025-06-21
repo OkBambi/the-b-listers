@@ -8,7 +8,6 @@ public class Splats : MonoBehaviour
 
     public Sprite[] sprites;
 
-    private SplatLocation splatLocation;
     private SpriteRenderer spriteRenderer;
 
     private void Awake()
@@ -16,9 +15,8 @@ public class Splats : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void Initialize(SplatLocation _splatLocation)
+    public void Initialize()
     {
-        splatLocation = _splatLocation;
         SetSprite();
         SetSize();
         SetRotation();

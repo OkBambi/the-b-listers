@@ -19,7 +19,7 @@ public class EnemyBase : MonoBehaviour, IDamage
     public int hp;
     public int score = 50;
     protected bool isAlive = true;
-
+    
     string nameStr;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
