@@ -15,4 +15,19 @@ public class Splats : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
+    public void Initialize(SplatLocation _splatLocation)
+    {
+        splatLocation = _splatLocation;
+        SetSprite();
+        //SetSize();
+        //SetRotation();
+        //SetLocation();
+    }
+
+    private void SetSprite()
+    {
+        int randIndex = Random.Range(0, sprites.Length);
+        spriteRenderer.sprite = sprites[randIndex];
+    }
 }
