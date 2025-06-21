@@ -20,14 +20,20 @@ public class Splats : MonoBehaviour
     {
         splatLocation = _splatLocation;
         SetSprite();
-        //SetSize();
+        SetSize();
         //SetRotation();
         //SetLocation();
     }
 
-    private void SetSprite()
+    private void SetSprite()//need to update later to have it determine what color sprite it needs
     {
         int randIndex = Random.Range(0, sprites.Length);
         spriteRenderer.sprite = sprites[randIndex];
+    }
+
+    private void SetSize()
+    {
+        float sizeMult = Random.Range(minSize, maxSize);
+        transform.localScale *= sizeMult;
     }
 }
