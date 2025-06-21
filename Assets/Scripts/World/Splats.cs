@@ -22,7 +22,7 @@ public class Splats : MonoBehaviour
         SetSprite();
         SetSize();
         SetRotation();
-        SetLocation();
+        SetProperties();
     }
 
     private void SetSprite()//need to update later to have it determine what color sprite it needs
@@ -43,7 +43,7 @@ public class Splats : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f,0f, randRotation);
     }
 
-    private void SetLocation()
+    private void SetProperties()
     {
         spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;//to make sure the splats do not hang off the edge.
         spriteRenderer.sortingOrder = 2;
