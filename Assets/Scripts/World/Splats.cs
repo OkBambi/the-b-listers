@@ -21,7 +21,7 @@ public class Splats : MonoBehaviour
         splatLocation = _splatLocation;
         SetSprite();
         SetSize();
-        //SetRotation();
+        SetRotation();
         //SetLocation();
     }
 
@@ -35,5 +35,11 @@ public class Splats : MonoBehaviour
     {
         float sizeMult = Random.Range(minSize, maxSize);
         transform.localScale *= sizeMult;
+    }
+
+    private void SetRotation()//may need to remove due to problems
+    {
+        float randRotation = Random.Range(-360f, 360f);
+        transform.rotation = Quaternion.Euler(0f,0f, randRotation);
     }
 }
