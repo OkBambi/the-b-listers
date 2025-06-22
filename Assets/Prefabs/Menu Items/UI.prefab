@@ -316,8 +316,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 5:00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 71299bbdb7ddea74e89a529816d998a7, type: 2}
+  m_sharedMaterial: {fileID: -7299018892634167461, guid: 71299bbdb7ddea74e89a529816d998a7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -336,19 +336,19 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 97690656
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
-  m_fontSizeBase: 70
+  m_fontSize: 85
+  m_fontSizeBase: 85
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 17
-  m_HorizontalAlignment: 1
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -452,8 +452,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: SSSADISTIC
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 71299bbdb7ddea74e89a529816d998a7, type: 2}
+  m_sharedMaterial: {fileID: -7299018892634167461, guid: 71299bbdb7ddea74e89a529816d998a7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -483,7 +483,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 1024
   m_textAlignment: 65535
@@ -806,6 +806,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2941b8c7199da041833de172229be82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ArcadeToggler: {fileID: 0}
+  OutlineToggler: {fileID: 0}
+  MainCamera: {fileID: 0}
+  ArcadeCamera: {fileID: 0}
 --- !u!114 &6197636836606507379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1536,6 +1540,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2941b8c7199da041833de172229be82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ArcadeToggler: {fileID: 0}
+  OutlineToggler: {fileID: 0}
+  MainCamera: {fileID: 0}
+  ArcadeCamera: {fileID: 0}
 --- !u!114 &5362186350928397381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1618,8 +1626,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 35159
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 71299bbdb7ddea74e89a529816d998a7, type: 2}
+  m_sharedMaterial: {fileID: -7299018892634167461, guid: 71299bbdb7ddea74e89a529816d998a7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2772,8 +2780,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 8.00x
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 71299bbdb7ddea74e89a529816d998a7, type: 2}
+  m_sharedMaterial: {fileID: -7299018892634167461, guid: 71299bbdb7ddea74e89a529816d998a7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2965,6 +2973,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2941b8c7199da041833de172229be82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ArcadeToggler: {fileID: 0}
+  OutlineToggler: {fileID: 0}
+  MainCamera: {fileID: 0}
+  ArcadeCamera: {fileID: 0}
 --- !u!1 &4684968353272659170
 GameObject:
   m_ObjectHideFlags: 0
@@ -3245,6 +3257,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2941b8c7199da041833de172229be82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ArcadeToggler: {fileID: 0}
+  OutlineToggler: {fileID: 0}
+  MainCamera: {fileID: 0}
+  ArcadeCamera: {fileID: 0}
 --- !u!114 &4079062026283333811
 MonoBehaviour:
   m_ObjectHideFlags: 0
