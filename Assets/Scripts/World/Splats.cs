@@ -38,12 +38,12 @@ public class Splats : MonoBehaviour
     private void SetRotation()//may need to remove due to problems
     {
         float randRotation = Random.Range(-360f, 360f);
-        transform.rotation = Quaternion.Euler(0f,0f, randRotation);
+        transform.rotation = Quaternion.Euler(90f, randRotation, 0f);
     }
 
     private void SetProperties()
     {
-        spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;//to make sure the splats do not hang off the edge.
+        //spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;//to make sure the splats do not hang off the edge.
         spriteRenderer.sortingOrder = 3;//makes sure it is on top
     }
 }

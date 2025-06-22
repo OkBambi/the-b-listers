@@ -64,9 +64,6 @@ public class Dagger : MonoBehaviour
                 dmg.takeDamage(projColor, 1);
 
                 //This is to cause color spray out of the enemy
-                GameObject theSplat = Instantiate(splatsPrefab, hit.point, Quaternion.identity);
-                theSplat.transform.SetParent(splatsHolder, true);
-                theSplat.GetComponent<Splats>().Initialize();
                 colorParticles.transform.position = hit.point;
                 colorParticles.Play();
             }

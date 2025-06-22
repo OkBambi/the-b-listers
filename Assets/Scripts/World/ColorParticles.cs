@@ -17,7 +17,7 @@ public class ColorParticles : MonoBehaviour
 
         for (int index = 0; index < count; index++)
         {
-            GameObject theSplat = Instantiate(splatsPrefab, collisionEvents[index].intersection, Quaternion.identity);
+            GameObject theSplat = Instantiate(splatsPrefab, collisionEvents[index].intersection, Quaternion.identity) as GameObject;
             theSplat.transform.SetParent(splatsHolder, true);
             theSplat.GetComponent<Splats>().Initialize();
         }
