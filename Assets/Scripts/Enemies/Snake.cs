@@ -1,16 +1,20 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 //CHANGE COMMENTS WHEN CODE CHANGES PLZ
-public class Snake : MonoBehaviour
+public class Snake : EnemyBase
 {
     //HEALTH
-
+    [SerializeField] List<SnakeHead> theBois;
+    [SerializeField] List<int> colourIndexes;
 
     //MOVEMENT/ROAM - trying with waypoint (obstacle avoidance + flocking)
     [SerializeField] float movementSpeed;
     [SerializeField] float rotationSpeed;
     [SerializeField] float wanderingRadius;
     [SerializeField] float wanderingTimer;
+
+    [SerializeField] Rigidbody rb;
 
     private float timer;
     private Vector3 wanderingTarget;
@@ -24,10 +28,25 @@ public class Snake : MonoBehaviour
 
     //ATTACKING
 
+    private void Awake()
+    {
+        OnAECAwake();
 
+        for (int headIndex = 0; headIndex < theBois.Count; headIndex++)
+        {
+            int rand = Random.Range(0, colourIndexes.Count - 1);
+            theBois[headIndex].setColor = (PrimaryColor)colourIndexes[rand];
+
+            Debug.Log((PrimaryColor)colourIndexes[rand]);
+            colourIndexes.Remove(colourIndexes[rand]);
+
+        }
+
+    }
 
     void Start()
     {
+        player = GameManager.instance.player.transform;
         timer = wanderingTimer;
         GetNewWanderTarget();
     }
