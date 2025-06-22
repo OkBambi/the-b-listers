@@ -11,9 +11,8 @@ public class SpinningObj : MonoBehaviour
     void Update()
     {
         //modify the Vector3.forward in the transform.Rotate() method to rotate around
-        //  different axes (e.g., Vector3.up for y-axis, Vector3.right for x-axis).
-        //rotates the parent/snake object around the z-axis
-        transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
+        //  different axes (e.g., Vector3.up for y-axis, Vector3.right for x-axis, Vector3.forward for z-axis)
+        transform.Rotate(Vector3.right * rotationSpeed * Time.deltaTime);
 
         //we can also add individual rotation to the children here if needed:
         //foreach (Transform child in transform)

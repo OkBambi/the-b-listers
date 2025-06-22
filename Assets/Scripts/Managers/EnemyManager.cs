@@ -8,6 +8,10 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager instance;
     [Space]
 
+    [Space]
+    //This is for those color splashes
+    public ParticleSystem colorParticles;
+
     [SerializeField] GameObject spawnIndicator;
     [Space]
 
@@ -30,8 +34,6 @@ public class EnemyManager : MonoBehaviour
     //and we have a spawn limit on the enemies
     [SerializeField] int AEC;
     [SerializeField] int currentEC;
-
-    [Space]
 
     //boids do not count towards AEC, but every other enemy counts as one AEC
     //we will also have a ticker that tracks the number of enemy kills.

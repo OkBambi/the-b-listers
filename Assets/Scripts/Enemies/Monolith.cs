@@ -29,6 +29,7 @@ public class Monolith : EnemyBase
         rb = GetComponent<Rigidbody>();
         ColorSelection(setColor);
         UpdateBoidAwareness();
+        name = "Monolith";
     }
 
     // Update is called once per frame

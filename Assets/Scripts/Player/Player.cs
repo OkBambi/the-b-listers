@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IColorLock
 {
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerCamera playerCamera;
@@ -97,10 +98,23 @@ public class Player : MonoBehaviour
         }
 
         //lose menu
-        GameManager.instance.OnLoseCondition();
+        GameManager.instance.OnEndCondition();
+    }
+
+    //Monk Lock Color interface implentation **NEW**
+    public void LockColorSelection(float duration)
+    {
+        StartCoroutine(LockColor(duration));
+    }
+    IEnumerator LockColor(float duration)
+    {
+        canColor = false;
+        yield return new WaitForSeconds(duration);
+        canColor = true;
     }
 }
 
+//enum of primary colors
 public enum PrimaryColor
 {
     RED,

@@ -82,7 +82,6 @@ public class ComboManager : MonoBehaviour
     [SerializeField] Ease ease;
     private Function func;
 
-
     void Awake()
     {
         instance = this;

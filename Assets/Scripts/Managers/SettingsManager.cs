@@ -14,6 +14,11 @@ public class SettingsManager : MonoBehaviour
 
     [SerializeField] SettingsObject settings;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     #region Resolution
     public Resolution Resolution()
     {

@@ -55,25 +55,30 @@ public class PlayerShooting : MonoBehaviour
                     shootTimer = 0;
                     GameObject b = Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
                     b.transform.Rotate(0, 0, UnityEngine.Random.Range(-360, 360));
+                    Gradient grad;
                     switch(playerColor)
                     {
                         case PrimaryColor.RED:
                             b.GetComponent<Renderer>().material.color = Color.red;
+                            grad = ParticleManager.instance.DeflectRed;
                             break;
                         case PrimaryColor.BLUE:
                             b.GetComponent<Renderer>().material.color = Color.blue;
+                            grad = ParticleManager.instance.DeflectBlue;
                             break;
                         case PrimaryColor.YELLOW:
                             b.GetComponent<Renderer>().material.color = Color.yellow;
+                            grad = ParticleManager.instance.DeflectYellow;
                             break;
                         default:
                             b.GetComponent<Renderer>().material.color = Color.black;
+                            grad = ParticleManager.instance.DeflectBlack;
                             break;
                     }
 
-                    StartCoroutine(camShaker.Shake(0.05f, 0.006f));
-                    StartCoroutine(playerArm.Recoil(0.05f, 0.006f, 0.005f));
-                    b.GetComponent<Dagger>().Initialize(playerColor, bulletSpeed, bulletLifeTime, ignoreLayer);
+                    StartCoroutine(camShaker.Shake(0.05f, 0.05f));
+                    StartCoroutine(playerArm.Recoil(0.05f, 0.006f, 0.04f));
+                    b.GetComponent<Dagger>().Initialize(playerColor, bulletSpeed, bulletLifeTime, ignoreLayer, grad);
                 }
             }
         }
@@ -105,26 +110,31 @@ public class PlayerShooting : MonoBehaviour
                         UnityEngine.Random.Range(-spreadAngle, spreadAngle),
                         UnityEngine.Random.Range(-spreadAngle, spreadAngle),
                         UnityEngine.Random.Range(-360, 360));
+                    Gradient grad;
                     switch (playerColor)
                     {
                         case PrimaryColor.RED:
                             b.GetComponent<Renderer>().material.color = Color.red;
+                            grad = ParticleManager.instance.DeflectRed;
                             break;
                         case PrimaryColor.BLUE:
                             b.GetComponent<Renderer>().material.color = Color.blue;
+                            grad = ParticleManager.instance.DeflectBlue;
                             break;
                         case PrimaryColor.YELLOW:
                             b.GetComponent<Renderer>().material.color = Color.yellow;
+                            grad = ParticleManager.instance.DeflectYellow;
                             break;
                         default:
                             b.GetComponent<Renderer>().material.color = Color.black;
+                            grad = ParticleManager.instance.DeflectBlack;
                             break;
                     }
 
-                    b.GetComponent<Dagger>().Initialize(playerColor, bulletSpeed, bulletLifeTime, ignoreLayer);
+                    b.GetComponent<Dagger>().Initialize(playerColor, bulletSpeed, bulletLifeTime, ignoreLayer, grad);
                 }
-                StartCoroutine(playerArm.Recoil(0.07f, 0.006f, 0.1f));
-                StartCoroutine(camShaker.Shake(0.06f, 0.08f));
+                StartCoroutine(playerArm.RecoilTween(0.2f, 0.01f, 0.2f, 0.1f));
+                StartCoroutine(camShaker.ShakeTween(0.2f, 0.2f, 0f, 0.3f));
             }
 
             holdTime = 0;

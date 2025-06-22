@@ -82,7 +82,7 @@ public class YellowSchmove : MonoBehaviour
                     AudioManager.instance.Play("Yellow_Fire");
 
                     ComboManager.instance.RemoveScore(100 * chargeLevel); //may need to change this later
-                    ComboFeed.theInstance.AddNewComboFeed("-", (100 * chargeLevel).ToString(), "yellowSchmove");//same here
+                    ComboFeed.theInstance.AddNewComboFeed("- " + (100 * chargeLevel).ToString() + " yellowSchmove");//same here
                     StartCoroutine(GameManager.instance.schmover.UpdateCoolDownUIYellow());
                 }
                 //ui resetting
