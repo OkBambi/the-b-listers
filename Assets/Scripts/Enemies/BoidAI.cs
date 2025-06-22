@@ -66,6 +66,7 @@ public class BoidAI : EnemyBase
         ColorSelection(setColor);
         base.UpdateBoidAwareness();
         StartCoroutine(NoiseWeights());
+        name = "Boid";
     }
 
     // Update is called once per frame

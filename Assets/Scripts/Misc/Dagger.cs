@@ -9,26 +9,20 @@ public class Dagger : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] LayerMask ignoreMask;
     [SerializeField] PrimaryColor projColor;
+    [SerializeField] GameObject deflectParticle;
+    private ParticleSystem.TrailModule trail;
 
     Vector3 lastPos;
     bool reflected;
 
-    //[Space]
-    //public ParticleSystem colorParticles;
-    //public GameObject splatsPrefab;
-    //public Transform splatsHolder;
-
-    private void Start()
-    {
-        //colorParticles = GameObject.Find("Color Particles").GetComponent<ParticleSystem>();
-        //splatsHolder = GameObject.Find("TheSplatHolder").transform;
-    }
-
-    public void Initialize(PrimaryColor _color, float _speed, float _lifeTime, LayerMask _ignoreMask)
+    public void Initialize(PrimaryColor _color, float _speed, float _lifeTime, LayerMask _ignoreMask, Gradient _trailGradient)
     {
         projColor = _color;
         speed = _speed;
         ignoreMask = _ignoreMask;
+        trail = deflectParticle.GetComponent<ParticleSystem>().trails;
+        trail.colorOverLifetime = _trailGradient;
+        trail.colorOverTrail = _trailGradient;
 
         Destroy(gameObject, _lifeTime);
     }
@@ -53,6 +47,7 @@ public class Dagger : MonoBehaviour
 
                 transform.position = hit.point;
                 transform.forward = reflectionDir.normalized;
+                Instantiate(deflectParticle, transform.position, transform.rotation);
             }
 
             //check for damage
