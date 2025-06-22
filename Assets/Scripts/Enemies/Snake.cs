@@ -13,16 +13,12 @@ public class Snake : MonoBehaviour
     //public float otherrotationspeed = 50f;
 
     //MOVEMENT/ROAM
-    [SerializeField] NavMeshAgent agent;
-    //private NavMeshAgent agent;
-    Vector3 destination;
+    
 
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        //finds the initial random destination
-        SetRandomDestination();
+        
     }
 
     
@@ -39,27 +35,11 @@ public class Snake : MonoBehaviour
         //}
 
         //MOVEMENT
-        //checks if snake has reached its destination
-        if (!agent.pathPending && agent.remainingDistance < 0.1f)
-        {
-            //sets a new random destination
-            SetRandomDestination();
-        }
+        
     }
 
     //moves around the map
-    void SetRandomDestination()
-    {
-        Vector3 randomDirection = Random.insideUnitSphere * 10f; //adjusts radius as needed
-        randomDirection += transform.position;
-        NavMeshHit hit;
-
-        if (NavMesh.SamplePosition(randomDirection, out hit, 10f, 1)) //adjusts maxDistance as needed
-        {
-            destination = hit.position;
-            agent.SetDestination(destination);
-        }
-    }
+    
 
     //follows the player when in view
 
