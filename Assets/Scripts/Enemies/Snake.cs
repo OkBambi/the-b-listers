@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 //CHANGE COMMENTS WHEN CODE CHANGES PLZ
 public class Snake : MonoBehaviour
@@ -9,11 +8,14 @@ public class Snake : MonoBehaviour
 
     //HEAD
     //adjust this to control the spinning speed
-    public float rotationSpeed = 50f;
+    public float spinningSpeed = 50f;
     //public float otherrotationspeed = 50f;
 
-    //MOVEMENT/ROAM
-    
+    //MOVEMENT/ROAM - trying with waypoint (obstacle avoidance + flocking)
+    public float movementSpeed = 2f;
+    public float rotationSpeed = 5f;
+    public float wanderingRadius = 5f;
+    public float wanderingTiner = 2f;
 
 
     void Start()
@@ -27,7 +29,7 @@ public class Snake : MonoBehaviour
         //HEAD
         //modify the Vector3.forward in the transform.Rotate() method to rotate around different axes (e.g., Vector3.up for y-axis, Vector3.right for x-axis).
         //rotates the parent/snake object around the z-axis
-        transform.Rotate(Vector3.right * rotationSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.right * spinningSpeed * Time.deltaTime);
         //we can also add individual rotation to the children here if needed:
         //foreach (Transform child in transform)
         //{
