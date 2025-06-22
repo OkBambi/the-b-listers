@@ -74,6 +74,17 @@ public class SettingsManager : MonoBehaviour
     }
     #endregion
 
+    #region isInvertY
+    public bool isInvertY()
+    {
+        return settings.isReducedCameraShake;
+    }
+    public void isInvertY(bool _isInvertY)
+    {
+        settings.isInvertY = _isInvertY;
+    }
+    #endregion
+
     #region isArcadeFilter
     public bool isArcadeFilter()
     {

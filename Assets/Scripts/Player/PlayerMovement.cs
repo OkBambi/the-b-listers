@@ -3,6 +3,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour, IDamage
 {
     [SerializeField] PlayerShooting shooter;
+    [SerializeField] PlayerCamera cam;
+
     [SerializeField] Rigidbody rb;
 
     [Header("Movement")]
@@ -23,11 +25,10 @@ public class PlayerMovement : MonoBehaviour, IDamage
     bool isGrounded;
 
     Vector3 moveDir;
-    Vector3 playerVel;
 
     public void Initialize()
     {
-
+        cam = GetComponentInChildren<PlayerCamera>();
     }
 
     public void UpdateInput()
@@ -44,7 +45,8 @@ public class PlayerMovement : MonoBehaviour, IDamage
         rb.MovePosition(transform.position + moveDir * speed);
 
         //jump, dash, etc etc
-        
+        //fov change from moving fast
+        cam.CameraAdjustFOV((moveDir.magnitude * 0.15f) + 1);
     }
 
     void Space()
