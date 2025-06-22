@@ -15,6 +15,8 @@ public class StopWatch : EnemyBase, IDamage
     private bool isSlamming;
     private Rigidbody rb;
 
+    Vector3 startPos;
+
     private void Awake()
     {
         OnAECAwake();
@@ -31,6 +33,7 @@ public class StopWatch : EnemyBase, IDamage
         rb = GetComponent<Rigidbody>();
         // Keep gravity off initially
         rb.useGravity = false;
+        startPos = transform.position;
     }
 
     // Update is called once per frame
@@ -80,10 +83,9 @@ public class StopWatch : EnemyBase, IDamage
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("groundTag") && isSlamming)
+        if(other.CompareTag("groundTag"))
         {
-            isSlamming = false;
-            rb.useGravity = true; // Enable gravity when slamming
+            ReturnToStart(slamDuration);
         }
     }
 
@@ -101,6 +103,22 @@ public class StopWatch : EnemyBase, IDamage
         }
         transform.position = endPos; // Ensure we end at the exact position
         isSlamming = false;
+    }
+
+    IEnumerator ReturnToStart(float duration)
+    {
+        float time = 0;
+        Vector3 currentPosition = transform.position;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float easeTime = EaseInBack(endPosition, startPosition, time); // Apply EaseInBack
+            transform.position = Vector3.Lerp(currentPosition, startPos, easeTime);
+            yield return null;
+        }
+
+        transform.position = startPos; // Ensure it reaches the exact start position
     }
 
 }
