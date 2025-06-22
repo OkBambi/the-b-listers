@@ -13,17 +13,6 @@ public class Dagger : MonoBehaviour
     Vector3 lastPos;
     bool reflected;
 
-    //[Space]
-    //public ParticleSystem colorParticles;
-    //public GameObject splatsPrefab;
-    //public Transform splatsHolder;
-
-    private void Start()
-    {
-        //colorParticles = GameObject.Find("Color Particles").GetComponent<ParticleSystem>();
-        //splatsHolder = GameObject.Find("TheSplatHolder").transform;
-    }
-
     public void Initialize(PrimaryColor _color, float _speed, float _lifeTime, LayerMask _ignoreMask)
     {
         projColor = _color;
@@ -62,10 +51,6 @@ public class Dagger : MonoBehaviour
             {
                 //HIT EM
                 dmg.takeDamage(projColor, 1);
-
-                //This is to cause color spray out of the enemy
-                //colorParticles.transform.position = hit.point;
-                //colorParticles.Play();
             }
         }
 
