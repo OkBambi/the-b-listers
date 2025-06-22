@@ -60,7 +60,7 @@ public class StickyMechanics : MonoBehaviour
                             {
                                 pulsesDone++;
                                 StartCoroutine(Pulse());
-                                //gameObject.GetComponent<StickyMechanics>().DmgParent();
+                                gameObject.GetComponent<StickyMechanics>().DmgParent();
                             }
                         }
                         else

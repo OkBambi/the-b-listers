@@ -87,7 +87,11 @@ public class SettingsMenu : MonoBehaviour
             //updates the text display
             //the slider val will be in dB if you set your slider from -80 to 0. which it is unless someone changes it *stare*
             //since it is, we're displaying it as a percentage for readability
-            volText.text = ConvertDbToPercentage(volume).ToString("F0") + "%";
+            //volText.text = ConvertDbToPercentage(volume).ToString("F0") + "%";
+
+            //yoga's version of the vfx text update
+            volText.text = (volumeSlider.value).ToString("F0") + "%";
+
         }
     }
 

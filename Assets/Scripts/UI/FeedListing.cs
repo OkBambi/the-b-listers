@@ -6,11 +6,23 @@ public class FeedListing : MonoBehaviour
     [SerializeField] Text modifier;
     [SerializeField] Text scoreAmount;
     [SerializeField] Text killedOrUsed;
+    [SerializeField] float timeTillKilled = 5f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    float timer;
+
+// Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Destroy(gameObject, 5f);//kills feed if it lasts longer then 5 seconds.
+        Destroy(gameObject, timeTillKilled);//kills feed if it lasts longer then 5 seconds.
+    }
+
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer >= timeTillKilled - 3)
+        {
+            ChangeAlpha();
+        }
     }
 
     public void SetScoreAndHow(string _modifier, string _scoreAmount, string _killedOrUsed)
@@ -22,6 +34,13 @@ public class FeedListing : MonoBehaviour
 
     public string GetScoreAndHow()
     {
-        return modifier + " " + scoreAmount + " " + killedOrUsed;
+        return modifier.text + " " + scoreAmount.text + " " + killedOrUsed.text;
+    }
+
+    private void ChangeAlpha()
+    {
+        modifier.CrossFadeAlpha(0, 3, true);
+        scoreAmount.CrossFadeAlpha(0, 3, true);
+        killedOrUsed.CrossFadeAlpha(0, 3, true);
     }
 }
