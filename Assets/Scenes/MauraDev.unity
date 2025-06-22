@@ -814,6 +814,8 @@ MonoBehaviour:
   rotationSpeed: 5
   wanderingRadius: 50
   wanderingTimer: 2
+  player: {fileID: 1181442380}
+  followRange: 10
 --- !u!1 &129488569
 GameObject:
   m_ObjectHideFlags: 0
@@ -6089,6 +6091,11 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!4 &1181442380 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3990897285812716556, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
+  m_PrefabInstance: {fileID: 942823290}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1201445264
 GameObject:
   m_ObjectHideFlags: 0
@@ -9662,7 +9669,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1940715587}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9671,7 +9678,7 @@ Transform:
   - {fileID: 243751871}
   - {fileID: 357033005}
   m_Father: {fileID: 103915346}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1940715592
 MonoBehaviour:
   m_ObjectHideFlags: 0
