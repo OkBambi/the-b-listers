@@ -37,6 +37,7 @@ public class AngryBoidRework : BoidAI
         base.UpdateBoidAwareness();
         StartCoroutine(NoiseWeights());
         StartCoroutine(SwitchAIMode());
+        name = "Angry Boid";
     }
 
     protected override void FixedUpdate()
