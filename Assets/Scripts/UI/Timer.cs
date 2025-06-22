@@ -27,7 +27,7 @@ public class Timer : MonoBehaviour
         else if (timeRemainingInSeconds <= 0)
         {
             timeRemainingInSeconds = 0;
-            GameManager.instance.OnWinCondition();
+            GameManager.instance.OnEndCondition();
         }
 
         minutes = Mathf.FloorToInt(timeRemainingInSeconds / 60);

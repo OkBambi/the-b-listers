@@ -5,8 +5,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     [SerializeField] GameObject MenuActive;
     [SerializeField] GameObject MenuPause;
-    [SerializeField] GameObject MenuWin;
-    [SerializeField] GameObject MenuLose;
+    [SerializeField] GameObject MenuEnd;
     [SerializeField] GameObject MenuSettings;
     [SerializeField] GameObject MenuCredits;
     [SerializeField] GameObject MenuGameInfo;
@@ -93,24 +92,24 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void OnLoseCondition()
+    public void OnEndCondition()
     {
         //statePause();
         //turn on the lose menu
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        MenuActive = MenuLose;
+        MenuActive = MenuEnd;
         MenuActive.SetActive(true);
     }
 
-    public void OnWinCondition()
-    {
-        statePause();
-        GameObject.FindFirstObjectByType<Player>().Die();
-        MenuActive.SetActive(false);//so lose menu from die does not appear
-        MenuActive = MenuWin;
-        MenuActive.SetActive(true);
-    }
+    //public void OnWinCondition()
+    //{
+    //    statePause();
+    //    GameObject.FindFirstObjectByType<Player>().Die();
+    //    MenuActive.SetActive(false);//so lose menu from die does not appear
+    //    MenuActive = MenuEnd;
+    //    MenuActive.SetActive(true);
+    //}
 
     public void OnCreditInfo()
     {
