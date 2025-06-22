@@ -5,6 +5,7 @@ public class StopWatch : EnemyBase, IDamage
 {
     //[SerializeField] GameObject SpitSac;
     [SerializeField] float startingHight; // Adjust this value for the starting position hight of the stopwatch
+    [SerializeField] float stopHight;// Adjust this value for the height at which the stopwatch will slam down
     [SerializeField] float riseTime; // Adjust this value for the time it takes to ease in back to the starting position
     int counter;
 
@@ -15,6 +16,7 @@ public class StopWatch : EnemyBase, IDamage
 
     private void Awake()
     {
+        startingHight = transform.position.y; // Set the starting height to the current position's y-coordinate
         OnAECAwake();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -56,28 +58,17 @@ public class StopWatch : EnemyBase, IDamage
 
     void StartSlam()
     {
-        isSlamming = true;
-        //// Turn on gravity
-        rb.useGravity = true;
-        // apply downward force
-        rb.AddForce(Vector3.down * slamForce, ForceMode.Impulse); 
+        EaseInBack(startingHight, stopHight, riseTime);
+
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("groundTag") && isSlamming)
-        {
-            EndSlam();
-        }
+
     }
 
     void EndSlam()
     {
-        Debug.Log("Slam Ended");
-        isSlamming = false;
-        // Turn off gravity
-        rb.useGravity = false;
-        EaseInBack(transform.position.y, startingHight, riseTime);
     }
 
 }
