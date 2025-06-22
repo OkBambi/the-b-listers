@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyBase : MonoBehaviour, IDamage
@@ -19,6 +20,8 @@ public class EnemyBase : MonoBehaviour, IDamage
     public int hp;
     public int score = 50;
     protected bool isAlive = true;
+
+
 
     string nameStr;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -102,7 +105,7 @@ public class EnemyBase : MonoBehaviour, IDamage
     {
         EnemyManager.instance.OnAECDestroy();
         ComboManager.instance.AddScore(score);
-        ComboFeed.theInstance.AddNewComboFeed("+", score.ToString(), gameObject.name);
+        ComboFeed.theInstance.AddNewComboFeed("+ " + score.ToString() + " " + gameObject.name);
     }
 
     public void takeDamage(PrimaryColor hitColor, int amount)
@@ -120,6 +123,9 @@ public class EnemyBase : MonoBehaviour, IDamage
 
             if (hitVfx)
                 Instantiate(hitVfx, transform.position, Quaternion.identity);
+
+            EnemyManager.instance.colorParticles.transform.position = transform.position;
+            EnemyManager.instance.colorParticles.Play();
         }
     }
 

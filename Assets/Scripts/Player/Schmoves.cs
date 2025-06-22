@@ -42,7 +42,7 @@ public class Schmoves : MonoBehaviour
                             cooldownRed = maxCooldownRed;
                             RedCD_M2.color = Color.gray;
                             ComboManager.instance.RemoveScore(100);
-                            ComboFeed.theInstance.AddNewComboFeed("-", "100", "redSchmove");
+                            ComboFeed.theInstance.AddNewComboFeed("- 100 redSchmove");
                             StartCoroutine(UpdateCoolDownUIRed());
                         }
                         break;
@@ -53,7 +53,7 @@ public class Schmoves : MonoBehaviour
                             cooldownBlue = maxCooldownBlue;
                             BlueCD_M2.color = Color.gray;
                             ComboManager.instance.RemoveScore(100);
-                            ComboFeed.theInstance.AddNewComboFeed("-", "100", "blueSchmove");
+                            ComboFeed.theInstance.AddNewComboFeed("- 100 blueSchmove");
                             StartCoroutine(UpdateCoolDownUIBlue());
                         }
                         break;
