@@ -19,11 +19,18 @@ public class ComboFeed : MonoBehaviour
         theInstance = this;
     }
 
-    public void AddNewComboFeed(string _modifier, string _score, string _killedOrUsed) //allows you to add to the kill feed (modifier is what is done to the score. Example + or -)
+    //public void AddNewComboFeed(string _modifier, string _score, string _killedOrUsed) //allows you to add to the kill feed (modifier is what is done to the score. Example + or -)
+    //{
+    //    GameObject newScoreFeed = Instantiate(feedListingPrefab, transform);
+    //    newScoreFeed.transform.SetSiblingIndex(0);
+    //    newScoreFeed.GetComponent<FeedListing>().SetScoreAndHow(_modifier, _score, _killedOrUsed);
+    //    AddToQueue(newScoreFeed);
+    //}
+    public void AddNewComboFeed(string _scoreFeed) //allows you to add to the kill feed (modifier is what is done to the score. Example + or -)
     {
         GameObject newScoreFeed = Instantiate(feedListingPrefab, transform);
         newScoreFeed.transform.SetSiblingIndex(0);
-        newScoreFeed.GetComponent<FeedListing>().SetScoreAndHow(_modifier, _score, _killedOrUsed);
+        newScoreFeed.GetComponent<FeedListing>().SetScoreAndHow(_scoreFeed);
         AddToQueue(newScoreFeed);
     }
 
