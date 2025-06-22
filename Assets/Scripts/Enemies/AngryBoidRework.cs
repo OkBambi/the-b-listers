@@ -9,6 +9,7 @@ public class AngryBoidRework : BoidAI
     [SerializeField] GameObject telegraphs;
     [SerializeField] GameObject redTelegraph;
     [SerializeField] GameObject whiteTelegraph;
+    [SerializeField] TrailRenderer trail;
 
     private int chargePhase = 0;
 
@@ -34,6 +35,18 @@ public class AngryBoidRework : BoidAI
     {
         scaleOriginal = model.transform.localScale;
         ColorSelection(setColor);
+        switch(setColor)
+        {
+            case PrimaryColor.RED:
+                trail.material.color = Color.red;
+                break;
+            case PrimaryColor.YELLOW:
+                trail.material.color = Color.yellow;
+                break;
+            case PrimaryColor.BLUE:
+                trail.material.color = Color.blue;
+                break;
+        }
         base.UpdateBoidAwareness();
         StartCoroutine(NoiseWeights());
         StartCoroutine(SwitchAIMode());
@@ -107,6 +120,7 @@ public class AngryBoidRework : BoidAI
     IEnumerator Dash()
     {
         //chargePhase = 2
+        trail.enabled = true;
         Debug.Log("dashing");
         yield return new WaitForSeconds(pauseDuration);
         //chargePhase = 3
@@ -118,6 +132,7 @@ public class AngryBoidRework : BoidAI
         yield return new WaitForSeconds(1);
         isNormalAI = !isNormalAI;
         StartCoroutine(SwitchAIMode());
+        trail.enabled = false;
 
     }
 
