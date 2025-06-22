@@ -4,20 +4,23 @@ using static EasingLibrary;
 public class StopWatch : EnemyBase, IDamage
 {
     //[SerializeField] GameObject SpitSac;
-    [SerializeField] float startingHight; // Adjust this value for the starting position hight of the stopwatch
-    [SerializeField] float stopHight;// Adjust this value for the height at which the stopwatch will slam down
-    [SerializeField] float riseTime; // Adjust this value for the time it takes to ease in back to the starting position
     int counter;
 
-    private Rigidbody rb;
-    public float slamForce; // Adjust this value for the desired slam force
-    
+    public float slamDuration;
+    public Vector3 endPosition;
+
+    private Vector3 startPosition;
     private bool isSlamming;
+    private float elapsedTime;
+    private Rigidbody rb;
 
     private void Awake()
     {
-        startingHight = transform.position.y; // Set the starting height to the current position's y-coordinate
         OnAECAwake();
+        startPosition = transform.position;
+        endPosition = startPosition + new Vector3(0, 4f, 0); // Adjust the end position as needed
+        isSlamming = false;
+        elapsedTime = 0.1f;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -58,13 +61,13 @@ public class StopWatch : EnemyBase, IDamage
 
     void StartSlam()
     {
-        EaseInBack(startingHight, stopHight, riseTime);
+        EaseInBack(startPosition.y, endPosition.y, elapsedTime);
 
     }
 
     private void OnTriggerEnter(Collider other)
     {
-
+        //if()
     }
 
     void EndSlam()
