@@ -1,14 +1,16 @@
 using UnityEngine;
+using static EasingLibrary;
 
 public class StopWatch : EnemyBase, IDamage
 {
     //[SerializeField] GameObject SpitSac;
-
+    [SerializeField] float startingHight; // Adjust this value for the starting position hight of the stopwatch
+    [SerializeField] float riseTime; // Adjust this value for the time it takes to ease in back to the starting position
     int counter;
 
     private Rigidbody rb;
     public float slamForce; // Adjust this value for the desired slam force
-
+    
     private bool isSlamming;
 
     private void Awake()
@@ -55,7 +57,7 @@ public class StopWatch : EnemyBase, IDamage
     void StartSlam()
     {
         isSlamming = true;
-        // Turn on gravity
+        //// Turn on gravity
         rb.useGravity = true;
         // apply downward force
         rb.AddForce(Vector3.down * slamForce, ForceMode.Impulse); 
@@ -68,13 +70,14 @@ public class StopWatch : EnemyBase, IDamage
             EndSlam();
         }
     }
+
     void EndSlam()
     {
         Debug.Log("Slam Ended");
         isSlamming = false;
         // Turn off gravity
         rb.useGravity = false;
-        rb.linearVelocity = Vector3.zero;
+        EaseInBack(transform.position.y, startingHight, riseTime);
     }
 
 }
