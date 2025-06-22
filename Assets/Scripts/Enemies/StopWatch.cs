@@ -15,7 +15,7 @@ public class StopWatch : EnemyBase, IDamage
     private bool isSlamming;
     private Rigidbody rb;
 
-    Vector3 startPos;
+    Vector3 StartPos;
 
     private void Awake()
     {
@@ -33,7 +33,7 @@ public class StopWatch : EnemyBase, IDamage
         rb = GetComponent<Rigidbody>();
         // Keep gravity off initially
         rb.useGravity = false;
-        startPos = transform.position;
+        StartPos = transform.position;
     }
 
     // Update is called once per frame
@@ -56,6 +56,7 @@ public class StopWatch : EnemyBase, IDamage
             StartCoroutine(slamer()); // Start the coroutine for slamming
             //SacSpit();
         }
+        
     }
 
     //void SacSpit()
@@ -81,13 +82,13 @@ public class StopWatch : EnemyBase, IDamage
     //    }
     //}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("groundTag"))
-        {
-            ReturnToStart(slamDuration);
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.CompareTag("groundTag"))
+    //    {
+            
+    //    }
+    //}
 
     IEnumerator slamer() {         float elapsedTime = 0f;
         Vector3 startPos = transform.position;
@@ -96,29 +97,29 @@ public class StopWatch : EnemyBase, IDamage
         {
             float t = elapsedTime / slamDuration;
             t = Mathf.Clamp01(t); // Ensure t is between 0 and 1
-            float easedT = EaseInBack(0, 1, t); // Replace EasingLibrary with your library's name
+            float easedT = EaseInBack(0, 1, t); 
             transform.position = Vector3.Lerp(startPos, endPos, easedT);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
         transform.position = endPos; // Ensure we end at the exact position
         isSlamming = false;
+        StartCoroutine(ReturnToStart()); // Return to start position after slamming 
     }
 
-    IEnumerator ReturnToStart(float duration)
+    IEnumerator ReturnToStart()
     {
-        float time = 0;
-        Vector3 currentPosition = transform.position;
-
-        while (time < duration)
+        float elapsedTime = 0f;
+        while (elapsedTime > slamDuration)
         {
-            time += Time.deltaTime;
-            float easeTime = EaseInBack(endPosition, startPosition, time); // Apply EaseInBack
-            transform.position = Vector3.Lerp(currentPosition, startPos, easeTime);
+            float t = elapsedTime / slamDuration;
+            t = Mathf.Clamp01(t); // Ensure t is between 0 and 1
+            float easedT = EaseInBack(1, 0, t); 
+            transform.position = Vector3.Lerp(transform.position, StartPos, easedT);
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        transform.position = startPos; // Ensure it reaches the exact start position
+        transform.position = StartPos; // Ensure we end at the exact position
     }
 
 }
