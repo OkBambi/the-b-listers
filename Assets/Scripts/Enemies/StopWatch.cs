@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.iOS;
 using static EasingLibrary;
 
 public class StopWatch : EnemyBase, IDamage
@@ -7,20 +9,18 @@ public class StopWatch : EnemyBase, IDamage
     int counter;
 
     public float slamDuration;
-    public Vector3 endPosition;
+    public float endPosition;
 
-    private Vector3 startPosition;
+    private float startPosition;
     private bool isSlamming;
-    private float elapsedTime;
     private Rigidbody rb;
 
     private void Awake()
     {
         OnAECAwake();
-        startPosition = transform.position;
-        endPosition = startPosition + new Vector3(0, 4f, 0); // Adjust the end position as needed
+        startPosition = transform.position.y;
+        //endPosition = 3f; // Adjust the end position as needed
         isSlamming = false;
-        elapsedTime = 0.1f;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -48,7 +48,9 @@ public class StopWatch : EnemyBase, IDamage
         if(counter == 3 && !isSlamming)
         {
             counter = 0;
-            StartSlam();
+            isSlamming = true;
+            //StartSlam();
+            StartCoroutine(slamer()); // Start the coroutine for slamming
             //SacSpit();
         }
     }
@@ -59,19 +61,46 @@ public class StopWatch : EnemyBase, IDamage
     //    mySac.setColor = this.setColor;
     //}
 
-    void StartSlam()
-    {
-        EaseInBack(startPosition.y, endPosition.y, elapsedTime);
+    //void StartSlam()
+    //{
+    //    Debug.Log("Slam started!");
+    //    if (isSlamming)
+    //    {
+    //        Debug.Log("Already slamming, ignoring request.");
+    //        slamDuration = 5f; // Normalized time (0 to 1)
 
-    }
+    //        // Apply EaseInBack using your Easing Library
+    //        float easedPosition = EaseInBack(startPosition, endPosition, slamDuration); // Replace EasingLibrary with your library's name
+
+    //        transform.position = new Vector3(transform.position.x, easedPosition, transform.position.z);
+
+    //        isSlamming = true;
+    //    }
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
-        //if()
+        if(other.CompareTag("groundTag") && isSlamming)
+        {
+            isSlamming = false;
+            rb.useGravity = true; // Enable gravity when slamming
+        }
     }
 
-    void EndSlam()
-    {
+    IEnumerator slamer() {         float elapsedTime = 0f;
+        Vector3 startPos = transform.position;
+        Vector3 endPos = new Vector3(transform.position.x, endPosition, transform.position.z);
+        while (elapsedTime < slamDuration)
+        {
+            float t = elapsedTime / slamDuration;
+            t = Mathf.Clamp01(t); // Ensure t is between 0 and 1
+            float easedT = EaseInBack(0, 1, t); // Replace EasingLibrary with your library's name
+            transform.position = Vector3.Lerp(startPos, endPos, easedT);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = endPos; // Ensure we end at the exact position
+        isSlamming = false;
     }
 
 }
