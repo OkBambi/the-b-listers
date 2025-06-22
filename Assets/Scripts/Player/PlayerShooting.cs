@@ -71,8 +71,8 @@ public class PlayerShooting : MonoBehaviour
                             break;
                     }
 
-                    StartCoroutine(camShaker.Shake(0.05f, 0.006f));
-                    StartCoroutine(playerArm.Recoil(0.05f, 0.006f, 0.005f));
+                    StartCoroutine(camShaker.Shake(0.05f, 0.05f));
+                    StartCoroutine(playerArm.Recoil(0.05f, 0.006f, 0.04f));
                     b.GetComponent<Dagger>().Initialize(playerColor, bulletSpeed, bulletLifeTime, ignoreLayer);
                 }
             }
@@ -123,8 +123,8 @@ public class PlayerShooting : MonoBehaviour
 
                     b.GetComponent<Dagger>().Initialize(playerColor, bulletSpeed, bulletLifeTime, ignoreLayer);
                 }
-                StartCoroutine(playerArm.Recoil(0.07f, 0.006f, 0.1f));
-                StartCoroutine(camShaker.Shake(0.06f, 0.08f));
+                StartCoroutine(playerArm.RecoilTween(0.2f, 0.01f, 0.2f, 0.1f));
+                StartCoroutine(camShaker.ShakeTween(0.2f, 0.2f, 0f, 0.3f));
             }
 
             holdTime = 0;

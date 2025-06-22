@@ -115,8 +115,8 @@ public class EnemyBase : MonoBehaviour, IDamage
 
             //flash white
             StartCoroutine(Flash());
-            StartCoroutine(ShakePos(0.2f, 0.1f));
-            StartCoroutine(ShakeSize(0.2f, 0.05f));
+            StartCoroutine(ShakePos(0.2f, 0.5f));
+            StartCoroutine(ShakeSize(0.2f, 0.1f));
 
             if (hitVfx)
                 Instantiate(hitVfx, transform.position, Quaternion.identity);
@@ -153,7 +153,7 @@ public class EnemyBase : MonoBehaviour, IDamage
             float _x = Random.Range(-1f, 1f) * magnitude;
             float _y = Random.Range(-1f, 1f) * magnitude;
 
-            transform.localPosition += new Vector3(_x, _y, 0);
+            transform.localPosition = originalPos + new Vector3(_x, _y, 0);
 
             elapsed += Time.deltaTime;
 
@@ -172,7 +172,7 @@ public class EnemyBase : MonoBehaviour, IDamage
             float _x = Random.Range(-1f, 1f) * magnitude;
             float _y = Random.Range(-1f, 1f) * magnitude;
 
-            transform.localScale += new Vector3(_x, _y, 0);
+            transform.localScale = originalSize + new Vector3(_x, _y, 0);
 
             elapsed += Time.deltaTime;
 
