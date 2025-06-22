@@ -7,10 +7,10 @@ public class Snake : MonoBehaviour
 
 
     //MOVEMENT/ROAM - trying with waypoint (obstacle avoidance + flocking)
-    public float movementSpeed;
-    public float rotationSpeed;
-    public float wanderingRadius;
-    public float wanderingTimer;
+    [SerializeField] float movementSpeed;
+    [SerializeField] float rotationSpeed;
+    [SerializeField] float wanderingRadius;
+    [SerializeField] float wanderingTimer;
 
     private float timer;
     private Vector3 wanderingTarget;
