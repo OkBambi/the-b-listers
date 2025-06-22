@@ -16,6 +16,15 @@ public class Snake : MonoBehaviour
     private Vector3 wanderingTarget;
     private bool isWandering = false;
 
+    //FOLLOWING
+    [SerializeField] Transform player;
+    [SerializeField] float followRange = 10f;
+
+    private bool isFollowing = false;
+
+    //ATTACKING
+
+
 
     void Start()
     {
@@ -50,6 +59,32 @@ public class Snake : MonoBehaviour
                 GetNewWanderTarget(); // Change direction immediately
             }
         }
+
+        //FOLLOWING
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        if (distanceToPlayer < followRange)
+        {
+            isFollowing = true;
+            isWandering = false;
+            MoveTowards(player.position);
+        }
+        else if (!isWandering)
+        {
+            isFollowing = false;
+            timer -= Time.deltaTime;
+
+            if (timer <= 0)
+            {
+                GetNewWanderTarget();
+                isWandering = true;
+                timer = wanderingTimer;
+            }
+
+            if(isWandering)
+            {
+                MoveTowards(wanderingTarget);
+            }
+        }
     }
 
     //moves around the map
@@ -78,6 +113,6 @@ public class Snake : MonoBehaviour
     //attacking player
 
 
-    //health
+    //health - three individual heads for snake
 
 }
