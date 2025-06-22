@@ -6,42 +6,71 @@ public class Snake : MonoBehaviour
     //HEALTH
 
 
-    //HEAD
-    //adjust this to control the spinning speed
-    public float spinningSpeed = 50f;
-    //public float otherrotationspeed = 50f;
-
     //MOVEMENT/ROAM - trying with waypoint (obstacle avoidance + flocking)
-    public float movementSpeed = 2f;
-    public float rotationSpeed = 5f;
-    public float wanderingRadius = 5f;
-    public float wanderingTiner = 2f;
+    public float movementSpeed;
+    public float rotationSpeed;
+    public float wanderingRadius;
+    public float wanderingTimer;
+
+    private float timer;
+    private Vector3 wanderingTarget;
+    private bool isWandering = false;
 
 
     void Start()
     {
-        
+        timer = wanderingTimer;
+        GetNewWanderTarget();
     }
 
     
     void Update()
     {
-        //HEAD
-        //modify the Vector3.forward in the transform.Rotate() method to rotate around different axes (e.g., Vector3.up for y-axis, Vector3.right for x-axis).
-        //rotates the parent/snake object around the z-axis
-        transform.Rotate(Vector3.right * spinningSpeed * Time.deltaTime);
-        //we can also add individual rotation to the children here if needed:
-        //foreach (Transform child in transform)
-        //{
-        //    child.Rotate(Vector3.forward * otherrotationspeed * Time.deltaTime);
-        //}
-
         //MOVEMENT
-        
+        timer -= Time.deltaTime;
+
+        if (timer <= 0)
+        {
+            GetNewWanderTarget();
+            isWandering = true;
+            timer = wanderingTimer;
+        }
+
+        if (isWandering)
+        {
+            MoveTowards(wanderingTarget);
+        }
+
+        // Example of raycast obstacle avoidance (simplified)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 2f))
+        {
+            if (hit.collider.tag != "Player") // Ignore player
+            {
+                GetNewWanderTarget(); // Change direction immediately
+            }
+        }
     }
 
     //moves around the map
-    
+    void MoveTowards(Vector3 target)
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target, movementSpeed * Time.deltaTime);
+
+        if (Vector3.Distance(transform.position, target) < 0.5f)
+        {
+            isWandering = false; //stops wandering when close to target
+        }
+    }
+
+    void GetNewWanderTarget()
+    {
+        Vector3 randomDirection = Random.insideUnitSphere * wanderingRadius;
+        randomDirection += transform.position;
+        wanderingTarget = new Vector3(randomDirection.x, transform.position.y, randomDirection.z);
+    }
 
     //follows the player when in view
 
