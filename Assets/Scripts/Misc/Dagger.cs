@@ -57,10 +57,6 @@ public class Dagger : MonoBehaviour
             {
                 //HIT EM
                 dmg.takeDamage(projColor, 1);
-
-                //This is to cause color spray out of the enemy
-                //colorParticles.transform.position = hit.point;
-                //colorParticles.Play();
             }
         }
 

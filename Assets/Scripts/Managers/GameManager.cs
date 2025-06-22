@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public Player playerScript;
     public bool isPaused;
     float TimeScaleOrigin;
+    public bool isDead;
 
     [Space]
     [Header("Player Stuff")]
@@ -96,10 +97,15 @@ public class GameManager : MonoBehaviour
     {
         //statePause();
         //turn on the lose menu
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        MenuActive = MenuEnd;
-        MenuActive.SetActive(true);
+        if (!isDead)
+        {
+            isDead = true;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            MenuActive = MenuEnd;
+            MenuActive.SetActive(true);
+            ComboFeed.theInstance.FinalScore();
+        }
     }
 
     //public void OnWinCondition()

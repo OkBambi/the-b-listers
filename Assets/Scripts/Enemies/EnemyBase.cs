@@ -124,11 +124,15 @@ public class EnemyBase : MonoBehaviour, IDamage
             if (hitVfx)
                 Instantiate(hitVfx, transform.position, Quaternion.identity);
 
+
             if (EnemyManager.instance.colorParticles)
             {
                 EnemyManager.instance.colorParticles.transform.position = transform.position;
                 EnemyManager.instance.colorParticles.Play();
             }
+
+            spawnColorParticles();
+
         }
     }
 
@@ -188,5 +192,29 @@ public class EnemyBase : MonoBehaviour, IDamage
             yield return null;
         }
         transform.localScale = originalSize;
+    }
+
+    private void spawnColorParticles()//spawn colors splats from the enemy
+    {
+        EnemyManager.instance.colorParticles.transform.position = transform.position;
+
+        var colorParticles = EnemyManager.instance.colorParticles.main;
+        if (setColor == PrimaryColor.RED)
+        {
+            colorParticles.startColor = Color.red;
+        }
+        else if (setColor == PrimaryColor.BLUE)
+        {
+            colorParticles.startColor = Color.blue;
+        }
+        else if (setColor == PrimaryColor.YELLOW)
+        {
+            colorParticles.startColor = Color.yellow;
+        }
+        else if (setColor == PrimaryColor.OMNI)
+        {
+            colorParticles.startColor = Color.black;
+        }
+        EnemyManager.instance.colorParticles.Play();
     }
 }
