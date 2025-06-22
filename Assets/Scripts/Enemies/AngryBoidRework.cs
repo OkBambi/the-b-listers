@@ -26,9 +26,13 @@ public class AngryBoidRework : BoidAI
     [SerializeField] bool isRedTelegraphShowing;
     [SerializeField] float startBlinkTime = 0.5f;
 
+    [SerializeField] GameObject squishModel;
 
+    Vector3 scaleOriginal;
+    [SerializeField] Vector3 scaleSquished;
     protected override void Start()
     {
+        scaleOriginal = model.transform.localScale;
         ColorSelection(setColor);
         base.UpdateBoidAwareness();
         StartCoroutine(NoiseWeights());
@@ -107,6 +111,7 @@ public class AngryBoidRework : BoidAI
         //chargePhase = 3
         ++chargePhase;
         //end the blinking
+        StartCoroutine(ChargeSquish());
         rb.AddForce(transform.forward * dashSpeed, ForceMode.Acceleration);
         chargePhase = 0;
         yield return new WaitForSeconds(1);
@@ -149,6 +154,30 @@ public class AngryBoidRework : BoidAI
         whiteTelegraph.SetActive(false);
         yield return new WaitForSeconds(pauseDuration);
         telegraphs.SetActive(false);
+    }
+
+    IEnumerator ChargeSquish()
+    {
+        Debug.Log("squish");
+        int count = 0;
+        while (count < 40)
+        {
+            model.transform.localScale = Vector3.Lerp(model.transform.localScale, scaleSquished, 0.2f);
+            ++count;
+            yield return null;
+        }
+        count = 0;
+
+        while (count < 80)
+        {
+            model.transform.localScale = Vector3.Lerp(model.transform.localScale, scaleOriginal, 0.1f);
+            ++count;
+            yield return null;
+        }
+        model.transform.localScale = scaleOriginal;
+        Debug.Log("stop squish");
+        yield return null;
+
     }
 
 }

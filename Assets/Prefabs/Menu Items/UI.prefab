@@ -590,7 +590,7 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 79b179393e5f58048a8dc955883af9e0, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: -4478754591247555784, guid: 79b179393e5f58048a8dc955883af9e0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -4344,15 +4344,15 @@ MonoBehaviour:
   invalidScore: {fileID: 7540960348084928443}
   RedCD_UI: {fileID: 6385075492904703134}
   YellowCD_UI: {fileID: 5808780831045927898}
-  BlueCD_UI: {fileID: 5808780831045927898}
+  BlueCD_UI: {fileID: 2378028418082600136}
   RedCD: 0
   YellowCD: 0
   BlueCD: 0
   RedCD_M2: {fileID: 451204754124004586}
   YellowCD_M2: {fileID: 5949324051714832767}
   BlueCD_M2: {fileID: 6225628873058750889}
-  finishSpeed: 0
-  animationDurations: 
+  finishSpeed: 0.2
+  animationDurations: 1e0000001e000000
 --- !u!114 &6198968398227689191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4435,9 +4435,9 @@ MonoBehaviour:
   shootingPoint: {fileID: 0}
   blueWindup: 1
   stickySpeed: 40
-  timeBetweenPulses: 2
-  pulseMaxRadius: 15
-  pulseSpeed: 5
+  timeBetweenPulses: 1
+  pulseMaxRadius: 40
+  pulseSpeed: 200
   amountOfPulses: 3
   pulseDmg: 1
 --- !u!1 &6807639528664673185
@@ -5311,6 +5311,7 @@ MonoBehaviour:
   comboMultUGUI: {fileID: 6458756855347946596}
   totalScoreUGUI: {fileID: 5771937175862872668}
   comboBar: {fileID: 8702706620798052471}
+  ease: 0
 --- !u!1 &7740294914428156270
 GameObject:
   m_ObjectHideFlags: 0

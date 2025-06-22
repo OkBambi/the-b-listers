@@ -83,7 +83,7 @@ public class YellowSchmove : MonoBehaviour
 
                     ComboManager.instance.RemoveScore(100 * chargeLevel); //may need to change this later
                     ComboFeed.theInstance.AddNewComboFeed("-", (100 * chargeLevel).ToString(), "yellowSchmove");//same here
-                    StartCoroutine(GameManager.instance.schmover.UpdateCoolDownUI());
+                    StartCoroutine(GameManager.instance.schmover.UpdateCoolDownUIYellow());
                 }
                 //ui resetting
                 ChargeCounterUI.color = Color.white;
