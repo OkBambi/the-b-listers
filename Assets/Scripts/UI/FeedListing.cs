@@ -1,11 +1,9 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class FeedListing : MonoBehaviour
 {
-    [SerializeField] Text modifier;
-    [SerializeField] Text scoreAmount;
-    [SerializeField] Text killedOrUsed;
     [SerializeField] float timeTillKilled = 5f;
 
     float timer;
@@ -25,22 +23,19 @@ public class FeedListing : MonoBehaviour
         }
     }
 
-    public void SetScoreAndHow(string _modifier, string _scoreAmount, string _killedOrUsed)
+    public void SetScoreAndHow(string _scoreFeed)
     {
-        modifier.text = _modifier;
-        scoreAmount.text = _scoreAmount;
-        killedOrUsed.text = _killedOrUsed;
+        Debug.Log("Die");
+        gameObject.GetComponent<TextMeshProUGUI>().text = _scoreFeed;
     }
 
     public string GetScoreAndHow()
     {
-        return modifier.text + " " + scoreAmount.text + " " + killedOrUsed.text;
+        return gameObject.GetComponent<TextMeshProUGUI>().text;
     }
 
     private void ChangeAlpha()
     {
-        modifier.CrossFadeAlpha(0, 3, true);
-        scoreAmount.CrossFadeAlpha(0, 3, true);
-        killedOrUsed.CrossFadeAlpha(0, 3, true);
+        gameObject.GetComponent<TextMeshProUGUI>().CrossFadeAlpha(0, 3, true);
     }
 }
