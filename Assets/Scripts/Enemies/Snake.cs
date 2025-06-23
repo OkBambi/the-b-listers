@@ -31,7 +31,13 @@ public class Snake : EnemyBase
 
     //ATTACKING
     [Header("Attacking")]
-    [SerializeField] float attackRange = 3f;
+    [SerializeField] float attackRange = 3f; //the distance at which the snake will attack
+    [SerializeField] float attackCooldown = 2f; //how often the snake can attack
+    [SerializeField] int attackDamage = 10; //how much damage each head deals
+    [SerializeField] LayerMask playerLayer; //assigns the player's layer in the Inspector
+
+    private float attackTimer; //to manage the attack cooldown
+    private bool canAttack = true;
 
 
     private void Awake()
@@ -45,19 +51,18 @@ public class Snake : EnemyBase
 
             Debug.Log((PrimaryColor)colourIndexes[rand]);
             colourIndexes.Remove(colourIndexes[rand]);
-
         }
-
     }
 
     void Start()
     {
         player = GameManager.instance.player.transform;
         timer = wanderingTimer;
+        attackTimer = attackCooldown; //initialises the attack timer
         GetNewWanderTarget();
     }
 
-    
+
     void Update()
     {
         //MOVEMENT
@@ -92,6 +97,17 @@ public class Snake : EnemyBase
             isFollowing = true;
             isWandering = false;
             MoveTowards(player.position);
+
+            //ATTACKING
+            if (distanceToPlayer < attackRange)
+            {
+                if (canAttack)
+                {
+                    Attack();
+                    canAttack = false; //prevents immediate reattack
+                    attackTimer = attackCooldown; //resets cooldown
+                }
+            }
         }
         else if (!isWandering)
         {
@@ -105,9 +121,19 @@ public class Snake : EnemyBase
                 timer = wanderingTimer;
             }
 
-            if(isWandering)
+            if (isWandering)
             {
                 MoveTowards(wanderingTarget);
+            }
+        }
+
+        //updates attack cooldown
+        if (!canAttack)
+        {
+            attackTimer -= Time.deltaTime;
+            if (attackTimer <= 0)
+            {
+                canAttack = true;
             }
         }
     }
@@ -133,6 +159,15 @@ public class Snake : EnemyBase
     }
 
     //attacking player
-
+    void Attack()
+    {
+        Debug.Log("Snake is attacking!");
+        // Here, you would trigger the attack animation/logic for the snake heads.
+        // For example, you could tell each head to perform its attack action.
+        foreach (SnakeHead head in theBois)
+        {
+            head.TryAttackPlayer(attackDamage); // Call a new method on SnakeHead
+        }
+    }
 
 }
