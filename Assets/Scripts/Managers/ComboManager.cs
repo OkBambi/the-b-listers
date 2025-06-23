@@ -249,6 +249,11 @@ public class ComboManager : MonoBehaviour
         popScore = true;
     }
 
+    public float getScoreTimesMult(float score)
+    {
+        return score * comboMults[(int)comboGrade];
+    }
+
     public void RemoveScore(float amount)
     {
         currentComboScore -= amount;
