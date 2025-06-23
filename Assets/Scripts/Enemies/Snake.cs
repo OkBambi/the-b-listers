@@ -5,10 +5,12 @@ using System.Collections.Generic;
 public class Snake : EnemyBase
 {
     //HEALTH
+    [Header("Health")]
     [SerializeField] List<SnakeHead> theBois;
     [SerializeField] List<int> colourIndexes;
 
     //MOVEMENT/ROAM - trying with waypoint (obstacle avoidance + flocking)
+    [Header("Movement/Roam")]
     [SerializeField] float movementSpeed;
     [SerializeField] float rotationSpeed;
     [SerializeField] float wanderingRadius;
@@ -21,12 +23,16 @@ public class Snake : EnemyBase
     private bool isWandering = false;
 
     //FOLLOWING
+    [Header("Following")]
     [SerializeField] Transform player;
     [SerializeField] float followRange = 10f;
 
     private bool isFollowing = false;
 
     //ATTACKING
+    [Header("Attacking")]
+    [SerializeField] float attackRange = 3f;
+
 
     private void Awake()
     {
@@ -126,12 +132,7 @@ public class Snake : EnemyBase
         wanderingTarget = new Vector3(randomDirection.x, transform.position.y, randomDirection.z);
     }
 
-    //follows the player when in view
-
-
     //attacking player
 
-
-    //health - three individual heads for snake
 
 }
