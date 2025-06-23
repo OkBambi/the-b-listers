@@ -113,7 +113,7 @@ public class Snake : EnemyBase
         //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         //transform.position = Vector3.MoveTowards(transform.position, target, movementSpeed * Time.deltaTime);
         Vector3 direction = (target - transform.position);
-        //direction.y = 0; //optional: keeps movement flat on the XZ plane
+        direction.y = 0; //optional: keeps movement flat on the XZ plane
         direction.Normalize();
 
         Quaternion targetRotation = Quaternion.LookRotation(direction);
