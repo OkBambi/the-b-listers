@@ -31,21 +31,18 @@ public class SnakeHead : EnemyBase
 
             if (damageableObject != null)
             {
-                // Call the takeDamage method on the object that implements IDamage
-                // Assuming player attacks are "OMNI" from the snake's perspective for simplicity
+                // Call the takeDamage method on the object that implements IDamage.
+                // This will trigger the player's Die() method directly as per your IDamage implementation.
+                // The 'damage' parameter might not be directly used by the player's takeDamage if it just calls Die(),
+                // but it's passed for consistency with the IDamage interface.
                 damageableObject.takeDamage(PrimaryColor.OMNI, damage);
-                Debug.Log(transform.name + " hit " + hitCollider.name + " for " + damage + " damage!");
-                // Optionally, add visual/audio feedback for the hit
+                Debug.Log(transform.name + " hit " + hitCollider.name + " causing them to 'Fall'!");
+
                 // You might want to break here if each head can only hit one target per attack cycle
+                // or if hitting one part of the player triggers the whole player's death logic.
+                // If the player truly 'dies' on any hit, breaking here prevents redundant calls.
                 // break;
             }
         }
-    }
-
-    // Optional: Draw the attack range in the editor for visualization
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, headAttackRange);
     }
 }
