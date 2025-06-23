@@ -1334,7 +1334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &247275134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2720,6 +2720,10 @@ PrefabInstance:
     - target: {fileID: 1464357687407549746, guid: 9db45d588406b334c89972af7d510c61, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6443365806102206552, guid: 9db45d588406b334c89972af7d510c61, type: 3}
+      propertyPath: m_Center.z
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6558586976252451046, guid: 9db45d588406b334c89972af7d510c61, type: 3}
       propertyPath: setColor
