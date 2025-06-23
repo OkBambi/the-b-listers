@@ -109,9 +109,20 @@ public class Snake : EnemyBase
     //moves around the map
     void MoveTowards(Vector3 target)
     {
-        Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        transform.position = Vector3.MoveTowards(transform.position, target, movementSpeed * Time.deltaTime);
+        //Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        //transform.position = Vector3.MoveTowards(transform.position, target, movementSpeed * Time.deltaTime);
+        Vector3 direction = (target - transform.position);
+        //direction.y = 0; //optional: keeps movement flat on the XZ plane
+        direction.Normalize();
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        Quaternion newRotation = Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        rb.MoveRotation(newRotation);
+
+        Vector3 moveStep = direction * movementSpeed * Time.deltaTime;
+        rb.MovePosition(rb.position + moveStep);
+
 
         if (Vector3.Distance(transform.position, target) < 0.5f)
         {
