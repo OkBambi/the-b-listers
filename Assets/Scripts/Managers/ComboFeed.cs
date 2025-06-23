@@ -3,41 +3,48 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Numerics;
+using System.Xml;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ComboFeed : MonoBehaviour
 {
     public static ComboFeed theInstance;
     [SerializeField] GameObject feedListingPrefab;
     [SerializeField] Transform endFeed;
+    [SerializeField] TextMeshProUGUI finalScoreText;
     [SerializeField] int maxFeedLength;
     [SerializeField] float endFeedSpeed;
 
 
     private Queue<GameObject> currentFeedList = new Queue<GameObject>();
-    private List<String> finalScoreList = new List<String>();
-    private Dictionary<string, float> scores = new Dictionary<string, float>();
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private List<string> finalFeedList = new List<string>();
+    private List<float> finalScoreList = new List<float>();
+    private float finalScore;
 
     private void Awake()
     {
         theInstance = this;
     }
 
-    public void AddNewComboFeed(string _scoreFeed) //allows you to add to the kill feed (modifier is what is done to the score. Example + or -)
+    public void AddNewComboFeed(string _scoreFeed, float _score) //allows you to add to the kill feed (modifier is what is done to the score. Example + or -)
     {
         GameObject newScoreFeed = Instantiate(feedListingPrefab, transform);
         newScoreFeed.transform.SetSiblingIndex(0);
         newScoreFeed.GetComponent<FeedListing>().SetScoreAndHow(_scoreFeed);
 
-        AddToQueue(newScoreFeed);
+        AddToQueue(newScoreFeed, _score);
     }
 
-    private void AddToQueue(GameObject _newScoreFeed)
+    private void AddToQueue(GameObject _newScoreFeed, float _score)
     {
+        
         currentFeedList.Enqueue(_newScoreFeed);
-        finalScoreList.Add(_newScoreFeed.GetComponent<FeedListing>().GetScoreAndHow());
+        finalScoreList.Add(_score);
+        finalFeedList.Add(_newScoreFeed.GetComponent<FeedListing>().GetScoreAndHow());
         if (currentFeedList.Count > maxFeedLength)
         {
             Destroy(currentFeedList.Dequeue());
@@ -52,11 +59,13 @@ public class ComboFeed : MonoBehaviour
 
     private IEnumerator waitASec()
     {
-        for (int i = 0; i < finalScoreList.Count; i++)
+        for (int i = 0; i < finalFeedList.Count; i++)
         {
             GameObject newScoreFeed = Instantiate(feedListingPrefab, endFeed);
             newScoreFeed.transform.SetSiblingIndex(0);
-            newScoreFeed.GetComponent<FeedListing>().SetScoreAndHow(finalScoreList[i]);
+            newScoreFeed.GetComponent<FeedListing>().SetScoreAndHow(finalFeedList[i]);
+            finalScore += finalScoreList[i];
+            finalScoreText.text = finalScore.ToString();
 
             yield return new WaitForSeconds(endFeedSpeed);
         }

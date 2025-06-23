@@ -10,7 +10,8 @@ public class SnakeHead : EnemyBase
         {
             isAlive = false;
             ComboManager.instance.AddScore(score);
-            ComboFeed.theInstance.AddNewComboFeed("+ " + score.ToString() + " " + transform.name);
+            float scoreWithMult = ComboManager.instance.getScoreTimesMult(score);
+            ComboFeed.theInstance.AddNewComboFeed("+ " + scoreWithMult.ToString() + " " + transform.name, scoreWithMult);
             snakeBody.takeDamage(PrimaryColor.OMNI, 1);
             Destroy(gameObject);
             return;
