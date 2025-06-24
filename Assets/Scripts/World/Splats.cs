@@ -39,6 +39,10 @@ public class Splats : MonoBehaviour
         {
             randIndex = Random.Range(8, 11);
         }
+        else
+        {
+            randIndex = Random.Range(12, 15);
+        }
         spriteRenderer.sprite = sprites[randIndex];
     }
 
