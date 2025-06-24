@@ -42,6 +42,13 @@ public class Monk : EnemyBase
         {
             waveSizeOriginal = Wave.transform.localScale;
         }
+        roam();
+    }
+
+    public override void takeDamage(PrimaryColor hitcolor, int amount)
+    {
+        AudioManager.instance.Play("Monk_HitAudio");
+        base.takeDamage(hitcolor, amount);
     }
 
     // Update is called once per frame
@@ -132,15 +139,14 @@ public class Monk : EnemyBase
 
         for (int i = 0; i < 2; i++)
         {
+            AudioManager.instance.Play("Monk_Blinker");
             model.material.color = Color.white;
             yield return new WaitForSeconds(0.05f);
             model.material.color = colorOriginal;
             yield return new WaitForSeconds(0.05f);
         }
-        if (monkInRange)
-        {
-            monkScan();
-        }
+        AudioManager.instance.Play("Monk_Cast");
+       
         yield return new WaitForSeconds(0.20f);
         Wave.SetActive(true);
         Wave.transform.localScale = Vector3.zero;
@@ -154,7 +160,13 @@ public class Monk : EnemyBase
         }
 
         Wave.SetActive(false);
+
         Wave.transform.localScale = waveSizeOriginal;
+
+        if (monkInRange)
+        {
+            monkScan();
+        }
         roam();
         isCasting = false;
     }

@@ -109,7 +109,7 @@ public class EnemyBase : MonoBehaviour, IDamage
         ComboFeed.theInstance.AddNewComboFeed("+ " + scoreWithMult.ToString() + " " + gameObject.name, scoreWithMult);
     }
 
-    public void takeDamage(PrimaryColor hitColor, int amount)
+    public virtual void takeDamage(PrimaryColor hitColor, int amount)
     {
         if (hitColor == setColor || hitColor == PrimaryColor.OMNI || setColor == PrimaryColor.OMNI)
         {

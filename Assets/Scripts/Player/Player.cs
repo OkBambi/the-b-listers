@@ -22,6 +22,7 @@ public class Player : MonoBehaviour, IColorLock
     public bool canCam;
     public bool canAction;
     public bool canColor;
+    public bool isDead = false;
 
     void Start()
     {
@@ -82,16 +83,24 @@ public class Player : MonoBehaviour, IColorLock
 
     public void Die()
     {
+        if (isDead)
+        {
+            return;
+        }
         //disable player stuff
         canAction = false;
         canMove = false;
         canCam = false;
         canColor = false;
+        isDead = true;
+
+        AudioManager.instance.Play("Death");
+
 
         //save score
         //check for highscore
         int highScore = PlayerPrefs.GetInt("Highscore");
-        
+
         if (ComboManager.instance.GetScore() > highScore)
         {
             GameManager.instance.SaveHighscore(ComboManager.instance.GetScore());
