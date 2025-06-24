@@ -13,6 +13,9 @@ public class ButtonFunction : MonoBehaviour
     [SerializeField] GameObject MainCamera;
     [SerializeField] GameObject ArcadeCamera;
 
+    public SkinnedMeshRenderer SkinnedMeshRenderer;
+    public Material materialTexture, OutlineMaterial;
+
     public void onResume()
     {
         GameManager.instance.stateUnPause();
@@ -53,16 +56,22 @@ public class ButtonFunction : MonoBehaviour
 
     public void ontoggleOutline(bool ison)
     {
+        Material[] materials = new Material[SkinnedMeshRenderer.sharedMaterials.Length];
         if (OutlineToggler.isOn)
         {
             Debug.Log("Filter On");
+            materials[0] = materialTexture;
+            materials[1] = OutlineMaterial;
 
+            SkinnedMeshRenderer.sharedMaterials = materials;
         
         }
         else
         {
             Debug.Log("default Camera");
-            
+            materials[0] = materialTexture;
+
+            SkinnedMeshRenderer.sharedMaterials = materials;
         }
     }
     public void BackButtonClick()

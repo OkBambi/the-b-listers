@@ -46,7 +46,7 @@ public class Monk : EnemyBase
         {
             roamTimer += Time.deltaTime;
             if (monkInRange)
-            { 
+            {
                 monkScan();
             }
             PauseForAMoment();
@@ -128,11 +128,11 @@ public class Monk : EnemyBase
     {
         PauseForAMoment();
         Wave.SetActive(true);
-        yield return new WaitForSeconds(15);
+
+        Wave.transform.localScale = new Vector3(12, 12, 12).normalized;
+        yield return new WaitForSeconds(10);
         Wave.SetActive(false);
-        yield break;
+        gameObject.transform.GetChild(0).localScale = new Vector3(1, 1, 1);
     }
-
-
 
 }
