@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Splats : MonoBehaviour
@@ -15,17 +16,29 @@ public class Splats : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void Initialize()
+    public void Initialize(Color splatColor)
     {
-        SetSprite();
+        SetSprite(splatColor);
         SetSize();
         SetRotation();
         SetProperties();
     }
 
-    private void SetSprite()//need to update later to have it determine what color sprite it needs
+    private void SetSprite(Color splatColor)//need to update later to have it determine what color sprite it needs
     {
-        int randIndex = Random.Range(0, sprites.Length);
+        int randIndex = 0;
+        if (splatColor == Color.red)
+        {
+            randIndex = Random.Range(0, 3);
+        }
+        else if (splatColor == Color.blue)
+        {
+            randIndex = Random.Range(4, 7);
+        }
+        else if (splatColor == Color.yellow)
+        {
+            randIndex = Random.Range(8, 11);
+        }
         spriteRenderer.sprite = sprites[randIndex];
     }
 

@@ -8,6 +8,7 @@ public class ColorParticles : MonoBehaviour
     public GameObject splatsPrefab;
     public Transform splatsHolder;
     private List<ParticleCollisionEvent> collisionEvents = new List<ParticleCollisionEvent>();
+    public Color startColor;
 
     private void OnParticleCollision(GameObject other)
     {
@@ -17,9 +18,10 @@ public class ColorParticles : MonoBehaviour
 
         for (int index = 0; index < count; index++)
         {
-            GameObject theSplat = Instantiate(splatsPrefab, collisionEvents[index].intersection, Quaternion.identity) as GameObject;
+            GameObject theSplat = Instantiate(splatsPrefab, collisionEvents[index].intersection, Quaternion.identity);
             theSplat.transform.SetParent(splatsHolder, true);
-            theSplat.GetComponent<Splats>().Initialize();
+            var colorParticles = EnemyManager.instance.colorParticles.main;
+            theSplat.GetComponent<Splats>().Initialize(startColor);
         }
     }
 }
