@@ -133,8 +133,19 @@ public class Snake : EnemyBase
     void GetNewWanderTarget()
     {
         Vector3 randomDirection = Random.insideUnitSphere * wanderingRadius;
-        randomDirection += transform.position;
-        wanderingTarget = new Vector3(randomDirection.x, transform.position.y, randomDirection.z);
+
+        //my thinking is to send a raycast down to make sure that that spot is okay
+        if (Physics.Raycast(randomDirection, -Vector3.up, 10f))
+        {
+            randomDirection += transform.position;
+            wanderingTarget = new Vector3(randomDirection.x, transform.position.y, randomDirection.z);
+        }
+        else
+        {
+            GetNewWanderTarget();
+        }
+
+        
     }
 
     //attacking player
