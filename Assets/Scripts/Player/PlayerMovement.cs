@@ -126,7 +126,6 @@ public class PlayerMovement : MonoBehaviour, IDamage
 
     public void takeDamage(PrimaryColor hitColor, int amount)
     {
-        Debug.Log("Fall.");
         transform.parent.GetComponent<Player>().Die();
     }
 }

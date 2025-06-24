@@ -47,6 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed090045db9d4854ea6e3a7552243acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model: {fileID: 269920179187667829}
+  cooldown: 10
+  isOnCooldown: 0
+  teleportPosition: {x: 0, y: 20, z: 0}
 --- !u!33 &7226407032429476901
 MeshFilter:
   m_ObjectHideFlags: 0

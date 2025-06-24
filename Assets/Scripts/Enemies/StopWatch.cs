@@ -6,6 +6,8 @@ using static EasingLibrary;
 public class StopWatch : EnemyBase, IDamage
 {
     //[SerializeField] GameObject SpitSac;
+    [SerializeField] GameObject ShockWave;
+
     int counter;
 
     public float slamDuration;
@@ -104,6 +106,7 @@ public class StopWatch : EnemyBase, IDamage
         }
         transform.position = endPos; // Ensure we end at the exact position
         isSlamming = false;
+        Instantiate(ShockWave, transform.position - new Vector3(0f,1f,0f), Quaternion.identity); // Instantiate shockwave effect
         StartCoroutine(ReturnToStart()); // Return to start position after slamming 
     }
 

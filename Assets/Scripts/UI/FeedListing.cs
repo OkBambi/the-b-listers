@@ -25,7 +25,6 @@ public class FeedListing : MonoBehaviour
 
     public void SetScoreAndHow(string _scoreFeed)
     {
-        Debug.Log("Die");
         gameObject.GetComponent<TextMeshProUGUI>().text = _scoreFeed;
     }
 
