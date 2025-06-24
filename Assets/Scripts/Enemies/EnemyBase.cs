@@ -125,13 +125,6 @@ public class EnemyBase : MonoBehaviour, IDamage
             if (hitVfx)
                 Instantiate(hitVfx, transform.position, Quaternion.identity);
 
-
-            if (EnemyManager.instance.colorParticles)
-            {
-                EnemyManager.instance.colorParticles.transform.position = transform.position;
-                EnemyManager.instance.colorParticles.Play();
-            }
-
             spawnColorParticles();
 
         }
