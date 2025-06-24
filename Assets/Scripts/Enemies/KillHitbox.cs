@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
 
-public class BoidKillHitbox : MonoBehaviour
+public class KillHitbox : MonoBehaviour
 {
     EnemyBase m_EnemyBase;
 

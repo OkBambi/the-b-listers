@@ -17,6 +17,7 @@ public class SettingsObject : ScriptableObject
 
     [Space]
     public bool isReducedCameraShake;
+    public bool isInvertY;
     public bool isArcadeFilter;
     public bool isOutlineFilter;
     public bool isColourBlindnessMode;

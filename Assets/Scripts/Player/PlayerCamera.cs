@@ -70,4 +70,9 @@ public class PlayerCamera : MonoBehaviour
         Quaternion finalRot = Quaternion.Euler(rotX, 0, rotZ);
         transform.localRotation = Quaternion.Lerp(initialRotation, finalRot, leanSmooth);
     }
+
+    public void CameraAdjustFOV(float multiplier)
+    {
+        Camera.main.fieldOfView = fov * multiplier;
+    }
 }
