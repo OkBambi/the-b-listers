@@ -3,7 +3,12 @@ using UnityEngine;
 public class SnakeHead : EnemyBase
 {
     [SerializeField] Snake snakeBody;
-    
+
+
+    protected virtual void Start()
+    {
+        ColorSelection(setColor);
+    }
 
     public override void DeathCheck()
     {
