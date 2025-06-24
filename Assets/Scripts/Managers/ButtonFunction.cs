@@ -51,20 +51,6 @@ public class ButtonFunction : MonoBehaviour
         }
     }
 
-    public void ontoggleOutline(bool ison)
-    {
-        if (OutlineToggler.isOn)
-        {
-            Debug.Log("Filter On");
-
-        
-        }
-        else
-        {
-            Debug.Log("default Camera");
-            
-        }
-    }
     public void BackButtonClick()
     {
         GameManager.instance.BackButton();

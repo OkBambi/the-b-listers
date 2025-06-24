@@ -4,53 +4,56 @@ using UnityEngine.AI;
 
 public class Monk : EnemyBase
 {
-    //casting
+    [Header("Casting")]
     [SerializeField] GameObject Wave;
     [SerializeField] float pauseToCastTimer;
+    [SerializeField] float waveSize;
+    private Vector3 waveSizeOriginal;
+    [SerializeField] float waveGrowthSpeed;
+    float waveGrowthTimer = 0;
 
 
     [Header("roaming movement")]
-    [SerializeField] int FaceTargetSpeed;
+    [SerializeField] int faceTargetSpeed;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] int roamDist;
     [SerializeField] int StopTime;
     float roamTimer;
 
-    //Seperation
+    [Header("Seperation")]
     [SerializeField] float minSeperationDistance;
     [SerializeField] GameObject SeperationDome;
 
-
-    Color colorOriginal;
-    bool PlayerInRange;
+    //detectors 
     public bool monkInRange;
+    bool isCasting = false;
+    Color colorOriginal;
 
-    Vector3 playerDir;
     Vector3 startingPOS;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
         startingPOS = transform.position;
-        GetComponent<Rigidbody>();
         ColorSelection(setColor);
-        StartCoroutine(Cast());
         agent = GetComponent<NavMeshAgent>();
+        colorOriginal = model.material.color;
+        if (Wave != null)
+        {
+            waveSizeOriginal = Wave.transform.localScale;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         roamCheck();
-        if (agent.remainingDistance < 0.01f)
+        if (agent.remainingDistance < 0.01f && !agent.pathPending && !isCasting)
         {
             roamTimer += Time.deltaTime;
-            if (monkInRange)
-            { 
-                monkScan();
-            }
-            PauseForAMoment();
+
             StartCoroutine(Cast());
+
         }
         FaceTarget();
     }
@@ -117,22 +120,43 @@ public class Monk : EnemyBase
         if (direction.sqrMagnitude > 0.001)
         {
             Quaternion rot = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * FaceTargetSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
         }
     }
-
-
 
     //casting
     IEnumerator Cast()
     {
+        isCasting = true;
         PauseForAMoment();
+
+        for (int i = 0; i < 2; i++)
+        {
+            model.material.color = Color.white;
+            yield return new WaitForSeconds(0.05f);
+            model.material.color = colorOriginal;
+            yield return new WaitForSeconds(0.05f);
+        }
+        if (monkInRange)
+        {
+            monkScan();
+        }
+        yield return new WaitForSeconds(0.20f);
         Wave.SetActive(true);
-        yield return new WaitForSeconds(15);
+        Wave.transform.localScale = Vector3.zero;
+        waveGrowthTimer = 0;
+        while (waveGrowthTimer < waveGrowthSpeed)
+        {
+            float growthRate = waveGrowthTimer / waveGrowthSpeed;
+            Wave.transform.localScale = Vector3.Lerp(Vector3.zero, waveSizeOriginal * waveSize, growthRate);
+            waveGrowthTimer += Time.deltaTime;
+            yield return null;
+        }
+
         Wave.SetActive(false);
-        yield break;
+        Wave.transform.localScale = waveSizeOriginal;
+        roam();
+        isCasting = false;
     }
-
-
 
 }
