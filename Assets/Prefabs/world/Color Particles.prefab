@@ -222,9 +222,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 2
+      minMaxState: 0
       minColor: {r: 0, g: 0, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.113523446, b: 0, a: 1}
+      maxColor: {r: 0, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 0, b: 0, a: 1}
@@ -4907,3 +4907,4 @@ MonoBehaviour:
   colorParticles: {fileID: 7473985483786903447}
   splatsPrefab: {fileID: 529820831358149147, guid: 8824c0c275a01bb46922fddc2f42b1fb, type: 3}
   splatsHolder: {fileID: 0}
+  startColor: {r: 0, g: 0, b: 0, a: 0}

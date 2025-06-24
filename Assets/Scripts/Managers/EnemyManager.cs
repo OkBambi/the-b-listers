@@ -55,6 +55,7 @@ public class EnemyManager : MonoBehaviour
                 break;
             }
         }
+        colorParticles = GameObject.Find("Color Particles").GetComponent<ParticleSystem>();
     }
 
     #region AEC

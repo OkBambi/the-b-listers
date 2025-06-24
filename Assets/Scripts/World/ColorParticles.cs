@@ -10,6 +10,11 @@ public class ColorParticles : MonoBehaviour
     private List<ParticleCollisionEvent> collisionEvents = new List<ParticleCollisionEvent>();
     public Color startColor;
 
+    private void Start()
+    {
+        splatsHolder = GameObject.Find("TheSplatHolder").transform;
+    }
+
     private void OnParticleCollision(GameObject other)
     {
         ParticlePhysicsExtensions.GetCollisionEvents(colorParticles, other, collisionEvents);
