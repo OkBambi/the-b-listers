@@ -5,6 +5,8 @@ public class WaveColorLockMonk : MonoBehaviour
     [SerializeField] GameObject WaveInstance;
     [SerializeField] float ColorLockTimer;
 
+
+
     private void OnTriggerEnter(Collider other)
     {
         IColorLock colorLock = GameManager.instance.playerScript.GetComponent<IColorLock>();
