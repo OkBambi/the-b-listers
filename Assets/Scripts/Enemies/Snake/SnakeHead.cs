@@ -3,6 +3,7 @@ using UnityEngine;
 public class SnakeHead : EnemyBase
 {
     [SerializeField] Snake snakeBody;
+    
 
     public override void DeathCheck()
     {

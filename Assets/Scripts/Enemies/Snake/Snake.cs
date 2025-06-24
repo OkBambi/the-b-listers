@@ -28,6 +28,8 @@ public class Snake : EnemyBase
 
     //ATTACKING
 
+
+
     private void Awake()
     {
         OnAECAwake();
@@ -39,9 +41,7 @@ public class Snake : EnemyBase
 
             Debug.Log((PrimaryColor)colourIndexes[rand]);
             colourIndexes.Remove(colourIndexes[rand]);
-
         }
-
     }
 
     void Start()
@@ -51,7 +51,7 @@ public class Snake : EnemyBase
         GetNewWanderTarget();
     }
 
-    
+
     void Update()
     {
         //MOVEMENT
@@ -99,7 +99,7 @@ public class Snake : EnemyBase
                 timer = wanderingTimer;
             }
 
-            if(isWandering)
+            if (isWandering)
             {
                 MoveTowards(wanderingTarget);
             }
@@ -109,9 +109,20 @@ public class Snake : EnemyBase
     //moves around the map
     void MoveTowards(Vector3 target)
     {
-        Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        transform.position = Vector3.MoveTowards(transform.position, target, movementSpeed * Time.deltaTime);
+        //Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        //transform.position = Vector3.MoveTowards(transform.position, target, movementSpeed * Time.deltaTime);
+        Vector3 direction = (target - transform.position);
+        direction.y = 0; //optional: keeps movement flat on the XZ plane
+        direction.Normalize();
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        Quaternion newRotation = Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        rb.MoveRotation(newRotation);
+
+        Vector3 moveStep = direction * movementSpeed * Time.deltaTime;
+        rb.MovePosition(rb.position + moveStep);
+
 
         if (Vector3.Distance(transform.position, target) < 0.5f)
         {
@@ -126,12 +137,7 @@ public class Snake : EnemyBase
         wanderingTarget = new Vector3(randomDirection.x, transform.position.y, randomDirection.z);
     }
 
-    //follows the player when in view
-
-
     //attacking player
 
-
-    //health - three individual heads for snake
 
 }
