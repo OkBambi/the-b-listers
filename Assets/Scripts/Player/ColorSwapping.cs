@@ -14,7 +14,7 @@ public class ColorSwapping : MonoBehaviour
     [Range(0f, 1f)] [SerializeField] float screenFlashSpeed;
     public void UpdateColor(ref PrimaryColor playerColor)
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && playerColor != PrimaryColor.RED)
         {
             playerColor = PrimaryColor.RED;
             red_m2.SetActive(true);
@@ -23,7 +23,7 @@ public class ColorSwapping : MonoBehaviour
             screenFlash.color = Color.red;
             StartCoroutine(FlashScreenColour());
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && playerColor != PrimaryColor.YELLOW)
         {
             playerColor = PrimaryColor.YELLOW;
             red_m2.SetActive(false);
@@ -32,7 +32,7 @@ public class ColorSwapping : MonoBehaviour
             screenFlash.color = Color.yellow;
             StartCoroutine(FlashScreenColour());
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && playerColor != PrimaryColor.BLUE)
         {
             playerColor = PrimaryColor.BLUE;
             red_m2.SetActive(false);
