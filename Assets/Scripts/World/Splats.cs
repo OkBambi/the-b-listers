@@ -60,7 +60,7 @@ public class Splats : MonoBehaviour
 
     private void SetProperties()
     {
-        //spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;//to make sure the splats do not hang off the edge.(Does not work for some reason)
+        spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;//to make sure the splats do not hang off the edge.
         spriteRenderer.sortingOrder = 3;//makes sure it is on top
     }
 }
