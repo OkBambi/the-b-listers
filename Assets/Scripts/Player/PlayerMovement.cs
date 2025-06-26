@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour, IDamage
 
         //jump, dash, etc etc
         //fov change from moving fast
-        cam.CameraAdjustFOV((moveDir.magnitude * 0.15f) + 1);
+        cam.CameraAdjustFOV((moveDir.magnitude * 0.05f) + 1);
     }
 
     void Space()

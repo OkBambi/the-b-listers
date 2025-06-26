@@ -24,6 +24,8 @@ public class RedSchmove : MonoBehaviour, ISchmove
     GameObject i;
     GameObject d;
 
+    CameraShake camShaker;
+
     float holdTime;
     bool timeToSlam;
 
@@ -31,6 +33,7 @@ public class RedSchmove : MonoBehaviour, ISchmove
     {
         player = GameManager.instance.playerScript;
         rb = player.GetComponentInChildren<Rigidbody>();
+        camShaker = GameObject.FindFirstObjectByType<CameraShake>();
     }
 
     void Update()
@@ -95,6 +98,8 @@ public class RedSchmove : MonoBehaviour, ISchmove
                 Destroy(d);
                 player.canMove = true;
                 player.canAction = true;
+                Instantiate(ParticleManager.instance.RedSchmoveSlamEffect, i.transform.position, Quaternion.identity);
+                StartCoroutine(camShaker.ShakeTween(2f, 0.75f, 0f, 0.25f));
             }
         }
     }
