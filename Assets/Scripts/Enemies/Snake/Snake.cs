@@ -136,7 +136,7 @@ public class Snake : EnemyBase
         Vector3 randomDirection = Random.insideUnitSphere * wanderingRadius;
 
 
-        if (Vector3.Distance(Vector3.zero, randomDirection + transform.position) < 50f)
+        if (Vector3.Distance(Vector3.zero, randomDirection + transform.position) < EnemyManager.instance.stage.transform.localScale.x / 2f)
         {
             randomDirection += transform.position;
             wanderingTarget = new Vector3(randomDirection.x, transform.position.y, randomDirection.z);
