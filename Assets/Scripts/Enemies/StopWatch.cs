@@ -36,15 +36,15 @@ public class StopWatch : EnemyBase, IDamage
         // Keep gravity off initially
         rb.useGravity = false;
         StartPos = transform.position;
+
+        EnemyManager.instance.StopwatchTrigger += CountDownTimer; // Subscribe to the stopwatch trigger event
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T)) 
-        {
-            CountDownTimer();
-        }
+
     }
 
     void CountDownTimer()

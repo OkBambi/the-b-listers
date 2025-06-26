@@ -2,6 +2,7 @@ using NUnit.Framework.Internal;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -23,7 +24,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] int spawnIndex;
 
     [SerializeField] bool isSpawningEnemies = true;
-    [Space]
+
+    public event Action StopwatchTrigger;
 
     [Header("Boid Stuff")]
     //so we stop getting stuff on awake
@@ -182,7 +184,7 @@ public class EnemyManager : MonoBehaviour
                 sp.enemyMesh = enemyMeshList[0];
                 sp.SetMesh(enemyMeshList[0]);
                 sp.modelFrame.transform.localScale = new Vector3(220f, 100f, 450f);
-                sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, Random.Range(0, 360), 0);
+                sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, UnityEngine.Random.Range(0, 360), 0);
                 break;
         }
 
@@ -194,7 +196,7 @@ public class EnemyManager : MonoBehaviour
 
     public Vector3 RandomizeSpawnLocation()
     {
-        return new Vector3(Random.Range(-100f, 100f), 40f, Random.Range(-100f, 100f));
+        return new Vector3(UnityEngine.Random.Range(-100f, 100f), 40f, UnityEngine.Random.Range(-100f, 100f));
     }
 
     public Vector3 FindAndValidateSpawnLocation()
@@ -226,5 +228,12 @@ public class EnemyManager : MonoBehaviour
     }
     #endregion
 
+    public void TriggerStopwatch()
+    {
+        if(StopwatchTrigger != null)
+        {
+            StopwatchTrigger();
 
+        }
+    }
 }
