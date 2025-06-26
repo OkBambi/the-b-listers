@@ -220,6 +220,9 @@ public class ComboManager : MonoBehaviour
                 float t = scoreTimer / scorePopDuration;
                 float scale = EaseInQuint(1f, 1.1f, t);
                 totalScoreUGUI.rectTransform.localScale = new Vector3(scale, scale, scale);
+
+                float rotation = EaseInQuint(0f, -10f, t);
+                totalScoreUGUI.rectTransform.localRotation = Quaternion.Euler(0, 0, rotation);
             }
             //go back down
             else if (scoreTimer <= scorePopDuration * 2)
@@ -227,12 +230,16 @@ public class ComboManager : MonoBehaviour
                 float t = (scoreTimer - scorePopDuration) / scorePopDuration;
                 float scale = EaseInQuint(1.1f, 1f, t);
                 totalScoreUGUI.rectTransform.localScale = new Vector3(scale, scale, scale);
+
+                float rotation = EaseInQuint(-10f, 0f, t);
+                totalScoreUGUI.rectTransform.localRotation = Quaternion.Euler(0, 0, rotation);
             }
             //WE'RE FREEEE (do this to ensure it goes back to 1,1,1 and not like 1.001 etc etc)
             else
             {
                 isScorePopping = false;
                 totalScoreUGUI.rectTransform.localScale = Vector3.one;
+                totalScoreUGUI.rectTransform.localRotation = Quaternion.identity;
             }
         }
     }
