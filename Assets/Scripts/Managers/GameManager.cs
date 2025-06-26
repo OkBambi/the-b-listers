@@ -98,10 +98,10 @@ public class GameManager : MonoBehaviour
 
     public void OnEndCondition()
     {
-        //statePause();
         //turn on the lose menu
         if (!isDead)
         {
+            statePause();
             isDead = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
