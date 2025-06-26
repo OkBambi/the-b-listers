@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.iOS;
 using static EasingLibrary;
 
 public class StopWatch : EnemyBase
