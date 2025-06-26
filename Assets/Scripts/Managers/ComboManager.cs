@@ -172,6 +172,10 @@ public class ComboManager : MonoBehaviour
                 float scale = EaseInQuint(1f, 1.1f, t);
                 comboGradeUGUI.rectTransform.localScale = new Vector3(scale, scale, scale);
                 comboMultUGUI.rectTransform.localScale = new Vector3(scale, scale, scale);
+
+                float rotation = EaseInQuint(0f, 10f, t);
+                comboGradeUGUI.rectTransform.localRotation = Quaternion.Euler(0f, 0f, rotation);
+                comboMultUGUI.rectTransform.localRotation = Quaternion.Euler(0f, 0f, rotation);
             }
             //go back down
             else if (popTimer <= popDuration * 2)
@@ -180,6 +184,20 @@ public class ComboManager : MonoBehaviour
                 float scale = EaseInQuint(1.1f, 1f, t);
                 comboGradeUGUI.rectTransform.localScale = new Vector3(scale, scale, scale);
                 comboMultUGUI.rectTransform.localScale = new Vector3(scale, scale, scale);
+
+                float rotation = EaseInQuint(10f, 0f, t);
+                comboGradeUGUI.rectTransform.localRotation = Quaternion.Euler(0f, 0f, rotation);
+                comboMultUGUI.rectTransform.localRotation = Quaternion.Euler(0f, 0f, rotation);
+            }
+            else
+            {
+                comboGradeUGUI.rectTransform.localScale = Vector3.one;
+                comboMultUGUI.rectTransform.localScale = Vector3.one;
+                comboGradeUGUI.rectTransform.localRotation = Quaternion.identity;
+                comboMultUGUI.rectTransform.localRotation = Quaternion.identity;
+
+                isPopping = false;
+                popTimer = 0f;
             }
         }
 
