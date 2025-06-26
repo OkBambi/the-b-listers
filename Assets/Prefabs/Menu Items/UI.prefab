@@ -1568,7 +1568,7 @@ RectTransform:
   m_Father: {fileID: 8302077868376401751}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.2, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1856,8 +1856,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8715202116360994517}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.2, y: 0}
-  m_AnchorMax: {x: 0.2, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2500,8 +2500,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 3806994525075260797}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5033,7 +5033,7 @@ RectTransform:
   m_Father: {fileID: 8666472795130337881}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -16583,7 +16583,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 783,123,854,124
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 71299bbdb7ddea74e89a529816d998a7, type: 2}
   m_sharedMaterial: {fileID: -3907019451045465018, guid: 71299bbdb7ddea74e89a529816d998a7, type: 2}
@@ -23363,6 +23363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fovSlider: {fileID: 1545372686942857195}
   mainCamera: {fileID: 0}
+  pixelCamera: {fileID: 0}
   fovText: {fileID: 4860188832743371708}
 --- !u!1 &7804633319907254796
 GameObject:
