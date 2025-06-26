@@ -22,6 +22,7 @@ public class ColorSwapping : MonoBehaviour
             blue_m2.SetActive(false);
             screenFlash.color = Color.red;
             StartCoroutine(FlashScreenColour());
+            EnemyManager.instance.TriggerStopwatch(); // Trigger the stopwatch event when color changes to red
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && playerColor != PrimaryColor.YELLOW)
         {
@@ -31,6 +32,8 @@ public class ColorSwapping : MonoBehaviour
             blue_m2.SetActive(false);
             screenFlash.color = Color.yellow;
             StartCoroutine(FlashScreenColour());
+            EnemyManager.instance.TriggerStopwatch(); // Trigger the stopwatch event when color changes to red
+
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) && playerColor != PrimaryColor.BLUE)
         {
@@ -40,8 +43,10 @@ public class ColorSwapping : MonoBehaviour
             blue_m2.SetActive(true);
             screenFlash.color = Color.blue;
             StartCoroutine(FlashScreenColour());
+            EnemyManager.instance.TriggerStopwatch(); // Trigger the stopwatch event when color changes to red
+
         }
-        
+
     }
 
 
