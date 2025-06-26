@@ -26,6 +26,8 @@ public class YellowSchmove : MonoBehaviour
     [SerializeField] int railgunDmg;
     [SerializeField] int railgunKnockback;
 
+    CameraShake camShaker;
+
     bool activated;
 
     void Start()
@@ -33,6 +35,7 @@ public class YellowSchmove : MonoBehaviour
         player = GameManager.instance.playerScript;
         rb = player.GetComponentInChildren<Rigidbody>();
         shootingPoint = GameManager.instance.shootingPoint;
+        camShaker = GameObject.FindFirstObjectByType<CameraShake>();
 
         ChargeGaugeUI.fillMethod = Image.FillMethod.Radial360;
     }
@@ -46,7 +49,7 @@ public class YellowSchmove : MonoBehaviour
             chargeTime += Time.deltaTime;
             player.canAction = false;
 
-
+            //increasing the charge level
             if (chargeTime >= chargeLevelDuration[Mathf.Clamp(chargeLevel, 0, chargeLevelDuration.Count - 1)] && ComboManager.instance.GetScore() >= 100 * (chargeLevel + 1))
             {
                 chargeTime = 0f;
@@ -84,6 +87,7 @@ public class YellowSchmove : MonoBehaviour
                     ComboManager.instance.RemoveScore(100 * chargeLevel); //may need to change this later
                     ComboFeed.theInstance.AddNewComboFeed("- " + (100 * chargeLevel).ToString() + " yellowSchmove");//same here
                     StartCoroutine(GameManager.instance.schmover.UpdateCoolDownUIYellow());
+                    StartCoroutine(camShaker.ShakeTween(1f, 0.04f * chargeLevel, 0f, 0.25f));
                 }
                 //ui resetting
                 ChargeCounterUI.color = Color.white;
@@ -104,6 +108,17 @@ public class YellowSchmove : MonoBehaviour
         ChargeGaugeUI.gameObject.SetActive(true);
         chargeTime = 0;
         activated = true;
+        StartCoroutine(ChargeShake());
         
+    }
+
+    IEnumerator ChargeShake()
+    {
+        while (activated)
+        {
+            StartCoroutine(camShaker.Shake(0.1f, 0.03f * chargeLevel));
+            yield return new WaitForSeconds(0.1f);
+        }
+        yield return null;
     }
 }

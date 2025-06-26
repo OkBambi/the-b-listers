@@ -8,6 +8,7 @@ public class ParticleManager : MonoBehaviour
     public Gradient DeflectYellow;
     public Gradient DeflectBlue;
     public Gradient DeflectBlack;
+    public GameObject RedSchmoveSlamEffect;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
