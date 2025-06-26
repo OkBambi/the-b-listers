@@ -8,6 +8,7 @@ public class FOVSlider : MonoBehaviour
     public Slider fovSlider;
     //same as the slider but to the camera
     public Camera mainCamera;
+    public Camera pixelCamera;
 
     //this can be optional but im putting this here if wanted
     //this is for the text element that will display the fov value
@@ -40,6 +41,7 @@ public class FOVSlider : MonoBehaviour
     {
         //updates the camera's fov
         mainCamera.fieldOfView = newFOV;
+        pixelCamera.fieldOfView = newFOV;
 
         //again, if added text, this updates the text just like the above one
         if (fovText != null )
