@@ -27,6 +27,7 @@ public class YellowSchmove : MonoBehaviour
     [SerializeField] int railgunKnockback;
 
     CameraShake camShaker;
+    PlayerArm arm;
 
     bool activated;
 
@@ -36,6 +37,7 @@ public class YellowSchmove : MonoBehaviour
         rb = player.GetComponentInChildren<Rigidbody>();
         shootingPoint = GameManager.instance.shootingPoint;
         camShaker = GameObject.FindFirstObjectByType<CameraShake>();
+        arm = GameObject.FindFirstObjectByType<PlayerArm>();
 
         ChargeGaugeUI.fillMethod = Image.FillMethod.Radial360;
     }
@@ -88,6 +90,7 @@ public class YellowSchmove : MonoBehaviour
                     ComboFeed.theInstance.AddNewComboFeed("- " + (100 * chargeLevel).ToString() + " yellowSchmove", (100 * chargeLevel));//same here
                     StartCoroutine(GameManager.instance.schmover.UpdateCoolDownUIYellow());
                     StartCoroutine(camShaker.ShakeTween(1f, 0.04f * chargeLevel, 0f, 0.25f));
+                    StartCoroutine(arm.RecoilTween(1f, 0.001f * chargeLevel, 0.01f * chargeLevel, 0.25f));
                 }
                 //ui resetting
                 ChargeCounterUI.color = Color.white;
@@ -117,6 +120,7 @@ public class YellowSchmove : MonoBehaviour
         while (activated)
         {
             StartCoroutine(camShaker.Shake(0.1f, 0.03f * chargeLevel));
+            StartCoroutine(arm.Recoil(0.1f, 0.005f * chargeLevel, 0.005f * chargeLevel));
             yield return new WaitForSeconds(0.1f);
         }
         yield return null;
