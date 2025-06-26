@@ -31,6 +31,12 @@ public class Monk : EnemyBase
 
     Vector3 startingPOS;
 
+    private void Awake()
+    {
+        RandomizeColor();
+        OnAECAwake();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
@@ -42,6 +48,7 @@ public class Monk : EnemyBase
         {
             waveSizeOriginal = Wave.transform.localScale;
         }
+        name = "Monk";
         roam();
     }
 

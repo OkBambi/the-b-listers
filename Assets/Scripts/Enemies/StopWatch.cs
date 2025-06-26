@@ -21,6 +21,7 @@ public class StopWatch : EnemyBase
 
     private void Awake()
     {
+        RandomizeColor();
         OnAECAwake();
         startPosition = transform.position.y;
         //endPosition = 3f; // Adjust the end position as needed
@@ -38,6 +39,7 @@ public class StopWatch : EnemyBase
         StartPos = transform.position;
 
         EnemyManager.instance.StopwatchTrigger += CountDownTimer; // Subscribe to the stopwatch trigger event
+        name = "Stop Watch";
 
     }
 
@@ -119,4 +121,17 @@ public class StopWatch : EnemyBase
         transform.position = StartPos; // Ensure we end at the exact position
     }
 
+
+    public override void DeathCheck()
+    {
+        if (hp <= 0)
+        {
+            isAlive = false;
+            OnAECDestroy();
+            RemoveSelfFromTargetList();
+            EnemyManager.instance.StopwatchTrigger -= CountDownTimer; // unSubscribe to the stopwatch trigger event
+            Destroy(gameObject);
+            return;
+        }
+    }
 }
