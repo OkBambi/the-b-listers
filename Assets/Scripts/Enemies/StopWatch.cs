@@ -46,7 +46,7 @@ public class StopWatch : EnemyBase
     void CountDownTimer()
     {
         counter++;
-        if(counter == 3 && !isSlamming)
+        if(counter >= 3 && !isSlamming)
         {
             counter = 0;
             isSlamming = true;
