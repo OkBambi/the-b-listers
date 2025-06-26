@@ -70,7 +70,7 @@ public class ComboFeed : MonoBehaviour
             finalScoreText.text = finalScore.ToString();
 
 
-            yield return new WaitForSeconds(endFeedSpeed);
+            yield return new WaitForSecondsRealtime(endFeedSpeed);
         }
     }
 }
