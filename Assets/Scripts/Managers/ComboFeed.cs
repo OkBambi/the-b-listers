@@ -63,9 +63,12 @@ public class ComboFeed : MonoBehaviour
         {
             GameObject newScoreFeed = Instantiate(feedListingPrefab, endFeed);
             newScoreFeed.transform.SetSiblingIndex(0);
+            newScoreFeed.GetComponent<FeedListing>().GetComponent<TextMeshProUGUI>().fontSize = 55;
+            newScoreFeed.GetComponent<FeedListing>().GetComponent<TextMeshProUGUI>().alignment = TextAlignmentOptions.Center;
             newScoreFeed.GetComponent<FeedListing>().SetScoreAndHow(finalFeedList[i]);
             finalScore += finalScoreList[i];
             finalScoreText.text = finalScore.ToString();
+
 
             yield return new WaitForSeconds(endFeedSpeed);
         }
