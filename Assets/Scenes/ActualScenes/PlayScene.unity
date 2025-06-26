@@ -688,7 +688,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 766196070945012508, guid: b566ac0c212d726428f3323243b47c3a, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 2039
+      value: 1015
       objectReference: {fileID: 0}
     - target: {fileID: 1090085926950873923, guid: b566ac0c212d726428f3323243b47c3a, type: 3}
       propertyPath: m_Cameras.Array.size
@@ -702,7 +702,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: MainCamera
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3928339288722426535, guid: b566ac0c212d726428f3323243b47c3a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
