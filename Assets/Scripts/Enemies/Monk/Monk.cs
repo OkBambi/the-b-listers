@@ -45,12 +45,6 @@ public class Monk : EnemyBase
         roam();
     }
 
-    public override void takeDamage(PrimaryColor hitcolor, int amount)
-    {
-        AudioManager.instance.Play("Monk_HitAudio");
-        base.takeDamage(hitcolor, amount);
-    }
-
     // Update is called once per frame
     void Update()
     {

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a76791ede84a241a96989add6ab92e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSounds: []
+  PlayerSounds: []
   WeaponSounds: []
   SchmoveSounds:
   - name: Yellow_Fire
@@ -69,8 +69,19 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
   UISounds: []
-  EnemySounds: []
+  EnemySounds:
+  - name: Monk_Cast
+    clip: {fileID: 8300000, guid: f1cfb96b3644d0e4481084590700455b, type: 3}
+    volume: 0.36
+    pitch: 1
+    source: {fileID: 0}
+  - name: Monk_Blinker
+    clip: {fileID: 8300000, guid: 4d8a6a6b2b529f34c8cd5ca742e826e7, type: 3}
+    volume: 0.28
+    pitch: 2.14
+    source: {fileID: 0}
   WorldSounds: []
+  Music: []
 --- !u!1001 &7159842087228185678
 PrefabInstance:
   m_ObjectHideFlags: 0
