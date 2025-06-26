@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.iOS;
 using static EasingLibrary;
 
-public class StopWatch : EnemyBase, IDamage
+public class StopWatch : EnemyBase
 {
     //[SerializeField] GameObject SpitSac;
     [SerializeField] GameObject ShockWave;
@@ -38,12 +38,6 @@ public class StopWatch : EnemyBase, IDamage
         StartPos = transform.position;
 
         EnemyManager.instance.StopwatchTrigger += CountDownTimer; // Subscribe to the stopwatch trigger event
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
 
@@ -106,7 +100,7 @@ public class StopWatch : EnemyBase, IDamage
         }
         transform.position = endPos; // Ensure we end at the exact position
         isSlamming = false;
-        Instantiate(ShockWave, transform.position - new Vector3(0f,1f,0f), Quaternion.identity); // Instantiate shockwave effect
+        Instantiate(ShockWave, transform.position - new Vector3(0f,1f,0f), Quaternion.identity).GetComponent<stopWatchShockWave>(); // Instantiate shockwave effect
         StartCoroutine(ReturnToStart()); // Return to start position after slamming 
     }
 

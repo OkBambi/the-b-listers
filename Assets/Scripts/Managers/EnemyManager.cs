@@ -143,9 +143,25 @@ public class EnemyManager : MonoBehaviour
         //what the spawn indicator will actually show
         switch (sp.enemyToSpawn.name)
         {
-            case "Monolith Blue":
+            case "Monolith_Enemy":
                 sp.enemyMesh = enemyMeshList[0];
                 sp.SetMesh(enemyMeshList[0]);
+                sp.modelFrame.transform.localScale = new Vector3(162f, 67f, 322f);
+                sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 180f);
+                break;
+            case "StopWatch":
+                sp.enemyMesh = enemyMeshList[1];
+                sp.SetMesh(enemyMeshList[1]);
+                break;
+            case "Monk_Enemy":
+                sp.enemyMesh = enemyMeshList[2];
+                sp.SetMesh(enemyMeshList[2]);
+                sp.modelFrame.transform.localScale = new Vector3(20f, 20f, 20f);
+                sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+                break;
+            case "Snake":
+                sp.enemyMesh = enemyMeshList[3];
+                sp.SetMesh(enemyMeshList[3]);
                 //sp.modelFrame.transform.localScale = new Vector3(162f, 67f, 322f);
                 //sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 180f);
                 break;
