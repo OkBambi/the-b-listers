@@ -11116,7 +11116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5244496927634214981}
   m_Layer: 5
-  m_Name: InfoShmoves
+  m_Name: InfoSchmoves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12780,6 +12780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fovSlider: {fileID: 7136565081313392372}
   mainCamera: {fileID: 2979528924940077614}
+  pixelCamera: {fileID: 0}
   fovText: {fileID: 5307944335951953323}
 --- !u!1 &5047391856338470327
 GameObject:
@@ -18262,7 +18263,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 171384421a11c5d4ea5d104f6f02c2ba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 336e232c7a6c7294a8ad97ddaa3acb9c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18546,7 +18547,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3871707373122797579
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18645,7 +18646,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SHMOVES
+  m_text: SCHMOVES
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -20811,7 +20812,7 @@ GameObject:
   - component: {fileID: 4499590734033385140}
   - component: {fileID: 8002155131262438787}
   m_Layer: 5
-  m_Name: ShmovesButton
+  m_Name: SchmovesButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
