@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class stopWatchShockWave : MonoBehaviour
@@ -30,9 +31,11 @@ public class stopWatchShockWave : MonoBehaviour
             shockWave.transform.localScale += new Vector3(speed * Time.deltaTime, 0f, speed * Time.deltaTime);
             if(shockWave.transform.localScale.x >= maxSize)
             {
+                shockWave.transform.localScale = new Vector3(0f, 0f, 0f);
                 break; // Exit the coroutine when the shock wave reaches its maximum size
             }
         }
+        yield return new WaitForSeconds(3f);
         Destroy(gameObject); // Destroy the shock wave GameObject after it reaches its maximum size
     }
 
@@ -43,15 +46,18 @@ public class stopWatchShockWave : MonoBehaviour
             // Handle player damage or effects here
             Debug.Log("Player hit by shock wave!");
             GameManager.instance.playerScript.canAction = false; // Disable player actions
-            Invoke("resetPlayer", ShockTime); // Reset player actions after 1 second
             // You can add player damage logic here
             GameManager.instance.player.GetComponent<Rigidbody>().AddForce(Vector3.up * LaunchHight, ForceMode.Impulse); // Example force to push the player up
+            Invoke("resetPlayer", ShockTime);
 
         }
     }
     
     private void resetPlayer()
     {
-                GameManager.instance.playerScript.canAction = true; // Re-enable player actions
+        Debug.Log("reset");
+        GameManager.instance.playerScript.canAction = true; // Re-enable player actions
     }
+
+    
 }

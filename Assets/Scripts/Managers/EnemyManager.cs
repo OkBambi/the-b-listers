@@ -9,6 +9,8 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager instance;
     [Space]
 
+    [SerializeField] float mapSize;
+
     [Space]
     //This is for those color splashes
     public ParticleSystem colorParticles;
@@ -143,9 +145,25 @@ public class EnemyManager : MonoBehaviour
         //what the spawn indicator will actually show
         switch (sp.enemyToSpawn.name)
         {
-            case "Monolith Blue":
+            case "Monolith_Enemy":
                 sp.enemyMesh = enemyMeshList[0];
                 sp.SetMesh(enemyMeshList[0]);
+                sp.modelFrame.transform.localScale = new Vector3(162f, 67f, 322f);
+                sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 180f);
+                break;
+            case "StopWatch":
+                sp.enemyMesh = enemyMeshList[1];
+                sp.SetMesh(enemyMeshList[1]);
+                break;
+            case "Monk_Enemy":
+                sp.enemyMesh = enemyMeshList[2];
+                sp.SetMesh(enemyMeshList[2]);
+                sp.modelFrame.transform.localScale = new Vector3(20f, 20f, 20f);
+                sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+                break;
+            case "Snake":
+                sp.enemyMesh = enemyMeshList[3];
+                sp.SetMesh(enemyMeshList[3]);
                 //sp.modelFrame.transform.localScale = new Vector3(162f, 67f, 322f);
                 //sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 180f);
                 break;
@@ -196,7 +214,8 @@ public class EnemyManager : MonoBehaviour
 
     public Vector3 RandomizeSpawnLocation()
     {
-        return new Vector3(UnityEngine.Random.Range(-100f, 100f), 40f, UnityEngine.Random.Range(-100f, 100f));
+        return new Vector3(UnityEngine.Random.Range(-mapSize, mapSize), 40f, 
+            UnityEngine.Random.Range(-mapSize, mapSize));
     }
 
     public Vector3 FindAndValidateSpawnLocation()

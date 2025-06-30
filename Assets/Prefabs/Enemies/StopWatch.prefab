@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2350332780393853857}
   - component: {fileID: 9196784621419938071}
   - component: {fileID: 2537083421555204562}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: StopWatch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,8 +51,8 @@ MonoBehaviour:
   model: {fileID: 2350332780393853857}
   setColor: 0
   hitVfx: {fileID: 0}
-  hp: 0
-  score: 50
+  hp: 7
+  score: 60
   ShockWave: {fileID: 1049063256035287301, guid: db36dbb4aa202104784009918f952e69, type: 3}
   slamDuration: 0.5
   endPosition: 2
@@ -87,7 +87,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: bd518a36aef2c134ab257589a79c7996, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -124,7 +124,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2

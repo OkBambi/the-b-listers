@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,16 +12,12 @@ public class FeedListing : MonoBehaviour
 // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Destroy(gameObject, timeTillKilled);//kills feed if it lasts longer then 5 seconds.
+        StartCoroutine(KillYourSelf());
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= timeTillKilled - 3)
-        {
-            ChangeAlpha();
-        }
+
     }
 
     public void SetScoreAndHow(string _scoreFeed)
@@ -36,5 +33,13 @@ public class FeedListing : MonoBehaviour
     private void ChangeAlpha()
     {
         gameObject.GetComponent<TextMeshProUGUI>().CrossFadeAlpha(0, 3, true);
+    }
+
+    private IEnumerator KillYourSelf()//kills feed if it lasts longer then 5 seconds.
+    {
+        yield return new WaitForSecondsRealtime(timeTillKilled - 3);
+        ChangeAlpha();
+        yield return new WaitForSecondsRealtime(3);
+        Destroy(gameObject);
     }
 }

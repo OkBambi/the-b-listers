@@ -121,6 +121,7 @@ public class StickyMechanics : MonoBehaviour
 
     public void DmgParent()
     {
+        if (!transform.parent) return;
         IDamage dmg = transform.parent.GetComponent<IDamage>();
         if (dmg != null)
         {

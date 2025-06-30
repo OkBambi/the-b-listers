@@ -21,6 +21,8 @@ public class SnakeHead : EnemyBase
                 trail.material.color = Color.blue;
                 break;
         }
+
+        name = "Snake Head";
     }
 
     public override void DeathCheck()

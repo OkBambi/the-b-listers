@@ -81,6 +81,7 @@ public class Player : MonoBehaviour, IColorLock
         return currentColor;
     }
 
+
     public void Die()
     {
         if (isDead)
@@ -94,8 +95,10 @@ public class Player : MonoBehaviour, IColorLock
         canColor = false;
         isDead = true;
 
+
         AudioManager.instance.Play("Death");
 
+        AudioManager.instance.Play("Game_Over");
 
         //save score
         //check for highscore

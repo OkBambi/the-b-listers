@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject MenuSettings;
     [SerializeField] GameObject MenuCredits;
     [SerializeField] GameObject MenuGameInfo;
+    [SerializeField] GameObject PlayerHUD;
 
     public GameObject player;
     public Player playerScript;
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
 
     public void BackButton()
     {
+        PlayerHUD.SetActive(true);
         MenuActive.SetActive(false);
         MenuActive = MenuPause;
         Cursor.visible = true;
@@ -73,6 +75,7 @@ public class GameManager : MonoBehaviour
     }
     public void StateSettings()
     {
+        PlayerHUD.SetActive(false);
         MenuActive = MenuSettings;
         MenuActive.SetActive(true);
     }
@@ -95,10 +98,10 @@ public class GameManager : MonoBehaviour
 
     public void OnEndCondition()
     {
-        //statePause();
         //turn on the lose menu
         if (!isDead)
         {
+            statePause();
             isDead = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;

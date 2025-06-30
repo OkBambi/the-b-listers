@@ -13,7 +13,7 @@ public class SettingsObject : ScriptableObject
     public WindowType windowType;
 
     [Space]
-    [Range(85, 110)] public int FOV;
+    [Range(60, 110)] public int FOV;
 
     [Space]
     public bool isReducedCameraShake;

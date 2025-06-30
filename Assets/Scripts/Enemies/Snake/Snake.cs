@@ -49,6 +49,7 @@ public class Snake : EnemyBase
         player = GameManager.instance.player.transform;
         timer = wanderingTimer;
         GetNewWanderTarget();
+        name = "Snake";
     }
 
 
@@ -134,12 +135,18 @@ public class Snake : EnemyBase
     {
         Vector3 randomDirection = Random.insideUnitSphere * wanderingRadius;
 
-        //my thinking is to send a raycast down to make sure that that spot is okay
-        if (Physics.Raycast(randomDirection, -Vector3.up, 10f))
+
+        if (Vector3.Distance(Vector3.zero, randomDirection + transform.position) < EnemyManager.instance.stage.transform.localScale.x / 2f)
         {
             randomDirection += transform.position;
             wanderingTarget = new Vector3(randomDirection.x, transform.position.y, randomDirection.z);
         }
+        //my thinking is to send a raycast down to make sure that that spot is okay
+        //if (Physics.Raycast(randomDirection, -Vector3.up, 1f))
+        //{
+        //    randomDirection += transform.position;
+        //    wanderingTarget = new Vector3(randomDirection.x, transform.position.y, randomDirection.z);
+        //}
         else
         {
             GetNewWanderTarget();
@@ -148,7 +155,13 @@ public class Snake : EnemyBase
         
     }
 
-    //attacking player
-
-
+    public override void takeDamage(PrimaryColor hitColor, int amount)
+    {
+        if (hitColor == setColor || hitColor == PrimaryColor.OMNI || setColor == PrimaryColor.OMNI)
+        {
+            hp -= amount;
+            if (isAlive)
+                DeathCheck();
+        }
+    }
 }
