@@ -164,6 +164,4 @@ public class Snake : EnemyBase
                 DeathCheck();
         }
     }
-
-
 }
