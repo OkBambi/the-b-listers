@@ -9,6 +9,8 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager instance;
     [Space]
 
+    [SerializeField] float mapSize;
+
     [Space]
     //This is for those color splashes
     public ParticleSystem colorParticles;
@@ -212,7 +214,8 @@ public class EnemyManager : MonoBehaviour
 
     public Vector3 RandomizeSpawnLocation()
     {
-        return new Vector3(UnityEngine.Random.Range(-100f, 100f), 40f, UnityEngine.Random.Range(-100f, 100f));
+        return new Vector3(UnityEngine.Random.Range(-mapSize, mapSize), 40f, 
+            UnityEngine.Random.Range(-mapSize, mapSize));
     }
 
     public Vector3 FindAndValidateSpawnLocation()
