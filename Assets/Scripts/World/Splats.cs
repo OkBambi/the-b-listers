@@ -29,18 +29,22 @@ public class Splats : MonoBehaviour
         if (splatColor == Color.red)
         {
             randIndex = Random.Range(0, 3);
+            spriteRenderer.color = new Color(splatColor.r, splatColor.g, splatColor.b, 0.9f);
         }
         else if (splatColor == Color.blue)
         {
             randIndex = Random.Range(4, 7);
+            spriteRenderer.color = new Color(splatColor.r, splatColor.g, splatColor.b, 0.9f);
         }
         else if (splatColor == Color.yellow)
         {
             randIndex = Random.Range(8, 11);
+            spriteRenderer.color = new Color(splatColor.r, splatColor.g, splatColor.b, 0.9f);
         }
         else
         {
             randIndex = Random.Range(12, 15);
+            spriteRenderer.color = new Color(splatColor.r, splatColor.g, splatColor.b, 0.9f);
         }
         spriteRenderer.sprite = sprites[randIndex];
     }
