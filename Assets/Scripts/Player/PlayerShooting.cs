@@ -25,6 +25,7 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] float rocketJumpAngle;
     [SerializeField] float rocketJumpForce;
     [SerializeField] int maxRocketJumps;
+    [SerializeField] Animator mAnimator;
 
     float shootTimer;
     bool isHolding;
@@ -36,6 +37,7 @@ public class PlayerShooting : MonoBehaviour
     public void Initialize()
     {
         camShaker = GameObject.FindFirstObjectByType<CameraShake>();
+       // mAnimator = GetComponent<Animator>();
     }
 
     public void UpdateWeapon(PrimaryColor playerColor, PlayerArm playerArm)
@@ -46,13 +48,14 @@ public class PlayerShooting : MonoBehaviour
         {
             isHolding = true;
             holdTime += Time.deltaTime;
-
+            
             if(holdTime > tapThreshold)
             {
                 //spray
                 if (shootTimer > fireRate)
                 {
                     shootTimer = 0;
+                    mAnimator.SetTrigger("Shooting");
                     GameObject b = Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
                     b.transform.Rotate(0, 0, UnityEngine.Random.Range(-360, 360));
                     Gradient grad;
