@@ -178,6 +178,7 @@ public class EnemyManager : MonoBehaviour
     public void SpawnEnemy()
     {
         //safety checks
+        if (GameManager.instance.playerScript.isDead) return;
         if (!isSpawningEnemies) return;
         if (currentEC >= AEC) return;
 
