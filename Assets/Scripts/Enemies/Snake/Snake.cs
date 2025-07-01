@@ -13,6 +13,7 @@ public class Snake : EnemyBase
     [SerializeField] float rotationSpeed;
     [SerializeField] float wanderingRadius;
     [SerializeField] float wanderingTimer;
+    [SerializeField] float startHeight;
 
     [SerializeField] Rigidbody rb;
 
@@ -48,6 +49,7 @@ public class Snake : EnemyBase
     {
         player = GameManager.instance.player.transform;
         timer = wanderingTimer;
+        startHeight = transform.position.y;
         GetNewWanderTarget();
         name = "Snake";
     }
@@ -133,24 +135,55 @@ public class Snake : EnemyBase
 
     void GetNewWanderTarget()
     {
-        Vector3 randomDirection = Random.insideUnitSphere * wanderingRadius;
-
-
-        if (Vector3.Distance(Vector3.zero, randomDirection + transform.position) < EnemyManager.instance.stage.transform.localScale.x / 2f)
+        RaycastHit hit;
+        int attemptCount = 0;
+        while (true)
         {
-            randomDirection += transform.position;
-            wanderingTarget = new Vector3(randomDirection.x, transform.position.y, randomDirection.z);
+            Vector3 randomDirection = Random.insideUnitSphere * wanderingRadius;
+            if (Physics.Raycast(randomDirection + transform.position, -Vector3.up, out hit))
+            {
+                //if we hit the ground, then there is nothing is that space, so spawn
+                if (hit.collider.CompareTag("groundTag") ||
+                    hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                {
+                    randomDirection += transform.position;
+                    wanderingTarget = new Vector3(randomDirection.x, transform.position.y, randomDirection.z);
+                    break;
+                }
+                //else we miss the platform or hit an enemy, try a different spot
+            }
+            else
+            {
+                ++attemptCount;
+                Debug.Log(attemptCount);
+                if (attemptCount >= 20)
+                {
+                    randomDirection += transform.position;
+                    wanderingTarget = new Vector3(EnemyManager.instance.stage.transform.position.x, transform.position.y, EnemyManager.instance.stage.transform.position.z);
+                    break;
+                }
+            }
         }
-        //my thinking is to send a raycast down to make sure that that spot is okay
-        //if (Physics.Raycast(randomDirection, -Vector3.up, 1f))
+
+        
+
+
+
+        //if (Vector3.Distance(Vector3.zero, randomDirection + transform.position) < EnemyManager.instance.stage.transform.localScale.x / 2f)
         //{
         //    randomDirection += transform.position;
         //    wanderingTarget = new Vector3(randomDirection.x, transform.position.y, randomDirection.z);
         //}
-        else
-        {
-            GetNewWanderTarget();
-        }
+        ////my thinking is to send a raycast down to make sure that that spot is okay
+        ////if (Physics.Raycast(randomDirection, -Vector3.up, 1f))
+        ////{
+        ////    randomDirection += transform.position;
+        ////    wanderingTarget = new Vector3(randomDirection.x, transform.position.y, randomDirection.z);
+        ////}
+        //else
+        //{
+        //    GetNewWanderTarget();
+        //}
 
         
     }

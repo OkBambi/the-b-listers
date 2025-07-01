@@ -154,11 +154,14 @@ public class EnemyBase : MonoBehaviour, IDamage
         Vector3 originalPos = transform.localPosition;
 
         float elapsed = 0.0f;
+        float _x;
+        float _y;
 
         while (elapsed < duration)
         {
-            float _x = Random.Range(-1f, 1f) * magnitude;
-            float _y = Random.Range(-1f, 1f) * magnitude;
+            if (Time.timeScale == 0f) yield break;
+            _x = Random.Range(-1f, 1f) * magnitude;
+            _y = Random.Range(-1f, 1f) * magnitude;
 
             transform.localPosition = originalPos + new Vector3(_x, _y, 0);
 
@@ -173,11 +176,14 @@ public class EnemyBase : MonoBehaviour, IDamage
     {
         Vector3 originalSize = transform.localScale;
         float elapsed = 0.0f;
+        float _x;
+        float _y;
 
         while (elapsed < duration)
         {
-            float _x = Random.Range(-1f, 1f) * magnitude;
-            float _y = Random.Range(-1f, 1f) * magnitude;
+            if (Time.timeScale == 0f) yield break;
+            _x = Random.Range(-1f, 1f) * magnitude;
+            _y = Random.Range(-1f, 1f) * magnitude;
 
             transform.localScale = originalSize + new Vector3(_x, _y, 0);
 
