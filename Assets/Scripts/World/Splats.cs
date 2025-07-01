@@ -26,22 +26,8 @@ public class Splats : MonoBehaviour
     private void SetSprite(Color splatColor)//need to update later to have it determine what color sprite it needs
     {
         int randIndex = 0;
-        if (splatColor == Color.red)
-        {
-            randIndex = Random.Range(0, 3);
-        }
-        else if (splatColor == Color.blue)
-        {
-            randIndex = Random.Range(4, 7);
-        }
-        else if (splatColor == Color.yellow)
-        {
-            randIndex = Random.Range(8, 11);
-        }
-        else
-        {
-            randIndex = Random.Range(12, 15);
-        }
+        randIndex = Random.Range(0, sprites.Length - 1);
+        spriteRenderer.color = new Color(splatColor.r, splatColor.g, splatColor.b, 0.9f);
         spriteRenderer.sprite = sprites[randIndex];
     }
 
