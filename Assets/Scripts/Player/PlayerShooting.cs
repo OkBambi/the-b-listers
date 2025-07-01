@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
@@ -39,6 +40,12 @@ public class PlayerShooting : MonoBehaviour
         camShaker = GameObject.FindFirstObjectByType<CameraShake>();
        // mAnimator = GetComponent<Animator>();
     }
+    IEnumerator ShotgunCycle()
+    {
+        AudioManager.instance.Play("Shotgun_Shot");
+        yield return new WaitForSeconds(2.0f);
+        AudioManager.instance.Play("Shotgun_Cockin");
+    }
 
     public void UpdateWeapon(PrimaryColor playerColor, PlayerArm playerArm)
     {
@@ -56,6 +63,7 @@ public class PlayerShooting : MonoBehaviour
                 {
                     shootTimer = 0;
                     mAnimator.SetTrigger("Shooting");
+                    AudioManager.instance.Play("Rapid");
                     GameObject b = Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
                     b.transform.Rotate(0, 0, UnityEngine.Random.Range(-360, 360));
                     Gradient grad;
@@ -95,6 +103,7 @@ public class PlayerShooting : MonoBehaviour
                 //shotgun
                 shootTimer = 0;
                 mAnimator.SetTrigger("Shotgun");
+                ShotgunCycle();
                 float dotProduct = Vector3.Dot(playerCam.forward, -Vector3.up);
                 float inverCos = Mathf.Acos(dotProduct);
                 float angle = Mathf.Rad2Deg * inverCos;
