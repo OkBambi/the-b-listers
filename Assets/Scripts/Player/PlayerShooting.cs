@@ -94,7 +94,7 @@ public class PlayerShooting : MonoBehaviour
             {
                 //shotgun
                 shootTimer = 0;
-
+                mAnimator.SetTrigger("Shotgun");
                 float dotProduct = Vector3.Dot(playerCam.forward, -Vector3.up);
                 float inverCos = Mathf.Acos(dotProduct);
                 float angle = Mathf.Rad2Deg * inverCos;

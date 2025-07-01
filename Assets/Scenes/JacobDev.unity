@@ -485,6 +485,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3923875554569662914, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923875554569662914, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 3990897285812716556, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -614,7 +622,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2348859292693357600, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5692723127181998997, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
       insertIndex: 0
@@ -705,7 +714,7 @@ GameObject:
   - component: {fileID: 271971666}
   - component: {fileID: 271971665}
   - component: {fileID: 271971664}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sw (14)
   m_TagString: groundTag
   m_Icon: {fileID: 0}
@@ -1149,7 +1158,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: e18859fd45968ca4fa34fc7d2d08b50c, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 70d731c787fb9a2458c49fec4f8e1a22, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &577955397
 Transform:
@@ -1719,7 +1728,7 @@ GameObject:
   - component: {fileID: 1168476051}
   - component: {fileID: 1168476050}
   - component: {fileID: 1168476049}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sw (17)
   m_TagString: groundTag
   m_Icon: {fileID: 0}
@@ -1827,7 +1836,7 @@ GameObject:
   - component: {fileID: 1318277105}
   - component: {fileID: 1318277104}
   - component: {fileID: 1318277103}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sw (10)
   m_TagString: groundTag
   m_Icon: {fileID: 0}
@@ -2151,7 +2160,7 @@ GameObject:
   - component: {fileID: 1797692070}
   - component: {fileID: 1797692069}
   - component: {fileID: 1797692068}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sw (19)
   m_TagString: groundTag
   m_Icon: {fileID: 0}
@@ -2259,7 +2268,7 @@ GameObject:
   - component: {fileID: 1938673586}
   - component: {fileID: 1938673585}
   - component: {fileID: 1938673584}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sw (16)
   m_TagString: groundTag
   m_Icon: {fileID: 0}
@@ -2367,7 +2376,7 @@ GameObject:
   - component: {fileID: 1984676066}
   - component: {fileID: 1984676065}
   - component: {fileID: 1984676064}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sw (18)
   m_TagString: groundTag
   m_Icon: {fileID: 0}
@@ -2808,7 +2817,7 @@ GameObject:
   - component: {fileID: 2038690685}
   - component: {fileID: 2038690684}
   - component: {fileID: 2038690683}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sw (15)
   m_TagString: groundTag
   m_Icon: {fileID: 0}
