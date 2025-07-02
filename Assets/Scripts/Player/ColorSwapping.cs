@@ -104,7 +104,6 @@ public class ColorSwapping : MonoBehaviour
             SetUpCurrentTint(true);
             StartCoroutine(MoveTint(currentTint, true));
         }
-
     }
 
 
