@@ -147,7 +147,7 @@ public class Snake : EnemyBase
                     hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
                 {
                     randomDirection += transform.position;
-                    wanderingTarget = new Vector3(randomDirection.x, transform.position.y, randomDirection.z);
+                    wanderingTarget = new Vector3(randomDirection.x, startHeight, randomDirection.z);
                     break;
                 }
                 //else we miss the platform or hit an enemy, try a different spot
@@ -159,7 +159,7 @@ public class Snake : EnemyBase
                 if (attemptCount >= 20)
                 {
                     randomDirection += transform.position;
-                    wanderingTarget = new Vector3(EnemyManager.instance.stage.transform.position.x, transform.position.y, EnemyManager.instance.stage.transform.position.z);
+                    wanderingTarget = new Vector3(EnemyManager.instance.stage.transform.position.x, startHeight, EnemyManager.instance.stage.transform.position.z);
                     break;
                 }
             }
