@@ -34,7 +34,9 @@ public class GameStartDagger : MonoBehaviour
         other.GetComponentInParent<Player>().canAction = true;
         other.GetComponentInParent<Player>().canColor = true;
         GameManager.instance.timer.isCounting = true;
+        AudioManager.instance.Play("GameMusic");
         EnemyManager.instance.SpawnFirstEnemy();
         Destroy(gameObject);
+        
     }
 }

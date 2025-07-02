@@ -16,13 +16,15 @@ public class PlayerArm : MonoBehaviour
     public IEnumerator Recoil(float duration, float magnitudeXY, float magnitudeZ)
     {
         float elapsed = 0.0f;
+        float _x;
+        float _y;
+        float _z = -magnitudeZ;
 
         while (elapsed < duration)
         {
-            float _x = Random.Range(-1f, 1f) * magnitudeXY;
-            float _y = Random.Range(-1f, 1f) * magnitudeXY;
-            float _z = -magnitudeZ;
-
+            if (Time.timeScale == 0f) yield break;
+            _x = Random.Range(-1f, 1f) * magnitudeXY;
+            _y = Random.Range(-1f, 1f) * magnitudeXY;
 
             transform.localPosition = defaultPos + new Vector3(_x, _y, _z);
 
@@ -38,11 +40,14 @@ public class PlayerArm : MonoBehaviour
         float elapsed = 0.0f;
 
         float _z = 0f;
+        float _x;
+        float _y;
 
         while (elapsed < duration)
         {
-            float _x = Random.Range(-1f, 1f) * magnitudeXY;
-            float _y = Random.Range(-1f, 1f) * magnitudeXY;
+            if (Time.timeScale == 0f) yield break;
+            _x = Random.Range(-1f, 1f) * magnitudeXY;
+            _y = Random.Range(-1f, 1f) * magnitudeXY;
             _z = EaseOutBounce(_z, -magnitudeZ, easeSpeed);
 
 
