@@ -13,6 +13,10 @@ public class ButtonFunction : MonoBehaviour
     [SerializeField] GameObject MainCamera;
     [SerializeField] GameObject ArcadeCamera;
 
+    void Start()
+    {
+        MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+    }
     public void onResume()
     {
         GameManager.instance.stateUnPause();
