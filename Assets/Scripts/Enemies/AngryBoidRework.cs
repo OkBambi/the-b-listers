@@ -80,7 +80,7 @@ public class AngryBoidRework : BoidAI
             Debug.Log("slowing");
             currentTime += Time.deltaTime;
             rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, Vector3.zero, slowDownSpeed);
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
         ++chargePhase;
         StartCoroutine(Charge());
@@ -94,7 +94,7 @@ public class AngryBoidRework : BoidAI
         while (chargePhase < 2)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(player.transform.position - transform.position), lookSpeed);
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
         yield return null;
         
@@ -109,7 +109,7 @@ public class AngryBoidRework : BoidAI
         while (chargingTime <= chargeDuration)
         {
             chargingTime += Time.deltaTime;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
         
         ++chargePhase;
@@ -180,7 +180,7 @@ public class AngryBoidRework : BoidAI
         {
             model.transform.localScale = Vector3.Lerp(model.transform.localScale, scaleSquished, 0.2f);
             ++count;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
         count = 0;
 
@@ -188,12 +188,13 @@ public class AngryBoidRework : BoidAI
         {
             model.transform.localScale = Vector3.Lerp(model.transform.localScale, scaleOriginal, 0.1f);
             ++count;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
         model.transform.localScale = scaleOriginal;
         Debug.Log("stop squish");
         yield return null;
 
     }
+
 
 }

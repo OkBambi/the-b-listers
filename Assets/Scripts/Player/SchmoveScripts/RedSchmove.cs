@@ -100,6 +100,7 @@ public class RedSchmove : MonoBehaviour, ISchmove
                 player.canAction = true;
                 Instantiate(ParticleManager.instance.RedSchmoveSlamEffect, i.transform.position, Quaternion.identity);
                 StartCoroutine(camShaker.ShakeTween(2f, 0.75f, 0f, 0.25f));
+                StartCoroutine(StopVelocity());
             }
         }
     }
@@ -111,5 +112,14 @@ public class RedSchmove : MonoBehaviour, ISchmove
         i = Instantiate(indicator);
         d = Instantiate(dmgIndic);
         activated = true;
+    }
+
+    IEnumerator StopVelocity()
+    {
+        float initialDampening = rb.linearDamping;
+        yield return new WaitForSeconds(0.075f);
+        rb.linearDamping = 10f;
+        yield return new WaitForSeconds(0.2f);
+        rb.linearDamping = initialDampening;
     }
 }
