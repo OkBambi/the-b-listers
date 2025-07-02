@@ -17,20 +17,63 @@ public class ColorSwapping : MonoBehaviour
     [Range(0f, 1f)] [SerializeField] float screenFlashSpeed;
     public void UpdateColor(ref PrimaryColor playerColor)
     {
+        bool isRight = true;
         if (Input.GetKeyDown(KeyCode.Alpha1) && playerColor != PrimaryColor.RED)
         {
+            switch (playerColor)
+            {
+                case PrimaryColor.YELLOW:
+                    StartCoroutine(MoveTint(currentTint, false));
+                    isRight = false;
+                    break;
+                case PrimaryColor.BLUE:
+                    StartCoroutine(MoveTint(currentTint, true));
+                    isRight = true;
+                    break;
+            }
+
             playerColor = PrimaryColor.RED;
             ProcessCurrentColour(ref playerColor);
+            SetUpCurrentTint(isRight);
+            StartCoroutine(MoveTint(currentTint, isRight));
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && playerColor != PrimaryColor.YELLOW)
         {
+            switch (playerColor)
+            {
+                case PrimaryColor.RED:
+                    StartCoroutine(MoveTint(currentTint, true));
+                    isRight = true;
+                    break;
+                case PrimaryColor.BLUE:
+                    StartCoroutine(MoveTint(currentTint, false));
+                    isRight = false;
+                    break;
+            }
+
             playerColor = PrimaryColor.YELLOW;
             ProcessCurrentColour(ref playerColor);
+            SetUpCurrentTint(isRight);
+            StartCoroutine(MoveTint(currentTint, isRight));
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) && playerColor != PrimaryColor.BLUE)
         {
+            switch (playerColor)
+            {
+                case PrimaryColor.RED:
+                    StartCoroutine(MoveTint(currentTint, false));
+                    isRight = false;
+                    break;
+                case PrimaryColor.YELLOW:
+                    StartCoroutine(MoveTint(currentTint, true));
+                    isRight = true;
+                    break;
+            }
+
             playerColor = PrimaryColor.BLUE;
             ProcessCurrentColour(ref playerColor);
+            SetUpCurrentTint(isRight);
+            StartCoroutine(MoveTint(currentTint, isRight));
 
         }
         else if (Input.GetKeyDown(KeyCode.Q))
@@ -136,13 +179,9 @@ public class ColorSwapping : MonoBehaviour
         while (counter <= 100)
         {
             if (isGoingRight)
-            {
                 currX = EaseInCubic(currX, finalX, screenFlashSpeed);
-            }
             else
-            {
                 currX = EaseInCubic(currX, finalX, screenFlashSpeed);
-            }
             tint.localPosition = new Vector3(currX, tint.localPosition.y, tint.localPosition.z);
             ++counter;
             yield return null;
