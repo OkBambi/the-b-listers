@@ -137,6 +137,7 @@ public class EnemyBase : MonoBehaviour, IDamage
             isAlive = false;
             OnAECDestroy();
             RemoveSelfFromTargetList();
+            AudioManager.instance.Play("Enemy_Death");
             Destroy(gameObject);
             return;
         }

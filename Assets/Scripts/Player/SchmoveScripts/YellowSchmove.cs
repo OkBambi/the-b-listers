@@ -91,7 +91,6 @@ public class YellowSchmove : MonoBehaviour
                     beam.railgunDmg = chargeLevel * railgunDmg;
                     rb.AddForce(shootingPoint.forward * chargeLevel * railgunKnockback, ForceMode.Impulse);
                     AudioManager.instance.Play("Yellow_Fire");
-
                     ComboManager.instance.RemoveScore(100 * chargeLevel); //may need to change this later
                     ComboFeed.theInstance.AddNewComboFeed("- " + (100 * chargeLevel).ToString() + " yellowSchmove", (100 * chargeLevel));//same here
                     StartCoroutine(GameManager.instance.schmover.UpdateCoolDownUIYellow());
