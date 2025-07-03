@@ -33,8 +33,8 @@ public class Monk : EnemyBase
 
     private void Awake()
     {
-        RandomizeColor();
         OnAECAwake();
+        RandomizeColor();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

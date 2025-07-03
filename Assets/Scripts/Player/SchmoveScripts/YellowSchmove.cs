@@ -25,6 +25,8 @@ public class YellowSchmove : MonoBehaviour
     [Header("Stats")]
     [SerializeField] int railgunDmg;
     [SerializeField] int railgunKnockback;
+    [SerializeField] Animator mAnimatorLeft;
+    [SerializeField] Animator mAnimatorRight;
 
     CameraShake camShaker;
     PlayerArm arm;
@@ -55,6 +57,7 @@ public class YellowSchmove : MonoBehaviour
             if (chargeTime >= chargeLevelDuration[Mathf.Clamp(chargeLevel, 0, chargeLevelDuration.Count - 1)] && ComboManager.instance.GetScore() >= 100 * (chargeLevel + 1))
             {
                 chargeTime = 0f;
+                mAnimatorRight.SetTrigger("RailGunRight");
 
                 //if (ComboManager.instance.currentScore >= chargeLevel * 100)x
                 AudioManager.instance.Play("Yellow_Charge");
@@ -65,11 +68,14 @@ public class YellowSchmove : MonoBehaviour
 
             if (chargeLevel == 3)
             {
+                AudioManager.instance.Stop("Yellow_Charge");
+               
                 ChargeGaugeUI.fillAmount = 1f;
                 ChargeCounterUI.color = Color.yellow;
             }
             else
             {
+                AudioManager.instance.Play("Yellow_Chargelvl3");
                 ChargeGaugeUI.fillAmount = chargeTime / chargeLevelDuration[chargeLevel];
             }
 

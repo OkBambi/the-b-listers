@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveColorLockMonk : MonoBehaviour
 {
@@ -11,15 +12,17 @@ public class WaveColorLockMonk : MonoBehaviour
 
     IEnumerator ChainScreen()
     {
-        yield return new WaitForSeconds(ColorLockTimer);
+        Debug.Log("Before UI");
+        yield return new WaitForSecondsRealtime(ColorLockTimer);
+        Debug.Log("UI OFF");
         ChainUI.SetActive(false);
-        Debug.Log("ChainUI Disabled");
     }
 
     private void OnTriggerEnter(Collider other)
     {
         IColorLock colorLock = GameManager.instance.playerScript.GetComponent<IColorLock>();
         colorLock.LockColorSelection(ColorLockTimer);
+        Debug.Log("UI ON");
         ChainUI.SetActive(true);
         StartCoroutine(ChainScreen());
     }

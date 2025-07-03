@@ -521,6 +521,38 @@ PrefabInstance:
       propertyPath: arm
       value: 
       objectReference: {fileID: 4173114402734692696}
+    - target: {fileID: 6544136719575331733, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
+      propertyPath: canAction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261247534326979501, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.0021377055
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261247534326979501, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.002142597
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261247534326979501, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9993267
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261247534326979501, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.036565267
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261247534326979501, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 4.192
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261247534326979501, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180.236
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261247534326979501, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -0.237
+      objectReference: {fileID: 0}
     - target: {fileID: 7843698751765381713, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -871,6 +903,10 @@ PrefabInstance:
       value: 0.61
       objectReference: {fileID: 0}
     - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
+      propertyPath: SchmoveSounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2a914b0bcc975e04c81a2d569fdfe708, type: 3}
+    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
       propertyPath: WeaponSounds.Array.data[0].pitch
       value: 1
       objectReference: {fileID: 0}
@@ -880,6 +916,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
       propertyPath: WeaponSounds.Array.data[2].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
+      propertyPath: SchmoveSounds.Array.data[0].pitch
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
@@ -893,6 +933,10 @@ PrefabInstance:
     - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
       propertyPath: WeaponSounds.Array.data[2].volume
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
+      propertyPath: SchmoveSounds.Array.data[0].volume
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2952979188818049576, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
       propertyPath: m_Name
@@ -2538,6 +2582,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5001171880905787501, guid: 2ff37f62bb686324893e075301874d31, type: 3}
+      propertyPath: mAnimatorLeft
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5001171880905787501, guid: 2ff37f62bb686324893e075301874d31, type: 3}
+      propertyPath: mAnimatorRight
+      value: 
+      objectReference: {fileID: 1203403281725742638}
     - target: {fileID: 5272018764977040749, guid: 2ff37f62bb686324893e075301874d31, type: 3}
       propertyPath: m_Layer
       value: 5

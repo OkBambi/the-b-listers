@@ -96,7 +96,6 @@ public class Player : MonoBehaviour, IColorLock
         isDead = true;
 
 
-        AudioManager.instance.Play("Death");
 
         AudioManager.instance.Play("Game_Over");
 
