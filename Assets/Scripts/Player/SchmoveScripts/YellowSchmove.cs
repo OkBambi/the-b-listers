@@ -64,12 +64,16 @@ public class YellowSchmove : MonoBehaviour
                 chargeLevel = Mathf.Clamp(++chargeLevel, 0, chargeLevelDuration.Count);
                 ChargeCounterUI.text = chargeLevel.ToString();
                 ChargeCounterUI.fontSize = 50 + 50 * chargeLevel;
+                if (chargeLevel == 2)
+                {
+                    AudioManager.instance.Play("Yellow_Chargelvl2");
+                    AudioManager.instance.Stop("Yellow_Charge");
+                }
             }
 
             if (chargeLevel == 3)
             {
                 AudioManager.instance.Stop("Yellow_Charge");
-               
                 ChargeGaugeUI.fillAmount = 1f;
                 ChargeCounterUI.color = Color.yellow;
             }
@@ -117,7 +121,7 @@ public class YellowSchmove : MonoBehaviour
         chargeTime = 0;
         activated = true;
         StartCoroutine(ChargeShake());
-        
+
     }
 
     IEnumerator ChargeShake()

@@ -49,17 +49,17 @@ MonoBehaviour:
   WeaponSounds:
   - name: Shotgun_Shot
     clip: {fileID: 8300000, guid: f39ecee690c0e3e429c88f4c41b8e6ee, type: 3}
-    volume: 0.57
+    volume: 0.45
     pitch: 1
     source: {fileID: 0}
   - name: Rapid
-    clip: {fileID: 8300000, guid: a4d1d09697e8f224b9ce4f5031599088, type: 3}
-    volume: 0.446
+    clip: {fileID: 8300000, guid: a992ee4aad5439e4d997243da4782eac, type: 3}
+    volume: 0.55
     pitch: 1
     source: {fileID: 0}
   SchmoveSounds:
   - name: Yellow_Fire
-    clip: {fileID: 8300000, guid: 8c25338523a213340b2d6c1f8e891a6b, type: 3}
+    clip: {fileID: 8300000, guid: 2a914b0bcc975e04c81a2d569fdfe708, type: 3}
     volume: 0.42
     pitch: 1
     source: {fileID: 0}
@@ -91,7 +91,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: GameMusic
     clip: {fileID: 8300000, guid: d1baf33d9bebe1945855dc8e8d837fdd, type: 3}
-    volume: 0.224
+    volume: 0
     pitch: 1
     source: {fileID: 0}
   EnemySounds:
@@ -104,6 +104,11 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 4d8a6a6b2b529f34c8cd5ca742e826e7, type: 3}
     volume: 0.61
     pitch: 2.14
+    source: {fileID: 0}
+  - name: Enemy_Death
+    clip: {fileID: 8300000, guid: 4f5b81f2ad7886247b0bd483383fae96, type: 3}
+    volume: 0.58
+    pitch: 1
     source: {fileID: 0}
   WorldSounds: []
   Music: []
