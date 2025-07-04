@@ -10,22 +10,23 @@ public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] Vector3 NormalPosition;
     [SerializeField] Vector3 HoverPosition;
 
-    void Start()
+    void Awake()
     {
-        NormalPosition = transform.position;
+        //NormalPosition = transform.position;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        // Move the card to the hover position when the mouse pointer enters
+        //moves the onject to the hover position when the mouse pointer enters
         transform.position = HoverPosition;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        // Return the card to its normal position when the mouse pointer exits
+        //returns the object to its normal position when the mouse pointer exits
         transform.position = NormalPosition;
     }
+
     //void Update()
     //{
     //    if (isHovering)
