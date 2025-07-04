@@ -52,6 +52,7 @@ public class YellowSchmove : MonoBehaviour
             //charging the railgun
             chargeTime += Time.deltaTime;
             player.canAction = false;
+            player.canColor = false;
 
             //increasing the charge level
             if (chargeTime >= chargeLevelDuration[Mathf.Clamp(chargeLevel, 0, chargeLevelDuration.Count - 1)] && ComboManager.instance.GetScore() >= 100 * (chargeLevel + 1))
@@ -107,14 +108,19 @@ public class YellowSchmove : MonoBehaviour
                 ChargeCounterUI.fontSize = 50;
                 ChargeGaugeUI.gameObject.SetActive(false);
 
-                mAnimatorRight.SetTrigger("RailGunDOWN");
+
 
                 chargeLevel = 0;
                 player.canAction = true;
+                player.canColor = true;
                 activated = false;
             }
         }
-        mAnimatorRight.SetTrigger("RailGunDOWN");
+        else
+        {
+            mAnimatorRight.SetTrigger("RailGunDOWN");
+        }
+
     }
 
     public void Activate()
