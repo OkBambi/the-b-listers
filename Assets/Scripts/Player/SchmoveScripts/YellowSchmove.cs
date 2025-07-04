@@ -32,6 +32,7 @@ public class YellowSchmove : MonoBehaviour
     PlayerArm arm;
 
     bool activated;
+    bool UPAnimationState = false;
 
     void Start()
     {
@@ -46,6 +47,7 @@ public class YellowSchmove : MonoBehaviour
 
     void Update()
     {
+        RailGunAnimation();
 
         if (activated)
         {
@@ -58,7 +60,7 @@ public class YellowSchmove : MonoBehaviour
             if (chargeTime >= chargeLevelDuration[Mathf.Clamp(chargeLevel, 0, chargeLevelDuration.Count - 1)] && ComboManager.instance.GetScore() >= 100 * (chargeLevel + 1))
             {
                 chargeTime = 0f;
-                mAnimatorRight.SetTrigger("RailGunUP");
+                
 
                 //if (ComboManager.instance.currentScore >= chargeLevel * 100)x
                 AudioManager.instance.Play("Yellow_Charge");
@@ -116,11 +118,23 @@ public class YellowSchmove : MonoBehaviour
                 activated = false;
             }
         }
+    }
+
+    private void RailGunAnimation()
+    {
+        if (activated)
+        {
+            if (!UPAnimationState)
+                mAnimatorRight.SetBool("RailGunUP", true);
+            mAnimatorRight.SetBool("RailGunDOWN", false);
+            UPAnimationState = true;
+        }
         else
         {
-            mAnimatorRight.SetTrigger("RailGunDOWN");
+            mAnimatorRight.SetBool("RailGunUP", false);
+            mAnimatorRight.SetBool("RailGunDOWN", true);
+            UPAnimationState =false;
         }
-
     }
 
     public void Activate()
