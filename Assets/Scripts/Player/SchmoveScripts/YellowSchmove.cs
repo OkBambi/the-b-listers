@@ -57,7 +57,7 @@ public class YellowSchmove : MonoBehaviour
             if (chargeTime >= chargeLevelDuration[Mathf.Clamp(chargeLevel, 0, chargeLevelDuration.Count - 1)] && ComboManager.instance.GetScore() >= 100 * (chargeLevel + 1))
             {
                 chargeTime = 0f;
-                mAnimatorRight.SetTrigger("RailGunRight");
+                mAnimatorRight.SetTrigger("RailGunUP");
 
                 //if (ComboManager.instance.currentScore >= chargeLevel * 100)x
                 AudioManager.instance.Play("Yellow_Charge");
@@ -107,11 +107,14 @@ public class YellowSchmove : MonoBehaviour
                 ChargeCounterUI.fontSize = 50;
                 ChargeGaugeUI.gameObject.SetActive(false);
 
+                mAnimatorRight.SetTrigger("RailGunDOWN");
+
                 chargeLevel = 0;
                 player.canAction = true;
                 activated = false;
             }
         }
+        mAnimatorRight.SetTrigger("RailGunDOWN");
     }
 
     public void Activate()
