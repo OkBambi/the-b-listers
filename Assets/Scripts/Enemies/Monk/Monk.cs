@@ -161,7 +161,7 @@ public class Monk : EnemyBase
         }
         Wave.transform.localScale = waveSizeOriginal;
 
-        
+
 
         if (monkInRange)
         {
