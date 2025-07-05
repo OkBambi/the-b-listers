@@ -46,16 +46,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerSounds: []
-  WeaponSounds: []
+  WeaponSounds:
+  - name: Shotgun_Shot
+    clip: {fileID: 8300000, guid: f39ecee690c0e3e429c88f4c41b8e6ee, type: 3}
+    volume: 0.496
+    pitch: 1
+    source: {fileID: 0}
+  - name: Rapid
+    clip: {fileID: 8300000, guid: a4d1d09697e8f224b9ce4f5031599088, type: 3}
+    volume: 0.128
+    pitch: 1
+    source: {fileID: 0}
   SchmoveSounds:
   - name: Yellow_Fire
-    clip: {fileID: 8300000, guid: 1bc7b0a89695f58408ff214c6803a2ab, type: 3}
-    volume: 0.4
+    clip: {fileID: 8300000, guid: 2a914b0bcc975e04c81a2d569fdfe708, type: 3}
+    volume: 0.268
     pitch: 1
     source: {fileID: 0}
   - name: Yellow_Charge
-    clip: {fileID: 8300000, guid: c0f58b62f2a81c944ad26185f3ab4325, type: 3}
-    volume: 0.4
+    clip: {fileID: 8300000, guid: a71f9ffa18d2df741a617ff362d3b326, type: 3}
+    volume: 0.121
+    pitch: 1
+    source: {fileID: 0}
+  - name: Yellow_Chargelvl2
+    clip: {fileID: 8300000, guid: 11afcfe7900a3d740a60b772b72407bc, type: 3}
+    volume: 0.214
+    pitch: 1
+    source: {fileID: 0}
+  - name: Yellow_Chargelvl3
+    clip: {fileID: 8300000, guid: 5ce90eceb00e1a84f9150255901fd6b0, type: 3}
+    volume: 0.623
     pitch: 1
     source: {fileID: 0}
   - name: Red_Launch
@@ -68,7 +88,17 @@ MonoBehaviour:
     volume: 0.6
     pitch: 1
     source: {fileID: 0}
-  UISounds: []
+  UISounds:
+  - name: Game_Over
+    clip: {fileID: 8300000, guid: b12120315ae629f428aec0fefd43ca3a, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: GameMusic
+    clip: {fileID: 8300000, guid: d1baf33d9bebe1945855dc8e8d837fdd, type: 3}
+    volume: 0.173
+    pitch: 1
+    source: {fileID: 0}
   EnemySounds:
   - name: Monk_Cast
     clip: {fileID: 8300000, guid: f1cfb96b3644d0e4481084590700455b, type: 3}
@@ -79,6 +109,21 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 4d8a6a6b2b529f34c8cd5ca742e826e7, type: 3}
     volume: 0.61
     pitch: 2.14
+    source: {fileID: 0}
+  - name: Enemy_Death
+    clip: {fileID: 8300000, guid: 4f5b81f2ad7886247b0bd483383fae96, type: 3}
+    volume: 0.58
+    pitch: 1
+    source: {fileID: 0}
+  - name: Monk_Wave_Hit
+    clip: {fileID: 8300000, guid: 0000e3a1490182b4fbacdfe4d12cdae8, type: 3}
+    volume: 0.58
+    pitch: 1
+    source: {fileID: 0}
+  - name: Monk_Wave_End
+    clip: {fileID: 8300000, guid: c1dcde64a0345f34b8b3fc300d7c2522, type: 3}
+    volume: 0.58
+    pitch: 1
     source: {fileID: 0}
   WorldSounds: []
   Music: []

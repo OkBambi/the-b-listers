@@ -14,7 +14,7 @@ public class Player : MonoBehaviour, IColorLock
     [SerializeField] CameraSpring cameraSpring;
 
     [Space]
-    [SerializeField] PrimaryColor currentColor;
+    [SerializeField] public PrimaryColor currentColor;
 
     [Space]
     [Header("Conditionals")]
@@ -96,7 +96,6 @@ public class Player : MonoBehaviour, IColorLock
         isDead = true;
 
 
-        AudioManager.instance.Play("Death");
 
         AudioManager.instance.Play("Game_Over");
 

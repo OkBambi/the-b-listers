@@ -1,32 +1,49 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveColorLockMonk : MonoBehaviour
 {
-    [SerializeField] GameObject WaveInstance;
-    [SerializeField] float ColorLockTimer;
-
-    //animation
+    [SerializeField] public int ColorLockTimer;
+    [SerializeField] GameObject ChainLock;
+    [SerializeField] GameObject ChainUnlock;
     [SerializeField] GameObject ChainUI;
+    [SerializeField] LockColorChange LockColorChange;
 
-    IEnumerator ChainScreen()
+
+    public void ChainScreen()
     {
-        yield return new WaitForSeconds(ColorLockTimer);
-        ChainUI.SetActive(false);
-        Debug.Log("ChainUI Disabled");
+        ChainLock.SetActive(true);
+        ChainUnlock.SetActive(false);
+        AudioManager.instance.Play("Monk_Wave_Hit");
+        StartCoroutine(ExitChainScreen(ColorLockTimer));
     }
+
+
+    IEnumerator ExitChainScreen(int timer)
+    {
+        Debug.Log("BEFORE EXIT CHAIN SCREEN TRIGGER");
+        yield return new WaitForSeconds(timer);
+        AudioManager.instance.Play("Monk_Wave_End");
+        ChainUnlock.SetActive(true);
+        ChainLock.SetActive(false);
+
+
+        Debug.Log("IVE GONE THROUGH IT, IT SHOULD WORK");
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("TRIGGER ENTERED");
         IColorLock colorLock = GameManager.instance.playerScript.GetComponent<IColorLock>();
-        colorLock.LockColorSelection(ColorLockTimer);
-        ChainUI.SetActive(true);
-        StartCoroutine(ChainScreen());
-    }
+        if (colorLock != null)
+        {
+            colorLock.LockColorSelection(ColorLockTimer);
+        }
+        LockColorChange.SwapChainColorToMonk();
 
-    private void OnTriggerExit(Collider other)
-    {
-        IColorLock colorLock = GetComponent<IColorLock>();
+        ChainScreen();
 
     }
 }

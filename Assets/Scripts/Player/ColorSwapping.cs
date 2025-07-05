@@ -17,152 +17,109 @@ public class ColorSwapping : MonoBehaviour
     [Range(0f, 1f)] [SerializeField] float screenFlashSpeed;
     public void UpdateColor(ref PrimaryColor playerColor)
     {
-        bool isRight = true;
         if (Input.GetKeyDown(KeyCode.Alpha1) && playerColor != PrimaryColor.RED)
-        {
-            switch (playerColor)
-            {
-                case PrimaryColor.YELLOW:
-                    StartCoroutine(MoveTint(currentTint, false));
-                    isRight = false;
-                    break;
-                case PrimaryColor.BLUE:
-                    StartCoroutine(MoveTint(currentTint, true));
-                    isRight = true;
-                    break;
-            }
+            SwapToColour(playerColor, PrimaryColor.RED, ref playerColor);
 
-            playerColor = PrimaryColor.RED;
-            ProcessCurrentColour(ref playerColor);
-            SetUpCurrentTint(isRight);
-            StartCoroutine(MoveTint(currentTint, isRight));
-        }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && playerColor != PrimaryColor.YELLOW)
-        {
-            switch (playerColor)
-            {
-                case PrimaryColor.RED:
-                    StartCoroutine(MoveTint(currentTint, true));
-                    isRight = true;
-                    break;
-                case PrimaryColor.BLUE:
-                    StartCoroutine(MoveTint(currentTint, false));
-                    isRight = false;
-                    break;
-            }
+            SwapToColour(playerColor, PrimaryColor.YELLOW, ref playerColor);
 
-            playerColor = PrimaryColor.YELLOW;
-            ProcessCurrentColour(ref playerColor);
-            SetUpCurrentTint(isRight);
-            StartCoroutine(MoveTint(currentTint, isRight));
-        }
         else if (Input.GetKeyDown(KeyCode.Alpha3) && playerColor != PrimaryColor.BLUE)
+            SwapToColour(playerColor, PrimaryColor.BLUE, ref playerColor);
+
+        else if (Input.GetKeyDown(KeyCode.E))
         {
-            switch (playerColor)
+            PrimaryColor finalColour = playerColor;
+            ++finalColour;
+            if (finalColour == PrimaryColor.OMNI)
             {
-                case PrimaryColor.RED:
-                    StartCoroutine(MoveTint(currentTint, false));
-                    isRight = false;
-                    break;
-                case PrimaryColor.YELLOW:
-                    StartCoroutine(MoveTint(currentTint, true));
-                    isRight = true;
-                    break;
+                finalColour = PrimaryColor.RED;
             }
-
-            playerColor = PrimaryColor.BLUE;
-            ProcessCurrentColour(ref playerColor);
-            SetUpCurrentTint(isRight);
-            StartCoroutine(MoveTint(currentTint, isRight));
-
+            SwapToColour(playerColor, finalColour, ref playerColor);
         }
         else if (Input.GetKeyDown(KeyCode.Q))
         {
-            StartCoroutine(MoveTint(currentTint, false));
-            ++playerColor;
-            Debug.Log(playerColor);
-            if (playerColor == PrimaryColor.OMNI)
-            {
-                playerColor = PrimaryColor.RED;
-            }
-            ProcessCurrentColour(ref playerColor);
-            SetUpCurrentTint(false);
-            StartCoroutine(MoveTint(currentTint, false));
-        }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            StartCoroutine(MoveTint(currentTint, true));
-            if (playerColor == PrimaryColor.RED)
-            {
-                playerColor = PrimaryColor.BLUE;
-            }
+            PrimaryColor finalColour = playerColor;
+            if (finalColour == PrimaryColor.RED)
+                finalColour = PrimaryColor.BLUE;
             else
-            {
-                --playerColor;
-            }
-            ProcessCurrentColour(ref playerColor);
-            SetUpCurrentTint(true);
-            StartCoroutine(MoveTint(currentTint, true));
+                --finalColour;
+            SwapToColour(playerColor, finalColour, ref playerColor);
         }
     }
 
+    public void SwapToColour(PrimaryColor currentColour, PrimaryColor finalColour, ref PrimaryColor playerColor)
+    {
+        switch (currentColour)
+        {
+            case PrimaryColor.RED:
+                switch (finalColour)
+                {
+                    case PrimaryColor.BLUE:
+                        StartCoroutine(MoveTint(currentTint, true));
+                        ProcessCurrentColour(ref finalColour);
+                        SetUpCurrentTint(true);
+                        StartCoroutine(MoveTint(currentTint, true));
+                        playerColor = PrimaryColor.BLUE;
+                        break;
+                    case PrimaryColor.YELLOW:
+                        StartCoroutine(MoveTint(currentTint, false));
+                        ProcessCurrentColour(ref finalColour);
+                        SetUpCurrentTint(false);
+                        StartCoroutine(MoveTint(currentTint, false));
+                        playerColor = PrimaryColor.YELLOW;
+                        break;
+                }
+                break;
 
-    //IEnumerator FlashScreenColour()
-    //{
-    //    screenFlash.gameObject.SetActive(true);
-    //    Color fadingColour = screenFlash.color;
-    //    float changingAlpha = 0f;
-    //    float timer = 0;
-    //    while(timer < screenFlashDuration / 4f)
-    //    {
-    //        changingAlpha = EasingLibrary.EaseInExpo(changingAlpha, 1f, screenFlashSpeed);
-    //        fadingColour = new Color(fadingColour.r, fadingColour.g, fadingColour.b, changingAlpha);
-    //        screenFlash.color = fadingColour;
-    //        timer += Time.deltaTime;
-    //        yield return null;
-    //    }
-    //    timer = 0;
-    //    while (timer < screenFlashDuration * 3f / 4f)
-    //    {
-    //        changingAlpha = EasingLibrary.EaseInCubic(changingAlpha, 0f, screenFlashSpeed / 2f);
-    //        fadingColour = new Color(fadingColour.r, fadingColour.g, fadingColour.b, changingAlpha);
-    //        screenFlash.color = fadingColour;
-    //        timer += Time.deltaTime;
-    //        yield return null;
-    //    }
-    //    screenFlash.gameObject.SetActive(false);
-    //    yield return null;
-    //}
+            case PrimaryColor.YELLOW:
+                switch (finalColour)
+                {
+                    case PrimaryColor.RED:
+                        StartCoroutine(MoveTint(currentTint, true));
+                        ProcessCurrentColour(ref finalColour);
+                        SetUpCurrentTint(true);
+                        StartCoroutine(MoveTint(currentTint, true));
+                        playerColor = PrimaryColor.RED;
+                        break;
+                    case PrimaryColor.BLUE:
+                        StartCoroutine(MoveTint(currentTint, false));
+                        ProcessCurrentColour(ref finalColour);
+                        SetUpCurrentTint(false);
+                        StartCoroutine(MoveTint(currentTint, false));
+                        playerColor = PrimaryColor.BLUE;
+                        break;
+                }
+                break;
 
-    //private void FlashSwipeColour(PrimaryColor currentColour, PrimaryColor finalColour)
-    //{
-    //    RectTransform currentTint;
-    //    RectTransform finalTint;
-    //    switch (currentColour)
-    //    {
-    //        case PrimaryColor.RED:
-    //            currentTint = redTint;
-    //            break;
-    //        case PrimaryColor.YELLOW:
-    //            currentTint = yellowTint;
-    //            break;
-    //        case PrimaryColor.BLUE:
-    //            currentTint = blueTint;
-    //            break;
-    //    }
-    //}
+            case PrimaryColor.BLUE:
+                switch (finalColour)
+                {
+                    case PrimaryColor.RED:
+                        StartCoroutine(MoveTint(currentTint, false));
+                        ProcessCurrentColour(ref finalColour);
+                        SetUpCurrentTint(false);
+                        StartCoroutine(MoveTint(currentTint, false));
+                        playerColor = PrimaryColor.RED;
+                        break;
+                    case PrimaryColor.YELLOW:
+                        StartCoroutine(MoveTint(currentTint, true));
+                        ProcessCurrentColour(ref finalColour);
+                        SetUpCurrentTint(true);
+                        StartCoroutine(MoveTint(currentTint, true));
+                        playerColor = PrimaryColor.YELLOW;
+                        break;
+                }
+                break;
+        }
+    }
+    
 
     private void SetUpCurrentTint(bool isGoingRight)
     {
         if (isGoingRight)
-        {
             currentTint.localPosition = new Vector3(-1920, 0, 0);
-        }
         else
-        {
             currentTint.localPosition = new Vector3(1920, 0, 0);
-        }
-        
     }
 
     IEnumerator MoveTint(RectTransform tint, bool isGoingRight)
@@ -174,7 +131,7 @@ public class ColorSwapping : MonoBehaviour
         float currX = oldX;
         Debug.Log(currX);
         int counter = 0;
-        //Mathf.Approximately(currX, finalX)
+
         while (counter <= 100)
         {
             if (isGoingRight)
@@ -198,28 +155,22 @@ public class ColorSwapping : MonoBehaviour
                 yellow_m2.SetActive(false);
                 blue_m2.SetActive(false);
                 currentTint = redTint;
-                //screenFlash.color = Color.red;
-                //StartCoroutine(FlashScreenColour());
                 break;
+
             case PrimaryColor.YELLOW:
                 red_m2.SetActive(false);
                 yellow_m2.SetActive(true);
                 blue_m2.SetActive(false);
                 currentTint = yellowTint;
-                //screenFlash.color = Color.yellow;
-                //StartCoroutine(FlashScreenColour());
                 break;
+
             case PrimaryColor.BLUE:
                 red_m2.SetActive(false);
                 yellow_m2.SetActive(false);
                 blue_m2.SetActive(true);
                 currentTint = blueTint;
-                //screenFlash.color = Color.blue;
-                //StartCoroutine(FlashScreenColour());
                 break;
         }
         EnemyManager.instance.TriggerStopwatch(); // Trigger the stopwatch event when color changes
-
-
     }
 }
