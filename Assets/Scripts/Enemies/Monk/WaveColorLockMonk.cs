@@ -23,8 +23,8 @@ public class WaveColorLockMonk : MonoBehaviour
 
     public void ChainScreen()
     {
-        ChainStates[1].gameObject.SetActive(true);
-        ChainStates[0].gameObject.SetActive(false);
+        ChainStates[0].gameObject.SetActive(true);
+        ChainStates[1].gameObject.SetActive(false);
         AudioManager.instance.Play("Monk_Wave_Hit");
         StartCoroutine(ExitChainScreen(ColorLockTimer));
     }
@@ -35,8 +35,8 @@ public class WaveColorLockMonk : MonoBehaviour
         Debug.Log("BEFORE EXIT CHAIN SCREEN TRIGGER");
         yield return new WaitForSeconds(timer);
         AudioManager.instance.Play("Monk_Wave_End");
-        ChainStates[0].gameObject.SetActive(true);
-        ChainStates[1].gameObject.SetActive(false);
+        ChainStates[1].gameObject.SetActive(true);
+        ChainStates[0].gameObject.SetActive(false);
 
 
         Debug.Log("IVE GONE THROUGH IT, IT SHOULD WORK");
