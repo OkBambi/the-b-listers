@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2130920958900456391}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
-  m_LocalPosition: {x: -3.226694, y: 3.2499988, z: 3.8387825}
+  m_LocalPosition: {x: -2.5780702, y: 1, z: 1.6558552}
   m_LocalScale: {x: 19.94, y: 19.94, z: 19.94}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -110,8 +110,8 @@ MonoBehaviour:
   score: 60
   Wave: {fileID: 3166157826796465087}
   pauseToCastTimer: 2
-  waveSize: 30
-  waveGrowthSpeed: 0.35
+  waveSize: 60
+  waveGrowthSpeed: 0.25
   faceTargetSpeed: 5
   agent: {fileID: 3359546144697713813}
   roamDist: 30
@@ -262,8 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1af13835a1242c438155a3384e545ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaveInstance: {fileID: 3166157826796465087}
-  ColorLockTimer: 3
+  ColorLockTimer: 5
   ChainUI: {fileID: 0}
 --- !u!135 &1144159770599546745
 SphereCollider:
