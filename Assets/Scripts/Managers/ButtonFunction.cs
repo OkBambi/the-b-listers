@@ -39,7 +39,7 @@ public class ButtonFunction : MonoBehaviour
         GameManager.instance.stateUnPause();
     }
 
-    public void ontoggleArcade(bool ison)
+    public void ontoggleArcade()
     { 
         if (ArcadeToggler.isOn)
         {
@@ -53,6 +53,23 @@ public class ButtonFunction : MonoBehaviour
             MainCamera.SetActive(true);
             ArcadeCamera.SetActive(false);
         }
+    }
+
+    public void ontoggleArcade(bool toggle)
+    {
+        if (toggle)
+        {
+            Debug.Log("Filter On");
+            MainCamera.SetActive(false);
+            ArcadeCamera.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("default Camera");
+            MainCamera.SetActive(true);
+            ArcadeCamera.SetActive(false);
+        }
+        ArcadeToggler.isOn = toggle;
     }
 
     public void BackButtonClick()

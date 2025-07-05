@@ -9,8 +9,8 @@ public class SettingsMenu : MonoBehaviour
 {
     //audio variables
     public AudioMixer audioMixer;
-    public Slider volumeSlider;
-    public TextMeshProUGUI volText;
+    public Slider vfxSlider;
+    public TextMeshProUGUI vfxText;
 
     //res stuff
     public TMP_Dropdown resolutionDropdown;
@@ -45,7 +45,7 @@ public class SettingsMenu : MonoBehaviour
 
         //beginning of the volume stuff
         //gets the initial volume from the AudioMixer and set the slider and text
-        if (audioMixer != null && volumeSlider != null && volText != null)
+        if (audioMixer != null && vfxSlider != null && vfxText != null)
         {
             float currentVolume;
             //trying to get the current vol from the AudioMixer
@@ -53,15 +53,15 @@ public class SettingsMenu : MonoBehaviour
             {
                 //if we keep our AudioMixer parameter "Volume" set to receive values like -80 to 0 dB,
                 // and our slider is still set to this -80 to 0, keep the code.
-                volumeSlider.value = currentVolume;
-                volText.text = ConvertDbToPercentage(currentVolume).ToString("F0") + "%"; // Convert dB to a more readable percentage
+                vfxSlider.value = currentVolume;
+                vfxText.text = ConvertDbToPercentage(currentVolume).ToString("F0") + "%"; // Convert dB to a more readable percentage
             }
             else
             {
                 //fallback if parameter not found or other issue
                 Debug.LogWarning("AudioMixer parameter 'Volume' not found or could not be retrieved. Ensure it's being called correctly.");
-                volumeSlider.value = 0; //defaults to 0
-                volText.text = "0%";
+                vfxSlider.value = 0; //defaults to 0
+                vfxText.text = "0%";
             }
         }
         else
@@ -71,8 +71,8 @@ public class SettingsMenu : MonoBehaviour
     }
 
 
-    //area for vol
-    public void SetVolume(float volume)
+    //area for vfx
+    public void SetVFXVolume(float volume)
     {
         //Debug.Log("Setting Volume to: {volume}"); //uncomment to see the slider's val
         if (audioMixer != null)
@@ -82,15 +82,15 @@ public class SettingsMenu : MonoBehaviour
             audioMixer.SetFloat("Volume", volume); //og
         }
 
-        if (volText != null)
+        if (vfxText != null)
         {
             //updates the text display
-            //the slider val will be in dB if you set your slider from -80 to 0. which it is unless someone changes it *stare*
+            //the slider val will be in dB if you set your slider from -80 to 0. which it is unless someone changes it *stare* ._.
             //since it is, we're displaying it as a percentage for readability
             //volText.text = ConvertDbToPercentage(volume).ToString("F0") + "%";
 
             //yoga's version of the vfx text update
-            volText.text = (volumeSlider.value).ToString("F0") + "%";
+            vfxText.text = ((vfxSlider.value + 80f) * 1.25f).ToString("F0") + "%";
 
         }
     }
