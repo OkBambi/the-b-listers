@@ -14,7 +14,7 @@ public class Player : MonoBehaviour, IColorLock
     [SerializeField] CameraSpring cameraSpring;
 
     [Space]
-    [SerializeField] PrimaryColor currentColor;
+    [SerializeField] public PrimaryColor currentColor;
 
     [Space]
     [Header("Conditionals")]
