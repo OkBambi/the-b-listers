@@ -12,9 +12,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] float mapSize;
 
     [Space]
-    //This is for those color splashes
-    public GameObject colorParticlesGameObject;
-    public ParticleSystem colorParticles;
+
 
     [SerializeField] GameObject spawnIndicator;
     [Space]
@@ -60,7 +58,6 @@ public class EnemyManager : MonoBehaviour
                 break;
             }
         }
-        colorParticles = Instantiate(colorParticlesGameObject, new Vector3(100, 100, 100), Quaternion.identity).GetComponent<ParticleSystem>();
     }
 
     #region AEC
