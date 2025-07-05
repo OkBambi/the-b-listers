@@ -13,6 +13,7 @@ public class EnemyManager : MonoBehaviour
 
     [Space]
     //This is for those color splashes
+    public GameObject colorParticlesGameObject;
     public ParticleSystem colorParticles;
 
     [SerializeField] GameObject spawnIndicator;
@@ -59,7 +60,7 @@ public class EnemyManager : MonoBehaviour
                 break;
             }
         }
-        colorParticles = GameObject.Find("Color Particles").GetComponent<ParticleSystem>();
+        colorParticles = Instantiate(colorParticlesGameObject, new Vector3(100, 100, 100), Quaternion.identity).GetComponent<ParticleSystem>();
     }
 
     #region AEC
