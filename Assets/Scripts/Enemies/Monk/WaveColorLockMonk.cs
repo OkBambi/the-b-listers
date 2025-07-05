@@ -5,18 +5,23 @@ using UnityEngine.UI;
 public class WaveColorLockMonk : MonoBehaviour
 {
     [SerializeField] GameObject WaveInstance;
-    [SerializeField] float ColorLockTimer;
+    [SerializeField] public int ColorLockTimer;
+    [SerializeField] GameObject ChainUI;
 
+    float ChainTimer;
 
-    IEnumerator ChainScreen()
+    public void ChainScreen()
     {
+        ChainTimer += Time.deltaTime;
         AudioManager.instance.Play("Monk_Wave_Hit");
-        GameManager.instance.ChainUI.SetActive(true);
-       yield return new WaitForSecondsRealtime(ColorLockTimer);
-        Debug.Log("AFTER");
-        AudioManager.instance.Play("Monk_Wave_Hit");
-        GameManager.instance.ChainUI.SetActive(false);
-        
+        ChainUI.SetActive(true);
+
+        if (ChainTimer <= ColorLockTimer)
+        {
+            Debug.Log("AFTER");
+            AudioManager.instance.Play("Monk_Wave_Hit");
+            ChainUI.SetActive(false);
+        }
     }
 
 
@@ -24,7 +29,7 @@ public class WaveColorLockMonk : MonoBehaviour
     {
         IColorLock colorLock = GameManager.instance.playerScript.GetComponent<IColorLock>();
         colorLock.LockColorSelection(ColorLockTimer);
-        StartCoroutine(ChainScreen());
+        ChainScreen();
 
     }
 

@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject MenuGameInfo;
     [SerializeField] GameObject PlayerHUD;
 
-    public GameObject ChainUI;
+   
     public GameObject player;
     public Player playerScript;
     public bool isPaused;
