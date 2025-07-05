@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class WaveColorLockMonk : MonoBehaviour
 {
-    [SerializeField] GameObject WaveInstance;
     [SerializeField] public int ColorLockTimer;
     [SerializeField] GameObject ChainUI;
 
@@ -12,30 +11,30 @@ public class WaveColorLockMonk : MonoBehaviour
 
     public void ChainScreen()
     {
-        ChainTimer += Time.deltaTime;
-        AudioManager.instance.Play("Monk_Wave_Hit");
         ChainUI.SetActive(true);
+        AudioManager.instance.Play("Monk_Wave_Hit");
+        StartCoroutine(ExitChainScreen(ColorLockTimer));
+    }
 
-        if (ChainTimer <= ColorLockTimer)
-        {
-            Debug.Log("AFTER");
-            AudioManager.instance.Play("Monk_Wave_Hit");
-            ChainUI.SetActive(false);
-        }
+    IEnumerator ExitChainScreen(int timer)
+    {
+        Debug.Log("BEFORE EXIT CHAIN SCREEN TRIGGER");
+        yield return new WaitForSeconds(timer);
+        ChainUI.SetActive(false);
+        Debug.Log("IVE GONE THROUGH IT, IT SHOULD WORK");
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("TRIGGER ENTERED");
         IColorLock colorLock = GameManager.instance.playerScript.GetComponent<IColorLock>();
-        colorLock.LockColorSelection(ColorLockTimer);
+        if (colorLock != null)
+        {
+            colorLock.LockColorSelection(ColorLockTimer);
+        }
+
         ChainScreen();
-
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        IColorLock colorLock = GetComponent<IColorLock>();
 
     }
 }
