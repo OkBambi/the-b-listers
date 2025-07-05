@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 5423275441298933267}
   - component: {fileID: 2161496043515557472}
   - component: {fileID: 4681726430559390448}
+  - component: {fileID: 562988025177513330}
   - component: {fileID: 6484883120799959230}
   - component: {fileID: 1144159770599546745}
   m_Layer: 8
@@ -250,6 +251,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &562988025177513330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3166157826796465087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2766a998f6ef8fa4f8ec7b1927ba2d6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MonkPrimary: {fileID: 678332203169664480}
+  ChainToggleables: []
+  ChainImageArray: []
+  PrimaryColor: 0
+  ChangeColor: {fileID: 0}
+  ColorLockMonk: {fileID: 0}
 --- !u!114 &6484883120799959230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,6 +358,7 @@ MonoBehaviour:
   ChainImageArray: []
   PrimaryColor: 0
   ChangeColor: {fileID: 0}
+  ColorLockMonk: {fileID: 0}
 --- !u!1 &8846788637968686138
 GameObject:
   m_ObjectHideFlags: 0
