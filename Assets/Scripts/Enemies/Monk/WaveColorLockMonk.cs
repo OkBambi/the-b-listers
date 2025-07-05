@@ -10,7 +10,6 @@ public class WaveColorLockMonk : MonoBehaviour
     [SerializeField] GameObject ChainUI;
     [SerializeField] LockColorChange LockColorChange;
 
-    float ChainTimer;
 
     public void ChainScreen()
     {

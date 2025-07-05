@@ -9,6 +9,8 @@ public class LockColorChange : MonoBehaviour
     [SerializeField] RawImage[] ChainImageArray;
     [SerializeField] PrimaryColor PrimaryColor;
     [SerializeField] ColorSwapping ChangeColor;
+    [SerializeField] WaveColorLockMonk ColorLockMonk;
+
 
     void Start()
     {
