@@ -25,7 +25,7 @@ public class Snake : EnemyBase
     [SerializeField] Transform player;
     [SerializeField] float followRange = 10f;
 
-    private bool isFollowing = false;
+    //private bool isFollowing = false;
 
     //ATTACKING
 
@@ -45,7 +45,7 @@ public class Snake : EnemyBase
         }
     }
 
-    void Start()
+    protected override void Start()
     {
         player = GameManager.instance.player.transform;
         timer = wanderingTimer;
@@ -86,13 +86,13 @@ public class Snake : EnemyBase
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         if (distanceToPlayer < followRange)
         {
-            isFollowing = true;
+            //isFollowing = true;
             isWandering = false;
             MoveTowards(player.position);
         }
         else if (!isWandering)
         {
-            isFollowing = false;
+            //isFollowing = false;
             timer -= Time.deltaTime;
 
             if (timer <= 0)

@@ -23,7 +23,7 @@ public class EnemyBase : MonoBehaviour, IDamage
 
 
 
-    string nameStr;
+    //string nameStr;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
@@ -43,20 +43,20 @@ public class EnemyBase : MonoBehaviour, IDamage
         {
             case PrimaryColor.RED:
                 model.material.color = Color.red;
-                nameStr = "Red";
+                //nameStr = "Red";
                 break;
             case PrimaryColor.YELLOW:
                 model.material.color = Color.yellow;
-                nameStr = "Yellow";
+                //nameStr = "Yellow";
                 break;
             case PrimaryColor.BLUE:
                 model.material.color = Color.blue;
-                nameStr = "Blue";
+                //nameStr = "Blue";
                 break;
             case PrimaryColor.OMNI:
             default:
                 model.material.color = Color.black;
-                nameStr = "Omni";
+                //nameStr = "Omni";
                 break;
         }
         baseColor = model.material.color;

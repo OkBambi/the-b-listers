@@ -102,8 +102,6 @@ public class Schmoves : MonoBehaviour
     [SerializeField] TextMeshProUGUI YellowCD_M2;
     [SerializeField] TextMeshProUGUI BlueCD_M2;
 
-    private bool isUpdating;
-
     [Header("CoolDownFinish")]
     [SerializeField] float finishSpeed;
     [SerializeField] List<int> animationDurations;
@@ -122,7 +120,6 @@ public class Schmoves : MonoBehaviour
 
         do
         {
-            isUpdating = true;
             if (cooldownRed > 0)
             {
                 cooldownRed = Mathf.Clamp(cooldownRed - Time.deltaTime, 0f, 100f);
@@ -149,7 +146,6 @@ public class Schmoves : MonoBehaviour
             yield return null;
         } while (true);
 
-        isUpdating = false;
         yield return null;
     }
 
@@ -183,7 +179,6 @@ public class Schmoves : MonoBehaviour
             yield return null;
         } while (true);
 
-        isUpdating = false;
         yield return null;
     }
 
@@ -218,7 +213,6 @@ public class Schmoves : MonoBehaviour
             yield return null;
         } while (true);
 
-        isUpdating = false;
         yield return null;
     }
 
