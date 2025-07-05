@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3359546144697713813}
   m_Layer: 7
   m_Name: Monk_Enemy
-  m_TagString: monkEnemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -263,7 +263,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ColorLockTimer: 5
+  ChainLock: {fileID: 0}
+  ChainUnlock: {fileID: 0}
   ChainUI: {fileID: 0}
+  LockColorChange: {fileID: 54409144999819444}
 --- !u!135 &1144159770599546745
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -294,6 +297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3092578260872014703}
+  - component: {fileID: 54409144999819444}
   m_Layer: 7
   m_Name: Controller
   m_TagString: Untagged
@@ -318,6 +322,23 @@ Transform:
   - {fileID: 5802317475518152574}
   m_Father: {fileID: 8974869154418730767}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &54409144999819444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8078194510631094572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2766a998f6ef8fa4f8ec7b1927ba2d6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MonkPrimary: {fileID: 678332203169664480}
+  ChainToggleables: []
+  ChainImageArray: []
+  PrimaryColor: 0
+  ChangeColor: {fileID: 0}
 --- !u!1 &8846788637968686138
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +351,7 @@ GameObject:
   - component: {fileID: 5195968046830200925}
   - component: {fileID: 4659689970883636019}
   - component: {fileID: 3728688490814827143}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Repulsion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
