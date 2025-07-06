@@ -184,6 +184,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(timer);
         AudioManager.instance.Play("Monk_Wave_End");
         ChainStates[1].gameObject.SetActive(true);
+        StartCoroutine (ChainReset());
         ChainStates[0].gameObject.SetActive(false);
         Debug.Log("IVE GONE THROUGH IT, IT SHOULD WORK");
     }
