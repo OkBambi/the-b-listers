@@ -203,21 +203,25 @@ public class EnemyBase : MonoBehaviour, IDamage
         if (setColor == PrimaryColor.RED)
         {
             colorParticles.startColor = Color.red;
+            ParticleManager.instance.colorParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.color = Color.red;
             ParticleManager.instance.colorParticles.GetComponent<ColorParticles>().startColor = Color.red;
         }
         else if (setColor == PrimaryColor.BLUE)
         {
             colorParticles.startColor = Color.blue;
+            ParticleManager.instance.colorParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.color = Color.blue;
             ParticleManager.instance.colorParticles.GetComponent<ColorParticles>().startColor = Color.blue;
         }
         else if (setColor == PrimaryColor.YELLOW)
         {
             colorParticles.startColor = Color.yellow;
+            ParticleManager.instance.colorParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.color = Color.yellow;
             ParticleManager.instance.colorParticles.GetComponent<ColorParticles>().startColor = Color.yellow;
         }
         else if (setColor == PrimaryColor.OMNI)
         {
             colorParticles.startColor = Color.black;
+            ParticleManager.instance.colorParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.color = Color.black;
             ParticleManager.instance.colorParticles.GetComponent<ColorParticles>().startColor = Color.black;
         }
 

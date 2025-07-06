@@ -21,5 +21,6 @@ public class ParticleManager : MonoBehaviour
     {
         instance = this;
         colorParticles = Instantiate(colorParticlesGameObject, new Vector3(100, 100, 100), Quaternion.identity).GetComponent<ParticleSystem>();
+        colorParticles.name = colorParticlesGameObject.name;
     }
 }
