@@ -13,6 +13,8 @@ public class ParticleManager : MonoBehaviour
     //This is for those color splashes
     public GameObject colorParticlesGameObject;
     public ParticleSystem colorParticles;
+    public int hitParticleAmt;
+    public int deathParticleAmt;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()

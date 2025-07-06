@@ -220,7 +220,17 @@ public class EnemyBase : MonoBehaviour, IDamage
             colorParticles.startColor = Color.black;
             ParticleManager.instance.colorParticles.GetComponent<ColorParticles>().startColor = Color.black;
         }
-        ParticleManager.instance.colorParticles.emission.SetBurst(5, new ParticleSystem.Burst());
+        var emmission = ParticleManager.instance.colorParticles.emission;
+
+        if (hp > 0)//this allows the amount of particles that come out of an enemy to be less if it is not dead.
+        {
+            emmission.SetBurst(0, new ParticleSystem.Burst(0f, ParticleManager.instance.hitParticleAmt));
+        }
+        else
+        {
+            emmission.SetBurst(0, new ParticleSystem.Burst(0f, ParticleManager.instance.deathParticleAmt));
+        }
+
         ParticleManager.instance.colorParticles.Play();
     }
 }
