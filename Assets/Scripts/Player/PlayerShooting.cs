@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
@@ -25,6 +26,7 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] float rocketJumpAngle;
     [SerializeField] float rocketJumpForce;
     [SerializeField] int maxRocketJumps;
+    [SerializeField] Animator mAnimator;
 
     float shootTimer;
     bool isHolding;
@@ -36,8 +38,10 @@ public class PlayerShooting : MonoBehaviour
     public void Initialize()
     {
         camShaker = GameObject.FindFirstObjectByType<CameraShake>();
+        // mAnimator = GetComponent<Animator>();
     }
 
+  
     public void UpdateWeapon(PrimaryColor playerColor, PlayerArm playerArm)
     {
         shootTimer += Time.deltaTime;
@@ -47,16 +51,18 @@ public class PlayerShooting : MonoBehaviour
             isHolding = true;
             holdTime += Time.deltaTime;
 
-            if(holdTime > tapThreshold)
+            if (holdTime > tapThreshold)
             {
                 //spray
                 if (shootTimer > fireRate)
                 {
                     shootTimer = 0;
+                    mAnimator.SetTrigger("Shooting");
+                    AudioManager.instance.Play("Rapid");
                     GameObject b = Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
                     b.transform.Rotate(0, 0, UnityEngine.Random.Range(-360, 360));
                     Gradient grad;
-                    switch(playerColor)
+                    switch (playerColor)
                     {
                         case PrimaryColor.RED:
                             b.GetComponent<Renderer>().material.color = Color.red;
@@ -83,15 +89,16 @@ public class PlayerShooting : MonoBehaviour
             }
         }
 
-        if(Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             isHolding = false;
 
-            if(holdTime <= tapThreshold && shootTimer > shotCooldown)
+            if (holdTime <= tapThreshold && shootTimer > shotCooldown)
             {
                 //shotgun
                 shootTimer = 0;
-
+                mAnimator.SetTrigger("Shotgun");
+                AudioManager.instance.Play("Shotgun_Shot");
                 float dotProduct = Vector3.Dot(playerCam.forward, -Vector3.up);
                 float inverCos = Mathf.Acos(dotProduct);
                 float angle = Mathf.Rad2Deg * inverCos;

@@ -1,22 +1,23 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveColorLockMonk : MonoBehaviour
 {
-    [SerializeField] GameObject WaveInstance;
-    [SerializeField] float ColorLockTimer;
-
-
+    [SerializeField] public int ColorLockTimer;
+    [SerializeField] LockColorChange LockColorChange;
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("TRIGGER ENTERED");
         IColorLock colorLock = GameManager.instance.playerScript.GetComponent<IColorLock>();
+        if (colorLock != null)
+        {
             colorLock.LockColorSelection(ColorLockTimer);
+        }
+        LockColorChange.SwapChainColorToMonk();
 
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        IColorLock colorLock = GetComponent<IColorLock>();
-
+        GameManager.instance.ChainScreen(ColorLockTimer);
     }
 }
