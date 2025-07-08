@@ -26,7 +26,7 @@ public class Monk_MiniBoss : Monk
             ColorSelection(newColor);
             
             ColorChangeIdex++;
-            if(ColorChangeIdex >= colorRoutine.Length)
+            if(ColorChangeIdex >= 2)
             {
                 ColorChangeIdex = 0;
             }
