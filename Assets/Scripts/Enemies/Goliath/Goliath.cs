@@ -31,6 +31,7 @@ public class Goliath : EnemyBase
     [SerializeField] int roamStopTimer;
     float roamTime;
     float remainingDistance;
+    Vector3 roamPosition;
 
 
     [Space]
@@ -45,7 +46,7 @@ public class Goliath : EnemyBase
     [Header("Swim Parameters")]
     [SerializeField] float swimSpeed;
 
-
+    Transform playerTransform;
     float stateTimer;
     Vector3 startPos;
 
@@ -53,6 +54,11 @@ public class Goliath : EnemyBase
     {
         ColorSelection(setColor);
         startPos = transform.position;
+
+        PickRoamLocation();
+
+        //for swimming
+        //playerTransform = GameManager.instance.player.transform;
 
         //for diving
         maxX = map.transform.lossyScale.x - radiusOfDiveLocation - 30;
@@ -70,14 +76,19 @@ public class Goliath : EnemyBase
     {
         if (currentState == State.Roam)
         {
+
             if (remainingDistance < 0.01f)
             {
                 roamTime += Time.deltaTime;
+                if (roamTime >= roamStopTimer)
+                {
+                    PickRoamLocation();
+                    roamTime = 0f;
+                }
             }
-
-            if (roamTime >= roamStopTimer && remainingDistance < 0.01f)
+            else
             {
-                Roam();
+                RoamToLocation();
             }
 
 
@@ -95,6 +106,8 @@ public class Goliath : EnemyBase
         }
         else if (currentState == State.Swimming)
         {
+            stateTimer += Time.deltaTime;
+
             //track player from under the map
         }
         else if (currentState == State.Breach)
@@ -103,18 +116,22 @@ public class Goliath : EnemyBase
         }
     }
 
-    void Roam()
+    void PickRoamLocation()
     {
-        roamTime = 0;
-
+        roamTime = 0f;
         Vector3 ranPos = Random.insideUnitCircle * roamDistance;
         ranPos += startPos;
+        roamPosition = ranPos;
+        remainingDistance = (transform.position - roamPosition).normalized.magnitude;
+    }
 
-        remainingDistance = (transform.position - ranPos).normalized.magnitude;
+    void RoamToLocation()
+    {
+        print("Roaming");
+        remainingDistance = (transform.position - roamPosition).normalized.magnitude;
 
-        //NavMeshHit hit;
-        //NavMesh.SamplePosition(ranPos, out hit, roamDistance, 1);
-        //agent.SetDestination(hit.position);
+        Vector3 direction = (roamPosition - transform.position).normalized;
+        transform.Translate(direction * roamSpeed * Time.deltaTime);
     }
     
     void Diving()
@@ -123,6 +140,10 @@ public class Goliath : EnemyBase
         goliathHitLocation.transform.position = divePos;
         goliathHitLocation.GetComponent<Renderer>().enabled = true;
         stateTimer = 0;
+
+        //go down to indicator and through the map
+        
+        //switch to swimming when Y level is within a certain threshold
         currentState = State.Swimming;
     }
 }
