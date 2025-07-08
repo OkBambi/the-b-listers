@@ -2252,40 +2252,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1200476489 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9018942012178815089, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-  m_PrefabInstance: {fileID: 9174702343328813044}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1200476492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1200476489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0750da9386a2bb74d99b90e16b1178fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1359443019 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 179240139863544708, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-  m_PrefabInstance: {fileID: 9174702343328813044}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1359443022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1359443019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0750da9386a2bb74d99b90e16b1178fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1410033365
 GameObject:
   m_ObjectHideFlags: 0
@@ -3487,10 +3453,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 179240139863544708, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      propertyPath: m_Name
-      value: ChainVideoUnlock
-      objectReference: {fileID: 0}
     - target: {fileID: 765095653579140490, guid: 2ff37f62bb686324893e075301874d31, type: 3}
       propertyPath: MainCamera
       value: 
@@ -3499,30 +3461,6 @@ PrefabInstance:
       propertyPath: ArcadeCamera
       value: 
       objectReference: {fileID: 7843698751921006741}
-    - target: {fileID: 900283249047638560, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      propertyPath: m_PlaybackSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234626974950347617, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      propertyPath: m_IsOn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234626974950347617, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234626974950347617, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234626974950347617, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234626974950347617, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: ButtonFunction, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 1392586728937957284, guid: 2ff37f62bb686324893e075301874d31, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3611,40 +3549,10 @@ PrefabInstance:
       propertyPath: mAnimatorRight
       value: 
       objectReference: {fileID: 1203403281725742638}
-    - target: {fileID: 6006273828357547317, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7370963198122677017, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7540960348084928443, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7740294914428156270, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8399752418724324577, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      propertyPath: m_PlaybackSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018942012178815089, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      propertyPath: m_Name
-      value: ChainVideoLock
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 179240139863544708, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1359443022}
-    - targetCorrespondingSourceObject: {fileID: 9018942012178815089, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1200476492}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ff37f62bb686324893e075301874d31, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
