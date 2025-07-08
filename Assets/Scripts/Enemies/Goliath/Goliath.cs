@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -31,6 +32,15 @@ public class Goliath : EnemyBase
     float roamTime;
     float remainingDistance;
 
+
+    [Space]
+    [Header("Dive Parameters")]
+    [SerializeField] float diveSpeed;
+    [SerializeField] float radiusOfDiveLocation;
+    [SerializeField] GameObject map;
+    private GameObject goliathHitLocation;
+    private float maxX;
+    private float maxZ;
     [Space]
     [Header("Swim Parameters")]
     [SerializeField] float swimSpeed;
@@ -43,6 +53,12 @@ public class Goliath : EnemyBase
     {
         ColorSelection(setColor);
         startPos = transform.position;
+
+        //for diving
+        maxX = map.transform.lossyScale.x - radiusOfDiveLocation - 30;
+        maxZ = map.transform.lossyScale.z - radiusOfDiveLocation - 30;
+        goliathHitLocation = GameObject.Find("GoliathHitMarker");
+        goliathHitLocation.transform.localScale = new Vector3(radiusOfDiveLocation, 0.1f, radiusOfDiveLocation);
     }
 
     void Update()
@@ -70,11 +86,12 @@ public class Goliath : EnemyBase
             if (stateTimer > topRoamTime)
             {
                 currentState = State.Diving;
+                Debug.Log("Goliath is diving!");
             }
         }
         else if (currentState == State.Diving)
         {
-            //smth
+            Diving();
         }
         else if (currentState == State.Swimming)
         {
@@ -98,5 +115,14 @@ public class Goliath : EnemyBase
         //NavMeshHit hit;
         //NavMesh.SamplePosition(ranPos, out hit, roamDistance, 1);
         //agent.SetDestination(hit.position);
+    }
+    
+    void Diving()
+    {
+        Vector3 divePos = new Vector3(Random.Range(-maxX, maxX), 1.1f,Random.Range(-maxZ, maxZ));
+        goliathHitLocation.transform.position = divePos;
+        goliathHitLocation.GetComponent<Renderer>().enabled = true;
+        stateTimer = 0;
+        currentState = State.Swimming;
     }
 }
