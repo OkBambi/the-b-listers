@@ -10,9 +10,6 @@ public class AECAngryBoidRework : AngryBoidRework
             OnAECDestroy();
             RemoveSelfFromTargetList();
             AudioManager.instance.Play("Enemy_Death");
-            ComboManager.instance.AddScore(score);
-            float scoreWithMult = ComboManager.instance.getScoreTimesMult(score);
-            ComboFeed.theInstance.AddNewComboFeed("+ " + scoreWithMult.ToString() + " " + transform.name, scoreWithMult);
             Destroy(gameObject);
             return;
         }

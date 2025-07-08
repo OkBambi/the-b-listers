@@ -104,8 +104,8 @@ public class EnemyBase : MonoBehaviour, IDamage
     public void OnAECDestroy()
     {
         EnemyManager.instance.OnAECDestroy();
-        ComboManager.instance.AddScore(score);
         float scoreWithMult = ComboManager.instance.getScoreTimesMult(score);
+        ComboManager.instance.AddScore(scoreWithMult);
         ComboFeed.theInstance.AddNewComboFeed("+ " + scoreWithMult.ToString() + " " + gameObject.name, scoreWithMult);
     }
 
