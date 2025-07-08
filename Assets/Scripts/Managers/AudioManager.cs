@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
             {
                 s.source = gameObject.AddComponent<AudioSource>();
                 s.source.clip = s.clip;
-                s.source.volume = s.volume * SettingsManager.instance.VFXVolume();
+                s.source.volume = s.volume * SettingsManager.instance.GetVFXVolume();
                 s.source.pitch = s.pitch;
             }
         }
@@ -46,7 +46,7 @@ public class AudioManager : MonoBehaviour
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
-            s.source.volume = s.volume * SettingsManager.instance.MusicVolume();
+            s.source.volume = s.volume * SettingsManager.instance.GetMusicVolume();
             s.source.pitch = s.pitch;
         }
 
@@ -116,7 +116,7 @@ public class AudioManager : MonoBehaviour
         {
             foreach (Sound s in array)
             {
-                s.source.volume = s.volume * SettingsManager.instance.VFXVolume();
+                s.source.volume = s.volume * SettingsManager.instance.GetVFXVolume();
             }
         }
     }
@@ -125,7 +125,7 @@ public class AudioManager : MonoBehaviour
     {
         foreach (Sound s in Music)
         {
-            s.source.volume = s.volume * SettingsManager.instance.MusicVolume();
+            s.source.volume = s.volume * SettingsManager.instance.GetMusicVolume();
         }
     }
 }

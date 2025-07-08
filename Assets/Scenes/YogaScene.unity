@@ -300,11 +300,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2182157757723241487, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
   m_PrefabInstance: {fileID: 887186370}
   m_PrefabAsset: {fileID: 0}
---- !u!20 &663109339 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 8208248214786314469, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
-  m_PrefabInstance: {fileID: 887186370}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &887186370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -315,7 +310,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2182157757723241487, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3639679110825891574, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -510,10 +505,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1482208589262157334, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      propertyPath: mainCamera
-      value: 
-      objectReference: {fileID: 663109339}
     - target: {fileID: 4020258067905937690, guid: 2ff37f62bb686324893e075301874d31, type: 3}
       propertyPath: m_Name
       value: UI

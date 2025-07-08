@@ -30,12 +30,6 @@ public class FOVSlider : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     //this gets called when the slider's val changes
     public void OnFOVChanged(float newFOV)
     {
@@ -49,5 +43,11 @@ public class FOVSlider : MonoBehaviour
             //fovText.text = "FOV: " + newFOV.ToString("F0");
             fovText.text = newFOV.ToString("F0");
         }
+    }
+
+    public void SetFOV(int newFOV)
+    {
+        fovSlider.value = newFOV;
+        OnFOVChanged(newFOV);
     }
 }
