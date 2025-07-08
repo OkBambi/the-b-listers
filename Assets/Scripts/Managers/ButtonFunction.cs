@@ -15,7 +15,7 @@ public class ButtonFunction : MonoBehaviour
 
     void Start()
     {
-        MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        MainCamera = GameObject.Find("Main Camera");
     }
     public void onResume()
     {

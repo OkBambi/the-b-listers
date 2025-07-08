@@ -25,7 +25,7 @@ public class ColorParticles : MonoBehaviour
         {
             GameObject theSplat = Instantiate(splatsPrefab, collisionEvents[index].intersection, Quaternion.identity);
             theSplat.transform.SetParent(splatsHolder, true);
-            var colorParticles = EnemyManager.instance.colorParticles.main;
+            var colorParticles = ParticleManager.instance.colorParticles.main;
             theSplat.GetComponent<Splats>().Initialize(startColor);
         }
     }

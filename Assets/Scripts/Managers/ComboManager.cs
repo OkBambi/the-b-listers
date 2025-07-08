@@ -285,7 +285,6 @@ public class ComboManager : MonoBehaviour
         totalScore -= amount;
         popScore = true;
     }
-
     void UIShenanigans()
     {
         //color stuff

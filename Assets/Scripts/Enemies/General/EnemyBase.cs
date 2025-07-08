@@ -125,7 +125,7 @@ public class EnemyBase : MonoBehaviour, IDamage
             if (hitVfx)
                 Instantiate(hitVfx, transform.position, Quaternion.identity);
 
-            spawnColorParticles();
+            spawnHitColorParticles();
 
         }
     }
@@ -195,31 +195,46 @@ public class EnemyBase : MonoBehaviour, IDamage
         transform.localScale = originalSize;
     }
 
-    private void spawnColorParticles()//spawn colors splats from the enemy
+    private void spawnHitColorParticles()//spawn colors splats from the enemy
     {
-        EnemyManager.instance.colorParticles.transform.position = transform.position;
+        ParticleManager.instance.colorParticles.transform.position = transform.position;
 
-        var colorParticles = EnemyManager.instance.colorParticles.main;
+        var colorParticles = ParticleManager.instance.colorParticles.main;
         if (setColor == PrimaryColor.RED)
         {
             colorParticles.startColor = Color.red;
-            EnemyManager.instance.colorParticles.GetComponent<ColorParticles>().startColor = Color.red;
+            ParticleManager.instance.colorParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.color = Color.red;
+            ParticleManager.instance.colorParticles.GetComponent<ColorParticles>().startColor = Color.red;
         }
         else if (setColor == PrimaryColor.BLUE)
         {
             colorParticles.startColor = Color.blue;
-            EnemyManager.instance.colorParticles.GetComponent<ColorParticles>().startColor = Color.blue;
+            ParticleManager.instance.colorParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.color = Color.blue;
+            ParticleManager.instance.colorParticles.GetComponent<ColorParticles>().startColor = Color.blue;
         }
         else if (setColor == PrimaryColor.YELLOW)
         {
             colorParticles.startColor = Color.yellow;
-            EnemyManager.instance.colorParticles.GetComponent<ColorParticles>().startColor = Color.yellow;
+            ParticleManager.instance.colorParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.color = Color.yellow;
+            ParticleManager.instance.colorParticles.GetComponent<ColorParticles>().startColor = Color.yellow;
         }
         else if (setColor == PrimaryColor.OMNI)
         {
             colorParticles.startColor = Color.black;
-            EnemyManager.instance.colorParticles.GetComponent<ColorParticles>().startColor = Color.black;
+            ParticleManager.instance.colorParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.color = Color.black;
+            ParticleManager.instance.colorParticles.GetComponent<ColorParticles>().startColor = Color.black;
         }
-        EnemyManager.instance.colorParticles.Play();
+
+        var emmission = ParticleManager.instance.colorParticles.emission;
+        if (hp > 0)//this allows the amount of particles that come out of an enemy to be less if it is not dead. 
+        {
+            emmission.SetBurst(0, new ParticleSystem.Burst(0f, ParticleManager.instance.hitParticleAmt));
+        }
+        else
+        {
+            emmission.SetBurst(0, new ParticleSystem.Burst(0f, ParticleManager.instance.deathParticleAmt));
+        }
+
+        ParticleManager.instance.colorParticles.Play();
     }
 }
