@@ -51,7 +51,19 @@ public class GameManager : MonoBehaviour
         //Find the object with chain marker script on the scene
         ChainStates = FindObjectsByType<ChainMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         //add Images to ChainImageArray
-        ChainToggleables = new RawImage[2] { ChainStates[0].GetComponent<RawImage>(), ChainStates[1].GetComponent<RawImage>() };
+        ChainToggleables = new RawImage[2];
+             
+        foreach (ChainMarker chainMarker in ChainStates)
+        {
+            if (chainMarker.chainType == ChainType.Lock)
+            {
+                ChainToggleables[0] = chainMarker.GetComponent<RawImage>();
+            }
+            else if (chainMarker.chainType == ChainType.Unlock)
+            {
+                ChainToggleables[1] = chainMarker.GetComponent<RawImage>();
+            }
+        }
 
     }
 
