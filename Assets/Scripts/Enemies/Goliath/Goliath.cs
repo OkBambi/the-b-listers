@@ -31,6 +31,12 @@ public class Goliath : EnemyBase
     float roamTime;
     float remainingDistance;
 
+
+    [Space]
+    [Header("Dive Parameters")]
+    [SerializeField] float diveSpeed;
+    [SerializeField] float radiusOfDiveLocation;
+    [SerializeField] GameObject map;
     [Space]
     [Header("Swim Parameters")]
     [SerializeField] float swimSpeed;
@@ -74,7 +80,7 @@ public class Goliath : EnemyBase
         }
         else if (currentState == State.Diving)
         {
-            //smth
+            Diving();
         }
         else if (currentState == State.Swimming)
         {
@@ -98,5 +104,12 @@ public class Goliath : EnemyBase
         //NavMeshHit hit;
         //NavMesh.SamplePosition(ranPos, out hit, roamDistance, 1);
         //agent.SetDestination(hit.position);
+    }
+    
+    void Diving()
+    {
+        float maxX = map.transform.localScale.x * 2 - radiusOfDiveLocation;
+        float maxZ = map.transform.localScale.z * 2 - radiusOfDiveLocation;
+        Vector3 divePos = new Vector3(Random.Range(-maxX, maxX), 0,Random.Range(-maxZ, maxZ));
     }
 }
