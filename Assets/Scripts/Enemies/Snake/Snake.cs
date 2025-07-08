@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.AI; // for NavMeshAgent
 
 //CHANGE COMMENTS WHEN CODE CHANGES PLZ
 public class Snake : EnemyBase
@@ -17,15 +18,17 @@ public class Snake : EnemyBase
 
     [SerializeField] Rigidbody rb;
 
+    [SerializeField] NavMeshAgent Snakeagent; // for NavMesh navigation
+
     private float timer;
     private Vector3 wanderingTarget;
-    private bool isWandering = false;
+    //private bool isWandering = false;
 
     //FOLLOWING
     [SerializeField] Transform player;
     [SerializeField] float followRange = 10f;
 
-    private bool isFollowing = false;
+    //private bool isFollowing = false;
 
     //ATTACKING
 
@@ -43,13 +46,16 @@ public class Snake : EnemyBase
             Debug.Log((PrimaryColor)colourIndexes[rand]);
             colourIndexes.Remove(colourIndexes[rand]);
         }
+
+        Snakeagent = GetComponent<NavMeshAgent>();
+        Snakeagent.speed = movementSpeed;
+        Snakeagent.baseOffset = startHeight;
     }
 
     void Start()
     {
         player = GameManager.instance.player.transform;
         timer = wanderingTimer;
-        startHeight = transform.position.y;
         GetNewWanderTarget();
         name = "Snake";
     }
@@ -60,112 +66,64 @@ public class Snake : EnemyBase
         //MOVEMENT
         timer -= Time.deltaTime;
 
-        if (timer <= 0)
-        {
-            GetNewWanderTarget();
-            isWandering = true;
-            timer = wanderingTimer;
-        }
-
-        if (isWandering)
-        {
-            MoveTowards(wanderingTarget);
-        }
-
-        // Example of raycast obstacle avoidance (simplified)
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 2f))
-        {
-            if (hit.collider.tag != "Player") // Ignore player
-            {
-                GetNewWanderTarget(); // Change direction immediately
-            }
-        }
-
-        //FOLLOWING
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
         if (distanceToPlayer < followRange)
         {
-            isFollowing = true;
-            isWandering = false;
-            MoveTowards(player.position);
+            //follow the player
+            Snakeagent.destination = player.position;
         }
-        else if (!isWandering)
+        else
         {
-            isFollowing = false;
-            timer -= Time.deltaTime;
-
+            //wander if not following
             if (timer <= 0)
             {
                 GetNewWanderTarget();
-                isWandering = true;
+                Snakeagent.destination = wanderingTarget;
                 timer = wanderingTimer;
             }
-
-            if (isWandering)
-            {
-                MoveTowards(wanderingTarget);
-            }
         }
+
     }
 
     //moves around the map
-    void MoveTowards(Vector3 target)
-    {
-        //Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
-        //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        //transform.position = Vector3.MoveTowards(transform.position, target, movementSpeed * Time.deltaTime);
-        Vector3 direction = (target - transform.position);
-        direction.y = 0; //optional: keeps movement flat on the XZ plane
-        direction.Normalize();
+    //void MoveTowards(Vector3 target)
+    //{
+    //    //Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
+    //    //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    //    //transform.position = Vector3.MoveTowards(transform.position, target, movementSpeed * Time.deltaTime);
+    //    Vector3 direction = (target - transform.position);
+    //    direction.y = 0; //optional: keeps movement flat on the XZ plane
+    //    direction.Normalize();
 
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        Quaternion newRotation = Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        rb.MoveRotation(newRotation);
+    //    Quaternion targetRotation = Quaternion.LookRotation(direction);
+    //    Quaternion newRotation = Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    //    rb.MoveRotation(newRotation);
 
-        Vector3 moveStep = direction * movementSpeed * Time.deltaTime;
-        rb.MovePosition(rb.position + moveStep);
+    //    Vector3 moveStep = direction * movementSpeed * Time.deltaTime;
+    //    rb.MovePosition(rb.position + moveStep);
 
 
-        if (Vector3.Distance(transform.position, target) < 0.5f)
-        {
-            isWandering = false; //stops wandering when close to target
-        }
-    }
+    //    if (Vector3.Distance(transform.position, target) < 0.5f)
+    //    {
+    //        isWandering = false; //stops wandering when close to target
+    //    }
+    //}
 
     void GetNewWanderTarget()
     {
-        RaycastHit hit;
-        int attemptCount = 0;
-        while (true)
-        {
-            Vector3 randomDirection = Random.insideUnitSphere * wanderingRadius;
-            if (Physics.Raycast(randomDirection + transform.position, -Vector3.up, out hit))
-            {
-                //if we hit the ground, then there is nothing is that space, so spawn
-                if (hit.collider.CompareTag("groundTag") ||
-                    hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
-                {
-                    randomDirection += transform.position;
-                    wanderingTarget = new Vector3(randomDirection.x, startHeight, randomDirection.z);
-                    break;
-                }
-                //else we miss the platform or hit an enemy, try a different spot
-            }
-            else
-            {
-                ++attemptCount;
-                Debug.Log(attemptCount);
-                if (attemptCount >= 20)
-                {
-                    randomDirection += transform.position;
-                    wanderingTarget = new Vector3(EnemyManager.instance.stage.transform.position.x, startHeight, EnemyManager.instance.stage.transform.position.z);
-                    break;
-                }
-            }
-        }
+        wanderingTarget = RandomNavPOS(transform.position, wanderingRadius, -1); // -1 for all layers
+    }
 
-        
+    //helper function to get random position
+    public static Vector3 RandomNavPOS(Vector3 origin, float dist, int layermask)
+    {
+        Vector3 randomDirection = Random.insideUnitSphere * dist;
+        randomDirection += origin;
+        NavMeshHit navHit;
+        NavMesh.SamplePosition(randomDirection, out navHit, dist, layermask);
+        return navHit.position;
+    }
 
 
 
@@ -184,9 +142,6 @@ public class Snake : EnemyBase
         //{
         //    GetNewWanderTarget();
         //}
-
-        
-    }
 
     public override void takeDamage(PrimaryColor hitColor, int amount)
     {
