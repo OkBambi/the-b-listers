@@ -1767,7 +1767,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5201707534005057053
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1996,7 +1996,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Dev
+  m_text: Sim Vis
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2811,7 +2811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19215687, g: 0.58431375, b: 0.7921569, a: 1}
+  m_Color: {r: 0.47058824, g: 0.023529412, b: 0.023529412, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4691,8 +4691,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -54, y: -103}
-  m_SizeDelta: {x: 541, y: 121}
+  m_AnchoredPosition: {x: 24, y: -103}
+  m_SizeDelta: {x: 696, y: 121}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2362692437587725928
 CanvasRenderer:
@@ -4722,7 +4722,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ethan Davis
+  m_text: Thomas Sornig
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7254,7 +7254,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 360, y: -280}
-  m_SizeDelta: {x: 400, y: 400}
+  m_SizeDelta: {x: 448, y: 364}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3847184301466123566
 CanvasRenderer:
@@ -7284,7 +7284,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 845b346ad60d2534c9cd23dcf6f72ef9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c9f45f257b2112449ec65ef1f004ff7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9696,7 +9696,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2248939009054445662
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12861,7 +12861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.29411766}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.11764706}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -22668,8 +22668,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 74, y: -105}
-  m_SizeDelta: {x: 765, y: 638}
+  m_AnchoredPosition: {x: 142, y: -105}
+  m_SizeDelta: {x: 901, y: 638}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &441667646191522421
 CanvasRenderer:
@@ -22699,30 +22699,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- Player + Player arm
-
-    - New Main Menu
-
-    - Player and enemies dying
-
-    -
-    Movements and general abilities
-
-    - Score system and combo meter
-
-    - Red
-    Schmove
-
-    - General world map
-
-    - Help on Settings
-
-    - Some enemy attacks
-
-    -
-    Bug fixing
-
-    - Boss creation'
+  m_text: "- Enemies\n   - Monolith and Stopwatch\n   - Bit of Snake and Monk\n  
+    - Stopwatch mini boss\n   - Some enemy UI\n- Level 2\n- Module creation\n- Keyboard
+    + Mouse controls for menus"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -22761,7 +22740,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 45
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
