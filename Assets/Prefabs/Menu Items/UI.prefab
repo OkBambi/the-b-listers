@@ -239,8 +239,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7353942943413648729}
   - component: {fileID: 900283249047638560}
+  - component: {fileID: 5678496758109614749}
   m_Layer: 5
-  m_Name: ChainVideo
+  m_Name: ChainVideoUnlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -285,7 +286,7 @@ VideoPlayer:
   m_AspectRatio: 2
   m_DataSource: 0
   m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 1
+  m_PlaybackSpeed: 3
   m_AudioOutputMode: 2
   m_TargetAudioSources: []
   m_DirectAudioVolumes: []
@@ -299,6 +300,18 @@ VideoPlayer:
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
+--- !u!114 &5678496758109614749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179240139863544708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0750da9386a2bb74d99b90e16b1178fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &193442931999505719
 GameObject:
   m_ObjectHideFlags: 0
@@ -5281,6 +5294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152e0b49fb9e4fa40bc5bbc0925ae02b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chainType: 0
 --- !u!222 &34449656453920886
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8832,12 +8846,12 @@ RectTransform:
   m_Children:
   - {fileID: 7289954272828393698}
   - {fileID: 6464291628820106756}
+  - {fileID: 2018629127031736305}
+  - {fileID: 1402619208197878753}
   - {fileID: 7856541497232897915}
   - {fileID: 504029642793585715}
   - {fileID: 8558295036623441940}
   - {fileID: 1923794858144092533}
-  - {fileID: 2018629127031736305}
-  - {fileID: 1402619208197878753}
   - {fileID: 8278021200727903013}
   - {fileID: 8741390897824642913}
   - {fileID: 8351726580663586251}
@@ -13571,6 +13585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152e0b49fb9e4fa40bc5bbc0925ae02b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chainType: 0
 --- !u!222 &1468659779114289695
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14450,7 +14465,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1923794858144092533
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17039,7 +17054,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6464291628820106756
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18121,7 +18136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8351726580663586251
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19604,8 +19619,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4582891568829504338}
   - component: {fileID: 8399752418724324577}
+  - component: {fileID: 6324261144665293422}
   m_Layer: 5
-  m_Name: ChainVideo
+  m_Name: ChainVideoLock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19650,7 +19666,7 @@ VideoPlayer:
   m_AspectRatio: 2
   m_DataSource: 0
   m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 1
+  m_PlaybackSpeed: 3
   m_AudioOutputMode: 2
   m_TargetAudioSources: []
   m_DirectAudioVolumes: []
@@ -19664,6 +19680,18 @@ VideoPlayer:
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
+--- !u!114 &6324261144665293422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9018942012178815089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0750da9386a2bb74d99b90e16b1178fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9027406390830014516
 GameObject:
   m_ObjectHideFlags: 0
