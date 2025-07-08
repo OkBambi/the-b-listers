@@ -112,10 +112,18 @@ public class Snake : EnemyBase
 
     void GetNewWanderTarget()
     {
-
+        wanderingTarget = RandomNavPOS(transform.position, wanderingRadius, -1); // -1 for all layers
     }
 
-        
+    //helper function to get random position
+    public static Vector3 RandomNavPOS(Vector3 origin, float dist, int layermask)
+    {
+        Vector3 randomDirection = Random.insideUnitSphere * dist;
+        randomDirection += origin;
+        NavMeshHit navHit;
+        NavMesh.SamplePosition(randomDirection, out navHit, dist, layermask);
+        return navHit.position;
+    }
 
 
 
@@ -134,9 +142,6 @@ public class Snake : EnemyBase
         //{
         //    GetNewWanderTarget();
         //}
-
-        
-    }
 
     public override void takeDamage(PrimaryColor hitColor, int amount)
     {
