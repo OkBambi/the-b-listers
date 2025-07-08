@@ -24,14 +24,17 @@ public class PlayerCamera : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        Camera.main.fieldOfView = fov;
+        fov = SettingsManager.instance.GetFOV();
+        SettingsManager.instance.mainCamera.fieldOfView = fov;
+        SettingsManager.instance.pixelCamera.fieldOfView = fov;
 
         initialRotation = transform.localRotation;
     }
 
     public void InitializeSettings()
     {
-        Camera.main.fieldOfView = fov;
+        SettingsManager.instance.mainCamera.fieldOfView = fov;
+        SettingsManager.instance.pixelCamera.fieldOfView = fov;
     }
 
     //TO-DO:

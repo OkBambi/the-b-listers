@@ -7,19 +7,21 @@ public class FOVSlider : MonoBehaviour
     //this is a reference to our fov slider
     public Slider fovSlider;
     //same as the slider but to the camera
-    public Camera mainCamera;
-    public Camera pixelCamera;
 
     //this can be optional but im putting this here if wanted
     //this is for the text element that will display the fov value
     //could use TMP?
     public TextMeshProUGUI fovText;
 
+    PlayerCamera playerCamera;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerCamera = FindFirstObjectByType<PlayerCamera>();
         //sets teh initial fov val to match the slider's val
-        mainCamera.fieldOfView = fovSlider.value;
+        //SettingsManager.instance.mainCamera.fieldOfView = fovSlider.value;
+        //SettingsManager.instance.pixelCamera.fieldOfView = fovSlider.value;
 
         //if adding the text
         //this updates the text initially
@@ -34,8 +36,9 @@ public class FOVSlider : MonoBehaviour
     public void OnFOVChanged(float newFOV)
     {
         //updates the camera's fov
-        mainCamera.fieldOfView = newFOV;
-        pixelCamera.fieldOfView = newFOV;
+        SettingsManager.instance.mainCamera.fieldOfView = newFOV;
+        SettingsManager.instance.pixelCamera.fieldOfView = newFOV;
+        //playerCamera.CameraAdjustFOV(newFOV);
 
         //again, if added text, this updates the text just like the above one
         if (fovText != null )
