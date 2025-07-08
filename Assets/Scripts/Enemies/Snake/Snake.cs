@@ -49,13 +49,13 @@ public class Snake : EnemyBase
 
         Snakeagent = GetComponent<NavMeshAgent>();
         Snakeagent.speed = movementSpeed;
+        Snakeagent.baseOffset = startHeight;
     }
 
     void Start()
     {
         player = GameManager.instance.player.transform;
         timer = wanderingTimer;
-        startHeight = transform.position.y;
         GetNewWanderTarget();
         name = "Snake";
     }
