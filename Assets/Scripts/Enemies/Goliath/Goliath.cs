@@ -10,6 +10,16 @@ public class Goliath : EnemyBase
      * yes
      * 
      */
+    public enum State
+    {
+        Roam,
+        Diving,
+        Swimming,
+        Breach,
+    }
+
+    [SerializeField] State currentState = State.Roam;
+    [Space]
     [Header("Timers")]
     [SerializeField] float topRoamTime;
     [SerializeField] float swimTime; //time under the map
@@ -25,8 +35,8 @@ public class Goliath : EnemyBase
     [Header("Swim Parameters")]
     [SerializeField] float swimSpeed;
 
-    
 
+    float stateTimer;
     Vector3 startPos;
 
     protected override void Start()
@@ -37,14 +47,42 @@ public class Goliath : EnemyBase
 
     void Update()
     {
-        if (remainingDistance < 0.01f)
-        {
-            roamTime += Time.deltaTime;
-        }
+        StateCheck();
+    }
 
-        if (roamTime >= roamStopTimer && remainingDistance < 0.01f)
+    void StateCheck()
+    {
+        if (currentState == State.Roam)
         {
-            Roam();
+            if (remainingDistance < 0.01f)
+            {
+                roamTime += Time.deltaTime;
+            }
+
+            if (roamTime >= roamStopTimer && remainingDistance < 0.01f)
+            {
+                Roam();
+            }
+
+
+            stateTimer += Time.deltaTime;
+
+            if (stateTimer > topRoamTime)
+            {
+                currentState = State.Diving;
+            }
+        }
+        else if (currentState == State.Diving)
+        {
+            //smth
+        }
+        else if (currentState == State.Swimming)
+        {
+            //track player from under the map
+        }
+        else if (currentState == State.Breach)
+        {
+
         }
     }
 
@@ -54,6 +92,8 @@ public class Goliath : EnemyBase
 
         Vector3 ranPos = Random.insideUnitCircle * roamDistance;
         ranPos += startPos;
+
+        remainingDistance = (transform.position - ranPos).normalized.magnitude;
 
         //NavMeshHit hit;
         //NavMesh.SamplePosition(ranPos, out hit, roamDistance, 1);
