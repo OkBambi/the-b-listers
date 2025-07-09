@@ -18,6 +18,7 @@ public class KillHitbox : MonoBehaviour
         {
             //HIT EM
             dmg.takeDamage(m_EnemyBase.setColor, 1);
+            ComboFeed.theInstance.PlayerWasKilledBy(m_EnemyBase.name);
         }
     }
 }
