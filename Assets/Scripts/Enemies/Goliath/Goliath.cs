@@ -97,6 +97,7 @@ public class Goliath : EnemyBase
             if (stateTimer > topRoamTime)
             {
                 currentState = State.Diving;
+                roamTime = 0;
                 Debug.Log("Goliath is diving!");
             }
         }
@@ -142,7 +143,10 @@ public class Goliath : EnemyBase
         stateTimer = 0;
 
         //go down to indicator and through the map
-        
+        Vector3 direction = (divePos - transform.position).normalized;
+
+        transform.Translate(direction * roamSpeed * Time.deltaTime);
+
         //switch to swimming when Y level is within a certain threshold
         currentState = State.Swimming;
     }
