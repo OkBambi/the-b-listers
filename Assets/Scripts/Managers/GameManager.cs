@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject MenuGameInfo;
     [SerializeField] GameObject PlayerHUD;
 
-   
+
     public GameObject player;
     public Player playerScript;
     public bool isPaused;
@@ -33,9 +33,13 @@ public class GameManager : MonoBehaviour
     [Space]
     [Header("ChainUI")]
     [SerializeField] WaveColorLockMonk ColorLockTimer;
-    [SerializeField] ChainMarker[] ChainStates;
+    [SerializeField] ChainMarkerOpen ChainOn;
+    [SerializeField] ChainMarkerClose ChainOff;
     [SerializeField] RawImage[] ChainToggleables;
     [SerializeField] LockColorChange LockColorChange;
+
+    [SerializeField] RawImage ChainOnImage;
+    [SerializeField] RawImage ChainOffImage;
 
     void Awake()
     {
@@ -46,24 +50,12 @@ public class GameManager : MonoBehaviour
         //TimeScaleOrigin = Time.timeScale;
         TimeScaleOrigin = 1f;
         Time.timeScale = TimeScaleOrigin;
-        Cursor.lockState=CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
+        ChainOn = FindFirstObjectByType<ChainMarkerOpen>();
+        ChainOff = FindFirstObjectByType<ChainMarkerClose>();
 
-        //Find the object with chain marker script on the scene
-        ChainStates = FindObjectsByType<ChainMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-        //add Images to ChainImageArray
-        ChainToggleables = new RawImage[2];
-             
-        foreach (ChainMarker chainMarker in ChainStates)
-        {
-            if (chainMarker.chainType == ChainType.Lock)
-            {
-                ChainToggleables[0] = chainMarker.GetComponent<RawImage>();
-            }
-            else if (chainMarker.chainType == ChainType.Unlock)
-            {
-                ChainToggleables[1] = chainMarker.GetComponent<RawImage>();
-            }
-        }
+        ChainOnImage = ChainOn.GetComponent<RawImage>();
+        ChainOffImage = ChainOff.GetComponent<RawImage>();
 
     }
 
@@ -122,7 +114,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadSettings()
     {
-        
+
 
     }
 
@@ -186,8 +178,8 @@ public class GameManager : MonoBehaviour
     //CHAINUI
     public void ChainScreen(int ColorLockTimer)
     {
-        ChainStates[0].gameObject.SetActive(true);
-        ChainStates[1].gameObject.SetActive(false);
+        ChainOnImage.gameObject.SetActive(true);
+        ChainOffImage.gameObject.SetActive(false);
         AudioManager.instance.Play("Monk_Wave_Hit");
         StartCoroutine(ExitChainScreen(ColorLockTimer));
     }
@@ -197,8 +189,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("BEFORE EXIT CHAIN SCREEN TRIGGER");
         yield return new WaitForSeconds(timer);
         AudioManager.instance.Play("Monk_Wave_End");
-        ChainStates[1].gameObject.SetActive(true);
-        ChainStates[0].gameObject.SetActive(false);
+        ChainOffImage.gameObject.SetActive(true);
+        ChainOnImage.gameObject.SetActive(false);
         Debug.Log("IVE GONE THROUGH IT, IT SHOULD WORK");
     }
 
