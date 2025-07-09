@@ -22,8 +22,8 @@ public class LockColorChange : MonoBehaviour
         //find ColorSwapping Script in scene
         ChangeColor = FindFirstObjectByType<ColorSwapping>();
         //Find the object with chain marker script on the scene
-        ChainOn = FindAnyObjectByType<ChainMarkerOpen>();
-        ChainOff = FindAnyObjectByType<ChainMarkerClose>();
+        ChainOn = FindFirstObjectByType<ChainMarkerOpen>();
+        ChainOff = FindFirstObjectByType<ChainMarkerClose>();
 
         ChainOnImage = ChainOn.GetComponent<RawImage>();
         ChainOffImage = ChainOff.GetComponent<RawImage>();
