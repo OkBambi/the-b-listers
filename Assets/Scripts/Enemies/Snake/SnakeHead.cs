@@ -6,7 +6,7 @@ public class SnakeHead : EnemyBase
     [SerializeField] TrailRenderer trail;
 
 
-    protected virtual void Start()
+    protected override void Start()
     {
         ColorSelection(setColor);
         switch (setColor)

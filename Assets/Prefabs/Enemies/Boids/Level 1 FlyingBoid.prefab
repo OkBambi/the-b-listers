@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7898798004148002361}
-  - component: {fileID: 500169324898610405}
+  - component: {fileID: 3220157199026392397}
   - component: {fileID: 5077083023810088317}
   - component: {fileID: 4219752573881016424}
   m_Layer: 7
-  m_Name: ActualFlyingBoid
+  m_Name: Level 1 FlyingBoid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ Transform:
   - {fileID: 4770366796381976583}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &500169324898610405
+--- !u!114 &3220157199026392397
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,12 +44,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2362246457872072167}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef31d8fe4939d124aa5dcaa958b4ff3d, type: 3}
+  m_Script: {fileID: 11500000, guid: a894e1fa70f6aab4dafd00a426cad67d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 2250048883942682153}
-  setColor: 2
-  hitVfx: {fileID: 3182796100078218705, guid: 29f4ce75b6fb46e4c84cf17f94908403, type: 3}
+  setColor: 0
+  hitVfx: {fileID: 0}
   hp: 2
   score: 50
   rb: {fileID: 5077083023810088317}

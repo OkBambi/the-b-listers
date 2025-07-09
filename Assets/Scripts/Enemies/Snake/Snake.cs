@@ -52,7 +52,7 @@ public class Snake : EnemyBase
         Snakeagent.baseOffset = startHeight;
     }
 
-    void Start()
+    protected override void Start()
     {
         player = GameManager.instance.player.transform;
         timer = wanderingTimer;

@@ -36,6 +36,7 @@ public class YellowSchmove : MonoBehaviour
 
     void Start()
     {
+        mAnimatorRight = GameObject.Find("Shoot_arm").GetComponent<Animator>();
         player = GameManager.instance.playerScript;
         rb = player.GetComponentInChildren<Rigidbody>();
         shootingPoint = GameManager.instance.shootingPoint;
