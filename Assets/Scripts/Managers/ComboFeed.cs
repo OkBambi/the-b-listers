@@ -20,6 +20,7 @@ public class ComboFeed : MonoBehaviour
     [SerializeField] float endFeedSpeed;
 
 
+    [SerializeField] TextMeshProUGUI playerKilledText;
     private Queue<GameObject> currentFeedList = new Queue<GameObject>();
     private List<string> finalFeedList = new List<string>();
     private List<float> finalScoreList = new List<float>();
@@ -49,6 +50,11 @@ public class ComboFeed : MonoBehaviour
         {
             Destroy(currentFeedList.Dequeue());
         }
+    }
+
+    public void PlayerWasKilledBy(string killer)
+    {
+        playerKilledText.text = "Killed by: " + killer;
     }
 
     public void FinalScore()
