@@ -28,7 +28,7 @@ public class Goliath : EnemyBase
     [Header("Roam Parameters")]
     [SerializeField] float roamSpeed;
     [SerializeField] int roamDistance;
-    [SerializeField] int roamStopTimer;
+    [SerializeField] float roamStopTimer;
     float roamTime;
     float remainingDistance;
     Vector3 roamPosition;
@@ -39,7 +39,7 @@ public class Goliath : EnemyBase
     [SerializeField] float diveSpeed;
     [SerializeField] float radiusOfDiveLocation;
     [SerializeField] GameObject map;
-    private GameObject goliathHitLocation;
+    [SerializeField] GameObject goliathHitLocation;
     private float maxX;
     private float maxZ;
     [Space]
@@ -63,7 +63,6 @@ public class Goliath : EnemyBase
         //for diving
         maxX = map.transform.lossyScale.x - radiusOfDiveLocation - 30;
         maxZ = map.transform.lossyScale.z - radiusOfDiveLocation - 30;
-        goliathHitLocation = GameObject.Find("GoliathHitMarker");
         goliathHitLocation.transform.localScale = new Vector3(radiusOfDiveLocation, 0.1f, radiusOfDiveLocation);
     }
 
@@ -77,13 +76,12 @@ public class Goliath : EnemyBase
         if (currentState == State.Roam)
         {
 
-            if (remainingDistance < 0.01f)
+            if (remainingDistance < 1f)
             {
                 roamTime += Time.deltaTime;
                 if (roamTime >= roamStopTimer)
                 {
                     PickRoamLocation();
-                    roamTime = 0f;
                 }
             }
             else
@@ -119,8 +117,10 @@ public class Goliath : EnemyBase
 
     void PickRoamLocation()
     {
+        print("Choosing new location");
         roamTime = 0f;
         Vector3 ranPos = Random.insideUnitCircle * roamDistance;
+        ranPos.y = 0f;
         ranPos += startPos;
         roamPosition = ranPos;
         remainingDistance = (transform.position - roamPosition).normalized.magnitude;
@@ -128,8 +128,7 @@ public class Goliath : EnemyBase
 
     void RoamToLocation()
     {
-        print("Roaming");
-        remainingDistance = (transform.position - roamPosition).normalized.magnitude;
+        remainingDistance = (roamPosition - transform.position).normalized.magnitude;
 
         Vector3 direction = (roamPosition - transform.position).normalized;
         transform.Translate(direction * roamSpeed * Time.deltaTime);
@@ -146,6 +145,7 @@ public class Goliath : EnemyBase
         Vector3 direction = (divePos - transform.position).normalized;
 
         transform.Translate(direction * roamSpeed * Time.deltaTime);
+        //transform.LookAt(direction);
 
         //switch to swimming when Y level is within a certain threshold
         currentState = State.Swimming;
