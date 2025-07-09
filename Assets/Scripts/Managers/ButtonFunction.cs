@@ -10,13 +10,6 @@ public class ButtonFunction : MonoBehaviour
     public Toggle ArcadeToggler;
     public Toggle OutlineToggler;
 
-    [SerializeField] GameObject MainCamera;
-    [SerializeField] GameObject ArcadeCamera;
-
-    void Start()
-    {
-        MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-    }
     public void onResume()
     {
         GameManager.instance.stateUnPause();
@@ -44,14 +37,14 @@ public class ButtonFunction : MonoBehaviour
         if (ArcadeToggler.isOn)
         {
             Debug.Log("Filter On");
-            MainCamera.SetActive(false);
-            ArcadeCamera.SetActive(true);
+            //SettingsManager.instance.mainCamera.gameObject.SetActive(false);
+            SettingsManager.instance.pixelCamera.gameObject.SetActive(true);
         }
         else
         {
             Debug.Log("default Camera");
-            MainCamera.SetActive(true);
-            ArcadeCamera.SetActive(false);
+            //SettingsManager.instance.mainCamera.gameObject.SetActive(true);
+            SettingsManager.instance.pixelCamera.gameObject.SetActive(false);
         }
     }
 
@@ -60,14 +53,14 @@ public class ButtonFunction : MonoBehaviour
         if (toggle)
         {
             Debug.Log("Filter On");
-            MainCamera.SetActive(false);
-            ArcadeCamera.SetActive(true);
+            //SettingsManager.instance.mainCamera.gameObject.SetActive(false);
+            SettingsManager.instance.pixelCamera.gameObject.SetActive(true);
         }
         else
         {
             Debug.Log("default Camera");
-            MainCamera.SetActive(true);
-            ArcadeCamera.SetActive(false);
+            //SettingsManager.instance.mainCamera.gameObject.SetActive(true);
+            SettingsManager.instance.pixelCamera.gameObject.SetActive(false);
         }
         ArcadeToggler.isOn = toggle;
     }

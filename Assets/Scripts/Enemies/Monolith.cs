@@ -7,10 +7,10 @@ public class Monolith : EnemyBase
 {
     [SerializeField] GameObject normalBoid;
     [SerializeField] GameObject angryBoid;
-    [SerializeField] float rotationRadius = 2f;
-    [SerializeField] float angularSpeed = 2f;
+    //[SerializeField] float rotationRadius = 2f;
+    //[SerializeField] float angularSpeed = 2f;
     [SerializeField] float rotationSpeed = 1f;
-    [SerializeField] float posX, posZ, angle= 0f;
+    //[SerializeField] float posX, posZ, angle = 0f;
     [SerializeField] float timeBetweenSpawns;
     [SerializeField] int normalBoidSpawnAmt;
     [SerializeField] int angryBoidSpawnAmt;

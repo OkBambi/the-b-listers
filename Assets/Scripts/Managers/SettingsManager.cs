@@ -18,22 +18,27 @@ public class SettingsManager : MonoBehaviour
 
     [SerializeField] SettingsObject settings;
 
+    public Camera mainCamera;
+    public Camera pixelCamera;
+
     private void Awake()
     {
         instance = this;
+        mainCamera = FindFirstObjectByType<MainCamera_Marker>(FindObjectsInactive.Include).GetComponent<Camera>();
+        pixelCamera = FindFirstObjectByType<PixelCamera_Marker>(FindObjectsInactive.Include).GetComponent<Camera>();
     }
 
     private void Start()
     {
         //on Start, read the settings object and apply the current settings to the settings screen in the scene
 
-        //FOVSlider slider = FindFirstObjectByType<FOVSlider>(FindObjectsInactive.Include);
-        //slider.SetFOV(GetFOV());
+        FOVSlider slider = FindFirstObjectByType<FOVSlider>(FindObjectsInactive.Include);
+        slider.SetFOV(GetFOV());
 
         //will need to be reworked because FindWithTag doesn't work on inactive objects
         FindFirstObjectByType<ReducedCameraShake_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisReducedCameraShake();
 
-        FindFirstObjectByType<ButtonFunction>(FindObjectsInactive.Include).GetComponent<ButtonFunction>().ontoggleArcade(GetisArcadeFilter());
+        FindFirstObjectByType<ButtonFunction>(FindObjectsInactive.Exclude).GetComponent<ButtonFunction>().ontoggleArcade(GetisArcadeFilter());
         //FindFirstObjectByType<PixelCamera_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisArcadeFilter();
 
         SettingsMenu settingsMenu = FindFirstObjectByType<SettingsMenu>(FindObjectsInactive.Include);

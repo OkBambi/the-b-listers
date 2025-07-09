@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
     public Sound[] Music;
 
 
-    void Awake()
+    void Start()
     {
         instance = this;
 

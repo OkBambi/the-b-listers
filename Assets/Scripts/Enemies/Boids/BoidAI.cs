@@ -207,8 +207,8 @@ public class BoidAI : EnemyBase
         {
             isAlive = false;
             RemoveSelfFromTargetList();
-            ComboManager.instance.AddScore(score);
             float scoreWithMult = ComboManager.instance.getScoreTimesMult(score);
+            ComboManager.instance.AddScore(scoreWithMult);
             ComboFeed.theInstance.AddNewComboFeed("+ " + scoreWithMult.ToString() + " " + transform.name, scoreWithMult);
             Destroy(gameObject);
             return;
