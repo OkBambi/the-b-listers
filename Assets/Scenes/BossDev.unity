@@ -663,6 +663,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 477317df45c9d26408cd8a79cc163a47, type: 3}
+--- !u!1 &1178463556 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2924476194631767320, guid: 477317df45c9d26408cd8a79cc163a47, type: 3}
+  m_PrefabInstance: {fileID: 1067815244}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1802709998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1190,10 +1195,11 @@ MonoBehaviour:
   swimTime: 0
   roamSpeed: 10
   roamDistance: 60
-  roamStopTimer: 1
+  roamStopTimer: 0.1
   diveSpeed: 5
   radiusOfDiveLocation: 10
-  map: {fileID: 0}
+  map: {fileID: 8513859188497356809}
+  goliathHitLocation: {fileID: 1178463556}
   swimSpeed: 0
 --- !u!1 &8513859188497356809
 GameObject:

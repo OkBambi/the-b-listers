@@ -22,7 +22,7 @@ public class SnakeHead : EnemyBase
                 break;
         }
 
-        name = "Snake Head";
+        name = "Snake";
     }
 
     public override void DeathCheck()
