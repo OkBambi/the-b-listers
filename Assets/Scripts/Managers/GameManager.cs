@@ -35,7 +35,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] WaveColorLockMonk ColorLockTimer;
     [SerializeField] ChainMarkerOpen ChainOn;
     [SerializeField] ChainMarkerClose ChainOff;
-    [SerializeField] RawImage[] ChainToggleables;
     [SerializeField] LockColorChange LockColorChange;
 
     [SerializeField] RawImage ChainOnImage;
@@ -178,6 +177,7 @@ public class GameManager : MonoBehaviour
     //CHAINUI
     public void ChainScreen(int ColorLockTimer)
     {
+        
         ChainOnImage.gameObject.SetActive(true);
         ChainOffImage.gameObject.SetActive(false);
         AudioManager.instance.Play("Monk_Wave_Hit");
