@@ -36182,9 +36182,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 881730386245783891, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
+      propertyPath: m_text
+      value: <color=red>GA</color><color=yellow>ME IN</color><color=blue>FO</color>
+      objectReference: {fileID: 0}
     - target: {fileID: 1248981906992706530, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2743411646172583778, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: m_AnchorMax.x
@@ -36336,7 +36340,7 @@ PrefabInstance:
       objectReference: {fileID: 1421014988}
     - target: {fileID: 7955805161080318966, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8542563858543716003, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
