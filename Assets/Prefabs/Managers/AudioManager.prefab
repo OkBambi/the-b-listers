@@ -94,9 +94,9 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: GameMusic
-    clip: {fileID: 8300000, guid: d1baf33d9bebe1945855dc8e8d837fdd, type: 3}
-    volume: 0.173
+  - name: Menu_Button_Click
+    clip: {fileID: 8300000, guid: 4d8a6a6b2b529f34c8cd5ca742e826e7, type: 3}
+    volume: 0.345
     pitch: 1
     source: {fileID: 0}
   EnemySounds:
@@ -110,11 +110,6 @@ MonoBehaviour:
     volume: 0.61
     pitch: 2.14
     source: {fileID: 0}
-  - name: Enemy_Death
-    clip: {fileID: 8300000, guid: 4f5b81f2ad7886247b0bd483383fae96, type: 3}
-    volume: 0.58
-    pitch: 1
-    source: {fileID: 0}
   - name: Monk_Wave_Hit
     clip: {fileID: 8300000, guid: 0000e3a1490182b4fbacdfe4d12cdae8, type: 3}
     volume: 0.58
@@ -125,8 +120,58 @@ MonoBehaviour:
     volume: 0.58
     pitch: 1
     source: {fileID: 0}
+  - name: Enemy_Death
+    clip: {fileID: 8300000, guid: 4f5b81f2ad7886247b0bd483383fae96, type: 3}
+    volume: 0.58
+    pitch: 0.95
+    source: {fileID: 0}
+  - name: A_Boid_Charge
+    clip: {fileID: 8300000, guid: 4bac55f56b68e6c469e8ad8344bd5fdd, type: 3}
+    volume: 0.291
+    pitch: 0.95
+    source: {fileID: 0}
+  - name: A_Boid_Dash
+    clip: {fileID: 8300000, guid: 8284f32780d4f36488fc5a82b0690fb9, type: 3}
+    volume: 0.309
+    pitch: 0.95
+    source: {fileID: 0}
+  - name: A_Boid_Blinker
+    clip: {fileID: 8300000, guid: 4d8a6a6b2b529f34c8cd5ca742e826e7, type: 3}
+    volume: 0.223
+    pitch: 2.04
+    source: {fileID: 0}
   WorldSounds: []
-  Music: []
+  Music:
+  - name: Level_1
+    clip: {fileID: 0}
+    volume: 0.45
+    pitch: 1
+    source: {fileID: 0}
+  - name: Level_2
+    clip: {fileID: 0}
+    volume: 0.45
+    pitch: 1
+    source: {fileID: 0}
+  - name: Level_3
+    clip: {fileID: 8300000, guid: d164d706d84771448b7a85e8097163a2, type: 3}
+    volume: 0.45
+    pitch: 1
+    source: {fileID: 0}
+  - name: Level_4
+    clip: {fileID: 0}
+    volume: 0.45
+    pitch: 1
+    source: {fileID: 0}
+  - name: Boss_Level
+    clip: {fileID: 0}
+    volume: 0.45
+    pitch: 1
+    source: {fileID: 0}
+  - name: Bonus_Level
+    clip: {fileID: 0}
+    volume: 0.45
+    pitch: 1
+    source: {fileID: 0}
 --- !u!1001 &7159842087228185678
 PrefabInstance:
   m_ObjectHideFlags: 0
