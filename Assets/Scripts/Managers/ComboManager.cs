@@ -266,6 +266,12 @@ public class ComboManager : MonoBehaviour
         }
     }
 
+    public void AddScoreNoMult(float amount)
+    {
+        totalScore += amount;
+        popScore = true;
+    }
+
     public void AddScore(float amount)
     {
         currentComboScore += amount * comboMults[(int)comboGrade];

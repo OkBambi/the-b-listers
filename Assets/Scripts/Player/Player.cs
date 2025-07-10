@@ -21,6 +21,7 @@ public class Player : MonoBehaviour, IColorLock
     public bool canMove;
     public bool canCam;
     public bool canAction;
+    public bool canSchmove;
     public bool canColor;
     public bool isDead = false;
 
@@ -49,11 +50,10 @@ public class Player : MonoBehaviour, IColorLock
                 colorSwapper.UpdateColor(ref currentColor);
 
             if (canAction)
-            {
                 weapon.UpdateWeapon(currentColor, arm);
 
+            if (canSchmove)
                 schmover.UpdateInput(currentColor);
-            }
         }
 
         arm.UpdateArm(currentColor);

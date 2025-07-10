@@ -9,6 +9,8 @@ using UnityEngine.XR;
 public class LevelModifierManager : MonoBehaviour
 {
     //when you make a new modifier, create a LevelModifier Object and then create the function that will apply the changes.
+    public static LevelModifierManager instance;
+
     GameObject modifierCardSelectionUI;
     [SerializeField] string functionName;
     [SerializeField] Button button1;
@@ -19,6 +21,13 @@ public class LevelModifierManager : MonoBehaviour
     [Inspectable] List<LevelModifier> modifiers;
 
     [SerializeField] DifficultyObject difficulty;
+
+    public bool schmoveOnly;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -59,9 +68,18 @@ public class LevelModifierManager : MonoBehaviour
                 break;
         }
 
-        
+
+
     }
 
+    
+
+    public void ClearCurrentModifiers()
+    {
+        modifiers.Clear();
+    }
+
+    #region Cards
     public void RandomizeCards()
     {
         #region Error Checking
@@ -135,12 +153,6 @@ public class LevelModifierManager : MonoBehaviour
             }
         }
     }
-
-    public void ClearCurrentModifiers()
-    {
-        modifiers.Clear();
-    }
-
     public void InitializeCards()
     {
         //Card1.icon = modifiers[0].icon;
@@ -161,8 +173,9 @@ public class LevelModifierManager : MonoBehaviour
         //button2.onClick.AddListener(delegate { SetFunctionToCall(button2.GetComponentInChildren<TextMeshProUGUI>()); });
         //button3.onClick.AddListener(delegate { SetFunctionToCall(button3.GetComponentInChildren<TextMeshProUGUI>()); });
     }
+    #endregion
 
-    
+    #region Function Modularity
     public void SetFunctionToCall(string newFunctionName)
     {
         functionName = newFunctionName;
@@ -180,4 +193,17 @@ public class LevelModifierManager : MonoBehaviour
             Invoke(functionName, 0f);
         }
     }
+    #endregion
+
+
+    //place modifier functions below of organization reasons
+    #region Modifier Methods
+    public void SchmovesOnly()
+    {
+        schmoveOnly = true;
+        FindFirstObjectByType<GameStartDagger>().mod_SchmoveOnly = true;
+        if (SceneManager.GetActiveScene().name == "Level_1")
+            ComboManager.instance.AddScoreNoMult(1000f);
+    }
+    #endregion
 }
