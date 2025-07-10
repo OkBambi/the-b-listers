@@ -53,4 +53,12 @@ public class HighScoreManager : MonoBehaviour
         }
         highScoreTableText.text = highScoreTable;
     }
+
+    public void ClearHighScores()
+    {
+        for (int index = 0; index < maxHighScores; ++index)
+        {
+            PlayerPrefs.SetFloat(prefix + index, 0);
+        }
+    }
 }
