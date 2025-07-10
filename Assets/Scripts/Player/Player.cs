@@ -101,7 +101,7 @@ public class Player : MonoBehaviour, IColorLock
 
         //save score
         //check for highscore
-        int highScore = PlayerPrefs.GetInt("Highscore");
+        float highScore = PlayerPrefs.GetFloat("Highscore");
 
         if (ComboManager.instance.GetScore() > highScore)
         {
