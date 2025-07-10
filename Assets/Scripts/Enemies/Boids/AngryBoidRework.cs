@@ -123,6 +123,7 @@ public class AngryBoidRework : BoidAI
         //chargePhase = 2
         trail.enabled = true;
         Debug.Log("dashing");
+        AudioManager.instance.Play("A_Boid_Dash");
         yield return new WaitForSeconds(pauseDuration);
         //chargePhase = 3
         ++chargePhase;
@@ -144,6 +145,7 @@ public class AngryBoidRework : BoidAI
         float blinkDelay = startBlinkTime;
         while (chargePhase < 2)
         {
+            AudioManager.instance.Play("A_Boid_Blinker");
             if (isRedTelegraphShowing)
             {
                 redTelegraph.SetActive(true);
