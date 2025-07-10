@@ -1,13 +1,16 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HighScoreManager : MonoBehaviour
 {
     public static HighScoreManager theInstance;
     private const string prefix = "HighScore";
-    [SerializeField] const int MaxHighScores = 10;
+    [SerializeField] const int maxHighScores = 10;
+    public TextMeshProUGUI highScoreTableText;
 
     void Start()
     {
@@ -18,9 +21,9 @@ public class HighScoreManager : MonoBehaviour
     {
         List<float> highScores = GetHighScores();
         highScores.Add(newHighScore);
-        highScores = highScores.OrderByDescending(s => s).Take(MaxHighScores).ToList();
+        highScores = highScores.OrderByDescending(s => s).Take(maxHighScores).ToList();
 
-        for (int index = 0; index < highScores.Count; index++)
+        for (int index = 0; index < maxHighScores; index++)
         {
             PlayerPrefs.SetFloat(prefix + index, highScores[index]);
         }
@@ -30,7 +33,7 @@ public class HighScoreManager : MonoBehaviour
     public static List<float> GetHighScores()
     {
         List<float> highScores = new List<float>();
-        for (int index = 0; index < MaxHighScores; index++)
+        for (int index = 0; index < maxHighScores; index++)
         {
             if(PlayerPrefs.HasKey(prefix + index))
             {
@@ -38,5 +41,16 @@ public class HighScoreManager : MonoBehaviour
             }
         }
         return highScores;
+    }
+
+    public void DisplayHighScoreTable()
+    {
+        string highScoreTable = "High Scores:\n";
+        List<float> highScores = GetHighScores();
+        for (int index = 0; index < maxHighScores; ++index)
+        {
+            highScoreTable += (index + 1) + ". " + highScores[index] + "\n";
+        }
+        highScoreTableText.text = highScoreTable;
     }
 }
