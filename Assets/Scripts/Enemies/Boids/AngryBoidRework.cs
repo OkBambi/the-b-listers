@@ -105,6 +105,7 @@ public class AngryBoidRework : BoidAI
         chargingTime = 0f;
         //chargePhase = 1
         Debug.Log("charging");
+        AudioManager.instance.Play("A_Boid_Charge");
         StartCoroutine(TelegraphBlink());
         while (chargingTime <= chargeDuration)
         {

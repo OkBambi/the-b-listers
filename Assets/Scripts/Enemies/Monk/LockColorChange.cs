@@ -22,8 +22,8 @@ public class LockColorChange : MonoBehaviour
         ChainToggleables = FindObjectsByType<ChainMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         //add Images to ChainImageArray
-        ChainImageArray = new RawImage[2] { ChainToggleables[0].GetComponent<RawImage>(), ChainToggleables[1].GetComponent<RawImage>() };
-
+        ChainImageArray = new RawImage[2] { ChainToggleables[0].GetComponent<RawImage>(), ChainToggleables[1].GetComponent<RawImage>()};
+            
     }
 
 
@@ -55,3 +55,4 @@ public class LockColorChange : MonoBehaviour
         }
     }
 }
+
