@@ -173,7 +173,12 @@ public class GameManager : MonoBehaviour
 
     public float LoadHighscore()
     {
-        return PlayerPrefs.GetFloat("Highscore");
+        if (PlayerPrefs.HasKey("HighScore"))
+        {
+            return PlayerPrefs.GetFloat("Highscore");
+        }
+        else
+            return 0;
     }
 
     public void SaveHighscore(int _highscore)
