@@ -687,9 +687,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 256385646}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0750da9386a2bb74d99b90e16b1178fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 152e0b49fb9e4fa40bc5bbc0925ae02b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chainType: 0
 --- !u!1 &260631573
 GameObject:
   m_ObjectHideFlags: 0
@@ -3533,6 +3534,10 @@ PrefabInstance:
     - target: {fileID: 4020258067905937690, guid: 2ff37f62bb686324893e075301874d31, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459484827976366155, guid: 2ff37f62bb686324893e075301874d31, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5001171880905787501, guid: 2ff37f62bb686324893e075301874d31, type: 3}
       propertyPath: mAnimatorRight
