@@ -23,7 +23,19 @@ public class LockColorChange : MonoBehaviour
         //Find the object with chain marker script on the scene
         ChainStates = FindObjectsByType<ChainMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
-        ChainToggleables = new RawImage[2] { ChainToggleables[0].GetComponent<RawImage>(), ChainToggleables[1].GetComponent<RawImage>() };
+        ChainToggleables = new RawImage[2];
+
+        foreach (ChainMarker chainMarker in ChainStates)
+        {
+            if (chainMarker.chainType == ChainType.Lock)
+            {
+                ChainToggleables[0] = chainMarker.GetComponent<RawImage>();
+            }
+            if (chainMarker.chainType == ChainType.Unlock)
+            {
+                ChainToggleables[1] = chainMarker.GetComponent<RawImage>();
+            }
+        }
     }
 
 

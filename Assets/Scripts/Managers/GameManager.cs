@@ -38,9 +38,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] LockColorChange LockColorChange;
 
-    [SerializeField] RawImage ChainOnImage;
-    [SerializeField] RawImage ChainOffImage;
-
     void Awake()
     {
         instance = this;
@@ -53,15 +50,15 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         ChainStates = FindObjectsByType<ChainMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
-        ChainToggleables = new RawImage[ChainStates.Length];
+        ChainToggleables = new RawImage[2];
 
         foreach (ChainMarker chainMarker in ChainStates)
         {
-            if (chainMarker.chainType == ChainType.lock)
+            if (chainMarker.chainType == ChainType.Lock)
                 {
                     ChainToggleables[0] = chainMarker.GetComponent<RawImage>();
                 }
-            if (chainMarker.chainType == ChainType.unlock)
+            if (chainMarker.chainType == ChainType.Unlock)
             {
                 ChainToggleables[1] = chainMarker.GetComponent<RawImage>();
             }
