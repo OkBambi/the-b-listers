@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DifficultyManager : MonoBehaviour
 {
-    DifficultyObject difficulty;
+    [SerializeField] DifficultyObject difficulty;
 
     public void SetDifficultyEasy()
     {
