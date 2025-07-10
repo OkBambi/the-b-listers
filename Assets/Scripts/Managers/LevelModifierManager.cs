@@ -22,7 +22,8 @@ public class LevelModifierManager : MonoBehaviour
 
     [SerializeField] DifficultyObject difficulty;
 
-    public bool schmoveOnly;
+    public bool schmovesOnly;
+    public bool daggersOnly;
 
     private void Awake()
     {
@@ -68,7 +69,7 @@ public class LevelModifierManager : MonoBehaviour
                 break;
         }
 
-
+        SchmovesOnly();
 
     }
 
@@ -200,10 +201,15 @@ public class LevelModifierManager : MonoBehaviour
     #region Modifier Methods
     public void SchmovesOnly()
     {
-        schmoveOnly = true;
-        FindFirstObjectByType<GameStartDagger>().mod_SchmoveOnly = true;
+        schmovesOnly = true;
+        FindFirstObjectByType<GameStartDagger>().mod_SchmovesOnly = true;
         if (SceneManager.GetActiveScene().name == "Level_1")
             ComboManager.instance.AddScoreNoMult(1000f);
+    }
+
+    public void DaggersOnly()
+    {
+        daggersOnly = true;
     }
     #endregion
 }

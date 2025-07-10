@@ -97,7 +97,7 @@ public class RedSchmove : MonoBehaviour, ISchmove
                 Destroy(i);
                 Destroy(d);
                 player.canMove = true;
-                if (!LevelModifierManager.instance.schmoveOnly)
+                if (!LevelModifierManager.instance.schmovesOnly)
                     player.canAction = true;
 
                 Instantiate(ParticleManager.instance.RedSchmoveSlamEffect, i.transform.position, Quaternion.identity);

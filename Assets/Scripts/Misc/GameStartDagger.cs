@@ -5,8 +5,8 @@ public class GameStartDagger : MonoBehaviour
 {
     [SerializeField] Player player;
     [SerializeField] Renderer model;
-    public bool mod_SchmoveOnly = false;
-    public bool mod_ShootOnly = false;
+    public bool mod_SchmovesOnly = false;
+    public bool mod_DaggersOnly = false;
 
     private void Start()
     {
@@ -33,11 +33,8 @@ public class GameStartDagger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (mod_SchmoveOnly)
+        if (mod_SchmovesOnly)
             other.GetComponentInParent<Player>().canSchmove = true;
-
-        else if (mod_ShootOnly)
-            other.GetComponentInParent<Player>().canAction = true;
 
         else
         {

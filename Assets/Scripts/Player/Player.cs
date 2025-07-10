@@ -90,6 +90,7 @@ public class Player : MonoBehaviour, IColorLock
         }
         //disable player stuff
         canAction = false;
+        canSchmove = false;
         canMove = false;
         canCam = false;
         canColor = false;
