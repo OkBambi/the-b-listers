@@ -5,14 +5,13 @@ using UnityEngine.Video;
 public class LockColorChange : MonoBehaviour
 {
     [SerializeField] Monk MonkPrimary;
-    [SerializeField] ChainMarkerOpen ChainOn;
-    [SerializeField] ChainMarkerClose ChainOff;
+    [SerializeField] ChainMarker[] ChainStates;
+    [SerializeField] RawImage[] ChainToggleables;
     [SerializeField] PrimaryColor PrimaryColor;
     [SerializeField] ColorSwapping ChangeColor;
     [SerializeField] WaveColorLockMonk ColorLockMonk;
 
-    [SerializeField] RawImage ChainOnImage;
-    [SerializeField] RawImage ChainOffImage;
+
 
 
     void Start()
@@ -22,11 +21,9 @@ public class LockColorChange : MonoBehaviour
         //find ColorSwapping Script in scene
         ChangeColor = FindFirstObjectByType<ColorSwapping>();
         //Find the object with chain marker script on the scene
-        ChainOn = FindFirstObjectByType<ChainMarkerOpen>();
-        ChainOff = FindFirstObjectByType<ChainMarkerClose>();
+        ChainStates = FindObjectsByType<ChainMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
-        ChainOnImage = ChainOn.GetComponent<RawImage>();
-        ChainOffImage = ChainOff.GetComponent<RawImage>();
+        ChainToggleables = new RawImage[2] { ChainToggleables[0].GetComponent<RawImage>(), ChainToggleables[1].GetComponent<RawImage>() };
     }
 
 
@@ -39,20 +36,20 @@ public class LockColorChange : MonoBehaviour
         switch (PrimaryColor)
         {
             case PrimaryColor.RED:
-                ChainOnImage.color = Color.red;
-                ChainOffImage.color = Color.red;
+                ChainToggleables[0].color = Color.red;
+                ChainToggleables[1].color = Color.red;
                 ChangeColor.SwapToColour(GameManager.instance.playerScript.GetPlayerColor(), PrimaryColor.RED, ref GameManager.instance.playerScript.currentColor);
                 break;
 
             case PrimaryColor.BLUE:
-                ChainOnImage.color = Color.blue;
-                ChainOffImage.color = Color.blue;
+                ChainToggleables[0].color = Color.blue;
+                ChainToggleables[1].color = Color.blue;
                 ChangeColor.SwapToColour(GameManager.instance.playerScript.GetPlayerColor(), PrimaryColor.BLUE, ref GameManager.instance.playerScript.currentColor);
                 break;
 
             case PrimaryColor.YELLOW:
-                ChainOnImage.color = Color.yellow;
-                ChainOffImage.color = Color.yellow;
+                ChainToggleables[0].color = Color.yellow;
+                ChainToggleables[1].color = Color.yellow;
                 ChangeColor.SwapToColour(GameManager.instance.playerScript.GetPlayerColor(), PrimaryColor.YELLOW, ref GameManager.instance.playerScript.currentColor);
                 break;
         }

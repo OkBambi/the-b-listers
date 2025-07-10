@@ -33,8 +33,9 @@ public class GameManager : MonoBehaviour
     [Space]
     [Header("ChainUI")]
     [SerializeField] WaveColorLockMonk ColorLockTimer;
-    [SerializeField] ChainMarkerOpen ChainOn;
-    [SerializeField] ChainMarkerClose ChainOff;
+    [SerializeField] ChainMarker[] ChainStates;
+    [SerializeField] RawImage[] ChainToggleables;
+
     [SerializeField] LockColorChange LockColorChange;
 
     [SerializeField] RawImage ChainOnImage;
@@ -50,11 +51,21 @@ public class GameManager : MonoBehaviour
         TimeScaleOrigin = 1f;
         Time.timeScale = TimeScaleOrigin;
         Cursor.lockState = CursorLockMode.Locked;
-        ChainOn = FindFirstObjectByType<ChainMarkerOpen>();
-        ChainOff = FindFirstObjectByType<ChainMarkerClose>();
+        ChainStates = FindObjectsByType<ChainMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
-        ChainOnImage = ChainOn.GetComponent<RawImage>();
-        ChainOffImage = ChainOff.GetComponent<RawImage>();
+        ChainToggleables = new RawImage[ChainStates.Length];
+
+        foreach (ChainMarker chainMarker in ChainStates)
+        {
+            if (chainMarker.chainType == ChainType.lock)
+                {
+                    ChainToggleables[0] = chainMarker.GetComponent<RawImage>();
+                }
+            if (chainMarker.chainType == ChainType.unlock)
+            {
+                ChainToggleables[1] = chainMarker.GetComponent<RawImage>();
+            }
+        }
 
     }
 
@@ -177,9 +188,8 @@ public class GameManager : MonoBehaviour
     //CHAINUI
     public void ChainScreen(int ColorLockTimer)
     {
-        
-        ChainOnImage.gameObject.SetActive(true);
-        ChainOffImage.gameObject.SetActive(false);
+        ChainStates[0].gameObject.SetActive(true);
+        ChainStates[1].gameObject.SetActive(false);
         AudioManager.instance.Play("Monk_Wave_Hit");
         StartCoroutine(ExitChainScreen(ColorLockTimer));
     }
@@ -189,8 +199,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("BEFORE EXIT CHAIN SCREEN TRIGGER");
         yield return new WaitForSeconds(timer);
         AudioManager.instance.Play("Monk_Wave_End");
-        ChainOffImage.gameObject.SetActive(true);
-        ChainOnImage.gameObject.SetActive(false);
+        ChainStates[1].gameObject.SetActive(true);
+        ChainStates[0].gameObject.SetActive(false);
         Debug.Log("IVE GONE THROUGH IT, IT SHOULD WORK");
     }
 
