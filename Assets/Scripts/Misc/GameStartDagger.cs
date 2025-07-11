@@ -1,5 +1,4 @@
 using System.Collections;
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,35 +10,7 @@ public class GameStartDagger : MonoBehaviour
     private void Start()
     {
         player = GameManager.instance.playerScript;
-       
-    }
-
-    private void Update()
-    {
-
-        switch (player.GetPlayerColor())
-        {
-            case PrimaryColor.RED:
-                model.material.color = Color.red;
-                break;
-            case PrimaryColor.YELLOW:
-                model.material.color = Color.yellow;
-                break;
-            case PrimaryColor.BLUE:
-                model.material.color = Color.blue;
-                break;
-        }
-
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
         Scene scene = SceneManager.GetActiveScene();
-        other.GetComponentInParent<Player>().canAction = true;
-        other.GetComponentInParent<Player>().canColor = true;
-        GameManager.instance.timer.isCounting = true;
-        AudioManager.instance.Play("GameMusic");
-        EnemyManager.instance.SpawnFirstEnemy();
         switch (scene.name)
         {
             case "Level_1":
@@ -67,6 +38,33 @@ public class GameStartDagger : MonoBehaviour
                 AudioManager.instance.Play("Boss_Level");
                 break;
         }
+    }
+
+    private void Update()
+    {
+
+        switch (player.GetPlayerColor())
+        {
+            case PrimaryColor.RED:
+                model.material.color = Color.red;
+                break;
+            case PrimaryColor.YELLOW:
+                model.material.color = Color.yellow;
+                break;
+            case PrimaryColor.BLUE:
+                model.material.color = Color.blue;
+                break;
+        }
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        other.GetComponentInParent<Player>().canAction = true;
+        other.GetComponentInParent<Player>().canColor = true;
+        GameManager.instance.timer.isCounting = true;
+        EnemyManager.instance.SpawnFirstEnemy();
+  
         Destroy(gameObject);
 
     }
