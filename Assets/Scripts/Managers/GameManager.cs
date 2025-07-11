@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             MenuActive = MenuEnd;
             MenuActive.SetActive(true);
-            MenuEnd.GetComponent<TypeOfEndScreen>().LoseEndScreen();
+            
             ComboFeed.theInstance.FinalScore();
         }
     }
