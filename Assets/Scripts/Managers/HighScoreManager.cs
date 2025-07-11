@@ -17,7 +17,7 @@ public class HighScoreManager : MonoBehaviour
         theInstance = this;
     }
 
-    public static void SaveHighScore(int newHighScore)
+    public void SaveHighScore(int newHighScore)
     {
         List<int> highScores = GetHighScores();
         highScores.Add(newHighScore);
@@ -30,7 +30,7 @@ public class HighScoreManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public static List<int> GetHighScores()
+    public List<int> GetHighScores()
     {
         List<int> highScores = new List<int>();
         for (int index = 0; index < maxHighScores; index++)

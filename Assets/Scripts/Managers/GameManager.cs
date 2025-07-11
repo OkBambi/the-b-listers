@@ -137,6 +137,7 @@ public class GameManager : MonoBehaviour
             MenuActive = MenuEnd;
             MenuActive.SetActive(true);
             ComboFeed.theInstance.FinalScore();
+            HighScoreManager.theInstance.DisplayHighScoreTable();
         }
     }
 
@@ -170,22 +171,6 @@ public class GameManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
-
-    public float LoadHighscore()
-    {
-        if (PlayerPrefs.HasKey("HighScore"))
-        {
-            return PlayerPrefs.GetFloat("Highscore");
-        }
-        else
-            return 0;
-    }
-
-    public void SaveHighscore(int _highscore)
-    {
-        PlayerPrefs.SetFloat("Highscore", _highscore);
-    }
-
 
     //CHAINUI
     public void ChainScreen(int ColorLockTimer)
