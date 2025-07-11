@@ -50,6 +50,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = TimeScaleOrigin;
         Cursor.lockState = CursorLockMode.Locked;
         ChainStates = FindObjectsByType<ChainMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name == "MainMenu")
+        {
+            PlayLevelMusic();
+        }
 
         ChainToggleables = new RawImage[2];
 
@@ -213,7 +218,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case "Level_2":
-                AudioManager.instance.Play("Level_2");
+                AudioManager.instance.Play("Level 2");
                 break;
 
             case "Level_3":
@@ -222,7 +227,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case "Level_4":
-                AudioManager.instance.Play("Level_4");
+                AudioManager.instance.Play("Level4");
                 break;
 
             case "Bonus_Level":
@@ -231,6 +236,10 @@ public class GameManager : MonoBehaviour
 
             case "Boss_Level":
                 AudioManager.instance.Play("Boss_Level");
+                break;
+
+            case "MainMenu":
+                AudioManager.instance.Play("Main_Menu");
                 break;
         }
 
