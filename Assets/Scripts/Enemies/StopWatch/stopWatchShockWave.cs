@@ -24,17 +24,20 @@ public class stopWatchShockWave : MonoBehaviour
 
     IEnumerator myShock()
     {
-
+        yield return new WaitForSeconds(0.35f);
+        AudioManager.instance.Play("Stopwatch_Smash");
         while (true)
         {
             yield return null;
             shockWave.transform.localScale += new Vector3(speed * Time.deltaTime, 0f, speed * Time.deltaTime);
-            if(shockWave.transform.localScale.x >= maxSize)
+            
+            if (shockWave.transform.localScale.x >= maxSize)
             {
                 shockWave.transform.localScale = new Vector3(0f, 0f, 0f);
                 break; // Exit the coroutine when the shock wave reaches its maximum size
             }
         }
+        
         yield return new WaitForSeconds(3f);
         Destroy(gameObject); // Destroy the shock wave GameObject after it reaches its maximum size
     }
@@ -53,7 +56,7 @@ public class stopWatchShockWave : MonoBehaviour
 
         }
     }
-    
+
     private void resetPlayer()
     {
         Debug.Log("reset");
@@ -61,5 +64,5 @@ public class stopWatchShockWave : MonoBehaviour
         GameManager.instance.playerScript.canSchmove = true;
     }
 
-    
+
 }

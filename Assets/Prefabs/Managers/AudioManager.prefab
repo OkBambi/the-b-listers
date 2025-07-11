@@ -53,9 +53,9 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
   - name: Rapid
-    clip: {fileID: 8300000, guid: a4d1d09697e8f224b9ce4f5031599088, type: 3}
-    volume: 0.128
-    pitch: 1
+    clip: {fileID: 8300000, guid: 8aa264a1a51111a4fb2b1903a66b8afe, type: 3}
+    volume: 0.319
+    pitch: 1.1
     source: {fileID: 0}
   SchmoveSounds:
   - name: Yellow_Fire
@@ -94,9 +94,44 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: GameMusic
+  - name: Menu_Button_Click
+    clip: {fileID: 8300000, guid: 4d8a6a6b2b529f34c8cd5ca742e826e7, type: 3}
+    volume: 0.345
+    pitch: 1
+    source: {fileID: 0}
+  - name: Level_1
     clip: {fileID: 8300000, guid: d1baf33d9bebe1945855dc8e8d837fdd, type: 3}
-    volume: 0.173
+    volume: 0.345
+    pitch: 1
+    source: {fileID: 0}
+  - name: Level_2
+    clip: {fileID: 8300000, guid: 9801ce4aae005c741ae268c217f43347, type: 3}
+    volume: 0.345
+    pitch: 1
+    source: {fileID: 0}
+  - name: Level_3
+    clip: {fileID: 8300000, guid: d164d706d84771448b7a85e8097163a2, type: 3}
+    volume: 0.345
+    pitch: 1
+    source: {fileID: 0}
+  - name: Level_4
+    clip: {fileID: 8300000, guid: 4d8a6a6b2b529f34c8cd5ca742e826e7, type: 3}
+    volume: 0.345
+    pitch: 1
+    source: {fileID: 0}
+  - name: Bonus_Level
+    clip: {fileID: 8300000, guid: 4d8a6a6b2b529f34c8cd5ca742e826e7, type: 3}
+    volume: 0.345
+    pitch: 1
+    source: {fileID: 0}
+  - name: Boss_Level
+    clip: {fileID: 8300000, guid: 4d8a6a6b2b529f34c8cd5ca742e826e7, type: 3}
+    volume: 0.345
+    pitch: 1
+    source: {fileID: 0}
+  - name: Main_Menu
+    clip: {fileID: 8300000, guid: 9a04582ed68558a479b95ecbb2d92e6e, type: 3}
+    volume: 0.345
     pitch: 1
     source: {fileID: 0}
   EnemySounds:
@@ -110,11 +145,6 @@ MonoBehaviour:
     volume: 0.61
     pitch: 2.14
     source: {fileID: 0}
-  - name: Enemy_Death
-    clip: {fileID: 8300000, guid: 4f5b81f2ad7886247b0bd483383fae96, type: 3}
-    volume: 0.58
-    pitch: 1
-    source: {fileID: 0}
   - name: Monk_Wave_Hit
     clip: {fileID: 8300000, guid: 0000e3a1490182b4fbacdfe4d12cdae8, type: 3}
     volume: 0.58
@@ -124,6 +154,36 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: c1dcde64a0345f34b8b3fc300d7c2522, type: 3}
     volume: 0.58
     pitch: 1
+    source: {fileID: 0}
+  - name: Enemy_Death
+    clip: {fileID: 8300000, guid: 4f5b81f2ad7886247b0bd483383fae96, type: 3}
+    volume: 0.58
+    pitch: 0.95
+    source: {fileID: 0}
+  - name: A_Boid_Dash
+    clip: {fileID: 8300000, guid: 8284f32780d4f36488fc5a82b0690fb9, type: 3}
+    volume: 0.309
+    pitch: 0.95
+    source: {fileID: 0}
+  - name: A_Boid_Charge
+    clip: {fileID: 8300000, guid: b30139c32f2849945b46c624d4a2eecd, type: 3}
+    volume: 0.326
+    pitch: 1
+    source: {fileID: 0}
+  - name: Monolith_Spawn
+    clip: {fileID: 8300000, guid: 4d8a6a6b2b529f34c8cd5ca742e826e7, type: 3}
+    volume: 0.223
+    pitch: 2.04
+    source: {fileID: 0}
+  - name: Stopwatch_Indicator
+    clip: {fileID: 8300000, guid: f1550256cf91db645b9a6b9179a5210c, type: 3}
+    volume: 0.744
+    pitch: 1
+    source: {fileID: 0}
+  - name: Stopwatch_Smash
+    clip: {fileID: 8300000, guid: 205dfcb094b01c444bf90e9c2da16167, type: 3}
+    volume: 0.326
+    pitch: 2.04
     source: {fileID: 0}
   WorldSounds: []
   Music: []

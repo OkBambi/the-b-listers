@@ -23,7 +23,7 @@ public class LockColorChange : MonoBehaviour
 
         //add Images to ChainImageArray
         ChainImageArray = new RawImage[2] { ChainToggleables[0].GetComponent<RawImage>(), ChainToggleables[1].GetComponent<RawImage>()};
-        
+            
     }
 
 

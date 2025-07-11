@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameStartDagger : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class GameStartDagger : MonoBehaviour
     [SerializeField] Renderer model;
     public bool mod_SchmovesOnly = false;
     public bool mod_DaggersOnly = false;
+
+    public bool DaggerGot= false;
 
     private void Start()
     {
@@ -16,7 +19,7 @@ public class GameStartDagger : MonoBehaviour
     private void Update()
     {
 
-        switch(player.GetPlayerColor())
+        switch (player.GetPlayerColor())
         {
             case PrimaryColor.RED:
                 model.material.color = Color.red;
@@ -43,11 +46,12 @@ public class GameStartDagger : MonoBehaviour
         }
 
 
-            other.GetComponentInParent<Player>().canColor = true;
+        other.GetComponentInParent<Player>().canColor = true;
+        DaggerGot = true;
         GameManager.instance.timer.isCounting = true;
-        AudioManager.instance.Play("GameMusic");
         EnemyManager.instance.SpawnFirstEnemy();
+        GameManager.instance.PlayLevelMusic();
         Destroy(gameObject);
-        
+
     }
 }

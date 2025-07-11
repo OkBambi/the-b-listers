@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject MenuGameInfo;
     [SerializeField] GameObject PlayerHUD;
 
-   
+
     public GameObject player;
     public Player playerScript;
     public bool isPaused;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
     public Schmoves schmover;
     public Timer timer;
 
+    public Scene currentLevel;
 
     //chain ui
     [Space]
@@ -35,7 +37,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] WaveColorLockMonk ColorLockTimer;
     [SerializeField] ChainMarker[] ChainStates;
     [SerializeField] RawImage[] ChainToggleables;
+
     [SerializeField] LockColorChange LockColorChange;
+
+
 
     void Awake()
     {
@@ -46,24 +51,28 @@ public class GameManager : MonoBehaviour
         //TimeScaleOrigin = Time.timeScale;
         TimeScaleOrigin = 1f;
         Time.timeScale = TimeScaleOrigin;
-        Cursor.lockState=CursorLockMode.Locked;
-
-        //Find the object with chain marker script on the scene
+        Cursor.lockState = CursorLockMode.Locked;
         ChainStates = FindObjectsByType<ChainMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-        //add Images to ChainImageArray
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name == "MainMenu")
+        {
+            PlayLevelMusic();
+        }
+
         ChainToggleables = new RawImage[2];
-             
+
         foreach (ChainMarker chainMarker in ChainStates)
         {
             if (chainMarker.chainType == ChainType.Lock)
             {
                 ChainToggleables[0] = chainMarker.GetComponent<RawImage>();
             }
-            else if (chainMarker.chainType == ChainType.Unlock)
+            if (chainMarker.chainType == ChainType.Unlock)
             {
                 ChainToggleables[1] = chainMarker.GetComponent<RawImage>();
             }
         }
+        currentLevel = SceneManager.GetActiveScene();
 
     }
 
@@ -83,7 +92,40 @@ public class GameManager : MonoBehaviour
                 stateUnPause();
             }
         }
+        if (Input.GetKeyDown(KeyCode.Keypad0))
+        {
+            SceneManager.LoadScene("Level_Showcase");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            SceneManager.LoadScene("Level_1");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            SceneManager.LoadScene("Level_2");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            SceneManager.LoadScene("Level_3");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad4))
+        {
+            SceneManager.LoadScene("Level_4");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad5))
+        {
+            SceneManager.LoadScene("Level_Bonus");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad6))
+        {
+            SceneManager.LoadScene("Level_Boss");
+        }
+        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
+
 
     public void statePause()
     {
@@ -91,7 +133,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-
     }
 
     public void BackButton()
@@ -122,7 +163,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadSettings()
     {
-        
+
 
     }
 
@@ -137,6 +178,7 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             MenuActive = MenuEnd;
             MenuActive.SetActive(true);
+            
             ComboFeed.theInstance.FinalScore();
         }
     }
@@ -172,22 +214,11 @@ public class GameManager : MonoBehaviour
 #endif
     }
 
-    public int LoadHighscore()
-    {
-        return PlayerPrefs.GetInt("Highscore");
-    }
-
-    public void SaveHighscore(int _highscore)
-    {
-        PlayerPrefs.SetInt("Highscore", _highscore);
-    }
-
-
     //CHAINUI
     public void ChainScreen(int ColorLockTimer)
     {
-        ChainStates[0].gameObject.SetActive(true);
-        ChainStates[1].gameObject.SetActive(false);
+        ChainStates[1].gameObject.SetActive(true);
+        ChainStates[0].gameObject.SetActive(false);
         AudioManager.instance.Play("Monk_Wave_Hit");
         StartCoroutine(ExitChainScreen(ColorLockTimer));
     }
@@ -197,9 +228,52 @@ public class GameManager : MonoBehaviour
         Debug.Log("BEFORE EXIT CHAIN SCREEN TRIGGER");
         yield return new WaitForSeconds(timer);
         AudioManager.instance.Play("Monk_Wave_End");
-        ChainStates[1].gameObject.SetActive(true);
-        ChainStates[0].gameObject.SetActive(false);
+        ChainStates[0].gameObject.SetActive(true);
+        ChainStates[1].gameObject.SetActive(false);
         Debug.Log("IVE GONE THROUGH IT, IT SHOULD WORK");
+    }
+
+    public void PlayLevelMusic()
+    {
+
+        Scene scene = SceneManager.GetActiveScene();
+        switch (scene.name)
+        {
+            case "Level_1":
+
+                AudioManager.instance.Play("Level_1");
+                break;
+
+            case "Level_2":
+                AudioManager.instance.Play("Level 2");
+                break;
+
+            case "Level_3":
+                AudioManager.instance.Play("Level_3");
+                break;
+
+            case "Level_4":
+                AudioManager.instance.Play("Level4");
+                break;
+
+            case "Bonus_Level":
+                AudioManager.instance.Play("Bonus_Level");
+                break;
+
+            case "Boss_Level":
+                AudioManager.instance.Play("Boss_Level");
+                break;
+
+            case "MainMenu":
+                AudioManager.instance.Play("Main_Menu");
+                break;
+
+            case "Level_Showcase":
+                AudioManager.instance.Play("Level_3");
+                break;
+
+        }
+
     }
 
 }

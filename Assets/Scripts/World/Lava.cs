@@ -27,6 +27,7 @@ public class Lava : MonoBehaviour
             else
             {
                 dmg.takeDamage(PrimaryColor.OMNI, 100);
+                ComboFeed.theInstance.PlayerWasKilledBy("The Void");
             }
         }
     }

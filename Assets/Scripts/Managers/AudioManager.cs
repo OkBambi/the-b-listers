@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
             SchmoveSounds,
             UISounds,
             EnemySounds,
-            WorldSounds
+            WorldSounds,
         };
 
         foreach(Sound[] array in allSounds)
@@ -61,7 +61,8 @@ public class AudioManager : MonoBehaviour
             SchmoveSounds,
             UISounds,
             EnemySounds,
-            WorldSounds
+            WorldSounds,
+            Music
         };
 
         foreach (Sound[] array in allSounds)
@@ -85,7 +86,8 @@ public class AudioManager : MonoBehaviour
             SchmoveSounds,
             UISounds,
             EnemySounds,
-            WorldSounds
+            WorldSounds,
+            Music
         };
 
         foreach (Sound[] array in allSounds)
