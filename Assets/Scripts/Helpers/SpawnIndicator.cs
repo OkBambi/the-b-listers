@@ -55,7 +55,6 @@ public class SpawnIndicator : MonoBehaviour
 
     IEnumerator Flash()
     {
-        
         while (isActiveAndEnabled)
         {
             if (red == flashColour.r && green == flashColour.g && blue == flashColour.b)
@@ -96,6 +95,7 @@ public class SpawnIndicator : MonoBehaviour
             
             yield return null;
         }
-        
+        AudioManager.instance.Play("Enemy_Spawn");
     }
+     
 }

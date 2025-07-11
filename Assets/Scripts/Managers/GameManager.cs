@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public Schmoves schmover;
     public Timer timer;
 
+    public Scene currentLevel;
 
     //chain ui
     [Space]
@@ -38,6 +39,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] RawImage[] ChainToggleables;
 
     [SerializeField] LockColorChange LockColorChange;
+
+
 
     void Awake()
     {
@@ -61,14 +64,15 @@ public class GameManager : MonoBehaviour
         foreach (ChainMarker chainMarker in ChainStates)
         {
             if (chainMarker.chainType == ChainType.Lock)
-                {
-                    ChainToggleables[0] = chainMarker.GetComponent<RawImage>();
-                }
+            {
+                ChainToggleables[0] = chainMarker.GetComponent<RawImage>();
+            }
             if (chainMarker.chainType == ChainType.Unlock)
             {
                 ChainToggleables[1] = chainMarker.GetComponent<RawImage>();
             }
         }
+        currentLevel = SceneManager.GetActiveScene();
 
     }
 
@@ -88,7 +92,40 @@ public class GameManager : MonoBehaviour
                 stateUnPause();
             }
         }
+        if (Input.GetKeyDown(KeyCode.Keypad0))
+        {
+            SceneManager.LoadScene("Level_Showcase");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            SceneManager.LoadScene("Level_1");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            SceneManager.LoadScene("Level_2");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            SceneManager.LoadScene("Level_3");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad4))
+        {
+            SceneManager.LoadScene("Level_4");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad5))
+        {
+            SceneManager.LoadScene("Level_Bonus");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad6))
+        {
+            SceneManager.LoadScene("Level_Boss");
+        }
+        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
+
 
     public void statePause()
     {
