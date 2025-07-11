@@ -137,7 +137,6 @@ public class GameManager : MonoBehaviour
             MenuActive = MenuEnd;
             MenuActive.SetActive(true);
             ComboFeed.theInstance.FinalScore();
-            HighScoreManager.theInstance.DisplayHighScoreTable();
         }
     }
 

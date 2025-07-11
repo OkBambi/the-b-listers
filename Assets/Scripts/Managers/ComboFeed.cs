@@ -18,6 +18,7 @@ public class ComboFeed : MonoBehaviour
     [SerializeField] TextMeshProUGUI finalScoreText;
     [SerializeField] int maxFeedLength;
     [SerializeField] float endFeedSpeed;
+    [SerializeField] float timeToWaitBeforeHighscores;
 
 
     [SerializeField] TextMeshProUGUI playerKilledText;
@@ -78,5 +79,7 @@ public class ComboFeed : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(endFeedSpeed);
         }
+        yield return new WaitForSecondsRealtime(timeToWaitBeforeHighscores);
+        HighScoreManager.theInstance.DisplayHighScoreTable();
     }
 }
