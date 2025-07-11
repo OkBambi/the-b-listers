@@ -28704,7 +28704,7 @@ MonoBehaviour:
   score: 10000
   currentState: 0
   topRoamTime: 10
-  swimTime: 0
+  swimTime: 10
   roamSpeed: 10
   roamDistance: 60
   roamStopTimer: 0.1
@@ -28713,7 +28713,8 @@ MonoBehaviour:
   map: {fileID: 8513859188497356809}
   goliathHitLocation: {fileID: 1178463556}
   mapRadius: 65
-  swimSpeed: 0
+  swimSpeed: 30
+  playerTransform: {fileID: 92942624}
 --- !u!1 &8513859188497356809
 GameObject:
   m_ObjectHideFlags: 0

@@ -45,7 +45,8 @@ public class Goliath : EnemyBase
     [Header("Swim Parameters")]
     [SerializeField] float swimSpeed;
 
-    Transform playerTransform;
+    [SerializeField] Transform playerTransform;
+
     float stateTimer;
     Vector3 startPos;
 
@@ -103,9 +104,7 @@ public class Goliath : EnemyBase
         }
         else if (currentState == State.Swimming)
         {
-            stateTimer += Time.deltaTime;
-
-            //track player from under the map
+            Swimming();
         }
         else if (currentState == State.Breach)
         {
@@ -161,5 +160,25 @@ public class Goliath : EnemyBase
                 goliathHitLocation.GetComponent<Renderer>().enabled = false;
             }
         }        
+    }
+
+    void Swimming()
+    {
+        //track the player and move towards it under the ground
+
+        Vector3 playerRelativePos = new Vector3(playerTransform.position.x, 
+            transform.position.y, playerTransform.position.z);
+
+        Vector3 horizontalDirection = (playerRelativePos - transform.position).normalized;
+
+        transform.Translate(horizontalDirection * swimSpeed * Time.deltaTime);
+
+        stateTimer += Time.deltaTime;
+
+        if (stateTimer > swimTime)
+        {
+            stateTimer = 0;
+            currentState = State.Breach;
+        }
     }
 }
