@@ -168,7 +168,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61240594}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1903,10 +1903,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7723310761478569250, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7723310761478569250, guid: 2ff37f62bb686324893e075301874d31, type: 3}
       propertyPath: MenuEnd
       value: 
       objectReference: {fileID: 60049065}
@@ -1930,7 +1926,9 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5678496758109614749, guid: 2ff37f62bb686324893e075301874d31, type: 3}
+    - {fileID: 6324261144665293422, guid: 2ff37f62bb686324893e075301874d31, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1330830709945080551, guid: 2ff37f62bb686324893e075301874d31, type: 3}
     m_AddedGameObjects:
@@ -2531,7 +2529,7 @@ PrefabInstance:
       objectReference: {fileID: 1005873662}
     - target: {fileID: 960334485513416140, guid: edd051178d52fdd49ab12608bcf6398f, type: 3}
       propertyPath: m_VersionIndex
-      value: 872
+      value: 875
       objectReference: {fileID: 0}
     - target: {fileID: 1092800084730145619, guid: edd051178d52fdd49ab12608bcf6398f, type: 3}
       propertyPath: m_Mesh
