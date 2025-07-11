@@ -18,7 +18,7 @@ public class MenuNavigation : MonoBehaviour
         else
         {
             // Fallback: Find the first Button in the scene
-            Button fallbackButton = FindObjectOfType<Button>();
+            Button fallbackButton = Object.FindFirstObjectByType<Button>();
             if (fallbackButton != null)
             {
                 selectedObject = fallbackButton.gameObject;
@@ -101,5 +101,5 @@ public class MenuNavigation : MonoBehaviour
             next = currentSelectable.FindSelectableOnRight();
 
         return next != null ? next.gameObject : current;
-    }  
+    }
 }
