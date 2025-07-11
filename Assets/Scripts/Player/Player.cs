@@ -114,8 +114,8 @@ public class Player : MonoBehaviour, IColorLock
         }
 
         //lose menu
-        //GameManager.instance.menuEnd.GetComponent<TypeOfEndScreen>().LoseEndScreen();
         GameManager.instance.OnEndCondition();
+        GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().LoseEndScreen();
     }
 
     //Monk Lock Color interface implentation **NEW**

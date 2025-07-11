@@ -184,6 +184,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public GameObject GetActiveMenu()
+    {
+        return MenuActive;
+    }
+
     //public void OnWinCondition()
     //{
     //    statePause();
