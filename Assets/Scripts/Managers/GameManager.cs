@@ -223,7 +223,6 @@ public class GameManager : MonoBehaviour
 
             case "Level_3":
                 AudioManager.instance.Play("Level_3");
-                Debug.Log("Level_3 Audio is Playing");
                 break;
 
             case "Level_4":
@@ -241,6 +240,11 @@ public class GameManager : MonoBehaviour
             case "MainMenu":
                 AudioManager.instance.Play("Main_Menu");
                 break;
+
+            case "Level_Showcase":
+                AudioManager.instance.Play("Level_3");
+                break;
+
         }
 
     }
