@@ -34,7 +34,7 @@ public class ButtonFunction : MonoBehaviour
 
     public void onNextStage()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().rootCount + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void ontoggleArcade()
