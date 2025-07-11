@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IColorLock
@@ -99,16 +100,20 @@ public class Player : MonoBehaviour, IColorLock
 
         AudioManager.instance.Play("Game_Over");
 
-        //save score
-        //check for highscore
-        int highScore = PlayerPrefs.GetInt("Highscore");
-
-        if (ComboManager.instance.GetScore() > highScore)
+        //check for highscore then saves if found
+        List<int> highscores = HighScoreManager.theInstance.GetHighScores();
+        int totalScore = ComboManager.instance.GetScore();
+        for (int index = 0; index < highscores.Count; index++)
         {
-            GameManager.instance.SaveHighscore(ComboManager.instance.GetScore());
+            if (totalScore > highscores[index])
+            {
+                HighScoreManager.theInstance.SaveHighScore(totalScore);
+                break;
+            }
         }
 
         //lose menu
+        //GameManager.instance.menuEnd.GetComponent<TypeOfEndScreen>().LoseEndScreen();
         GameManager.instance.OnEndCondition();
     }
 

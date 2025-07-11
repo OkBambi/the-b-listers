@@ -19,7 +19,7 @@ public class ButtonFunction : MonoBehaviour
     {
         Debug.Log("Reloading State...");
         GameManager.instance.stateUnPause();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(0);
 
     }
     public void onSettings()
@@ -30,6 +30,11 @@ public class ButtonFunction : MonoBehaviour
     public void onCredits()
     {
         GameManager.instance.stateUnPause();
+    }
+
+    public void onNextStage()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void ontoggleArcade()

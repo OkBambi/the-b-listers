@@ -7,17 +7,10 @@ public class FeedListing : MonoBehaviour
 {
     [SerializeField] float timeTillKilled = 5f;
 
-    float timer;
-
 // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         StartCoroutine(KillYourSelf());
-    }
-
-    private void Update()
-    {
-
     }
 
     public void SetScoreAndHow(string _scoreFeed)
