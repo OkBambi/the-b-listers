@@ -58,6 +58,12 @@ public class Snake : EnemyBase
         timer = wanderingTimer;
         GetNewWanderTarget();
         name = "Snake";
+
+        if (LevelModifierManager.instance.smallFastEnemies)
+        {
+            movementSpeed = movementSpeed * 2f;
+            Snakeagent.speed = movementSpeed;
+        }
     }
 
 

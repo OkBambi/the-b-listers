@@ -33,6 +33,12 @@ public class Monolith : EnemyBase
 
         if (LevelModifierManager.instance.lowEnemyCooldowns)
             timeBetweenSpawns = timeBetweenSpawns * 0.25f;
+
+        if (LevelModifierManager.instance.smallFastEnemies)
+        {
+            model.transform.localScale = model.transform.localScale * 0.75f;
+            rotationSpeed = rotationSpeed * 2f;
+        }
     }
 
     // Update is called once per frame

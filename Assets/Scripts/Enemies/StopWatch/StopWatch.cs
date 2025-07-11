@@ -43,6 +43,9 @@ public class StopWatch : EnemyBase
         if (LevelModifierManager.instance.lowEnemyCooldowns)
             counterLimit = Mathf.Clamp(Mathf.CeilToInt((float)counterLimit * 0.25f), 1, 100);
 
+        if (LevelModifierManager.instance.smallFastEnemies)
+            model.transform.localScale = model.transform.localScale * 0.75f;
+
     }
 
     void CountDownTimer()

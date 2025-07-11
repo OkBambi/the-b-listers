@@ -57,6 +57,12 @@ public class Monk : EnemyBase
             pauseToCastTimer = pauseToCastTimer * 0.25f;
             roamDist = roamDist * 0.25f;
         }
+
+        if (LevelModifierManager.instance.smallFastEnemies)
+        {
+            model.transform.localScale = model.transform.localScale * 0.75f;
+            agent.speed = agent.speed * 2f;
+        }
     }
 
     // Update is called once per frame
