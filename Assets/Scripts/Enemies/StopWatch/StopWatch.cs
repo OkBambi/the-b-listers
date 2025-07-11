@@ -8,6 +8,7 @@ public class StopWatch : EnemyBase
     [SerializeField] GameObject ShockWave;
 
     int counter;
+    [SerializeField] int counterLimit = 3;
 
     public float slamDuration;
     public float endPosition;
@@ -39,13 +40,15 @@ public class StopWatch : EnemyBase
 
         EnemyManager.instance.StopwatchTrigger += CountDownTimer; // Subscribe to the stopwatch trigger event
         name = "Stop Watch";
+        if (LevelModifierManager.instance.lowEnemyCooldowns)
+            counterLimit = Mathf.Clamp(Mathf.CeilToInt((float)counterLimit * 0.25f), 1, 100);
 
     }
 
     void CountDownTimer()
     {
         counter++;
-        if(counter >= 3 && !isSlamming)
+        if(counter >= counterLimit && !isSlamming)
         {
             counter = 0;
             isSlamming = true;

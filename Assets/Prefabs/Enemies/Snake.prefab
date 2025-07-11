@@ -65,6 +65,7 @@ MonoBehaviour:
   wanderingTimer: 2
   startHeight: 0
   rb: {fileID: 6865793603336743839}
+  Snakeagent: {fileID: 0}
   player: {fileID: 0}
   followRange: 20
 --- !u!33 &2584507537928448301
@@ -177,7 +178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5851093800064333019}
-  - component: {fileID: 1324319670495882316}
+  - component: {fileID: 201013737509840807}
   - component: {fileID: 4074780470188102390}
   m_Layer: 13
   m_Name: SpinHolder
@@ -204,7 +205,7 @@ Transform:
   - {fileID: 1310319916464502660}
   m_Father: {fileID: 1464357687407549746}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1324319670495882316
+--- !u!114 &201013737509840807
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,7 +214,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1639606639198716344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad2ee5ef1fdfcae4aa4e7f1ef5f1f882, type: 3}
+  m_Script: {fileID: 11500000, guid: 44d7b98fd70edbb4b8cafe85ef272bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 50
