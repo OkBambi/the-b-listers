@@ -21,10 +21,21 @@ public class LevelModifierManager : MonoBehaviour
     [Inspectable] List<LevelModifier> modifiers;
 
     [SerializeField] DifficultyObject difficulty;
-
+    
+    //Hard
     public bool schmovesOnly = false;
     public bool daggersOnly = false;
     public bool doubleEnemies = false;
+
+    //normal
+    public bool boogieWoogie = false;
+    public bool enemyDrops = false;
+    public bool monkTaunt = false;
+
+    //easy
+    public bool largerStage = false;
+    public bool reduceSpawnRate = false;
+    public bool savingGrace = false;
 
     private void Awake()
     {
@@ -198,6 +209,7 @@ public class LevelModifierManager : MonoBehaviour
 
     //place modifier functions below of organization reasons
     #region Modifier Methods
+    //Hards
     public void SchmovesOnly()
     {
         schmovesOnly = true;
@@ -215,5 +227,40 @@ public class LevelModifierManager : MonoBehaviour
     {
         doubleEnemies = true;
     }
+
+    //Normal
+    public void BoogieWoogieShuffle()
+    {
+        boogieWoogie = true;
+    }
+
+    public void EnemyDrop()
+    {
+        enemyDrops = true;
+    }
+
+    public void MonkTaunt()
+    {
+        monkTaunt = true;
+    }
+
+
+    //easy
+    public void LargerStage()
+    {
+        largerStage = true;
+    }
+
+    public void ReduceSpawnRate()
+    {
+        reduceSpawnRate = true;
+    }
+
+    public void SavingGrace()
+    {
+        savingGrace = true;
+    }
+
+
     #endregion
 }
