@@ -23,6 +23,8 @@ public class SnakeHead : EnemyBase
         }
 
         name = "Snake Head";
+        if (LevelModifierManager.instance.smallFastEnemies)
+            model.transform.localScale = model.transform.localScale * 0.75f;
     }
 
     public override void DeathCheck()

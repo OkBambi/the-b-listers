@@ -57,6 +57,15 @@ public class AngryBoidRework : BoidAI
             chargeCooldown[0] = chargeCooldown[0] * 0.25f;
             chargeCooldown[1] = chargeCooldown[1] * 0.25f;
         }
+
+        if (LevelModifierManager.instance.smallFastEnemies)
+        {
+            model.transform.localScale = model.transform.localScale * 0.75f;
+            maxSpeed = maxSpeed * 2f;
+            stageWeight = stageWeight * 1.5f;
+            playerWeight = playerWeight * 1.5f;
+        }
+
         StartCoroutine(SwitchAIMode());
     }
 

@@ -22,10 +22,12 @@ public class LevelModifierManager : MonoBehaviour
 
     [SerializeField] DifficultyObject difficulty;
 
+    //hard
     public bool schmovesOnly = false;
     public bool daggersOnly = false;
     public bool doubleEnemies = false;
     public bool lowEnemyCooldowns = false;
+    public bool smallFastEnemies = false;
 
     //normal
     public bool boogieWoogie = false;
@@ -82,6 +84,7 @@ public class LevelModifierManager : MonoBehaviour
         }
         //DoubleEnemies();
         //LowEnemyCooldowns();
+        //SmallFastEnemies();
     }
 
     
@@ -210,6 +213,7 @@ public class LevelModifierManager : MonoBehaviour
 
     //place modifier functions below of organization reasons
     #region Modifier Methods
+    #region Hard
     public void SchmovesOnly()
     {
         schmovesOnly = true;
@@ -217,7 +221,6 @@ public class LevelModifierManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Level_1")
             ComboManager.instance.AddScoreNoMult(1000f);
     }
-
     public void DaggersOnly()
     {
         daggersOnly = true;
@@ -235,8 +238,14 @@ public class LevelModifierManager : MonoBehaviour
         //I will still implement an adjusted implementation based on the trigger tho
     }
 
+    public void SmallFastEnemies()
+    {
+        smallFastEnemies = true;
+    }
+    #endregion
 
-    //Normal
+
+    #region Normal
     public void BoogieWoogieShuffle()
     {
         boogieWoogie = true;
@@ -250,8 +259,10 @@ public class LevelModifierManager : MonoBehaviour
     {
         monkTaunt = true;
     }
+    #endregion
 
-    //easy
+
+    #region Easy
     public void LargerStage()
     {
         largerStage = true;
@@ -266,5 +277,7 @@ public class LevelModifierManager : MonoBehaviour
     {
         savingGrace = true;
     }
+    #endregion
+
     #endregion
 }
