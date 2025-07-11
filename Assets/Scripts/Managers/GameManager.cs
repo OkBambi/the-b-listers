@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -198,6 +199,41 @@ public class GameManager : MonoBehaviour
         ChainStates[0].gameObject.SetActive(true);
         ChainStates[1].gameObject.SetActive(false);
         Debug.Log("IVE GONE THROUGH IT, IT SHOULD WORK");
+    }
+
+    public void PlayLevelMusic()
+    {
+
+        Scene scene = SceneManager.GetActiveScene();
+        switch (scene.name)
+        {
+            case "Level_1":
+
+                AudioManager.instance.Play("Level_1");
+                break;
+
+            case "Level_2":
+                AudioManager.instance.Play("Level_2");
+                break;
+
+            case "Level_3":
+                AudioManager.instance.Play("Level_3");
+                Debug.Log("Level_3 Audio is Playing");
+                break;
+
+            case "Level_4":
+                AudioManager.instance.Play("Level_4");
+                break;
+
+            case "Bonus_Level":
+                AudioManager.instance.Play("Bonus_Level");
+                break;
+
+            case "Boss_Level":
+                AudioManager.instance.Play("Boss_Level");
+                break;
+        }
+
     }
 
 }

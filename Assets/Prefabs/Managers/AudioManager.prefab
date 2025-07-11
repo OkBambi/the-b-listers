@@ -99,6 +99,41 @@ MonoBehaviour:
     volume: 0.345
     pitch: 1
     source: {fileID: 0}
+  - name: Level_1
+    clip: {fileID: 8300000, guid: d1baf33d9bebe1945855dc8e8d837fdd, type: 3}
+    volume: 0.345
+    pitch: 1
+    source: {fileID: 0}
+  - name: Level_2
+    clip: {fileID: 8300000, guid: 9801ce4aae005c741ae268c217f43347, type: 3}
+    volume: 0.345
+    pitch: 1
+    source: {fileID: 0}
+  - name: Level_3
+    clip: {fileID: 8300000, guid: d164d706d84771448b7a85e8097163a2, type: 3}
+    volume: 0.345
+    pitch: 1
+    source: {fileID: 0}
+  - name: Level_4
+    clip: {fileID: 8300000, guid: 4d8a6a6b2b529f34c8cd5ca742e826e7, type: 3}
+    volume: 0.345
+    pitch: 1
+    source: {fileID: 0}
+  - name: Bonus_Level
+    clip: {fileID: 8300000, guid: 4d8a6a6b2b529f34c8cd5ca742e826e7, type: 3}
+    volume: 0.345
+    pitch: 1
+    source: {fileID: 0}
+  - name: Boss_Level
+    clip: {fileID: 8300000, guid: 4d8a6a6b2b529f34c8cd5ca742e826e7, type: 3}
+    volume: 0.345
+    pitch: 1
+    source: {fileID: 0}
+  - name: Main_Menu
+    clip: {fileID: 8300000, guid: 9a04582ed68558a479b95ecbb2d92e6e, type: 3}
+    volume: 0.345
+    pitch: 1
+    source: {fileID: 0}
   EnemySounds:
   - name: Monk_Cast
     clip: {fileID: 8300000, guid: f1cfb96b3644d0e4481084590700455b, type: 3}
@@ -130,11 +165,6 @@ MonoBehaviour:
     volume: 0.309
     pitch: 0.95
     source: {fileID: 0}
-  - name: A_Boid_Blinker
-    clip: {fileID: 8300000, guid: 4d8a6a6b2b529f34c8cd5ca742e826e7, type: 3}
-    volume: 0.223
-    pitch: 2.04
-    source: {fileID: 0}
   - name: A_Boid_Charge
     clip: {fileID: 8300000, guid: b30139c32f2849945b46c624d4a2eecd, type: 3}
     volume: 0.326
@@ -156,42 +186,7 @@ MonoBehaviour:
     pitch: 2.04
     source: {fileID: 0}
   WorldSounds: []
-  Music:
-  - name: Level_1
-    clip: {fileID: 8300000, guid: d1baf33d9bebe1945855dc8e8d837fdd, type: 3}
-    volume: 0.45
-    pitch: 1
-    source: {fileID: 0}
-  - name: Level_2
-    clip: {fileID: 8300000, guid: 9801ce4aae005c741ae268c217f43347, type: 3}
-    volume: 0.45
-    pitch: 1
-    source: {fileID: 0}
-  - name: Level_3
-    clip: {fileID: 8300000, guid: d164d706d84771448b7a85e8097163a2, type: 3}
-    volume: 0.734
-    pitch: 1
-    source: {fileID: 0}
-  - name: Level_4
-    clip: {fileID: 0}
-    volume: 0.45
-    pitch: 1
-    source: {fileID: 0}
-  - name: Boss_Level
-    clip: {fileID: 0}
-    volume: 0.45
-    pitch: 1
-    source: {fileID: 0}
-  - name: Bonus_Level
-    clip: {fileID: 0}
-    volume: 0.45
-    pitch: 1
-    source: {fileID: 0}
-  - name: Main_Menu
-    clip: {fileID: 0}
-    volume: 0.45
-    pitch: 1
-    source: {fileID: 0}
+  Music: []
 --- !u!1001 &7159842087228185678
 PrefabInstance:
   m_ObjectHideFlags: 0

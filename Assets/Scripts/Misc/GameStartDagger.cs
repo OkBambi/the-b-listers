@@ -7,37 +7,11 @@ public class GameStartDagger : MonoBehaviour
     [SerializeField] Player player;
     [SerializeField] Renderer model;
 
+    public bool DaggerGot= false;
+
     private void Start()
     {
         player = GameManager.instance.playerScript;
-        Scene scene = SceneManager.GetActiveScene();
-        switch (scene.name)
-        {
-            case "Level_1":
-
-                AudioManager.instance.Play("Level_1");
-                break;
-
-            case "Level_2":
-                AudioManager.instance.Play("Level_2");
-                break;
-
-            case "Level_3":
-                AudioManager.instance.Play("Level_3");
-                break;
-
-            case "Level_4":
-                AudioManager.instance.Play("Level_4");
-                break;
-
-            case "Bonus_Level":
-                AudioManager.instance.Play("Bonus_Level");
-                break;
-
-            case "Boss_Level":
-                AudioManager.instance.Play("Boss_Level");
-                break;
-        }
     }
 
     private void Update()
@@ -60,11 +34,12 @@ public class GameStartDagger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        DaggerGot = true;
         other.GetComponentInParent<Player>().canAction = true;
         other.GetComponentInParent<Player>().canColor = true;
         GameManager.instance.timer.isCounting = true;
         EnemyManager.instance.SpawnFirstEnemy();
-  
+        GameManager.instance.PlayLevelMusic();
         Destroy(gameObject);
 
     }
