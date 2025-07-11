@@ -30,6 +30,9 @@ public class Monolith : EnemyBase
         ColorSelection(setColor);
         UpdateBoidAwareness();
         name = "Monolith";
+
+        if (LevelModifierManager.instance.lowEnemyCooldowns)
+            timeBetweenSpawns = timeBetweenSpawns * 0.25f;
     }
 
     // Update is called once per frame

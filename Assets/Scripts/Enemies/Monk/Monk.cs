@@ -16,8 +16,8 @@ public class Monk : EnemyBase
     [Header("roaming movement")]
     [SerializeField] int faceTargetSpeed;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] int roamDist;
-    [SerializeField] int StopTime;
+    [SerializeField] float roamDist;
+    [SerializeField] float StopTime;
     float roamTimer;
 
     [Header("Seperation")]
@@ -50,6 +50,13 @@ public class Monk : EnemyBase
         }
         name = "Monk";
         roam();
+
+        if (LevelModifierManager.instance.lowEnemyCooldowns)
+        {
+            StopTime = StopTime * 0.25f;
+            pauseToCastTimer = pauseToCastTimer * 0.25f;
+            roamDist = roamDist * 0.25f;
+        }
     }
 
     // Update is called once per frame

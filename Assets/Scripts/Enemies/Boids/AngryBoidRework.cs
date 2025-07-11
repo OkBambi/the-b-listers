@@ -49,8 +49,15 @@ public class AngryBoidRework : BoidAI
         }
         base.UpdateBoidAwareness();
         StartCoroutine(NoiseWeights());
-        StartCoroutine(SwitchAIMode());
+        
         name = "Angry Boid";
+
+        if (LevelModifierManager.instance.lowEnemyCooldowns)
+        {
+            chargeCooldown[0] = chargeCooldown[0] * 0.25f;
+            chargeCooldown[1] = chargeCooldown[1] * 0.25f;
+        }
+        StartCoroutine(SwitchAIMode());
     }
 
     protected override void FixedUpdate()

@@ -25,6 +25,7 @@ public class LevelModifierManager : MonoBehaviour
     public bool schmovesOnly = false;
     public bool daggersOnly = false;
     public bool doubleEnemies = false;
+    public bool lowEnemyCooldowns = false;
 
     private void Awake()
     {
@@ -70,6 +71,7 @@ public class LevelModifierManager : MonoBehaviour
                 break;
         }
         //DoubleEnemies();
+        //LowEnemyCooldowns();
     }
 
     
@@ -215,5 +217,13 @@ public class LevelModifierManager : MonoBehaviour
     {
         doubleEnemies = true;
     }
+
+    public void LowEnemyCooldowns()
+    {
+        lowEnemyCooldowns = true;
+        //this method implementation is incomplete, it depends on the stopwatch being reworked to be on a time basis
+        //I will still implement an adjusted implementation based on the trigger tho
+    }
+
     #endregion
 }
