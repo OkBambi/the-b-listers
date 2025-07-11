@@ -9,7 +9,7 @@ public class Lava : MonoBehaviour
     [SerializeField] Vector3 teleportPosition;
 
     private void OnTriggerEnter(Collider other)
-    { 
+    {
 
         IDamage dmg = other.GetComponent<IDamage>();
 
@@ -22,7 +22,8 @@ public class Lava : MonoBehaviour
 
                 other.transform.position = teleportPosition;
 
-                StartCoroutine(Cooldown());
+                    StartCoroutine(Cooldown());
+                
             }
             else
             {
