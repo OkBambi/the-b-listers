@@ -40,8 +40,7 @@ public class Goliath : EnemyBase
     [SerializeField] float radiusOfDiveLocation;
     [SerializeField] GameObject map;
     [SerializeField] GameObject goliathHitLocation;
-    private float maxX;
-    private float maxZ;
+    [SerializeField] float mapRadius;
     [Space]
     [Header("Swim Parameters")]
     [SerializeField] float swimSpeed;
@@ -61,8 +60,6 @@ public class Goliath : EnemyBase
         //playerTransform = GameManager.instance.player.transform;
 
         //for diving
-        maxX = map.transform.lossyScale.x - radiusOfDiveLocation - 30;
-        maxZ = map.transform.lossyScale.z - radiusOfDiveLocation - 30;
         goliathHitLocation.transform.localScale = new Vector3(radiusOfDiveLocation, 0.1f, radiusOfDiveLocation);
     }
 
@@ -101,6 +98,7 @@ public class Goliath : EnemyBase
         }
         else if (currentState == State.Diving)
         {
+            stateTimer = 0;
             Diving();
         }
         else if (currentState == State.Swimming)
@@ -136,18 +134,32 @@ public class Goliath : EnemyBase
     
     void Diving()
     {
-        Vector3 divePos = new Vector3(Random.Range(-maxX, maxX), 1.1f,Random.Range(-maxZ, maxZ));
-        goliathHitLocation.transform.position = divePos;
-        goliathHitLocation.GetComponent<Renderer>().enabled = true;
-        stateTimer = 0;
+        if (goliathHitLocation.transform.position == Vector3.zero)
+        {
+            Vector3 divePos = new Vector3(Random.Range(-1f, 1f) * mapRadius, 1.1f, Random.Range(-1f, 1f) * mapRadius);
+            goliathHitLocation.transform.position = divePos;
+            goliathHitLocation.GetComponent<Renderer>().enabled = true;
+        }
+
+
+        stateTimer += Time.deltaTime;
 
         //go down to indicator and through the map
-        Vector3 direction = (divePos - transform.position).normalized;
+        Vector3 goToPos = new Vector3(goliathHitLocation.transform.position.x, 
+            transform.position.y, goliathHitLocation.transform.position.z);
+        Vector3 horizontalDirection = (goToPos - transform.position).normalized;
 
-        transform.Translate(direction * roamSpeed * Time.deltaTime);
-        //transform.LookAt(direction);
+        transform.Translate(horizontalDirection * roamSpeed * Time.deltaTime);
+        
+        if (Vector3.Distance(goToPos, transform.position) < 0.1f)
+        {
+            transform.Translate(Vector3.down * diveSpeed * Time.deltaTime, Space.World);
 
-        //switch to swimming when Y level is within a certain threshold
-        currentState = State.Swimming;
+            if (transform.position.y < -20f)
+            {
+                currentState = State.Swimming;
+                goliathHitLocation.GetComponent<Renderer>().enabled = false;
+            }
+        }        
     }
 }
