@@ -25,7 +25,7 @@ public class ComboFeed : MonoBehaviour
     private Queue<GameObject> currentFeedList = new Queue<GameObject>();
     private List<string> finalFeedList = new List<string>();
     private List<float> finalScoreList = new List<float>();
-    private float finalScore;
+    private static float finalScore;
 
     private void Awake()
     {
