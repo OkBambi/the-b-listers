@@ -3,9 +3,10 @@ using UnityEngine.UI;
 
 public class TypeOfEndScreen : MonoBehaviour
 {
-    public GameObject quitButton;
-    public GameObject tryAgainButton;
-    public GameObject nextStageButton;
+    [SerializeField] GameObject quitButton;
+    [SerializeField] GameObject tryAgainButton;
+    [SerializeField] GameObject nextStageButton;
+    [SerializeField] GameObject highScoreTable;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,6 +24,7 @@ public class TypeOfEndScreen : MonoBehaviour
         quitButton.SetActive(true);
         tryAgainButton.SetActive(true);
         nextStageButton.SetActive(false);
+        highScoreTable.SetActive(true);
     }
 
     public void LoseEndScreen()
@@ -30,6 +32,7 @@ public class TypeOfEndScreen : MonoBehaviour
         quitButton.SetActive(true);
         tryAgainButton.SetActive(true);
         nextStageButton.SetActive(false);
+        highScoreTable.SetActive(true);
     }
 
     public void NextStageEndScreen()
@@ -37,5 +40,6 @@ public class TypeOfEndScreen : MonoBehaviour
         quitButton.SetActive(false);
         tryAgainButton.SetActive(false);
         nextStageButton.SetActive(true);
+        highScoreTable.SetActive(false);
     }
 }
