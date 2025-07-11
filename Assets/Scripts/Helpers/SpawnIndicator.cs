@@ -66,6 +66,10 @@ public class SpawnIndicator : MonoBehaviour
                 if(flashIndex >= 3)
                 {
                     Instantiate(enemyToSpawn, transform.position, transform.rotation);
+                    if (LevelModifierManager.instance.doubleEnemies)
+                        Instantiate(enemyToSpawn, transform.position + new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f)), transform.rotation);
+
+
                     Destroy(gameObject);
                 }
             }

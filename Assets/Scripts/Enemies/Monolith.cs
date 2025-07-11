@@ -52,11 +52,15 @@ public class Monolith : EnemyBase
         for (int spawnCount = 0; spawnCount < normalBoidSpawnAmt; spawnCount++)//normal spawn
         {
             Instantiate(normalBoid, transform.position, Quaternion.identity);
+            if (LevelModifierManager.instance.doubleEnemies)
+                Instantiate(normalBoid, transform.position + new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)), Quaternion.identity);
         }
 
         for (int spawnCount = 0; spawnCount < angryBoidSpawnAmt; spawnCount++)//angry spawn
         {
             Instantiate(angryBoid, transform.position, Quaternion.identity);
+            if (LevelModifierManager.instance.doubleEnemies)
+                Instantiate(angryBoid, transform.position + new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)), Quaternion.identity);
         }
         yield return new WaitForSeconds(timeBetweenSpawns * (3f / 4f));
 

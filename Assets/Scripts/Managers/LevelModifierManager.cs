@@ -22,8 +22,9 @@ public class LevelModifierManager : MonoBehaviour
 
     [SerializeField] DifficultyObject difficulty;
 
-    public bool schmovesOnly;
-    public bool daggersOnly;
+    public bool schmovesOnly = false;
+    public bool daggersOnly = false;
+    public bool doubleEnemies = false;
 
     private void Awake()
     {
@@ -68,9 +69,7 @@ public class LevelModifierManager : MonoBehaviour
                 }
                 break;
         }
-
-        SchmovesOnly();
-
+        //DoubleEnemies();
     }
 
     
@@ -210,6 +209,11 @@ public class LevelModifierManager : MonoBehaviour
     public void DaggersOnly()
     {
         daggersOnly = true;
+    }
+
+    public void DoubleEnemies()
+    {
+        doubleEnemies = true;
     }
     #endregion
 }
