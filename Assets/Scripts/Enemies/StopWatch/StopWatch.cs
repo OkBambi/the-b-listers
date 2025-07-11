@@ -90,6 +90,7 @@ public class StopWatch : EnemyBase
     IEnumerator slamer() {         float elapsedTime = 0f;
         Vector3 startPos = transform.position;
         Vector3 endPos = new Vector3(transform.position.x, endPosition, transform.position.z);
+        AudioManager.instance.Play("Stopwatch_Indicator");
         while (elapsedTime < slamDuration)
         {
             float t = elapsedTime / slamDuration;

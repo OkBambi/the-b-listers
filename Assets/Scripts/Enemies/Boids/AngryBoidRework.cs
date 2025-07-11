@@ -104,8 +104,8 @@ public class AngryBoidRework : BoidAI
     {
         chargingTime = 0f;
         //chargePhase = 1
-        Debug.Log("charging");
         AudioManager.instance.Play("A_Boid_Charge");
+        Debug.Log("charging");
         StartCoroutine(TelegraphBlink());
         while (chargingTime <= chargeDuration)
         {
@@ -123,6 +123,7 @@ public class AngryBoidRework : BoidAI
         //chargePhase = 2
         trail.enabled = true;
         Debug.Log("dashing");
+        AudioManager.instance.Play("A_Boid_Dash");
         yield return new WaitForSeconds(pauseDuration);
         //chargePhase = 3
         ++chargePhase;
