@@ -31,13 +31,13 @@ public class GameManager : MonoBehaviour
 
     public Scene currentLevel;
 
+
     //chain ui
     [Space]
     [Header("ChainUI")]
     [SerializeField] WaveColorLockMonk ColorLockTimer;
     [SerializeField] ChainMarker[] ChainStates;
     [SerializeField] RawImage[] ChainToggleables;
-
     [SerializeField] LockColorChange LockColorChange;
 
 
@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
         currentLevel = SceneManager.GetActiveScene();
 
     }
+    
 
     // Update is called once per frame
     void Update()
@@ -245,45 +246,44 @@ public class GameManager : MonoBehaviour
 
     public void PlayLevelMusic()
     {
-
+       
         Scene scene = SceneManager.GetActiveScene();
-        switch (scene.name)
-        {
-            case "Level_1":
+            switch (scene.name)
+            {
+                case "Level_1":
 
-                AudioManager.instance.Play("Level_1");
-                break;
+                    AudioManager.instance.Play("Level_1");
+                    break;
 
-            case "Level_2":
-                AudioManager.instance.Play("Level 2");
-                break;
+                case "Level_2":
+                    AudioManager.instance.Play("Level 2");
+                    break;
 
-            case "Level_3":
-                AudioManager.instance.Play("Level_3");
-                break;
+                case "Level_3":
+                    AudioManager.instance.Play("Level_3");
+                    break;
 
-            case "Level_4":
-                AudioManager.instance.Play("Level4");
-                break;
+                case "Level_4":
+                    AudioManager.instance.Play("Level4");
+                    break;
 
-            case "Bonus_Level":
-                AudioManager.instance.Play("Bonus_Level");
-                break;
+                case "Bonus_Level":
+                    AudioManager.instance.Play("Bonus_Level");
+                    break;
 
-            case "Boss_Level":
-                AudioManager.instance.Play("Boss_Level");
-                break;
+                case "Boss_Level":
+                    AudioManager.instance.Play("Boss_Level");
+                    break;
 
-            case "MainMenu":
-                AudioManager.instance.Play("Main_Menu");
-                break;
+                case "MainMenu":
+                    AudioManager.instance.Play("Main_Menu");
+                    break;
 
-            case "Level_Showcase":
-                AudioManager.instance.Play("Level_3");
-                break;
+                case "Level_Showcase":
+                    AudioManager.instance.Play("Level_3");
+                    break;
 
-        }
-
+            }
     }
 
 }

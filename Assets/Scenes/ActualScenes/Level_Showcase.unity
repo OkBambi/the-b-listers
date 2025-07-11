@@ -261,6 +261,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level 1 FlyingBoid
       objectReference: {fileID: 0}
+    - target: {fileID: 2362246457872072167, guid: 94fe91a114c94e04084fd8ad76d07088, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7898798004148002361, guid: 94fe91a114c94e04084fd8ad76d07088, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.489031
@@ -382,6 +386,10 @@ PrefabInstance:
     - target: {fileID: 3703748537186476124, guid: 640ba846edda9d44b9072db8483c4861, type: 3}
       propertyPath: m_Name
       value: Monolith_Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703748537186476124, guid: 640ba846edda9d44b9072db8483c4861, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3943148142247391701, guid: 640ba846edda9d44b9072db8483c4861, type: 3}
       propertyPath: m_LocalPosition.x
@@ -748,98 +756,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: UISounds.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: EnemySounds.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: UISounds.Array.data[5].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 9a04582ed68558a479b95ecbb2d92e6e, type: 3}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: UISounds.Array.data[5].name
-      value: Level_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: UISounds.Array.data[6].name
-      value: Bonus_Level
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: UISounds.Array.data[7].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4d8a6a6b2b529f34c8cd5ca742e826e7, type: 3}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: UISounds.Array.data[7].name
-      value: Boss_Level
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: UISounds.Array.data[8].name
-      value: Main_Menu
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: UISounds.Array.data[9].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 9a04582ed68558a479b95ecbb2d92e6e, type: 3}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: UISounds.Array.data[9].name
-      value: Play_Scene
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: UISounds.Array.data[9].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: UISounds.Array.data[4].volume
-      value: 0.103
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: UISounds.Array.data[9].volume
-      value: 0.345
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: EnemySounds.Array.data[8].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 1dbfa8df088a8b547a53ed48e9d980fc, type: 3}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: EnemySounds.Array.data[10].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 1dbfa8df088a8b547a53ed48e9d980fc, type: 3}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: EnemySounds.Array.data[10].name
-      value: Enemy_Spawn
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: EnemySounds.Array.data[11].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: d8b00f63d79ba164f86c554f37b0c346, type: 3}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: EnemySounds.Array.data[11].name
-      value: Monolith_Growl
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: EnemySounds.Array.data[10].pitch
-      value: 2.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: EnemySounds.Array.data[11].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: EnemySounds.Array.data[8].volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: EnemySounds.Array.data[10].volume
-      value: 0.326
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-      propertyPath: EnemySounds.Array.data[11].volume
-      value: 0.339
-      objectReference: {fileID: 0}
     - target: {fileID: 2952979188818049576, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -957,6 +873,10 @@ PrefabInstance:
     - target: {fileID: 2362246457872072167, guid: fed71304f1809f34b80978261626ae55, type: 3}
       propertyPath: m_Name
       value: AngryBoid_Reworked
+      objectReference: {fileID: 0}
+    - target: {fileID: 2362246457872072167, guid: fed71304f1809f34b80978261626ae55, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5499464649607623116, guid: fed71304f1809f34b80978261626ae55, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1094,6 +1014,10 @@ PrefabInstance:
     - target: {fileID: 4843311458845422002, guid: 65f629433d980e7478fbb9d049d2dd19, type: 3}
       propertyPath: m_Name
       value: Snake w_ NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843311458845422002, guid: 65f629433d980e7478fbb9d049d2dd19, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
