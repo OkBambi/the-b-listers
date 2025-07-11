@@ -17,27 +17,27 @@ public class HighScoreManager : MonoBehaviour
         theInstance = this;
     }
 
-    public static void SaveHighScore(float newHighScore)
+    public static void SaveHighScore(int newHighScore)
     {
-        List<float> highScores = GetHighScores();
+        List<int> highScores = GetHighScores();
         highScores.Add(newHighScore);
         highScores = highScores.OrderByDescending(s => s).Take(maxHighScores).ToList();
 
         for (int index = 0; index < maxHighScores; index++)
         {
-            PlayerPrefs.SetFloat(prefix + index, highScores[index]);
+            PlayerPrefs.SetInt(prefix + index, highScores[index]);
         }
         PlayerPrefs.Save();
     }
 
-    public static List<float> GetHighScores()
+    public static List<int> GetHighScores()
     {
-        List<float> highScores = new List<float>();
+        List<int> highScores = new List<int>();
         for (int index = 0; index < maxHighScores; index++)
         {
             if(PlayerPrefs.HasKey(prefix + index))
             {
-                highScores.Add(PlayerPrefs.GetFloat(prefix + index));
+                highScores.Add(PlayerPrefs.GetInt(prefix + index));
             }
         }
         return highScores;
@@ -46,7 +46,7 @@ public class HighScoreManager : MonoBehaviour
     public void DisplayHighScoreTable()
     {
         string highScoreTable = "High Scores:\n";
-        List<float> highScores = GetHighScores();
+        List<int> highScores = GetHighScores();
         for (int index = 0; index < maxHighScores; ++index)
         {
             highScoreTable += (index + 1) + ". " + highScores[index] + "\n";
@@ -58,7 +58,7 @@ public class HighScoreManager : MonoBehaviour
     {
         for (int index = 0; index < maxHighScores; ++index)
         {
-            PlayerPrefs.SetFloat(prefix + index, 0);
+            PlayerPrefs.SetInt(prefix + index, 0);
         }
     }
 }
