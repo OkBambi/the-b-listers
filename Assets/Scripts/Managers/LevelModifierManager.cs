@@ -27,6 +27,16 @@ public class LevelModifierManager : MonoBehaviour
     public bool doubleEnemies = false;
     public bool lowEnemyCooldowns = false;
 
+    //normal
+    public bool boogieWoogie = false;
+    public bool enemyDrops = false;
+    public bool monkTaunt = false;
+
+    //easy
+    public bool largerStage = false;
+    public bool reduceSpawnRate = false;
+    public bool savingGrace = false;
+
     private void Awake()
     {
         instance = this;
@@ -225,5 +235,36 @@ public class LevelModifierManager : MonoBehaviour
         //I will still implement an adjusted implementation based on the trigger tho
     }
 
+
+    //Normal
+    public void BoogieWoogieShuffle()
+    {
+        boogieWoogie = true;
+    }
+    public void EnemyDrop()
+    {
+        enemyDrops = true;
+    }
+
+    public void MonkTaunt()
+    {
+        monkTaunt = true;
+    }
+
+    //easy
+    public void LargerStage()
+    {
+        largerStage = true;
+    }
+
+    public void ReduceSpawnRate()
+    {
+        reduceSpawnRate = true;
+    }
+
+    public void SavingGrace()
+    {
+        savingGrace = true;
+    }
     #endregion
 }
