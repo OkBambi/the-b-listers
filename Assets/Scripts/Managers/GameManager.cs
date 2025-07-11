@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
     public Schmoves schmover;
     public Timer timer;
 
+    public Scene currentLevel;
 
     //chain ui
     [Space]
@@ -37,6 +39,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] RawImage[] ChainToggleables;
 
     [SerializeField] LockColorChange LockColorChange;
+
+
 
     void Awake()
     {
@@ -49,20 +53,26 @@ public class GameManager : MonoBehaviour
         Time.timeScale = TimeScaleOrigin;
         Cursor.lockState = CursorLockMode.Locked;
         ChainStates = FindObjectsByType<ChainMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name == "MainMenu")
+        {
+            PlayLevelMusic();
+        }
 
         ChainToggleables = new RawImage[2];
 
         foreach (ChainMarker chainMarker in ChainStates)
         {
             if (chainMarker.chainType == ChainType.Lock)
-                {
-                    ChainToggleables[0] = chainMarker.GetComponent<RawImage>();
-                }
+            {
+                ChainToggleables[0] = chainMarker.GetComponent<RawImage>();
+            }
             if (chainMarker.chainType == ChainType.Unlock)
             {
                 ChainToggleables[1] = chainMarker.GetComponent<RawImage>();
             }
         }
+        currentLevel = SceneManager.GetActiveScene();
 
     }
 
@@ -82,7 +92,40 @@ public class GameManager : MonoBehaviour
                 stateUnPause();
             }
         }
+        if (Input.GetKeyDown(KeyCode.Keypad0))
+        {
+            SceneManager.LoadScene("Level_Showcase");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            SceneManager.LoadScene("Level_1");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            SceneManager.LoadScene("Level_2");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            SceneManager.LoadScene("Level_3");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad4))
+        {
+            SceneManager.LoadScene("Level_4");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad5))
+        {
+            SceneManager.LoadScene("Level_Bonus");
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad6))
+        {
+            SceneManager.LoadScene("Level_Boss");
+        }
+        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
+
 
     public void statePause()
     {
@@ -90,7 +133,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-
     }
 
     public void BackButton()
@@ -189,6 +231,49 @@ public class GameManager : MonoBehaviour
         ChainStates[0].gameObject.SetActive(true);
         ChainStates[1].gameObject.SetActive(false);
         Debug.Log("IVE GONE THROUGH IT, IT SHOULD WORK");
+    }
+
+    public void PlayLevelMusic()
+    {
+
+        Scene scene = SceneManager.GetActiveScene();
+        switch (scene.name)
+        {
+            case "Level_1":
+
+                AudioManager.instance.Play("Level_1");
+                break;
+
+            case "Level_2":
+                AudioManager.instance.Play("Level 2");
+                break;
+
+            case "Level_3":
+                AudioManager.instance.Play("Level_3");
+                break;
+
+            case "Level_4":
+                AudioManager.instance.Play("Level4");
+                break;
+
+            case "Bonus_Level":
+                AudioManager.instance.Play("Bonus_Level");
+                break;
+
+            case "Boss_Level":
+                AudioManager.instance.Play("Boss_Level");
+                break;
+
+            case "MainMenu":
+                AudioManager.instance.Play("Main_Menu");
+                break;
+
+            case "Level_Showcase":
+                AudioManager.instance.Play("Level_3");
+                break;
+
+        }
+
     }
 
 }

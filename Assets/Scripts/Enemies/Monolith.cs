@@ -46,6 +46,7 @@ public class Monolith : EnemyBase
     IEnumerator SpawnBoids()
     {
         isSpawning = true;
+        AudioManager.instance.Play("Monolith_Growl");
         //thiss should make it so that the first boid spawn for monoliths is almost instant, but afterwards, it will be the correct amount of time
         yield return new WaitForSeconds(timeBetweenSpawns / 4f);
         for (int spawnCount = 0; spawnCount < normalBoidSpawnAmt; spawnCount++)//normal spawn
