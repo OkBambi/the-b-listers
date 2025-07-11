@@ -36,7 +36,7 @@ public class EnemyBase : MonoBehaviour, IDamage
         setColor = (PrimaryColor)Random.Range(0, 3);
     }
 
-    protected void ColorSelection(PrimaryColor newColor)
+    public void ColorSelection(PrimaryColor newColor)
     {
         setColor = newColor;
         switch (setColor)
