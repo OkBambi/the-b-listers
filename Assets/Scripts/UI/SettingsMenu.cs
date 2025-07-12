@@ -12,36 +12,42 @@ public class SettingsMenu : MonoBehaviour
     public Slider vfxSlider;
     public TextMeshProUGUI vfxText;
 
+
     //res stuff
     public TMP_Dropdown resolutionDropdown;
     Resolution[] resolutions;
+
+    public TMP_Dropdown quality;
+    public TMP_Dropdown window;
 
 
     void Start()
     {
         //resolution
         resolutions = Screen.resolutions;
-        resolutionDropdown.ClearOptions();  //clear all existing options from the dropdown
 
-        List<string> options = new List<string>();  //create a list of options to populate the dropdown
+        //maura's code I used to
+        //resolutionDropdown.ClearOptions();  //clear all existing options from the dropdown
+        
+        //List<string> options = new List<string>();  //create a list of options to populate the dropdown
 
-        int currentResolutionIndex = 0; //track the index of the current screen resolution
-        //loop for each element in our array
-        for (int i = 0; i < resolutions.Length; i++)
-        {
-            //string option = "width" + " x " + "height";
-            string option = resolutions[i].width + " x " + resolutions[i].height;   //a nicely formated string will be crated for them
-            options.Add(option);    //then gets added to the list
+        //int currentResolutionIndex = 0; //track the index of the current screen resolution
+        ////loop for each element in our array
+        //for (int i = 0; i < resolutions.Length; i++)
+        //{
+        //    //string option = "width" + " x " + "height";
+        //    string option = resolutions[i].width + " x " + resolutions[i].height;   //a nicely formated string will be crated for them
+        //    options.Add(option);    //then gets added to the list
 
-            if (resolutions[i].width == Screen.currentResolution.width &&
-                resolutions[i].height == Screen.currentResolution.height)
-            {
-                currentResolutionIndex = i;
-            }
-        }
-        resolutionDropdown.AddOptions(options); //once done, it gets back added to the res dropdown
-        resolutionDropdown.value = currentResolutionIndex;
-        resolutionDropdown.RefreshShownValue();
+        //    if (resolutions[i].width == Screen.currentResolution.width &&
+        //        resolutions[i].height == Screen.currentResolution.height)
+        //    {
+        //        currentResolutionIndex = i;
+        //    }
+        //}
+        //resolutionDropdown.AddOptions(options); //once done, it gets back added to the res dropdown
+        //resolutionDropdown.value = currentResolutionIndex;
+        //resolutionDropdown.RefreshShownValue();
 
         //beginning of the volume stuff
         //gets the initial volume from the AudioMixer and set the slider and text
@@ -96,16 +102,75 @@ public class SettingsMenu : MonoBehaviour
     }
 
     //if wanting graphics
-    public void SetQuality(int qualityIndex)
+    public void SetQuality()
     {
-        QualitySettings.SetQualityLevel(qualityIndex);
+        QualitySettings.SetQualityLevel(quality.value);
+    }
+    public void SetQuality(int index)
+    {
+        QualitySettings.SetQualityLevel(index);
+        quality.value = index;
     }
 
     //this sets the resolution when the clicked value from the dropdown changes
-    public void SetResolution(int resolutionIndex)
+    public void SetResolution()
     {
-        Resolution resolution = resolutions[resolutionIndex];
+        //reads an input and sets the window resolution
+        if (resolutions == null)
+            resolutions = Screen.resolutions;
+        Resolution resolution = resolutions[resolutionDropdown.value];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+
+    public void SetResolution(Resolution newResolution)
+    {
+        //reads an input and sets the window resolution
+        Resolution resolution = newResolution;
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
+        for (int resolutionIndex = 0;  resolutionIndex < Screen.resolutions.Length; ++resolutionIndex)
+        {
+            if (Screen.resolutions[resolutionIndex].Equals(newResolution))
+            {
+                resolutionDropdown.value = resolutionIndex;
+                Debug.Log(resolutionDropdown.value);
+                break;
+            }
+        }
+        
+    }
+
+    public void SetWindowSetting()
+    {
+        switch (window.value)
+        {
+            case 0:
+                Screen.fullScreenMode = FullScreenMode.Windowed;
+                break;
+            case 1:
+                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                break;
+            case 2:
+                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                break;
+        }
+    }
+
+    public void SetWindowSetting(FullScreenMode mode)
+    {
+        Screen.fullScreenMode = mode;
+        switch (mode)
+        {
+            case FullScreenMode.Windowed:
+                window.value = 0;
+                break;
+            case FullScreenMode.FullScreenWindow:
+                window.value = 1;
+                break;
+            case FullScreenMode.ExclusiveFullScreen:
+                window.value = 2;
+                break;
+        }
     }
 
     //nom nom. this is a helper function that converts the dB to be more friendly for the player (0-100)

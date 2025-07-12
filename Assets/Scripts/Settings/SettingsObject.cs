@@ -1,16 +1,16 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SettingsObject", menuName = "Settings", order = 1)]
 public class SettingsObject : ScriptableObject
 {
-    public enum QualityTypes { Low, Medium, High }
-    public enum WindowType { Windowed, Fullscreen, FullscreenWindowed }
+    //public enum WindowType { Windowed, Fullscreen, FullscreenWindowed }
 
     [Header("Graphics")]
 
-    public Resolution resolution;
-    public QualityTypes quality;
-    public WindowType windowType;
+    public int resolution;
+    public int quality;
+    public FullScreenMode windowType;
 
     [Space]
     [Range(60, 110)] public int FOV;
