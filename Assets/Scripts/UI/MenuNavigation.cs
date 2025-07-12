@@ -7,7 +7,7 @@ public class MenuNavigation : MonoBehaviour
     private GameObject selectedObject;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void OnEnable()
     {
         // Check if this GameObject has a Button component
         Button button = GetComponent<Button>();
@@ -18,7 +18,7 @@ public class MenuNavigation : MonoBehaviour
         else
         {
             // Fallback: Find the first Button in the scene
-            Button fallbackButton = Object.FindFirstObjectByType<Button>();
+            Button fallbackButton = GetComponentInChildren<Button>();
             if (fallbackButton != null)
             {
                 selectedObject = fallbackButton.gameObject;
@@ -43,6 +43,7 @@ public class MenuNavigation : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.S))
         {
             Navigate(Vector2.down);
+            Input.ResetInputAxes(); // Reset input axes to prevent multiple triggers
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
@@ -60,6 +61,7 @@ public class MenuNavigation : MonoBehaviour
             if (button != null && button.interactable)
             {
                 button.onClick.Invoke();
+
             }
         }
     }
@@ -79,8 +81,8 @@ public class MenuNavigation : MonoBehaviour
             var next = FindNextSelectable(current, direction);
             if (next != null)
             {
-                EventSystem.current.SetSelectedGameObject(next);
-                selectedObject = next;
+                EventSystem.current.SetSelectedGameObject(current);
+                selectedObject = current;
             }
         }
     }
@@ -100,6 +102,19 @@ public class MenuNavigation : MonoBehaviour
         else if (direction == Vector2.right)
             next = currentSelectable.FindSelectableOnRight();
 
-        return next != null ? next.gameObject : current;
+        foreach (Selectable selectable in Selectable.allSelectablesArray)
+        {
+            if (selectable == null || !selectable.IsInteractable())
+                continue;
+            // Debugging output to see all selectables
+            Debug.Log($"Selectable: {selectable.gameObject.name}, Interactable: {selectable.IsInteractable()}");
+        }
+        //Debug.Log(currentSelectable);
+        //Debug.Log(direction);
+        if (next != null && next.IsInteractable())
+        {
+            return next.gameObject;
+        }
+        return current;
     }
 }
