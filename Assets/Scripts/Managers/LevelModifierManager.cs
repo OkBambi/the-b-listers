@@ -92,6 +92,21 @@ public class LevelModifierManager : MonoBehaviour
     public void ClearCurrentModifiers()
     {
         modifiers.Clear();
+
+        schmovesOnly = false;
+        daggersOnly = false;
+        doubleEnemies = false;
+        lowEnemyCooldowns = false;
+        smallFastEnemies = false;
+
+        boogieWoogie = false;
+        enemyDrops = false;
+        monkTaunt = false;
+
+        largerStage = false;
+        reduceSpawnRate = false;
+        savingGrace = false;
+
     }
 
     #region Cards

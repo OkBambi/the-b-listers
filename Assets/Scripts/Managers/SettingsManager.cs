@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,10 +44,13 @@ public class SettingsManager : MonoBehaviour
 
         SettingsMenu settingsMenu = FindFirstObjectByType<SettingsMenu>(FindObjectsInactive.Include);
 
+        settingsMenu.SetResolution(Screen.resolutions[GetResolution()]);
+
+        settingsMenu.SetQuality(GetQuality());
         ////Resolution
         //Dropdown dropDown = GameObject.FindWithTag("Resolution").GetComponent<Dropdown>();
         //var options = dropDown.options;
-        
+
         //for (int resIndex = 0; resIndex < options.Count; ++resIndex)
         //{
         //    if (options[resIndex].text == GetResolution().ToString())
@@ -87,35 +91,56 @@ public class SettingsManager : MonoBehaviour
     }
 
     #region Resolution
-    public Resolution GetResolution()
+    public int GetResolution()
     {
+        Debug.Log(settings.resolution);
         return settings.resolution;
     }
     public void SetResolution(Resolution _resolution)
     {
-        settings.resolution = _resolution;
+        for (int resIndex = 0; resIndex < Screen.resolutions.Length; resIndex++)
+        {
+            if (Screen.resolutions[resIndex].Equals(_resolution))
+                settings.resolution = resIndex;
+        }
+    }
+    public void SetResolution(TMP_Dropdown _resolution)
+    {
+        settings.resolution = _resolution.value;
     }
     #endregion
 
     #region Quality
-    public SettingsObject.QualityTypes GetQuality()
+    public int GetQuality()
     {
         return settings.quality;
     }
-    public void SetQuality(SettingsObject.QualityTypes _quality)
+    public string GetQualityName()
+    {
+        return QualitySettings.names[settings.quality];
+    }
+    public void SetQuality(int _quality)
     {
         settings.quality = _quality;
+    }
+    public void SetQuality(TMP_Dropdown _quality)
+    {
+        settings.quality = _quality.value;
     }
     #endregion
 
     #region Window Type
-    public SettingsObject.WindowType GetWindowType()
+    public FullScreenMode GetWindowType()
     {
         return settings.windowType;
     }
-    public void SetWindowType(SettingsObject.WindowType _windowType)
+    public void SetWindowType(FullScreenMode _windowType)
     {
         settings.windowType = _windowType;
+    }
+    public void SetWindowType(TMP_Dropdown _windowType)
+    {
+        settings.windowType = (FullScreenMode)_windowType.value;
     }
     #endregion
 
