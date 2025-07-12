@@ -64,10 +64,6 @@ public class Monk : EnemyBase
             agent.speed = agent.speed * 2f;
         }
 
-        if (LevelModifierManager.instance.monkTaunt)
-        {
-
-        }
     }
     // Update is called once per frame
     void Update()
@@ -187,15 +183,4 @@ public class Monk : EnemyBase
         roam();
         isCasting = false;
     }
-
-
-    public override void DeathCheck()
-    {
-        if (LevelModifierManager.instance.monkTaunt)
-        {
-            GameManager.instance.playerScript.canColor = true;
-        }
-        base.DeathCheck();
-    }
-
 }
