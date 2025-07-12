@@ -98,12 +98,14 @@ public class LevelModifierManager : MonoBehaviour
         lowEnemyCooldowns = false;
         smallFastEnemies = false;
 
+        //
         boogieWoogie = false;
+
         enemyDrops = false;
         monkTaunt = false;
 
         largerStage = false;
-        reduceSpawnRate = false;
+        lessHealth = false;
         savingGrace = false;
 
     }
