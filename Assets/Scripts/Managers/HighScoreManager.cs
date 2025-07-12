@@ -83,6 +83,7 @@ public class HighScoreManager : MonoBehaviour
         for (int index = 0; index < maxHighScores; ++index)
         {
             PlayerPrefs.SetInt(highscorePrefix + index, 0);
+            PlayerPrefs.SetString(playerNamePrefix + index, "Alphonsine");
         }
     }
 
