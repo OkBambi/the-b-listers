@@ -47,6 +47,9 @@ public class Goliath : EnemyBase
 
     [SerializeField] Transform playerTransform;
 
+    [Header("Breach Parameters")]
+    [SerializeField] float breachSpeed;
+
     float stateTimer;
     Vector3 startPos;
 
@@ -108,7 +111,7 @@ public class Goliath : EnemyBase
         }
         else if (currentState == State.Breach)
         {
-
+            Breach();
         }
     }
 
@@ -171,6 +174,7 @@ public class Goliath : EnemyBase
 
         Vector3 horizontalDirection = (playerRelativePos - transform.position).normalized;
 
+        //jaws music...
         transform.Translate(horizontalDirection * swimSpeed * Time.deltaTime);
 
         stateTimer += Time.deltaTime;
@@ -179,6 +183,18 @@ public class Goliath : EnemyBase
         {
             stateTimer = 0;
             currentState = State.Breach;
+        }
+    }
+
+    void Breach()
+    {
+        //UP.
+
+        transform.Translate(Vector3.up * breachSpeed * Time.deltaTime, Space.World);
+
+        if (transform.position.y > 26f)
+        {
+            currentState = State.Roam;
         }
     }
 }
