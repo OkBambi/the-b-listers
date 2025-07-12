@@ -49,6 +49,8 @@ public class SettingsManager : MonoBehaviour
         settingsMenu.SetQuality(GetQuality());
 
         settingsMenu.SetWindowSetting(GetWindowType());
+
+        settingsMenu.SetSFX(GetSFXVolume());
         ////Resolution
         //Dropdown dropDown = GameObject.FindWithTag("Resolution").GetComponent<Dropdown>();
         //var options = dropDown.options;
@@ -88,7 +90,7 @@ public class SettingsManager : MonoBehaviour
         //    }
         //}
 
-        settingsMenu.SetVFXVolume((GetVFXVolume() * 80f) - 80f);
+        settingsMenu.SetSFXVolume((GetSFXVolume() * 80f) - 80f);
 
     }
 
@@ -242,19 +244,19 @@ public class SettingsManager : MonoBehaviour
     }
     #endregion
 
-    #region VFXVolume
-    public float GetVFXVolume()
+    #region SFXVolume
+    public float GetSFXVolume()
     {
-        return settings.VFXVolume;
+        return settings.SFXVolume;
     }
-    public void SetVFXVolume(float _VFXVolume)
+    public void SetSFXVolume(float _SFXVolume)
     {
-        settings.VFXVolume = _VFXVolume;
+        settings.SFXVolume = _SFXVolume;
     }
 
-    public void SetVFXVolume(Slider _VFXVolume)
+    public void SetSFXVolume(Slider _SFXVolume)
     {
-        settings.VFXVolume = _VFXVolume.value;
+        settings.SFXVolume = (_SFXVolume.value + 80f) / 80f;
     }
     #endregion
 
