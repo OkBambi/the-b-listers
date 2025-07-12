@@ -16,13 +16,7 @@ public class LockColorChange : MonoBehaviour
     void Start()
     {
         
-       if (LevelModifierManager.instance.boogieWoogie)
-        {
-            PrimaryColor = StopwatchPrimary.setColor;
-        } else
-        {
             PrimaryColor = MonkPrimary.setColor;
-        }
 
             //find ColorSwapping Script in scene
             ChangeColor = FindFirstObjectByType<ColorSwapping>();
