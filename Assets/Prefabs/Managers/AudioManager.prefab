@@ -134,6 +134,11 @@ MonoBehaviour:
     volume: 0.345
     pitch: 1
     source: {fileID: 0}
+  - name: Setting_SFX
+    clip: {fileID: 8300000, guid: 052f5921db1ef164390dc04919895dd1, type: 3}
+    volume: 0.345
+    pitch: 1
+    source: {fileID: 0}
   EnemySounds:
   - name: Monk_Cast
     clip: {fileID: 8300000, guid: f1cfb96b3644d0e4481084590700455b, type: 3}
@@ -196,7 +201,12 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
   WorldSounds: []
-  Music: []
+  Music:
+  - name: Setting_Music
+    clip: {fileID: 8300000, guid: 052f5921db1ef164390dc04919895dd1, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
 --- !u!1001 &7159842087228185678
 PrefabInstance:
   m_ObjectHideFlags: 0

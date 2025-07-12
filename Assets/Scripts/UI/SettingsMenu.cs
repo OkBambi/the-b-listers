@@ -78,6 +78,12 @@ public class SettingsMenu : MonoBehaviour
         {
             Debug.LogWarning("AudioMixer, Volume Slider, or Volume Text is not assigned in the Inspector.");
         }
+
+        sfxSlider.onValueChanged.AddListener(delegate { AudioManager.instance.Play("Setting_SFX"); });
+        sfxSlider.onValueChanged.AddListener(delegate { AudioManager.instance.UpdateVFXVolume(); });
+
+        musicSlider.onValueChanged.AddListener(delegate { AudioManager.instance.Play("Setting_Music"); });
+        musicSlider.onValueChanged.AddListener(delegate { AudioManager.instance.UpdateMusicVolume(); });
     }
 
 
