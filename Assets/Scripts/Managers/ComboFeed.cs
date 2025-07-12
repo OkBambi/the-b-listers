@@ -53,11 +53,6 @@ public class ComboFeed : MonoBehaviour
         }
     }
 
-    public void PlayerWasKilledBy(string killer)
-    {
-        playerKilledText.text = "Killed by: " + killer;
-    }
-
     public void FinalScore()
     {
         Debug.Log("Final Print");
@@ -79,7 +74,16 @@ public class ComboFeed : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(endFeedSpeed);
         }
+
+        //clear screen for highscore
         yield return new WaitForSecondsRealtime(timeToWaitBeforeHighscores);
+        finalScoreText.text = "";
+        playerKilledText.text = "";
         HighScoreManager.theInstance.DisplayHighScoreTable();
+    }
+
+    public void PlayerWasKilledBy(string killer)
+    {
+        playerKilledText.text = "Killed by: " + killer;
     }
 }
