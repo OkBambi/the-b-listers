@@ -5,6 +5,7 @@ using static EasingLibrary;
 public class PlayerArm : MonoBehaviour
 {
     [SerializeField] Renderer model;
+    [SerializeField] Renderer Leftmodel;
 
     Vector3 defaultPos;
 
@@ -78,5 +79,6 @@ public class PlayerArm : MonoBehaviour
                 model.material.color = Color.black;
                 break;
         }
+        Leftmodel.material.color = model.material.color;
     }
 }
