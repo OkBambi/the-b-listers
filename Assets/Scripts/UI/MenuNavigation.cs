@@ -25,7 +25,7 @@ public class MenuNavigation : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("No Button found in the scene.");
+                Debug.Log("No Button found in the scene.");
             }
         }
 
