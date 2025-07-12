@@ -2,15 +2,28 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    [SerializeField] GameObject stage;
+    [SerializeField] float Scaler;
+
+    Vector3 originalStageSize;
+
+   
     void Start()
     {
-        
+        if (stage != null)
+        {
+            originalStageSize = stage.transform.localScale;
+
+            if (LevelModifierManager.instance.largerStage)
+            {
+                Vector3 Scaled = originalStageSize;
+                Scaled.x *= Scaler;
+                Scaled.z *= Scaler;
+
+                stage.transform.localScale = Scaled;
+          }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

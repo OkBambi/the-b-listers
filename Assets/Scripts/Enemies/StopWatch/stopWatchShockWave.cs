@@ -10,6 +10,11 @@ public class stopWatchShockWave : MonoBehaviour, IColorLock
     [SerializeField] float maxSize;
     [SerializeField] float ShockTime;
     [SerializeField] float LaunchHight;
+
+    //boogie woogie
+    [SerializeField] public int ColorLockTimer;
+    [SerializeField] LockColorChange LockColorChange;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -46,17 +51,28 @@ public class stopWatchShockWave : MonoBehaviour, IColorLock
     {
         if (other.CompareTag("Player"))
         {
-            // Handle player damage or effects here
-            Debug.Log("Player hit by shock wave!");
-            GameManager.instance.playerScript.canAction = false; // Disable player actions
-            GameManager.instance.playerScript.canSchmove = false;
-            // You can add player damage logic here
-            GameManager.instance.player.GetComponent<Rigidbody>().AddForce(Vector3.up * LaunchHight, ForceMode.Impulse); // Example force to push the player up
-            Invoke("resetPlayer", ShockTime);
             if (LevelModifierManager.instance.boogieWoogie)
             {
-                //add code here
+                IColorLock colorLock = GameManager.instance.playerScript.GetComponent<IColorLock>();
+                if (colorLock != null)
+                {
+                    colorLock.LockColorSelection(ColorLockTimer);
+                }
+                LockColorChange.SwapChainColorToMonk();
+
+                GameManager.instance.ChainScreen(ColorLockTimer);
             }
+            else
+            {
+                // Handle player damage or effects here
+                Debug.Log("Player hit by shock wave!");
+                GameManager.instance.playerScript.canAction = false; // Disable player actions
+                GameManager.instance.playerScript.canSchmove = false;
+                // You can add player damage logic here
+                GameManager.instance.player.GetComponent<Rigidbody>().AddForce(Vector3.up * LaunchHight, ForceMode.Impulse); // Example force to push the player up
+                Invoke("resetPlayer", ShockTime);
+            }
+
 
         }
     }

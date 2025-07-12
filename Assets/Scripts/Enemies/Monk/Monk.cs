@@ -63,8 +63,12 @@ public class Monk : EnemyBase
             model.transform.localScale = model.transform.localScale * 0.75f;
             agent.speed = agent.speed * 2f;
         }
-    }
 
+        if (LevelModifierManager.instance.monkTaunt)
+        {
+
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -160,7 +164,7 @@ public class Monk : EnemyBase
             yield return new WaitForSeconds(0.05f);
         }
         AudioManager.instance.Play("Monk_Cast");
-       
+
         yield return new WaitForSeconds(0.20f);
         Wave.SetActive(true);
         Wave.transform.localScale = Vector3.zero;
@@ -182,6 +186,16 @@ public class Monk : EnemyBase
         }
         roam();
         isCasting = false;
+    }
+
+
+    public override void DeathCheck()
+    {
+        if (LevelModifierManager.instance.monkTaunt)
+        {
+            GameManager.instance.playerScript.canColor = true;
+        }
+        base.DeathCheck();
     }
 
 }
