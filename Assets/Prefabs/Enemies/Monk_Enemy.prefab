@@ -230,13 +230,13 @@ MonoBehaviour:
   hp: 10
   score: 60
   Wave: {fileID: 3166157826796465087}
-  pauseToCastTimer: 2
+  pauseToCastTimer: 10
   waveSize: 60
   waveGrowthSpeed: 0.25
   faceTargetSpeed: 5
   agent: {fileID: 3359546144697713813}
-  roamDist: 30
-  StopTime: 5
+  roamDist: 5
+  StopTime: 15
   minSeperationDistance: 30
   SeperationDome: {fileID: 8846788637968686138}
   monkInRange: 0
@@ -385,6 +385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonkPrimary: {fileID: 678332203169664480}
+  StopwatchPrimary: {fileID: 0}
   ChainToggleables: []
   ChainImageArray: []
   PrimaryColor: 0
@@ -404,6 +405,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ColorLockTimer: 5
   LockColorChange: {fileID: 54409144999819444}
+  ShockTime: 0
+  LaunchHight: 0
 --- !u!135 &1144159770599546745
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -473,6 +476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonkPrimary: {fileID: 678332203169664480}
+  StopwatchPrimary: {fileID: 0}
   ChainToggleables: []
   ChainImageArray: []
   PrimaryColor: 0
