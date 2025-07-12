@@ -7,6 +7,7 @@ public class TypeOfEndScreen : MonoBehaviour
     [SerializeField] GameObject tryAgainButton;
     [SerializeField] GameObject nextStageButton;
     [SerializeField] GameObject highScoreTable;
+    [SerializeField] GameObject nameForNewScore;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -41,5 +42,10 @@ public class TypeOfEndScreen : MonoBehaviour
         tryAgainButton.SetActive(false);
         nextStageButton.SetActive(true);
         highScoreTable.SetActive(false);
+    }
+
+    public void NewHighScore()
+    {
+        nameForNewScore.SetActive(true);
     }
 }

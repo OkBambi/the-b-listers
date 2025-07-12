@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -8,7 +9,8 @@ using UnityEngine.UI;
 public class HighScoreManager : MonoBehaviour
 {
     public static HighScoreManager theInstance;
-    private const string prefix = "HighScore";
+    private const string highscorePrefix = "HighScore";
+    private const string playerNamePrefix = "PlayerName"; 
     [SerializeField] const int maxHighScores = 10;
     public TextMeshProUGUI highScoreTableText;
     public TMP_InputField userName;
@@ -16,18 +18,28 @@ public class HighScoreManager : MonoBehaviour
     void Start()
     {
         theInstance = this;
-    }
-
-    public void SaveHighScore(int newHighScore)
-    {
-        List<int> highScores = GetHighScores();
-        highScores.Add(newHighScore);
-        
-        highScores = highScores.OrderByDescending(s => s).Take(maxHighScores).ToList();
-
         for (int index = 0; index < maxHighScores; index++)
         {
-            PlayerPrefs.SetInt(prefix + index, highScores[index]);
+            PlayerPrefs.SetString(playerNamePrefix + index, "Alphonsine");
+        }
+    }
+
+    public void SaveHighScore(int newHighScore, int location, string userName)
+    {
+        //List<int> highScores = GetHighScores();
+        //highScores.Add(newHighScore);
+        
+        //highScores = highScores.OrderByDescending(s => s).Take(maxHighScores).ToList();
+
+        //shuffes everything else into order
+        for (int index = location ; index < maxHighScores; index++)
+        {
+            string swapedUserName = PlayerPrefs.GetString(playerNamePrefix + index);
+            int swapedScore = PlayerPrefs.GetInt(highscorePrefix + index);
+            PlayerPrefs.SetString(playerNamePrefix + index, userName);
+            PlayerPrefs.SetInt(highscorePrefix + index, newHighScore);
+            userName = swapedUserName;
+            swapedScore = newHighScore;
         }
         PlayerPrefs.Save();
     }
@@ -37,9 +49,9 @@ public class HighScoreManager : MonoBehaviour
         List<int> highScores = new List<int>();
         for (int index = 0; index < maxHighScores; index++)
         {
-            if(PlayerPrefs.HasKey(prefix + index))
+            if(PlayerPrefs.HasKey(highscorePrefix + index))
             {
-                highScores.Add(PlayerPrefs.GetInt(prefix + index));
+                highScores.Add(PlayerPrefs.GetInt(highscorePrefix + index));
             }
         }
         return highScores;
@@ -60,7 +72,7 @@ public class HighScoreManager : MonoBehaviour
     {
         for (int index = 0; index < maxHighScores; ++index)
         {
-            PlayerPrefs.SetInt(prefix + index, 0);
+            PlayerPrefs.SetInt(highscorePrefix + index, 0);
         }
     }
 
@@ -72,11 +84,15 @@ public class HighScoreManager : MonoBehaviour
         {
             if (totalScore > highscores[index])
             {
-                string userInput = userName.text;
-                Debug.Log("The name: " + userInput);
-                SaveHighScore(totalScore);
+                //SaveHighScore(totalScore, index);
                 break;
             }
         }
+    }
+
+    public void SaveName()
+    {
+        //userName.text;
+        //PlayerPrefs.SetString(prefix + , userName.text);
     }
 }

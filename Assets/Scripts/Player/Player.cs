@@ -101,9 +101,6 @@ public class Player : MonoBehaviour, IColorLock
 
         AudioManager.instance.Play("Game_Over");
 
-        //check for highscore then saves if found
-        HighScoreManager.theInstance.SaveIfHighScore();
-
         //lose menu
         GameManager.instance.OnEndCondition();
         GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().LoseEndScreen();

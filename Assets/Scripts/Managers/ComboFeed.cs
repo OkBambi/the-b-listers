@@ -77,6 +77,8 @@ public class ComboFeed : MonoBehaviour
 
         //clear screen for highscore
         yield return new WaitForSecondsRealtime(timeToWaitBeforeHighscores);
+        //check for highscore then saves if found
+        HighScoreManager.theInstance.SaveIfHighScore();
         finalScoreText.text = "";
         playerKilledText.text = "";
         HighScoreManager.theInstance.DisplayHighScoreTable();
