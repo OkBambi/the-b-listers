@@ -8,7 +8,7 @@ public class WaveColorLockMonk : MonoBehaviour
     [SerializeField] public int ColorLockTimer;
     [SerializeField] LockColorChange LockColorChange;
 
-    //boogie woogie
+    [Header("BoogieWoogie")]
     [SerializeField] float ShockTime;
     [SerializeField] float LaunchHight;
 
@@ -31,7 +31,7 @@ public class WaveColorLockMonk : MonoBehaviour
             {
                 colorLock.LockColorSelection(ColorLockTimer);
             }
-            LockColorChange.SwapChainColorToMonk();
+            LockColorChange.SwapChainColor();
 
             GameManager.instance.ChainScreen(ColorLockTimer);
         }
