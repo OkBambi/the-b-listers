@@ -31,4 +31,6 @@ public class SettingsObject : ScriptableObject
     [Header("Controls")]
     [Range(0f, 1f)] public float mouseSensitivity;
 
+    public ColourBlindnessPreset colorPreset;
+
 }

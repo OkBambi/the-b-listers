@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class SettingsMenu : MonoBehaviour
     public TMP_Dropdown quality;
     public TMP_Dropdown window;
 
+    public TMP_Dropdown colourBlindness;
+    [Inspectable] public List<ColourBlindnessPreset> colorPresets;
 
     void Start()
     {

@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -53,6 +54,8 @@ public class SettingsManager : MonoBehaviour
         settingsMenu.SetSFX(GetSFXVolume());
 
         settingsMenu.SetMusic(GetMusicVolume());
+
+
         ////Resolution
         //Dropdown dropDown = GameObject.FindWithTag("Resolution").GetComponent<Dropdown>();
         //var options = dropDown.options;
