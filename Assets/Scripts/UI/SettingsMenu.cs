@@ -115,6 +115,8 @@ public class SettingsMenu : MonoBehaviour
     public void SetResolution()
     {
         //reads an input and sets the window resolution
+        if (resolutions == null)
+            resolutions = Screen.resolutions;
         Resolution resolution = resolutions[resolutionDropdown.value];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
@@ -129,13 +131,9 @@ public class SettingsMenu : MonoBehaviour
         {
             if (Screen.resolutions[resolutionIndex].Equals(newResolution))
             {
-                if (resolutionDropdown != null)
-                {
-                    //resolutionDropdown.value = resolutionIndex;
-                    break;
-                }
-                    
-                
+                resolutionDropdown.value = resolutionIndex;
+                Debug.Log(resolutionDropdown.value);
+                break;
             }
         }
         
