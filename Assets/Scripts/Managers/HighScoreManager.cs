@@ -14,6 +14,7 @@ public class HighScoreManager : MonoBehaviour
     [SerializeField] const int maxHighScores = 10;
     public TextMeshProUGUI highScoreTableText;
     public TMP_InputField userName;
+    private int indexForNewName;
 
     void Start()
     {
@@ -95,7 +96,8 @@ public class HighScoreManager : MonoBehaviour
         {
             if (totalScore > highscores[index])
             {
-                //SaveHighScore(totalScore, index);
+                SaveHighScore(totalScore, index, "");
+                indexForNewName = index;
                 break;
             }
         }
@@ -103,7 +105,6 @@ public class HighScoreManager : MonoBehaviour
 
     public void SaveName()
     {
-        //userName.text;
-        //PlayerPrefs.SetString(prefix + , userName.text);
+        PlayerPrefs.SetString(playerNamePrefix + indexForNewName, userName.text);
     }
 }
