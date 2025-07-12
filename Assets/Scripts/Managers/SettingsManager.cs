@@ -47,6 +47,8 @@ public class SettingsManager : MonoBehaviour
         settingsMenu.SetResolution(Screen.resolutions[GetResolution()]);
 
         settingsMenu.SetQuality(GetQuality());
+
+        settingsMenu.SetWindowSetting(GetWindowType());
         ////Resolution
         //Dropdown dropDown = GameObject.FindWithTag("Resolution").GetComponent<Dropdown>();
         //var options = dropDown.options;

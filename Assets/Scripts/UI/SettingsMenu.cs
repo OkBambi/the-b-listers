@@ -109,6 +109,7 @@ public class SettingsMenu : MonoBehaviour
     public void SetQuality(int index)
     {
         QualitySettings.SetQualityLevel(index);
+        quality.value = index;
     }
 
     //this sets the resolution when the clicked value from the dropdown changes
@@ -139,9 +140,9 @@ public class SettingsMenu : MonoBehaviour
         
     }
 
-    public void SetWindowSetting(TMP_Dropdown windowDropDown)
+    public void SetWindowSetting()
     {
-        switch (windowDropDown.value)
+        switch (window.value)
         {
             case 0:
                 Screen.fullScreenMode = FullScreenMode.Windowed;
@@ -153,7 +154,23 @@ public class SettingsMenu : MonoBehaviour
                 Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
                 break;
         }
-        
+    }
+
+    public void SetWindowSetting(FullScreenMode mode)
+    {
+        Screen.fullScreenMode = mode;
+        switch (mode)
+        {
+            case FullScreenMode.Windowed:
+                window.value = 0;
+                break;
+            case FullScreenMode.FullScreenWindow:
+                window.value = 1;
+                break;
+            case FullScreenMode.ExclusiveFullScreen:
+                window.value = 2;
+                break;
+        }
     }
 
     //nom nom. this is a helper function that converts the dB to be more friendly for the player (0-100)
