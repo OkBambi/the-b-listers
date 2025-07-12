@@ -34,7 +34,7 @@ public class LockColorChange : MonoBehaviour
             
     }
 
-    public void SwapChainColorToMonk()
+    public void SwapChainColor()
     {
         switch (PrimaryColor)
         {

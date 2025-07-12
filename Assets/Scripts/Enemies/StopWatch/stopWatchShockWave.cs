@@ -2,7 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class stopWatchShockWave : MonoBehaviour, IColorLock
+public class stopWatchShockWave : MonoBehaviour
 {
 
     [SerializeField] GameObject shockWave;
@@ -11,14 +11,21 @@ public class stopWatchShockWave : MonoBehaviour, IColorLock
     [SerializeField] float ShockTime;
     [SerializeField] float LaunchHight;
 
-    //boogie woogie
+    [Header("BoogieWoogie")]
     [SerializeField] public int ColorLockTimer;
-    [SerializeField] LockColorChange LockColorChange;
+    [SerializeField] LockColorChange ChainUIColor;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private void Awake()
+    {
+        ChainUIColor = GetComponent<LockColorChange>();
+    }
+
     void Start()
     {
         StartCoroutine(myShock());
+        
     }
 
     // Update is called once per frame
@@ -29,21 +36,24 @@ public class stopWatchShockWave : MonoBehaviour, IColorLock
 
     IEnumerator myShock()
     {
+        shockWave.SetActive(true);
         yield return new WaitForSeconds(0.35f);
         AudioManager.instance.Play("Stopwatch_Smash");
         while (true)
         {
             yield return null;
             shockWave.transform.localScale += new Vector3(speed * Time.deltaTime, 0f, speed * Time.deltaTime);
-            
+
             if (shockWave.transform.localScale.x >= maxSize)
             {
                 shockWave.transform.localScale = new Vector3(0f, 0f, 0f);
                 break; // Exit the coroutine when the shock wave reaches its maximum size
             }
         }
-        
+
         yield return new WaitForSeconds(3f);
+        shockWave.SetActive(false);
+        yield return new WaitForSeconds(2f);
         Destroy(gameObject); // Destroy the shock wave GameObject after it reaches its maximum size
     }
 
@@ -58,7 +68,7 @@ public class stopWatchShockWave : MonoBehaviour, IColorLock
                 {
                     colorLock.LockColorSelection(ColorLockTimer);
                 }
-                LockColorChange.SwapChainColorToMonk();
+                ChainUIColor.SwapChainColor();
 
                 GameManager.instance.ChainScreen(ColorLockTimer);
             }

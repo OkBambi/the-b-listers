@@ -16,19 +16,24 @@ public class Lava : MonoBehaviour
         if (dmg != null && other.CompareTag("Player"))
         {
             if (!isOnCooldown)
-            {
+            {  
                 isOnCooldown = true;
-                model.material.color = Color.red;
-
+                if (!LevelModifierManager.instance.savingGrace)
+                {
+                    model.material.color = Color.red;
+                }
                 other.transform.position = teleportPosition;
-
-                    StartCoroutine(Cooldown());
-                
+                StartCoroutine(Cooldown());
+                return;
             }
-            else
+            if (!LevelModifierManager.instance.savingGrace)
             {
                 dmg.takeDamage(PrimaryColor.OMNI, 100);
                 ComboFeed.theInstance.PlayerWasKilledBy("The Void");
+            }
+            else
+            {
+                other.transform.position = teleportPosition;
             }
         }
     }

@@ -27,6 +27,10 @@ public class EnemyBase : MonoBehaviour, IDamage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
+        if (LevelModifierManager.instance.lessHealth)
+        {
+           hp = hp / 2;
+        }
         ColorSelection(setColor);
         UpdateBoidAwareness();
     }
