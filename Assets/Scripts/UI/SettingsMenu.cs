@@ -1,9 +1,10 @@
-using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class SettingsMenu : MonoBehaviour
     public AudioMixer audioMixer;
     public Slider sfxSlider;
     public TextMeshProUGUI sfxText;
+    public Slider musicSlider;
+    public TextMeshProUGUI musicText;
 
 
     //res stuff
@@ -60,7 +63,7 @@ public class SettingsMenu : MonoBehaviour
                 //if we keep our AudioMixer parameter "Volume" set to receive values like -80 to 0 dB,
                 // and our slider is still set to this -80 to 0, keep the code.
                 sfxSlider.value = currentVolume;
-                //vfxText.text = ConvertDbToPercentage(currentVolume).ToString("F0") + "%"; // Convert dB to a more readable percentage
+                //sfxText.text = ConvertDbToPercentage(currentVolume).ToString("F0") + "%"; // Convert dB to a more readable percentage
                 sfxText.text = ((sfxSlider.value + 80f) * 1.25f).ToString("F0") + "%";
             }
             else
@@ -78,7 +81,7 @@ public class SettingsMenu : MonoBehaviour
     }
 
 
-    //area for vfx
+    //area for sfx
     public void SetSFXVolume(float volume)
     {
         //Debug.Log("Setting Volume to: {volume}"); //uncomment to see the slider's val
@@ -86,7 +89,7 @@ public class SettingsMenu : MonoBehaviour
         {
             //sets the exposed parameter in the AudioMixer
             //"Volume" must match the name of the exposed parameter in your AudioMixer
-            audioMixer.SetFloat("Volume", volume); //og
+            audioMixer.SetFloat("Volume", sfxSlider.value); //og
         }
 
         if (sfxText != null)
@@ -126,6 +129,25 @@ public class SettingsMenu : MonoBehaviour
 
         }
     }
+
+    public void UpdateMusicText()
+    {
+        if (musicText != null)
+        {
+            musicText.text = ((musicSlider.value + 80f) * 1.25f).ToString("F0") + "%";
+
+        }
+    }
+
+    public void SetMusic(float volume)
+    {
+        if (musicSlider != null)
+        {
+            musicSlider.value = (volume * 80f) - 80f;
+            UpdateMusicText();
+        }
+    }
+
 
     //if wanting graphics
     public void SetQuality()

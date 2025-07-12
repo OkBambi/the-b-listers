@@ -51,6 +51,8 @@ public class SettingsManager : MonoBehaviour
         settingsMenu.SetWindowSetting(GetWindowType());
 
         settingsMenu.SetSFX(GetSFXVolume());
+
+        settingsMenu.SetMusic(GetMusicVolume());
         ////Resolution
         //Dropdown dropDown = GameObject.FindWithTag("Resolution").GetComponent<Dropdown>();
         //var options = dropDown.options;
@@ -90,7 +92,7 @@ public class SettingsManager : MonoBehaviour
         //    }
         //}
 
-        settingsMenu.SetSFXVolume((GetSFXVolume() * 80f) - 80f);
+
 
     }
 
@@ -272,7 +274,7 @@ public class SettingsManager : MonoBehaviour
 
     public void SetMusicVolume(Slider _MusicVolume)
     {
-        settings.MusicVolume = _MusicVolume.value;
+        settings.MusicVolume = (_MusicVolume.value + 80f) / 80f;
     }
     #endregion
 
