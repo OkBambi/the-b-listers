@@ -19,6 +19,7 @@ public class HighScoreManager : MonoBehaviour
     void Start()
     {
         theInstance = this;
+        ClearHighScores();
     }
 
     public void SaveHighScore(int newHighScore, int location, string userName)
@@ -36,7 +37,7 @@ public class HighScoreManager : MonoBehaviour
             PlayerPrefs.SetString(playerNamePrefix + index, userName);
             PlayerPrefs.SetInt(highscorePrefix + index, newHighScore);
             userName = swapedUserName;
-            swapedScore = newHighScore;
+            newHighScore = swapedScore;
         }
         PlayerPrefs.Save();
     }
@@ -74,7 +75,7 @@ public class HighScoreManager : MonoBehaviour
         List<string> highScoresNames = GetNames();
         for (int index = 0; index < maxHighScores; ++index)
         {
-            highScoreTable += (index + 1) + ". " + highScores[index] + "\t\t\t" + highScoresNames[index] + "\n";
+            highScoreTable += (index + 1) + ". " + highScores[index] + "\t\t" + highScoresNames[index] + "\n";
         }
         highScoreTableText.text = highScoreTable;
     }
@@ -88,8 +89,9 @@ public class HighScoreManager : MonoBehaviour
         }
     }
 
-    public void SaveIfHighScore()
+    public bool SaveIfHighScore()
     {
+        bool isHighscore = false;
         List<int> highscores = GetScores();
         int totalScore = ComboManager.instance.GetScore();
         for (int index = 0; index < highscores.Count; index++)
@@ -98,13 +100,16 @@ public class HighScoreManager : MonoBehaviour
             {
                 SaveHighScore(totalScore, index, "");
                 indexForNewName = index;
+                isHighscore = true;
                 break;
             }
         }
+        return isHighscore;
     }
 
     public void SaveName()
     {
         PlayerPrefs.SetString(playerNamePrefix + indexForNewName, userName.text);
+        DisplayHighScoreTable();
     }
 }
