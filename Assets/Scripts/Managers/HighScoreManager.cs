@@ -18,10 +18,6 @@ public class HighScoreManager : MonoBehaviour
     void Start()
     {
         theInstance = this;
-        for (int index = 0; index < maxHighScores; index++)
-        {
-            PlayerPrefs.SetString(playerNamePrefix + index, "Alphonsine");
-        }
     }
 
     public void SaveHighScore(int newHighScore, int location, string userName)
@@ -44,7 +40,7 @@ public class HighScoreManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public List<int> GetHighScores()
+    private List<int> GetScores()
     {
         List<int> highScores = new List<int>();
         for (int index = 0; index < maxHighScores; index++)
@@ -57,13 +53,27 @@ public class HighScoreManager : MonoBehaviour
         return highScores;
     }
 
+    private List<string> GetNames()
+    {
+        List<string> highScoreNames = new List<string>();
+        for (int index = 0; index < maxHighScores; index++)
+        {
+            if (PlayerPrefs.HasKey(playerNamePrefix + index))
+            {
+                highScoreNames.Add(PlayerPrefs.GetString(playerNamePrefix + index));
+            }
+        }
+        return highScoreNames;
+    }
+
     public void DisplayHighScoreTable()
     {
         string highScoreTable = "High Scores:\n";
-        List<int> highScores = GetHighScores();
+        List<int> highScores = GetScores();
+        List<string> highScoresNames = GetNames();
         for (int index = 0; index < maxHighScores; ++index)
         {
-            highScoreTable += (index + 1) + ". " + highScores[index] + "\n";
+            highScoreTable += (index + 1) + ". " + highScores[index] + "\t\t\t" + highScoresNames[index] + "\n";
         }
         highScoreTableText.text = highScoreTable;
     }
@@ -78,7 +88,7 @@ public class HighScoreManager : MonoBehaviour
 
     public void SaveIfHighScore()
     {
-        List<int> highscores = GetHighScores();
+        List<int> highscores = GetScores();
         int totalScore = ComboManager.instance.GetScore();
         for (int index = 0; index < highscores.Count; index++)
         {
