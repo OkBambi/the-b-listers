@@ -17,7 +17,6 @@ public class LevelModifierManager : MonoBehaviour
     [SerializeField] Button button2;
     [SerializeField] Button button3;
 
-
     [Inspectable] List<LevelModifier> modifiers;
 
     [SerializeField] DifficultyObject difficulty;
@@ -258,6 +257,7 @@ public class LevelModifierManager : MonoBehaviour
     public void MonkTaunt()
     {
         monkTaunt = true;
+        GameManager.instance.playerScript.canColor = false;
     }
     #endregion
 
