@@ -61,7 +61,7 @@ public class Goliath : EnemyBase
         PickRoamLocation();
 
         //for swimming
-        //playerTransform = GameManager.instance.player.transform;
+        playerTransform = GameManager.instance.player.transform;
 
         //for diving
         goliathHitLocation.transform.localScale = new Vector3(radiusOfDiveLocation, 0.1f, radiusOfDiveLocation);
