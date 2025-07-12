@@ -35,7 +35,7 @@ public class LevelModifierManager : MonoBehaviour
 
     //easy
     public bool largerStage = false;
-    public bool reduceSpawnRate = false;
+    public bool lessHealth = false;
     public bool savingGrace = false;
 
     private void Awake()
@@ -263,14 +263,15 @@ public class LevelModifierManager : MonoBehaviour
 
 
     #region Easy
+
     public void LargerStage()
     {
         largerStage = true;
     }
 
-    public void ReduceSpawnRate()
+    public void LessHealth()
     {
-        reduceSpawnRate = true;
+        lessHealth = true;
     }
 
     public void SavingGrace()
