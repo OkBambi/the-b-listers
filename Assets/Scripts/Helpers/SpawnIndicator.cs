@@ -50,6 +50,7 @@ public class SpawnIndicator : MonoBehaviour
         }
         indicatorRenderer.materials = flashMats; 
         StartCoroutine(Flash());
+
     }
 
 
@@ -69,7 +70,8 @@ public class SpawnIndicator : MonoBehaviour
                     if (LevelModifierManager.instance.doubleEnemies)
                         Instantiate(enemyToSpawn, transform.position + new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f)), transform.rotation);
 
-
+                    AudioManager.instance.Play("Enemy_Spawn");
+                    Debug.Log("ENEMY HAS SPAWN NOW PLAY");
                     Destroy(gameObject);
                 }
             }
@@ -99,7 +101,7 @@ public class SpawnIndicator : MonoBehaviour
             
             yield return null;
         }
-        AudioManager.instance.Play("Enemy_Spawn");
+      
     }
      
 }
