@@ -2,7 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class stopWatchShockWave : MonoBehaviour
+public class stopWatchShockWave : MonoBehaviour, IColorLock
 {
 
     [SerializeField] GameObject shockWave;
@@ -49,9 +49,14 @@ public class stopWatchShockWave : MonoBehaviour
             // Handle player damage or effects here
             Debug.Log("Player hit by shock wave!");
             GameManager.instance.playerScript.canAction = false; // Disable player actions
+            GameManager.instance.playerScript.canSchmove = false;
             // You can add player damage logic here
             GameManager.instance.player.GetComponent<Rigidbody>().AddForce(Vector3.up * LaunchHight, ForceMode.Impulse); // Example force to push the player up
             Invoke("resetPlayer", ShockTime);
+            if (LevelModifierManager.instance.boogieWoogie)
+            {
+                //add code here
+            }
 
         }
     }
@@ -60,7 +65,11 @@ public class stopWatchShockWave : MonoBehaviour
     {
         Debug.Log("reset");
         GameManager.instance.playerScript.canAction = true; // Re-enable player actions
+        GameManager.instance.playerScript.canSchmove = true;
     }
 
-
+    public void LockColorSelection(float duration)
+    {
+        throw new System.NotImplementedException();
+    }
 }

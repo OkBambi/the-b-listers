@@ -6,6 +6,8 @@ public class GameStartDagger : MonoBehaviour
 {
     [SerializeField] Player player;
     [SerializeField] Renderer model;
+    public bool mod_SchmovesOnly = false;
+    public bool mod_DaggersOnly = false;
 
     public bool DaggerGot= false;
 
@@ -34,9 +36,18 @@ public class GameStartDagger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        DaggerGot = true;
-        other.GetComponentInParent<Player>().canAction = true;
+        if (mod_SchmovesOnly)
+            other.GetComponentInParent<Player>().canSchmove = true;
+
+        else
+        {
+            other.GetComponentInParent<Player>().canAction = true;
+            other.GetComponentInParent<Player>().canSchmove = true;
+        }
+
+
         other.GetComponentInParent<Player>().canColor = true;
+        DaggerGot = true;
         GameManager.instance.timer.isCounting = true;
         EnemyManager.instance.SpawnFirstEnemy();
         GameManager.instance.PlayLevelMusic();

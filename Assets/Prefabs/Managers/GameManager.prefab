@@ -46,11 +46,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuActive: {fileID: 0}
   MenuPause: {fileID: 0}
-  MenuWin: {fileID: 0}
-  MenuLose: {fileID: 0}
+  MenuEnd: {fileID: 0}
   MenuSettings: {fileID: 0}
   MenuCredits: {fileID: 0}
   MenuGameInfo: {fileID: 0}
-  player: {fileID: 3923875554569662914, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
-  PlayerMovement: {fileID: 0}
+  PlayerHUD: {fileID: 0}
+  player: {fileID: 0}
+  playerScript: {fileID: 0}
   isPaused: 0
+  isDead: 0
+  shootingPoint: {fileID: 0}
+  colorSwapper: {fileID: 0}
+  schmover: {fileID: 0}
+  timer: {fileID: 0}
+  currentLevel:
+    m_Handle: 0
+  ColorLockTimer: {fileID: 0}
+  ChainStates: []
+  ChainToggleables: []
+  LockColorChange: {fileID: 0}
