@@ -102,16 +102,7 @@ public class Player : MonoBehaviour, IColorLock
         AudioManager.instance.Play("Game_Over");
 
         //check for highscore then saves if found
-        List<int> highscores = HighScoreManager.theInstance.GetHighScores();
-        int totalScore = ComboManager.instance.GetScore();
-        for (int index = 0; index < highscores.Count; index++)
-        {
-            if (totalScore > highscores[index])
-            {
-                HighScoreManager.theInstance.SaveHighScore(totalScore);
-                break;
-            }
-        }
+        HighScoreManager.theInstance.SaveIfHighScore();
 
         //lose menu
         GameManager.instance.OnEndCondition();

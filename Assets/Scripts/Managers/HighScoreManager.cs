@@ -61,4 +61,18 @@ public class HighScoreManager : MonoBehaviour
             PlayerPrefs.SetInt(prefix + index, 0);
         }
     }
+
+    public void SaveIfHighScore()
+    {
+        List<int> highscores = GetHighScores();
+        int totalScore = ComboManager.instance.GetScore();
+        for (int index = 0; index < highscores.Count; index++)
+        {
+            if (totalScore > highscores[index])
+            {
+                SaveHighScore(totalScore);
+                break;
+            }
+        }
+    }
 }
