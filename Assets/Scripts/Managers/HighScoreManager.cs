@@ -11,6 +11,7 @@ public class HighScoreManager : MonoBehaviour
     private const string prefix = "HighScore";
     [SerializeField] const int maxHighScores = 10;
     public TextMeshProUGUI highScoreTableText;
+    public TMP_InputField userName;
 
     void Start()
     {
@@ -21,6 +22,7 @@ public class HighScoreManager : MonoBehaviour
     {
         List<int> highScores = GetHighScores();
         highScores.Add(newHighScore);
+        
         highScores = highScores.OrderByDescending(s => s).Take(maxHighScores).ToList();
 
         for (int index = 0; index < maxHighScores; index++)
@@ -70,6 +72,8 @@ public class HighScoreManager : MonoBehaviour
         {
             if (totalScore > highscores[index])
             {
+                string userInput = userName.text;
+                Debug.Log("The name: " + userInput);
                 SaveHighScore(totalScore);
                 break;
             }
