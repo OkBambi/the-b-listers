@@ -1912,75 +1912,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 387320897}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &896210843
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 678332203169664480, guid: e2adbfc455e061644bc6d452f457d0a9, type: 3}
-      propertyPath: StopTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 678332203169664480, guid: e2adbfc455e061644bc6d452f457d0a9, type: 3}
-      propertyPath: roamDist
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130920958900456391, guid: e2adbfc455e061644bc6d452f457d0a9, type: 3}
-      propertyPath: m_Name
-      value: Monk_Enemy (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3359546144697713813, guid: e2adbfc455e061644bc6d452f457d0a9, type: 3}
-      propertyPath: m_BaseOffset
-      value: 0.22
-      objectReference: {fileID: 0}
-    - target: {fileID: 8974869154418730767, guid: e2adbfc455e061644bc6d452f457d0a9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.295778
-      objectReference: {fileID: 0}
-    - target: {fileID: 8974869154418730767, guid: e2adbfc455e061644bc6d452f457d0a9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.59299564
-      objectReference: {fileID: 0}
-    - target: {fileID: 8974869154418730767, guid: e2adbfc455e061644bc6d452f457d0a9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 9.186007
-      objectReference: {fileID: 0}
-    - target: {fileID: 8974869154418730767, guid: e2adbfc455e061644bc6d452f457d0a9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 8974869154418730767, guid: e2adbfc455e061644bc6d452f457d0a9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 8974869154418730767, guid: e2adbfc455e061644bc6d452f457d0a9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8974869154418730767, guid: e2adbfc455e061644bc6d452f457d0a9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8974869154418730767, guid: e2adbfc455e061644bc6d452f457d0a9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 8974869154418730767, guid: e2adbfc455e061644bc6d452f457d0a9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8974869154418730767, guid: e2adbfc455e061644bc6d452f457d0a9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e2adbfc455e061644bc6d452f457d0a9, type: 3}
 --- !u!1 &1067492026
 GameObject:
   m_ObjectHideFlags: 0
@@ -2885,10 +2816,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2766a998f6ef8fa4f8ec7b1927ba2d6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonkPrimary: {fileID: 678332202167309721}
+  MonkPrimary: {fileID: 0}
+  StopwatchPrimary: {fileID: 0}
+  monk_mini: {fileID: 0}
   ChainToggleables: []
   ChainImageArray: []
-  PrimaryColor: 0
+  primaryColor: 0
   ChangeColor: {fileID: 0}
   ColorLockMonk: {fileID: 0}
 --- !u!114 &562988024041293067
@@ -2903,40 +2836,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2766a998f6ef8fa4f8ec7b1927ba2d6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonkPrimary: {fileID: 678332202167309721}
+  MonkPrimary: {fileID: 0}
+  StopwatchPrimary: {fileID: 0}
+  monk_mini: {fileID: 8974869153281998712}
   ChainToggleables: []
   ChainImageArray: []
-  PrimaryColor: 0
+  primaryColor: 0
   ChangeColor: {fileID: 0}
   ColorLockMonk: {fileID: 6484883121944891591}
---- !u!114 &678332202167309721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2130920957763949502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 459da98decac7b741a2b23f7ad739272, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 1142338547552773385}
-  setColor: 0
-  hitVfx: {fileID: 0}
-  hp: 1000
-  score: 1500
-  Wave: {fileID: 3166157827941102534}
-  pauseToCastTimer: 1
-  waveSize: 250
-  waveGrowthSpeed: 3
-  faceTargetSpeed: 5
-  agent: {fileID: 0}
-  roamDist: 5
-  StopTime: 5
-  minSeperationDistance: 30
-  SeperationDome: {fileID: 8846788636966061123}
-  monkInRange: 0
 --- !u!23 &1142338547552773385
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3020,11 +2927,11 @@ GameObject:
   - component: {fileID: 8974869153281998710}
   - component: {fileID: 7479598924523345059}
   - component: {fileID: 1142338547552773385}
-  - component: {fileID: 678332202167309721}
+  - component: {fileID: 8974869153281998712}
   - component: {fileID: 2707385416636092983}
   - component: {fileID: 8974869153281998711}
   m_Layer: 7
-  m_Name: Monk_Enemy
+  m_Name: Monk_Mini_Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3265,6 +3172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ColorLockTimer: 5
   LockColorChange: {fileID: 54409143997030605}
+  ShockTime: 0
+  LaunchHight: 0
 --- !u!114 &6544136719689259345 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6544136719575331733, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
@@ -3334,7 +3243,7 @@ Transform:
   m_GameObject: {fileID: 2130920957763949502}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
-  m_LocalPosition: {x: -0.02491493, y: 25.517654, z: 0.008637383}
+  m_LocalPosition: {x: -0.02491493, y: 19, z: 0}
   m_LocalScale: {x: 85.3, y: 85.3, z: 85.3}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -3360,9 +3269,39 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.1517616
-  m_BaseOffset: 0.39
+  m_BaseOffset: 0.21
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8974869153281998712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130920957763949502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f198423296473d84fad06ac724e78d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 1142338547552773385}
+  setColor: 0
+  hitVfx: {fileID: 0}
+  hp: 10000
+  score: 1500
+  faceTargetSpeed: 5
+  agent: {fileID: 8974869153281998711}
+  PrimaryColor: 0
+  ColorChangeIndex: 0
+  chainUI: {fileID: 562988024041293067}
+  Wave: {fileID: 3166157827941102534}
+  pauseToCastTimer: 1
+  waveSize: 250
+  waveGrowthSpeed: 3
+  initialDelay: 3
+  middleDelay: 3
+  ResetTimer: 3
+  StopTime: 3
 --- !u!1001 &9174702343328813044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3494,7 +3433,6 @@ SceneRoots:
   - {fileID: 1527277500}
   - {fileID: 9174702343328813044}
   - {fileID: 8974869153281998710}
-  - {fileID: 896210843}
   - {fileID: 298359327}
   - {fileID: 542600187}
   - {fileID: 387320897}

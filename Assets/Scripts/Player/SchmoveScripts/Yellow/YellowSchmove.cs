@@ -37,6 +37,7 @@ public class YellowSchmove : MonoBehaviour
     void Start()
     {
         mAnimatorRight = GameObject.Find("Shoot_arm").GetComponent<Animator>();
+        mAnimatorLeft = GameObject.Find("Left_Hand").GetComponent<Animator>();
         player = GameManager.instance.playerScript;
         rb = player.GetComponentInChildren<Rigidbody>();
         shootingPoint = GameManager.instance.shootingPoint;
@@ -127,14 +128,18 @@ public class YellowSchmove : MonoBehaviour
         if (activated)
         {
             if (!UPAnimationState)
-                mAnimatorRight.SetBool("RailGunUP", true);
+            mAnimatorRight.SetBool("RailGunUP", true);
             mAnimatorRight.SetBool("RailGunDOWN", false);
+            mAnimatorLeft.SetBool("RailGunUP", true);
+            mAnimatorLeft.SetBool("RailGunDOWN", false);
             UPAnimationState = true;
         }
         else
         {
             mAnimatorRight.SetBool("RailGunUP", false);
             mAnimatorRight.SetBool("RailGunDOWN", true);
+            mAnimatorLeft.SetBool("RailGunUP", false);
+            mAnimatorLeft.SetBool("RailGunDOWN", true);
             UPAnimationState =false;
         }
     }
