@@ -57,8 +57,13 @@ public class GameManager : MonoBehaviour
             PlayLevelMusic();
         }
 
+
+
         lockMarker = GameObject.Find("ChainLock").GetComponent<ChainMarker>();
         unlockedMarker = GameObject.Find("ChainUnlock").GetComponent<ChainMarker>();
+
+        lockMarker.gameObject.SetActive(false);
+        unlockedMarker.gameObject.SetActive(false);
 
         lockMarker.AssignType(ChainType.Lock);
         unlockedMarker.AssignType(ChainType.Unlock);
