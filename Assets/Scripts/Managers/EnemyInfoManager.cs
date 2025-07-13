@@ -54,39 +54,30 @@ public class EnemyInfoManager : MonoBehaviour
     //public methods that will because by button clicks
     public void OnMonolithButtonClicked()
     {
-        //currentActivePanel = monolithInfoPanel;
         ShowPanel(monolithInfoPanel);
     }
     public void OnBoidsButtonClicked()
     {
-        //currentActivePanel = boidsInfoPanel;
         ShowPanel(boidsInfoPanel);
     }
     public void OnAngryBoidsButtonClicked()
     {
-        //currentActivePanel = angryBoidsInfoPanel;
         ShowPanel(angryBoidsInfoPanel);
     }
     public void OnStopwatchButtonClicked()
     {
-        //currentActivePanel = stopwatchInfoPanel;
         ShowPanel(stopwatchInfoPanel);
     }
     public void OnMonkButtonClicked()
     {
-        //currentActivePanel = monkInfoPanel;
         ShowPanel(monkInfoPanel);
     }
     public void OnSnakeButtonClicked()
     {
-        //currentActivePanel = snakeInfoPanel;
         ShowPanel(snakeInfoPanel);
     }
     public void OnGoliathButtonClicked()
     {
-        //currentActivePanel = goliathInfoPanel;
         ShowPanel(goliathInfoPanel);
     }
-
-    
 }

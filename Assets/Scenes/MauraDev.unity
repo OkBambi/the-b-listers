@@ -8338,6 +8338,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &447663866 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2924855036250312226, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
+  m_PrefabInstance: {fileID: 1809786786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &447663869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447663866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6faa682f1b110d040bd59d87dad007ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &450173087
 GameObject:
   m_ObjectHideFlags: 0
@@ -32203,7 +32220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8124006449094040153, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8169412999464298777, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: m_Color.a
@@ -32366,7 +32383,10 @@ PrefabInstance:
     - {fileID: 9116935153686210874, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
     - {fileID: 5795987841709243563, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2924855036250312226, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 447663869}
   m_SourcePrefab: {fileID: 100100000, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
 --- !u!1 &1809786787 stripped
 GameObject:
@@ -37653,6 +37673,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
       propertyPath: UISounds.Array.data[10].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
+      propertyPath: UISounds.Array.data[8].volume
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
