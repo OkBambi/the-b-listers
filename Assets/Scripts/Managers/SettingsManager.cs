@@ -221,37 +221,37 @@ public class SettingsManager : MonoBehaviour
     }
     #endregion
 
-    #region isOutlineFilter
-    public bool GetisOutlineFilter()
-    {
-        return settings.isOutlineFilter;
-    }
-    public void SetisOutlineFilter(bool _isOutlineFilter)
-    {
-        settings.isOutlineFilter = _isOutlineFilter;
-    }
+    //#region isOutlineFilter
+    //public bool GetisOutlineFilter()
+    //{
+    //    return settings.isOutlineFilter;
+    //}
+    //public void SetisOutlineFilter(bool _isOutlineFilter)
+    //{
+    //    settings.isOutlineFilter = _isOutlineFilter;
+    //}
 
-    public void SetisOutlineFilter(Toggle _isOutlineFilter)
-    {
-        settings.isOutlineFilter = _isOutlineFilter.isOn;
-    }
-    #endregion
+    //public void SetisOutlineFilter(Toggle _isOutlineFilter)
+    //{
+    //    settings.isOutlineFilter = _isOutlineFilter.isOn;
+    //}
+    //#endregion
 
-    #region isReducedCameraShake
-    public bool GetisColourBlindnessMode()
-    {
-        return settings.isColourBlindnessMode;
-    }
-    public void SetisColourBlindnessMode(bool _isColourBlindnessMode)
-    {
-        settings.isColourBlindnessMode = _isColourBlindnessMode;
-    }
+    //#region isColourBlindnessMode
+    //public bool GetisColourBlindnessMode()
+    //{
+    //    return settings.isColourBlindnessMode;
+    //}
+    //public void SetisColourBlindnessMode(bool _isColourBlindnessMode)
+    //{
+    //    settings.isColourBlindnessMode = _isColourBlindnessMode;
+    //}
 
-    public void SetisColourBlindnessMode(Toggle _isColourBlindnessMode)
-    {
-        settings.isColourBlindnessMode = _isColourBlindnessMode.isOn;
-    }
-    #endregion
+    //public void SetisColourBlindnessMode(Toggle _isColourBlindnessMode)
+    //{
+    //    settings.isColourBlindnessMode = _isColourBlindnessMode.isOn;
+    //}
+    //#endregion
 
     #region SFXVolume
     public float GetSFXVolume()
@@ -304,6 +304,7 @@ public class SettingsManager : MonoBehaviour
     public void ApplyInvertY()
     {
         //Debug.Log(GetisInvertY());
-        GameManager.instance.playerScript.GetComponentInChildren<PlayerCamera>().invertY = GetisInvertY();
+        if (GameManager.instance)
+            GameManager.instance.playerScript.GetComponentInChildren<PlayerCamera>().invertY = GetisInvertY();
     }
 }
