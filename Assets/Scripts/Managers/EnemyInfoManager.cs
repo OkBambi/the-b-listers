@@ -26,18 +26,29 @@ public class EnemyInfoManager : MonoBehaviour
     void ShowPanel(GameObject panelToShow)
     {
         //deactivate the currently active panel, if any
-        if (currentActivePanel != null)
-        {
-            currentActivePanel.SetActive(false);
-        }
+        //if (currentActivePanel != null)
+        //{
+        //    currentActivePanel.SetActive(false);
+        //}
 
         //activates the new panel
         if (panelToShow != null)
         {
-            currentActivePanel.SetActive(false);
+            //currentActivePanel.SetActive(false);
+            HideAllPanels();
             panelToShow.SetActive(true);
             currentActivePanel = panelToShow;   //updates the active panel tracker
         }
+    }
+    public void HideAllPanels()
+    {
+        monolithInfoPanel.SetActive(false);
+        boidsInfoPanel.SetActive(false);
+        angryBoidsInfoPanel.SetActive(false);
+        stopwatchInfoPanel.SetActive(false);
+        monkInfoPanel.SetActive(false);
+        snakeInfoPanel.SetActive(false);
+        goliathInfoPanel.SetActive(false);
     }
 
     //public methods that will because by button clicks
@@ -76,4 +87,6 @@ public class EnemyInfoManager : MonoBehaviour
         //currentActivePanel = goliathInfoPanel;
         ShowPanel(goliathInfoPanel);
     }
+
+    
 }
