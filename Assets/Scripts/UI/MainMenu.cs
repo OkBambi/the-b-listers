@@ -16,7 +16,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void PlayButton()
     {
-        SceneManager.LoadScene("PlayScene");
+        SceneManager.LoadScene("Level_1");
     }
 
     public void QuitButton()
