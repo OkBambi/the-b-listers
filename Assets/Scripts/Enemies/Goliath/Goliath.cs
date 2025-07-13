@@ -51,6 +51,7 @@ public class Goliath : EnemyBase
 
     [Header("Breach Parameters")]
     [SerializeField] float breachSpeed;
+    [SerializeField] float timeBeforeBreach;
 
     float stateTimer;
     Vector3 startPos;
@@ -196,10 +197,16 @@ public class Goliath : EnemyBase
         //UP.
         goliathHitLocation.transform.position = new Vector3(transform.position.x, 1.1f, transform.position.z);
         goliathHitLocation.GetComponent<Renderer>().enabled = true;
-        transform.Translate(Vector3.up * breachSpeed * Time.deltaTime, Space.World);
+        
+        stateTimer += Time.deltaTime;
+        if (stateTimer > timeBeforeBreach)
+        {
+            transform.Translate(Vector3.up * breachSpeed * Time.deltaTime, Space.World);
+        }
 
         if (transform.position.y > 26f)
         {
+            stateTimer = 0;
             currentState = State.Roam;
             goliathHitLocation.GetComponent<Renderer>().enabled = false;
             goliathHitLocation.transform.position = Vector3.zero;
