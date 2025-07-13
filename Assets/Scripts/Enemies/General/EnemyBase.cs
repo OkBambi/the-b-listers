@@ -155,6 +155,7 @@ public class EnemyBase : MonoBehaviour, IDamage
             AudioManager.instance.Play("Enemy_Death");
             if(gameObject.name == "Goliath")
             {
+                GameManager.instance.isWon = true;
                 GameManager.instance.OnEndCondition();
             }
             Destroy(gameObject);
