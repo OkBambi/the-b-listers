@@ -34,6 +34,7 @@ public class EnemyInfoManager : MonoBehaviour
         //activates the new panel
         if (panelToShow != null)
         {
+            currentActivePanel.SetActive(false);
             panelToShow.SetActive(true);
             currentActivePanel = panelToShow;   //updates the active panel tracker
         }
@@ -42,7 +43,7 @@ public class EnemyInfoManager : MonoBehaviour
     //public methods that will because by button clicks
     public void OnMonolithButtonClicked()
     {
-        currentActivePanel = monolithInfoPanel;
+        //currentActivePanel = monolithInfoPanel;
         ShowPanel(monolithInfoPanel);
     }
     public void OnBoidsButtonClicked()
