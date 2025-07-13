@@ -128,11 +128,14 @@ public class EnemyBase : MonoBehaviour, IDamage
             //flash white
             if (gameObject.name != "Goliath")
             {
-                StartCoroutine(Flash());
+                if (gameObject.name != "Monk_Mini_Boss")
+                {
+                    StartCoroutine(Flash());
+                }
                 StartCoroutine(ShakePos(0.2f, 0.5f));
                 StartCoroutine(ShakeSize(0.2f, 0.1f));
             }
-            else
+            else 
             {
                 updateBossHPBar();
             }
