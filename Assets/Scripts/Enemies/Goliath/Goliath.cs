@@ -194,12 +194,15 @@ public class Goliath : EnemyBase
     void Breach()
     {
         //UP.
-
+        goliathHitLocation.transform.position = new Vector3(transform.position.x, 1.1f, transform.position.z);
+        goliathHitLocation.GetComponent<Renderer>().enabled = true;
         transform.Translate(Vector3.up * breachSpeed * Time.deltaTime, Space.World);
 
         if (transform.position.y > 26f)
         {
             currentState = State.Roam;
+            goliathHitLocation.GetComponent<Renderer>().enabled = false;
+            goliathHitLocation.transform.position = Vector3.zero;
         }
     }
 
