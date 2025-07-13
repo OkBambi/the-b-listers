@@ -70,6 +70,8 @@ public class Goliath : EnemyBase
         goliathHitLocation.transform.localScale = new Vector3(radiusOfDiveLocation, 0.1f, radiusOfDiveLocation);
 
         StartCoroutine(SwapColors());
+
+        bossHPOrig = hp;
     }
 
     void Update()

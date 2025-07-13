@@ -91,7 +91,15 @@ public class ComboFeed : MonoBehaviour
             {
                 GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().NewHighScore();
             }
-            GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().LoseEndScreen();
+
+            if (GameManager.instance.player.GetComponentInParent<Player>().isDead)
+            {
+                GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().LoseEndScreen();
+            }
+            else
+            {
+                GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().WinEndScreen();
+            }
             finalScoreText.text = "";
             playerKilledText.text = "";
             HighScoreManager.theInstance.DisplayHighScoreTable();

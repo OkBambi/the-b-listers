@@ -41,7 +41,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] LockColorChange LockColorChange;
 
 
-
     void Awake()
     {
         instance = this;
