@@ -1,23 +1,23 @@
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.ProBuilder;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.XR;
 
 public class LevelModifierManager : MonoBehaviour
 {
     //when you make a new modifier, create a LevelModifier Object and then create the function that will apply the changes.
     public static LevelModifierManager instance;
 
-    GameObject modifierCardSelectionUI;
+    [SerializeField] GameObject modifierCardSelectionUI;
     [SerializeField] string functionName;
-    [SerializeField] Button button1;
-    [SerializeField] Button button2;
-    [SerializeField] Button button3;
+    [SerializeField] List<TextMeshProUGUI> card1Texts;
+    [SerializeField] List<TextMeshProUGUI> card2Texts;
+    [SerializeField] List<TextMeshProUGUI> card3Texts;
 
-    [Inspectable] List<LevelModifier> modifiers;
+    [Inspectable] public List<LevelModifier> modifiers;
 
     [SerializeField] DifficultyObject difficulty;
 
@@ -45,6 +45,16 @@ public class LevelModifierManager : MonoBehaviour
 
     private void Start()
     {
+        Invoke("CardLogic", 0.01f);
+    }
+
+    public void CardLogic()
+    {
+        RandomizeCards();
+
+        InitializeCards();
+
+
         string sceneName = SceneManager.GetActiveScene().name;
         switch (difficulty.difficulty)
         {
@@ -53,7 +63,7 @@ public class LevelModifierManager : MonoBehaviour
                 {
                     case "Level_2":
                     case "Level_3":
-                    case "Level4":
+                    case "Level_4":
                         ShowCardUI();
                         break;
                 }
@@ -63,7 +73,7 @@ public class LevelModifierManager : MonoBehaviour
                 {
                     case "Level_2":
                     case "Level_3":
-                    case "Level4":
+                    case "Level_4":
                         ShowCardUI();
                         break;
                 }
@@ -74,8 +84,8 @@ public class LevelModifierManager : MonoBehaviour
                     case "Level_1":
                     case "Level_2":
                     case "Level_3":
-                    case "Level4":
-                    case "BossDev":
+                    case "Level_4":
+                    case "Level_Boss":
                         ShowCardUI();
                         break;
                 }
@@ -84,6 +94,7 @@ public class LevelModifierManager : MonoBehaviour
         //DoubleEnemies();
         //LowEnemyCooldowns();
         //SmallFastEnemies();
+        //ShowCardUI();
     }
 
     
@@ -186,6 +197,17 @@ public class LevelModifierManager : MonoBehaviour
     }
     public void InitializeCards()
     {
+        card1Texts[0].text = modifiers[0].modifierName;
+        card1Texts[1].text = modifiers[0].functionName;
+        card1Texts[2].text = modifiers[0].description;
+
+        card2Texts[0].text = modifiers[1].modifierName;
+        card2Texts[1].text = modifiers[1].functionName;
+        card2Texts[2].text = modifiers[1].description;
+
+        card3Texts[0].text = modifiers[2].modifierName;
+        card3Texts[1].text = modifiers[2].functionName;
+        card3Texts[2].text = modifiers[2].description;
         //Card1.icon = modifiers[0].icon;
         //Card2.icon = modifiers[0].icon;
         //Card3.icon = modifiers[0].icon;
@@ -196,6 +218,8 @@ public class LevelModifierManager : MonoBehaviour
 
     public void ShowCardUI()
     {
+        GameManager.instance.statePause();
+        GameManager.instance.MenuActive = modifierCardSelectionUI;
         modifierCardSelectionUI.SetActive(true);
 
         //this part will need to be adjusted depending on what the card ui looks like
@@ -219,9 +243,11 @@ public class LevelModifierManager : MonoBehaviour
 
     public void CallSelectedFunction()
     {
-        if (functionName != null)
+        if (functionName != "")
         {
             Invoke(functionName, 0f);
+            modifierCardSelectionUI.SetActive(false);
+            GameManager.instance.stateUnPause();
         }
     }
     #endregion

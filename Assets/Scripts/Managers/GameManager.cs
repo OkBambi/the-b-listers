@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [SerializeField] GameObject MenuActive;
+    public GameObject MenuActive;
     [SerializeField] GameObject MenuPause;
     [SerializeField] GameObject MenuEnd;
     [SerializeField] GameObject MenuSettings;
