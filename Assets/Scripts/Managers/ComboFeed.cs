@@ -31,6 +31,7 @@ public class ComboFeed : MonoBehaviour
     private void Awake()
     {
         theInstance = this;
+        //clearFinalScore();
     }
 
     public void AddNewComboFeed(string _scoreFeed, float _score) //allows you to add to the kill feed (modifier is what is done to the score. Example + or -)
@@ -79,6 +80,7 @@ public class ComboFeed : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(endFeedSpeed);
         }
+        currentFinalFeedList.Clear();
 
         //clear screen for highscore
         yield return new WaitForSecondsRealtime(timeToWaitBeforeHighScores);
@@ -103,5 +105,10 @@ public class ComboFeed : MonoBehaviour
     public void PlayerWasKilledBy(string killer)
     {
         playerKilledText.text = "Killed by: " + killer;
+    }
+
+    public void clearFinalScore()
+    {
+        finalScore = 0;
     }
 }

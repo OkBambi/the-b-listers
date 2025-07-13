@@ -20,7 +20,7 @@ public class HighScoreManager : MonoBehaviour
     void Start()
     {
         theInstance = this;
-        ClearHighScores();
+        //ClearHighScores();
     }
 
     public void SaveHighScore(int newHighScore, int location, string userName)
