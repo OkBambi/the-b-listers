@@ -11,6 +11,7 @@ public class WaveColorLockMonk : MonoBehaviour
     [Header("BoogieWoogie")]
     [SerializeField] float ShockTime;
     [SerializeField] float LaunchHight;
+    private PrimaryColor waveColor;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -31,7 +32,7 @@ public class WaveColorLockMonk : MonoBehaviour
             {
                 colorLock.LockColorSelection(ColorLockTimer);
             }
-            LockColorChange.SwapChainColor();
+            LockColorChange.SwapChainColor(waveColor);
 
             GameManager.instance.ChainScreen(ColorLockTimer);
         }

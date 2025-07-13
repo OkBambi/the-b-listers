@@ -6,6 +6,7 @@ public class LockColorChange : MonoBehaviour
 {
     [SerializeField] Monk MonkPrimary;
     [SerializeField] StopWatch StopwatchPrimary;
+    [SerializeField] Monk_MiniBoss monk_mini;
     [SerializeField] ChainMarker[] ChainToggleables;
     [SerializeField] RawImage[] ChainImageArray;
     [SerializeField] PrimaryColor primaryColor;
@@ -15,7 +16,7 @@ public class LockColorChange : MonoBehaviour
 
     void Start()
     {  
-            primaryColor = MonkPrimary.setColor;
+            primaryColor = monk_mini.setColor;
             //find ColorSwapping Script in scene
             ChangeColor = FindFirstObjectByType<ColorSwapping>();
         //Find the object with chain marker script on the scene
@@ -26,7 +27,7 @@ public class LockColorChange : MonoBehaviour
             
     }
 
-    public void SwapChainColor()
+    public void SwapChainColor(PrimaryColor primaryColor)
     {
         switch (primaryColor)
         {

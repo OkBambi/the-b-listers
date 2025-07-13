@@ -15,6 +15,8 @@ public class stopWatchShockWave : MonoBehaviour
     [SerializeField] public int ColorLockTimer;
     [SerializeField] LockColorChange ChainUIColor;
 
+    private PrimaryColor ShockColor;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     private void Awake()
@@ -68,7 +70,7 @@ public class stopWatchShockWave : MonoBehaviour
                 {
                     colorLock.LockColorSelection(ColorLockTimer);
                 }
-                ChainUIColor.SwapChainColor();
+                ChainUIColor.SwapChainColor(ShockColor);
 
                 GameManager.instance.ChainScreen(ColorLockTimer);
             }
