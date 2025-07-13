@@ -12,13 +12,15 @@ public class HighScoreManager : MonoBehaviour
     private const string highscorePrefix = "HighScore";
     private const string playerNamePrefix = "PlayerName"; 
     [SerializeField] const int maxHighScores = 10;
-    public TextMeshProUGUI highScoreTableText;
+    public TextMeshProUGUI highScoresTableText;
+    public TextMeshProUGUI highScoresNamesTableText;
     public TMP_InputField userName;
     private int indexForNewName;
 
     void Start()
     {
         theInstance = this;
+        ClearHighScores();
     }
 
     public void SaveHighScore(int newHighScore, int location, string userName)
@@ -65,13 +67,16 @@ public class HighScoreManager : MonoBehaviour
     public void DisplayHighScoreTable()
     {
         string highScoreTable = "High Scores:\n";
+        string highScoreNameTable = "\n";
         List<int> highScores = GetScores();
         List<string> highScoresNames = GetNames();
         for (int index = 0; index < maxHighScores; ++index)
         {
-            highScoreTable += (index + 1) + ". " + highScores[index] + "\t\t" + highScoresNames[index] + "\n";
+           highScoreNameTable += highScoresNames[index] + "\n";
+           highScoreTable += (index + 1) + ". " + highScores[index] + "\n";
         }
-        highScoreTableText.text = highScoreTable;
+        highScoresTableText.text = highScoreTable;
+        highScoresNamesTableText.text = highScoreNameTable;
     }
 
     public void ClearHighScores()
