@@ -19,16 +19,18 @@ public class SettingsObject : ScriptableObject
     public bool isReducedCameraShake;
     public bool isInvertY;
     public bool isArcadeFilter;
-    public bool isOutlineFilter;
-    public bool isColourBlindnessMode;
+    //public bool isOutlineFilter;
+    //public bool isColourBlindnessMode;
 
     [Space]
     [Header("Sounds")]
-    [Range(0f, 1f)] public float VFXVolume;
+    [Range(0f, 1f)] public float SFXVolume;
     [Range(0f, 1f)] public float MusicVolume;
 
     [Space]
     [Header("Controls")]
-    [Range(0f, 1f)] public float mouseSensitivity;
+    [Range(0.1f, 2f)] public float mouseSensitivity;
+
+    //public ColourBlindnessPreset colorPreset;
 
 }

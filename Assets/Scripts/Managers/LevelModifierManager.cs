@@ -30,8 +30,8 @@ public class LevelModifierManager : MonoBehaviour
 
     //normal
     public bool boogieWoogie = false;
-    public bool enemyDrops = false;
-    public bool monkTaunt = false;
+    public bool shotgunOnly = false;
+    public bool rapidFireOnly = false;
 
     //easy
     public bool largerStage = false;
@@ -101,8 +101,8 @@ public class LevelModifierManager : MonoBehaviour
         //
         boogieWoogie = false;
 
-        enemyDrops = false;
-        monkTaunt = false;
+        shotgunOnly = false;
+        rapidFireOnly = false;
 
         largerStage = false;
         lessHealth = false;
@@ -266,15 +266,14 @@ public class LevelModifierManager : MonoBehaviour
     {
         boogieWoogie = true;
     }
-    public void EnemyDrop()
+    public void ShotgunOnly()
     {
-        enemyDrops = true;
+        shotgunOnly = true;
     }
 
-    public void MonkTaunt()
+    public void RapidfireOnly()
     {
-        monkTaunt = true;
-        GameManager.instance.playerScript.canColor = false;
+        rapidFireOnly = true;
     }
     #endregion
 
