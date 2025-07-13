@@ -1,6 +1,101 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.ProBuilder;
 
 public class Snake_MiniBoss : Snake
 {
-    //so for the snake miniboss, it needs to further challenge the player's precision
+    //so for the snake miniboss, it needs to further challenge the player's precision so i reckon:
+    //normal snake, but when you kill the head it breaks into 3 orbs.
+    //if the player doesnt break the 3 orbs in time, it gets re absorbed by the snake to regrow the head
+
+    public float offsetRange = 3f;
+    [SerializeField] Vector3 offset;
+
+    float distanceToPlayer;
+
+    private void Awake()
+    {
+        for (int headIndex = 0; headIndex < theBois.Count; headIndex++)
+        {
+            int rand = Random.Range(0, colourIndexes.Count - 1);
+            theBois[headIndex].setColor = (PrimaryColor)colourIndexes[rand];
+
+            Debug.Log((PrimaryColor)colourIndexes[rand]);
+            colourIndexes.Remove(colourIndexes[rand]);
+        }
+
+        Snakeagent = GetComponent<NavMeshAgent>();
+        Snakeagent.speed = movementSpeed;
+        Snakeagent.baseOffset = startHeight;
+    }
+
+    protected override void Start()
+    {
+        player = GameManager.instance.player.transform;
+
+        name = "Snake Mini Boss";
+
+        if (LevelModifierManager.instance.smallFastEnemies)
+        {
+            movementSpeed = movementSpeed * 2f;
+            Snakeagent.speed = movementSpeed;
+        }
+        StartCoroutine(RandomizeDestinationOffset());
+    }
+
+    private void Update()
+    {
+        //the boss will have infinite vision, meaning it will always try to chase the player
+        //MOVEMENT
+        distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        if (distanceToPlayer <= offsetRange) 
+            Snakeagent.destination = player.position;
+        else
+            Snakeagent.destination = player.position + offset;
+
+        //timer -= Time.deltaTime;
+
+        //float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        //if (distanceToPlayer < followRange)
+        //{
+        //    //follow the player
+        //    Snakeagent.destination = player.position;
+        //}
+        //else
+        //{
+        //    //wander if not following
+        //    if (timer <= 0)
+        //    {
+        //        GetNewWanderTarget();
+        //        Snakeagent.destination = wanderingTarget;
+        //        timer = wanderingTimer;
+        //    }
+        //}
+    }
+
+    IEnumerator RandomizeDestinationOffset()
+    {
+        while (true)
+        {
+            offset = new Vector3(Random.Range(0f, offsetRange), 0, Random.Range(0f, offsetRange));
+            
+            yield return new WaitForSeconds(Random.Range(2f, 5f));
+        }
+        
+    }
+
+    public override void DeathCheck()
+    {
+        if (hp <= 0)
+        {
+            isAlive = false;
+            RemoveSelfFromTargetList();
+            AudioManager.instance.Play("Enemy_Death");
+            Destroy(gameObject);
+            return;
+        }
+    }
 }

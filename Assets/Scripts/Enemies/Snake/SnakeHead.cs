@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class SnakeHead : EnemyBase
 {
-    [SerializeField] Snake snakeBody;
-    [SerializeField] TrailRenderer trail;
+    [SerializeField] protected Snake snakeBody;
+    [SerializeField] public TrailRenderer trail;
 
 
     protected override void Start()
@@ -25,6 +25,11 @@ public class SnakeHead : EnemyBase
         name = "Snake Head";
         if (LevelModifierManager.instance.smallFastEnemies)
             model.transform.localScale = model.transform.localScale * 0.75f;
+
+        if (LevelModifierManager.instance.lessHealth)
+        {
+            hp = hp / 2;
+        }
     }
 
     public override void DeathCheck()
@@ -32,8 +37,8 @@ public class SnakeHead : EnemyBase
         if (hp <= 0)
         {
             isAlive = false;
-            ComboManager.instance.AddScore(score);
             float scoreWithMult = ComboManager.instance.getScoreTimesMult(score);
+            ComboManager.instance.AddScore(score);
             ComboFeed.theInstance.AddNewComboFeed("+ " + scoreWithMult.ToString() + " " + transform.name, scoreWithMult);
             snakeBody.takeDamage(PrimaryColor.OMNI, 1);
             Destroy(gameObject);
