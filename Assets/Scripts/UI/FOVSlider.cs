@@ -1,6 +1,7 @@
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class FOVSlider : MonoBehaviour
 {
@@ -36,8 +37,11 @@ public class FOVSlider : MonoBehaviour
     public void OnFOVChanged(float newFOV)
     {
         //updates the camera's fov
-        SettingsManager.instance.mainCamera.fieldOfView = newFOV;
-        SettingsManager.instance.pixelCamera.fieldOfView = newFOV;
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            SettingsManager.instance.mainCamera.fieldOfView = newFOV;
+            SettingsManager.instance.pixelCamera.fieldOfView = newFOV;
+        }
         //playerCamera.CameraAdjustFOV(newFOV);
 
         //again, if added text, this updates the text just like the above one
