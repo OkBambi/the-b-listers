@@ -70,7 +70,7 @@ public class stopWatchShockWave : MonoBehaviour
                 {
                     colorLock.LockColorSelection(ColorLockTimer);
                 }
-                ChainUIColor.SwapChainColor(ShockColor);
+                ChainUIColor.SwapChainColor();
 
                 GameManager.instance.ChainScreen(ColorLockTimer);
             }

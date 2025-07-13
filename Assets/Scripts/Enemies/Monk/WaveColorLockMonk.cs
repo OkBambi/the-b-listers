@@ -32,9 +32,16 @@ public class WaveColorLockMonk : MonoBehaviour
             {
                 colorLock.LockColorSelection(ColorLockTimer);
             }
-            LockColorChange.SwapChainColor(waveColor);
+            
 
             GameManager.instance.ChainScreen(ColorLockTimer);
         }
+    }
+
+    private void resetPlayer()
+    {
+        Debug.Log("reset");
+        GameManager.instance.playerScript.canAction = true; // Re-enable player actions
+        GameManager.instance.playerScript.canSchmove = true;
     }
 }
