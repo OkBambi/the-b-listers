@@ -8,21 +8,17 @@ public class TypeOfEndScreen : MonoBehaviour
     [SerializeField] GameObject nextStageButton;
     [SerializeField] GameObject highScoreTable;
     [SerializeField] GameObject nameForNewScore;
+    [SerializeField] GameObject winText;
+    [SerializeField] GameObject newHighScoreText;
 
-    public void WinEndScreen()
+    public void WinOrLoseEndScreen()
     {
         quitButton.SetActive(true);
         tryAgainButton.SetActive(true);
         nextStageButton.SetActive(false);
         highScoreTable.SetActive(true);
-    }
-
-    public void LoseEndScreen()
-    {
-        quitButton.SetActive(true);
-        tryAgainButton.SetActive(true);
-        nextStageButton.SetActive(false);
-        highScoreTable.SetActive(true);
+        winText.SetActive(false);
+        newHighScoreText.SetActive(false);
     }
 
     public void NextStageEndScreen()
@@ -31,10 +27,22 @@ public class TypeOfEndScreen : MonoBehaviour
         tryAgainButton.SetActive(false);
         nextStageButton.SetActive(true);
         highScoreTable.SetActive(false);
+        winText.SetActive(false);
+        newHighScoreText.SetActive(false);
+    }
+
+    public void EnterHighScoreName()
+    {
+        nameForNewScore.SetActive(true);
     }
 
     public void NewHighScore()
     {
-        nameForNewScore.SetActive(true);
+        newHighScoreText.SetActive(true);
+    }
+
+    public void WonGame()
+    {
+        winText.SetActive(true);
     }
 }

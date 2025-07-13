@@ -57,6 +57,10 @@ public class ComboFeed : MonoBehaviour
     public void FinalScore()
     {
         Debug.Log("Final Print");
+        if (GameManager.instance.isWon)
+        {
+            GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().WonGame();
+        }
         StartCoroutine(waitASec());
     }
 
@@ -82,24 +86,24 @@ public class ComboFeed : MonoBehaviour
         }
         currentFinalFeedList.Clear();
 
+        
+        bool highScoreObtained = HighScoreManager.theInstance.SaveIfHighScore();
+        if (highScoreObtained)
+        {
+            GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().NewHighScore();
+        }
+
         //clear screen for highscore
         yield return new WaitForSecondsRealtime(timeToWaitBeforeHighScores);
         //check for highscore then saves if found
-        if (GameManager.instance.player.GetComponentInParent<Player>().isDead)
+        if (GameManager.instance.player.GetComponentInParent<Player>().isDead || GameManager.instance.isWon)
         {
-            if (HighScoreManager.theInstance.SaveIfHighScore())
+            if (highScoreObtained)
             {
-                GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().NewHighScore();
+                GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().EnterHighScoreName();
             }
 
-            if (GameManager.instance.player.GetComponentInParent<Player>().isDead)
-            {
-                GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().LoseEndScreen();
-            }
-            else
-            {
-                GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().WinEndScreen();
-            }
+            GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().WinOrLoseEndScreen();
             finalScoreText.text = "";
             playerKilledText.text = "";
             HighScoreManager.theInstance.DisplayHighScoreTable();

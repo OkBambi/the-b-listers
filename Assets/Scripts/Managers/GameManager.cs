@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public ColorSwapping colorSwapper;
     public Schmoves schmover;
     public Timer timer;
+    public bool isWon;
 
     public Scene currentLevel;
 
