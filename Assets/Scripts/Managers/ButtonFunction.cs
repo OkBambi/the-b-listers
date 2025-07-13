@@ -20,6 +20,7 @@ public class ButtonFunction : MonoBehaviour
         Debug.Log("Reloading State...");
         GameManager.instance.stateUnPause();
         SceneManager.LoadScene(0);
+        ComboFeed.theInstance.clearFinalScore();
     }
     public void onSettings()
     {

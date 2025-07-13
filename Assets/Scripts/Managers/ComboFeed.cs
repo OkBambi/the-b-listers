@@ -61,7 +61,6 @@ public class ComboFeed : MonoBehaviour
 
     private IEnumerator waitASec()
     {
-        finalScore = 0;
         for (int i = 0; i < finalFeedList.Count; i++)
         {
             GameObject newScoreFeed = Instantiate(feedListingPrefab, endFeed);
@@ -105,5 +104,10 @@ public class ComboFeed : MonoBehaviour
     public void PlayerWasKilledBy(string killer)
     {
         playerKilledText.text = "Killed by: " + killer;
+    }
+
+    public void clearFinalScore()
+    {
+        finalScore = 0;
     }
 }
