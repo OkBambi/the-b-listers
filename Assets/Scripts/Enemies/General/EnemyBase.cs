@@ -122,9 +122,9 @@ public class EnemyBase : MonoBehaviour, IDamage
                 DeathCheck();
 
             //flash white
-            StartCoroutine(Flash());
             if(gameObject.name != "Goliath")
             {
+                StartCoroutine(Flash());
                 StartCoroutine(ShakePos(0.2f, 0.5f));
                 StartCoroutine(ShakeSize(0.2f, 0.1f));
             }
