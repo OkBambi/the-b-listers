@@ -2162,6 +2162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1136550935}
   - component: {fileID: 1136550934}
+  - component: {fileID: 1136550937}
   - component: {fileID: 1136550933}
   - component: {fileID: 1136550936}
   m_Layer: 9
@@ -2261,6 +2262,20 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1136550937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136550932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0ab2d23bd2d8b408a83b90bccd6357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stage: {fileID: 1136550932}
+  Scaler: 3
 --- !u!4 &1260776932 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4286932813153953689, guid: a17c33c97e9996b4f919d0b48f85565f, type: 3}
