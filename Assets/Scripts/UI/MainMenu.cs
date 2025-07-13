@@ -7,6 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
+    [SerializeField] AudioManager audioGuy;
+
+    public void Start()
+    {
+        AudioIsPlaying();
+    }
+
     public void PlayButton()
     {
         SceneManager.LoadScene("PlayScene");
@@ -23,4 +30,9 @@ public class MainMenuScript : MonoBehaviour
         SceneManager.LoadScene("Settings");
     }
 
+    public void AudioIsPlaying()
+    {
+        Debug.Log("It is deffinetly playing Audio");
+        AudioManager.instance.Play("Main_Menu");
+    }
 }
