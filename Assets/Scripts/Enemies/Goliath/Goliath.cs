@@ -51,6 +51,7 @@ public class Goliath : EnemyBase
 
     [Header("Breach Parameters")]
     [SerializeField] float breachSpeed;
+    [SerializeField] float timeBeforeBreach;
 
     float stateTimer;
     Vector3 startPos;
@@ -86,6 +87,7 @@ public class Goliath : EnemyBase
                 roamTime += Time.deltaTime;
                 if (roamTime >= roamStopTimer)
                 {
+                    Debug.Log("Roam");
                     PickRoamLocation();
                 }
             }
@@ -142,7 +144,7 @@ public class Goliath : EnemyBase
     {
         if (goliathHitLocation.transform.position == Vector3.zero)
         {
-            Vector3 divePos = new Vector3(Random.Range(-1f, 1f) * mapRadius, 1.1f, Random.Range(-1f, 1f) * mapRadius);
+            Vector3 divePos = new Vector3(Random.Range(-1f, 1f) * mapRadius, 0.1f, Random.Range(-1f, 1f) * mapRadius);
             goliathHitLocation.transform.position = divePos;
             goliathHitLocation.GetComponent<Renderer>().enabled = true;
         }
@@ -165,6 +167,7 @@ public class Goliath : EnemyBase
             {
                 currentState = State.Swimming;
                 goliathHitLocation.GetComponent<Renderer>().enabled = false;
+                goliathHitLocation.transform.position = Vector3.zero;
             }
         }        
     }
@@ -193,12 +196,21 @@ public class Goliath : EnemyBase
     void Breach()
     {
         //UP.
-
-        transform.Translate(Vector3.up * breachSpeed * Time.deltaTime, Space.World);
+        goliathHitLocation.transform.position = new Vector3(transform.position.x, 0.1f, transform.position.z);
+        goliathHitLocation.GetComponent<Renderer>().enabled = true;
+        
+        stateTimer += Time.deltaTime;
+        if (stateTimer > timeBeforeBreach)
+        {
+            transform.Translate(Vector3.up * breachSpeed * Time.deltaTime, Space.World);
+        }
 
         if (transform.position.y > 26f)
         {
+            stateTimer = 0;
             currentState = State.Roam;
+            goliathHitLocation.GetComponent<Renderer>().enabled = false;
+            goliathHitLocation.transform.position = Vector3.zero;
         }
     }
 

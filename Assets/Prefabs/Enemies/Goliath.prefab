@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4659325182028693950}
   - component: {fileID: 5785529092490397064}
   - component: {fileID: 8235087951299776666}
+  - component: {fileID: 3612219934607918438}
   m_Layer: 7
   m_Name: Goliath
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 728601701052533488}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1, y: 26, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
@@ -48,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 8235087951299776666}
   setColor: 3
-  hitVfx: {fileID: 644026535586439266, guid: 7b49e4569ea67314d97fc5d7729d156a, type: 3}
+  hitVfx: {fileID: 0}
   hp: 150
   score: 10000
   currentState: 0
@@ -66,6 +67,7 @@ MonoBehaviour:
   swimSpeed: 30
   playerTransform: {fileID: 0}
   breachSpeed: 30
+  timeBeforeBreach: 1
 --- !u!33 &5785529092490397064
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -122,3 +124,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3612219934607918438
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728601701052533488}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2959467708922500008, guid: e5ef99c1a9d47c045b752f36935cded8, type: 3}
