@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -24,6 +25,7 @@ public class Goliath : EnemyBase
     [Header("Timers")]
     [SerializeField] float topRoamTime;
     [SerializeField] float swimTime; //time under the map
+    [SerializeField] float swapTime;
     [Space]
     [Header("Roam Parameters")]
     [SerializeField] float roamSpeed;
@@ -65,6 +67,8 @@ public class Goliath : EnemyBase
 
         //for diving
         goliathHitLocation.transform.localScale = new Vector3(radiusOfDiveLocation, 0.1f, radiusOfDiveLocation);
+
+        StartCoroutine(SwapColors());
     }
 
     void Update()
@@ -195,6 +199,18 @@ public class Goliath : EnemyBase
         if (transform.position.y > 26f)
         {
             currentState = State.Roam;
+        }
+    }
+
+    IEnumerator SwapColors()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(swapTime);
+            //change color
+            setColor = (PrimaryColor)Random.Range(0, 3);
+
+            ColorSelection(setColor);
         }
     }
 }
