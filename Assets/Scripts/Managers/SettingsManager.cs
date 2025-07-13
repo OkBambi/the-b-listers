@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -26,8 +27,11 @@ public class SettingsManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        mainCamera = FindFirstObjectByType<MainCamera_Marker>(FindObjectsInactive.Include).GetComponent<Camera>();
-        pixelCamera = FindFirstObjectByType<PixelCamera_Marker>(FindObjectsInactive.Include).GetComponent<Camera>();
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            mainCamera = FindFirstObjectByType<MainCamera_Marker>(FindObjectsInactive.Include).GetComponent<Camera>();
+            pixelCamera = FindFirstObjectByType<PixelCamera_Marker>(FindObjectsInactive.Include).GetComponent<Camera>();
+        }
     }
 
     private void Start()

@@ -18,7 +18,7 @@ public class ButtonFunction : MonoBehaviour
     public void onRestart()
     {
         Debug.Log("Reloading State...");
-        GameManager.instance.stateUnPause();
+        GameManager.instance.statePause();
         SceneManager.LoadScene(0);
         ComboFeed.theInstance.clearFinalScore();
     }
@@ -55,17 +55,20 @@ public class ButtonFunction : MonoBehaviour
 
     public void ontoggleArcade(bool toggle)
     {
-        if (toggle)
+        if (SceneManager.GetActiveScene().name != "MainMenu")
         {
-            Debug.Log("Filter On");
-            //SettingsManager.instance.mainCamera.gameObject.SetActive(false);
-            SettingsManager.instance.pixelCamera.gameObject.SetActive(true);
-        }
-        else
-        {
-            Debug.Log("default Camera");
-            //SettingsManager.instance.mainCamera.gameObject.SetActive(true);
-            SettingsManager.instance.pixelCamera.gameObject.SetActive(false);
+            if (toggle)
+            {
+                Debug.Log("Filter On");
+                //SettingsManager.instance.mainCamera.gameObject.SetActive(false);
+                SettingsManager.instance.pixelCamera.gameObject.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("default Camera");
+                //SettingsManager.instance.mainCamera.gameObject.SetActive(true);
+                SettingsManager.instance.pixelCamera.gameObject.SetActive(false);
+            }
         }
         ArcadeToggler.isOn = toggle;
     }

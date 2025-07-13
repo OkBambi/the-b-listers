@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Unity.VisualScripting;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -165,7 +166,10 @@ public class SettingsMenu : MonoBehaviour
         {
             mouseSensitivityText.text = (mouseSensitivitySlider.value * 100f).ToString("F0") + "%";
         }
-        GameManager.instance.playerScript.GetComponentInChildren<PlayerCamera>().sens = mouseSensitivitySlider.value;
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            GameManager.instance.playerScript.GetComponentInChildren<PlayerCamera>().sens = mouseSensitivitySlider.value;
+        }
     }
 
     public void SetMouseSensitivity(float sensitivity)

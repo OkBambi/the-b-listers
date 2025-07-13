@@ -15,8 +15,7 @@ public class AudioManager : MonoBehaviour
     public Sound[] WorldSounds;
     public Sound[] Music;
 
-
-    void Start()
+    private void Awake()
     {
         instance = this;
 
@@ -30,7 +29,7 @@ public class AudioManager : MonoBehaviour
             WorldSounds,
         };
 
-        foreach(Sound[] array in allSounds)
+        foreach (Sound[] array in allSounds)
         {
             foreach (Sound s in array)
             {
@@ -49,7 +48,6 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume * SettingsManager.instance.GetMusicVolume();
             s.source.pitch = s.pitch;
         }
-
     }
 
     public void Play(string _name)

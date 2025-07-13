@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
-    [SerializeField] AudioManager audioGuy;
+    //[SerializeField] AudioManager audioGuy;
 
     public void Start()
     {
