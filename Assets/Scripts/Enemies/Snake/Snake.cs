@@ -6,27 +6,27 @@ using UnityEngine.AI; // for NavMeshAgent
 public class Snake : EnemyBase
 {
     //HEALTH
-    [SerializeField] List<SnakeHead> theBois;
-    [SerializeField] List<int> colourIndexes;
+    [SerializeField] protected List<SnakeHead> theBois;
+    [SerializeField] protected List<int> colourIndexes;
 
     //MOVEMENT/ROAM - trying with waypoint (obstacle avoidance + flocking)
-    [SerializeField] float movementSpeed;
+    [SerializeField] protected float movementSpeed;
     [SerializeField] float rotationSpeed;
     [SerializeField] float wanderingRadius;
     [SerializeField] float wanderingTimer;
-    [SerializeField] float startHeight;
+    [SerializeField] protected float startHeight;
 
     [SerializeField] Rigidbody rb;
 
-    [SerializeField] NavMeshAgent Snakeagent; // for NavMesh navigation
+    [SerializeField] protected NavMeshAgent Snakeagent; // for NavMesh navigation
 
-    private float timer;
+    protected float timer;
     private Vector3 wanderingTarget;
     //private bool isWandering = false;
 
     //FOLLOWING
-    [SerializeField] Transform player;
-    [SerializeField] float followRange = 10f;
+    [SerializeField] protected Transform player;
+    [SerializeField] protected float followRange = 10f;
 
     //private bool isFollowing = false;
 
