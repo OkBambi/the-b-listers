@@ -111,21 +111,21 @@ public class Monk : EnemyBase
     }
 
     //spacing
-    void monkScan()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, minSeperationDistance);
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            {
-                Collider collider = colliders[i];
-                if (collider.gameObject != gameObject && collider.CompareTag("monkEnemy"))
-                {
-                    MonkSpacing(collider);
-                    break;
-                }
-            }
-        }
-    }
+    //void monkScan()
+    //{
+    //    Collider[] colliders = Physics.OverlapSphere(transform.position, minSeperationDistance);
+    //    for (int i = 0; i < colliders.Length; i++)
+    //    {
+    //        {
+    //            Collider collider = colliders[i];
+    //            if (collider.gameObject != gameObject && collider.CompareTag("monkEnemy"))
+    //            {
+    //                MonkSpacing(collider);
+    //                break;
+    //            }
+    //        }
+    //    }
+    //}
 
     void MonkSpacing(Collider other)
     {
@@ -176,10 +176,10 @@ public class Monk : EnemyBase
 
 
 
-        if (monkInRange)
-        {
-            monkScan();
-        }
+        //if (monkInRange)
+        //{
+        //    monkScan();
+        //}
         roam();
         isCasting = false;
     }

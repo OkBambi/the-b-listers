@@ -96,7 +96,7 @@ public class YellowSchmove : MonoBehaviour
                 {
                     YellowRailgunHitbox beam = Instantiate(YELLOWBEAAAM, shootingPoint.position + 2 * shootingPoint.forward, shootingPoint.rotation).GetComponentInChildren<YellowRailgunHitbox>();
 
-                    beam.transform.localScale = new Vector3(Mathf.Clamp(chargeLevel * 2, 1f, 50f), 100, Mathf.Clamp(chargeLevel * 2, 1f, 50f));
+                    beam.transform.localScale = new Vector3(Mathf.Clamp(chargeLevel * 3, 1f, 50f), 100, Mathf.Clamp(chargeLevel * 3, 1f, 50f));
                     beam.railgunDmg = chargeLevel * railgunDmg;
                     rb.AddForce(shootingPoint.forward * chargeLevel * railgunKnockback, ForceMode.Impulse);
                     AudioManager.instance.Play("Yellow_Fire");

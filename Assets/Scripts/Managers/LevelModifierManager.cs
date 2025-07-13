@@ -262,8 +262,7 @@ public class LevelModifierManager : MonoBehaviour
     {
         schmovesOnly = true;
         FindFirstObjectByType<GameStartDagger>().mod_SchmovesOnly = true;
-        if (SceneManager.GetActiveScene().name == "Level_1")
-            ComboManager.instance.AddScoreNoMult(1000f);
+        ComboManager.instance.AddScoreNoMult(1000f);
     }
     public void DaggersOnly()
     {

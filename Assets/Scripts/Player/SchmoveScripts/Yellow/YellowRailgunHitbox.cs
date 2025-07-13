@@ -4,6 +4,7 @@ using UnityEngine.InputSystem.HID;
 public class YellowRailgunHitbox : MonoBehaviour
 {
     public int railgunDmg;
+    [SerializeField] GameObject emptyParent;
     private void Awake()
     {
         Invoke("DestroySelf", 0.2f);
@@ -23,6 +24,6 @@ public class YellowRailgunHitbox : MonoBehaviour
 
     private void DestroySelf()
     {
-        Destroy(gameObject);
+        Destroy(emptyParent);
     }
 }

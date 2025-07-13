@@ -41,7 +41,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 90326390152961263}
-  - component: {fileID: 3050143858313488259}
   - component: {fileID: 4783133212369582231}
   - component: {fileID: 880542298565677045}
   - component: {fileID: 7588462334359437879}
@@ -67,19 +66,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7507342675957304726}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &3050143858313488259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2195308842412428392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62d2bdafce0bf234b85dffea4298f377, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  railgunDmg: 1
 --- !u!33 &4783133212369582231
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -205,6 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   railgunDmg: 1
+  emptyParent: {fileID: 1550552765679704896}
 --- !u!33 &1939267944639505687
 MeshFilter:
   m_ObjectHideFlags: 0
