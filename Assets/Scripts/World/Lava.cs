@@ -9,24 +9,31 @@ public class Lava : MonoBehaviour
     [SerializeField] Vector3 teleportPosition;
 
     private void OnTriggerEnter(Collider other)
-    { 
+    {
 
         IDamage dmg = other.GetComponent<IDamage>();
 
         if (dmg != null && other.CompareTag("Player"))
         {
             if (!isOnCooldown)
-            {
+            {  
                 isOnCooldown = true;
-                model.material.color = Color.red;
-
+                if (!LevelModifierManager.instance.savingGrace)
+                {
+                    model.material.color = Color.red;
+                }
                 other.transform.position = teleportPosition;
-
                 StartCoroutine(Cooldown());
+                return;
+            }
+            if (!LevelModifierManager.instance.savingGrace)
+            {
+                dmg.takeDamage(PrimaryColor.OMNI, 100);
+                ComboFeed.theInstance.PlayerWasKilledBy("The Void");
             }
             else
             {
-                dmg.takeDamage(PrimaryColor.OMNI, 100);
+                other.transform.position = teleportPosition;
             }
         }
     }

@@ -30,6 +30,15 @@ public class Monolith : EnemyBase
         ColorSelection(setColor);
         UpdateBoidAwareness();
         name = "Monolith";
+
+        if (LevelModifierManager.instance.lowEnemyCooldowns)
+            timeBetweenSpawns = timeBetweenSpawns * 0.25f;
+
+        if (LevelModifierManager.instance.smallFastEnemies)
+        {
+            model.transform.localScale = model.transform.localScale * 0.75f;
+            rotationSpeed = rotationSpeed * 2f;
+        }
     }
 
     // Update is called once per frame
@@ -52,11 +61,15 @@ public class Monolith : EnemyBase
         for (int spawnCount = 0; spawnCount < normalBoidSpawnAmt; spawnCount++)//normal spawn
         {
             Instantiate(normalBoid, transform.position, Quaternion.identity);
+            if (LevelModifierManager.instance.doubleEnemies)
+                Instantiate(normalBoid, transform.position + new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)), Quaternion.identity);
         }
 
         for (int spawnCount = 0; spawnCount < angryBoidSpawnAmt; spawnCount++)//angry spawn
         {
             Instantiate(angryBoid, transform.position, Quaternion.identity);
+            if (LevelModifierManager.instance.doubleEnemies)
+                Instantiate(angryBoid, transform.position + new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)), Quaternion.identity);
         }
         yield return new WaitForSeconds(timeBetweenSpawns * (3f / 4f));
 

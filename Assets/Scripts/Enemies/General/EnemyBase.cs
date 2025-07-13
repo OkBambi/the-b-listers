@@ -27,6 +27,10 @@ public class EnemyBase : MonoBehaviour, IDamage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
+        if (LevelModifierManager.instance.lessHealth)
+        {
+           hp = hp / 2;
+        }
         ColorSelection(setColor);
         UpdateBoidAwareness();
     }
@@ -36,7 +40,7 @@ public class EnemyBase : MonoBehaviour, IDamage
         setColor = (PrimaryColor)Random.Range(0, 3);
     }
 
-    protected void ColorSelection(PrimaryColor newColor)
+    public void ColorSelection(PrimaryColor newColor)
     {
         setColor = newColor;
         switch (setColor)

@@ -114,7 +114,8 @@ public class YellowSchmove : MonoBehaviour
 
 
                 chargeLevel = 0;
-                player.canAction = true;
+                if (!LevelModifierManager.instance.schmovesOnly)
+                    player.canAction = true;
                 player.canColor = true;
                 activated = false;
             }

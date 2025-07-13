@@ -31,47 +31,55 @@ public class Schmoves : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            if (ComboManager.instance.GetScore() >= 100)
+            if (!LevelModifierManager.instance.daggersOnly)
             {
-                switch (playerColor)
+                if (ComboManager.instance.GetScore() >= 100)
                 {
-                    case PrimaryColor.RED:
-                        if (cooldownRed <= 0)
-                        {
-                            redSchmover.Activate();
-                            cooldownRed = maxCooldownRed;
-                            RedCD_M2.color = Color.gray;
-                            ComboManager.instance.RemoveScore(100);
-                            ComboFeed.theInstance.AddNewComboFeed("- 100 redSchmove", 100);
-                            StartCoroutine(UpdateCoolDownUIRed());
-                        }
-                        break;
-                    case PrimaryColor.BLUE:
-                        if (cooldownBlue <= 0)
-                        {
-                            blueSchmover.Activate();
-                            cooldownBlue = maxCooldownBlue;
-                            BlueCD_M2.color = Color.gray;
-                            ComboManager.instance.RemoveScore(100);
-                            ComboFeed.theInstance.AddNewComboFeed("- 100 blueSchmove", 100);
-                            StartCoroutine(UpdateCoolDownUIBlue());
-                        }
-                        break;
-                    default:
-                        if (cooldownYel <= 0)
-                        {
-                            yellowSchmover.Activate();
-                            cooldownYel = maxCooldownYel;
-                            YellowCD_M2.color = Color.gray;
-                            //the coroutine starts when you release the railgun
-                        }
-                        break;
+                    switch (playerColor)
+                    {
+                        case PrimaryColor.RED:
+                            if (cooldownRed <= 0)
+                            {
+                                redSchmover.Activate();
+                                cooldownRed = maxCooldownRed;
+                                RedCD_M2.color = Color.gray;
+                                ComboManager.instance.RemoveScore(100);
+                                ComboFeed.theInstance.AddNewComboFeed("- 100 redSchmove", 100);
+                                StartCoroutine(UpdateCoolDownUIRed());
+                            }
+                            break;
+                        case PrimaryColor.BLUE:
+                            if (cooldownBlue <= 0)
+                            {
+                                blueSchmover.Activate();
+                                cooldownBlue = maxCooldownBlue;
+                                BlueCD_M2.color = Color.gray;
+                                ComboManager.instance.RemoveScore(100);
+                                ComboFeed.theInstance.AddNewComboFeed("- 100 blueSchmove", 100);
+                                StartCoroutine(UpdateCoolDownUIBlue());
+                            }
+                            break;
+                        default:
+                            if (cooldownYel <= 0)
+                            {
+                                yellowSchmover.Activate();
+                                cooldownYel = maxCooldownYel;
+                                YellowCD_M2.color = Color.gray;
+                                //the coroutine starts when you release the railgun
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    //invalid score
+                    StartCoroutine(InvalidFlash());
                 }
             }
             else
             {
-                //invalid score
-                StartCoroutine(InvalidFlash());
+                //level modifier diable
+                StartCoroutine(DisabledFlash());
             }
         }
     }
@@ -83,8 +91,16 @@ public class Schmoves : MonoBehaviour
         invalidScore.SetActive(false);
     }
 
+    IEnumerator DisabledFlash()
+    {
+        disabledSchmoves.SetActive(true);
+        yield return new WaitForSeconds(0.4f);
+        disabledSchmoves.SetActive(false);
+    }
+
     [Header("Informational UI")]
     [SerializeField] GameObject invalidScore;
+    [SerializeField] GameObject disabledSchmoves;
 
     //UI
     [Header("CoolDownBars")]

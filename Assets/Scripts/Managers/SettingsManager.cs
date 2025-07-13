@@ -1,5 +1,7 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -35,18 +37,33 @@ public class SettingsManager : MonoBehaviour
         FOVSlider slider = FindFirstObjectByType<FOVSlider>(FindObjectsInactive.Include);
         slider.SetFOV(GetFOV());
 
+        SettingsMenu settingsMenu = FindFirstObjectByType<SettingsMenu>(FindObjectsInactive.Include);
+
+        settingsMenu.SetResolution(Screen.resolutions[GetResolution()]);
+
+        settingsMenu.SetQuality(GetQuality());
+
+        settingsMenu.SetWindowSetting(GetWindowType());
+
+        settingsMenu.SetSFX(GetSFXVolume());
+
+        settingsMenu.SetMusic(GetMusicVolume());
+
         //will need to be reworked because FindWithTag doesn't work on inactive objects
         FindFirstObjectByType<ReducedCameraShake_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisReducedCameraShake();
 
         FindFirstObjectByType<ButtonFunction>(FindObjectsInactive.Exclude).GetComponent<ButtonFunction>().ontoggleArcade(GetisArcadeFilter());
         //FindFirstObjectByType<PixelCamera_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisArcadeFilter();
 
-        SettingsMenu settingsMenu = FindFirstObjectByType<SettingsMenu>(FindObjectsInactive.Include);
+        FindFirstObjectByType<InvertY_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisInvertY();
+        ApplyInvertY();
+
+        settingsMenu.SetMouseSensitivity(GetmouseSensitivity());
 
         ////Resolution
         //Dropdown dropDown = GameObject.FindWithTag("Resolution").GetComponent<Dropdown>();
         //var options = dropDown.options;
-        
+
         //for (int resIndex = 0; resIndex < options.Count; ++resIndex)
         //{
         //    if (options[resIndex].text == GetResolution().ToString())
@@ -82,40 +99,61 @@ public class SettingsManager : MonoBehaviour
         //    }
         //}
 
-        settingsMenu.SetVFXVolume((GetVFXVolume() * 80f) - 80f);
+
 
     }
 
     #region Resolution
-    public Resolution GetResolution()
+    public int GetResolution()
     {
+        Debug.Log(settings.resolution);
         return settings.resolution;
     }
     public void SetResolution(Resolution _resolution)
     {
-        settings.resolution = _resolution;
+        for (int resIndex = 0; resIndex < Screen.resolutions.Length; resIndex++)
+        {
+            if (Screen.resolutions[resIndex].Equals(_resolution))
+                settings.resolution = resIndex;
+        }
+    }
+    public void SetResolution(TMP_Dropdown _resolution)
+    {
+        settings.resolution = _resolution.value;
     }
     #endregion
 
     #region Quality
-    public SettingsObject.QualityTypes GetQuality()
+    public int GetQuality()
     {
         return settings.quality;
     }
-    public void SetQuality(SettingsObject.QualityTypes _quality)
+    public string GetQualityName()
+    {
+        return QualitySettings.names[settings.quality];
+    }
+    public void SetQuality(int _quality)
     {
         settings.quality = _quality;
+    }
+    public void SetQuality(TMP_Dropdown _quality)
+    {
+        settings.quality = _quality.value;
     }
     #endregion
 
     #region Window Type
-    public SettingsObject.WindowType GetWindowType()
+    public FullScreenMode GetWindowType()
     {
         return settings.windowType;
     }
-    public void SetWindowType(SettingsObject.WindowType _windowType)
+    public void SetWindowType(FullScreenMode _windowType)
     {
         settings.windowType = _windowType;
+    }
+    public void SetWindowType(TMP_Dropdown _windowType)
+    {
+        settings.windowType = (FullScreenMode)_windowType.value;
     }
     #endregion
 
@@ -154,7 +192,7 @@ public class SettingsManager : MonoBehaviour
     #region isInvertY
     public bool GetisInvertY()
     {
-        return settings.isReducedCameraShake;
+        return settings.isInvertY;
     }
     public void SetisInvertY(bool _isInvertY)
     {
@@ -183,51 +221,51 @@ public class SettingsManager : MonoBehaviour
     }
     #endregion
 
-    #region isOutlineFilter
-    public bool GetisOutlineFilter()
+    //#region isOutlineFilter
+    //public bool GetisOutlineFilter()
+    //{
+    //    return settings.isOutlineFilter;
+    //}
+    //public void SetisOutlineFilter(bool _isOutlineFilter)
+    //{
+    //    settings.isOutlineFilter = _isOutlineFilter;
+    //}
+
+    //public void SetisOutlineFilter(Toggle _isOutlineFilter)
+    //{
+    //    settings.isOutlineFilter = _isOutlineFilter.isOn;
+    //}
+    //#endregion
+
+    //#region isColourBlindnessMode
+    //public bool GetisColourBlindnessMode()
+    //{
+    //    return settings.isColourBlindnessMode;
+    //}
+    //public void SetisColourBlindnessMode(bool _isColourBlindnessMode)
+    //{
+    //    settings.isColourBlindnessMode = _isColourBlindnessMode;
+    //}
+
+    //public void SetisColourBlindnessMode(Toggle _isColourBlindnessMode)
+    //{
+    //    settings.isColourBlindnessMode = _isColourBlindnessMode.isOn;
+    //}
+    //#endregion
+
+    #region SFXVolume
+    public float GetSFXVolume()
     {
-        return settings.isOutlineFilter;
+        return settings.SFXVolume;
     }
-    public void SetisOutlineFilter(bool _isOutlineFilter)
+    public void SetSFXVolume(float _SFXVolume)
     {
-        settings.isOutlineFilter = _isOutlineFilter;
+        settings.SFXVolume = _SFXVolume;
     }
 
-    public void SetisOutlineFilter(Toggle _isOutlineFilter)
+    public void SetSFXVolume(Slider _SFXVolume)
     {
-        settings.isOutlineFilter = _isOutlineFilter.isOn;
-    }
-    #endregion
-
-    #region isReducedCameraShake
-    public bool GetisColourBlindnessMode()
-    {
-        return settings.isColourBlindnessMode;
-    }
-    public void SetisColourBlindnessMode(bool _isColourBlindnessMode)
-    {
-        settings.isColourBlindnessMode = _isColourBlindnessMode;
-    }
-
-    public void SetisColourBlindnessMode(Toggle _isColourBlindnessMode)
-    {
-        settings.isColourBlindnessMode = _isColourBlindnessMode.isOn;
-    }
-    #endregion
-
-    #region VFXVolume
-    public float GetVFXVolume()
-    {
-        return settings.VFXVolume;
-    }
-    public void SetVFXVolume(float _VFXVolume)
-    {
-        settings.VFXVolume = _VFXVolume;
-    }
-
-    public void SetVFXVolume(Slider _VFXVolume)
-    {
-        settings.VFXVolume = _VFXVolume.value;
+        settings.SFXVolume = (_SFXVolume.value + 80f) / 80f;
     }
     #endregion
 
@@ -243,11 +281,11 @@ public class SettingsManager : MonoBehaviour
 
     public void SetMusicVolume(Slider _MusicVolume)
     {
-        settings.MusicVolume = _MusicVolume.value;
+        settings.MusicVolume = (_MusicVolume.value + 80f) / 80f;
     }
     #endregion
 
-    #region mouseSensitivity
+    #region MouseSensitivity
     public float GetmouseSensitivity()
     {
         return settings.mouseSensitivity;
@@ -263,5 +301,10 @@ public class SettingsManager : MonoBehaviour
     }
     #endregion
 
-
+    public void ApplyInvertY()
+    {
+        //Debug.Log(GetisInvertY());
+        if (GameManager.instance)
+            GameManager.instance.playerScript.GetComponentInChildren<PlayerCamera>().invertY = GetisInvertY();
+    }
 }

@@ -10,10 +10,22 @@ public class stopWatchShockWave : MonoBehaviour
     [SerializeField] float maxSize;
     [SerializeField] float ShockTime;
     [SerializeField] float LaunchHight;
+
+    [Header("BoogieWoogie")]
+    [SerializeField] public int ColorLockTimer;
+    [SerializeField] LockColorChange ChainUIColor;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private void Awake()
+    {
+        ChainUIColor = GetComponent<LockColorChange>();
+    }
+
     void Start()
     {
         StartCoroutine(myShock());
+        
     }
 
     // Update is called once per frame
@@ -24,21 +36,24 @@ public class stopWatchShockWave : MonoBehaviour
 
     IEnumerator myShock()
     {
+        shockWave.SetActive(true);
         yield return new WaitForSeconds(0.35f);
         AudioManager.instance.Play("Stopwatch_Smash");
         while (true)
         {
             yield return null;
             shockWave.transform.localScale += new Vector3(speed * Time.deltaTime, 0f, speed * Time.deltaTime);
-            
+
             if (shockWave.transform.localScale.x >= maxSize)
             {
                 shockWave.transform.localScale = new Vector3(0f, 0f, 0f);
                 break; // Exit the coroutine when the shock wave reaches its maximum size
             }
         }
-        
+
         yield return new WaitForSeconds(3f);
+        shockWave.SetActive(false);
+        yield return new WaitForSeconds(2f);
         Destroy(gameObject); // Destroy the shock wave GameObject after it reaches its maximum size
     }
 
@@ -46,12 +61,28 @@ public class stopWatchShockWave : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // Handle player damage or effects here
-            Debug.Log("Player hit by shock wave!");
-            GameManager.instance.playerScript.canAction = false; // Disable player actions
-            // You can add player damage logic here
-            GameManager.instance.player.GetComponent<Rigidbody>().AddForce(Vector3.up * LaunchHight, ForceMode.Impulse); // Example force to push the player up
-            Invoke("resetPlayer", ShockTime);
+            if (LevelModifierManager.instance.boogieWoogie)
+            {
+                IColorLock colorLock = GameManager.instance.playerScript.GetComponent<IColorLock>();
+                if (colorLock != null)
+                {
+                    colorLock.LockColorSelection(ColorLockTimer);
+                }
+                ChainUIColor.SwapChainColor();
+
+                GameManager.instance.ChainScreen(ColorLockTimer);
+            }
+            else
+            {
+                // Handle player damage or effects here
+                Debug.Log("Player hit by shock wave!");
+                GameManager.instance.playerScript.canAction = false; // Disable player actions
+                GameManager.instance.playerScript.canSchmove = false;
+                // You can add player damage logic here
+                GameManager.instance.player.GetComponent<Rigidbody>().AddForce(Vector3.up * LaunchHight, ForceMode.Impulse); // Example force to push the player up
+                Invoke("resetPlayer", ShockTime);
+            }
+
 
         }
     }
@@ -60,7 +91,11 @@ public class stopWatchShockWave : MonoBehaviour
     {
         Debug.Log("reset");
         GameManager.instance.playerScript.canAction = true; // Re-enable player actions
+        GameManager.instance.playerScript.canSchmove = true;
     }
 
-
+    public void LockColorSelection(float duration)
+    {
+        throw new System.NotImplementedException();
+    }
 }

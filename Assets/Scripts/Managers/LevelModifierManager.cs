@@ -9,16 +9,39 @@ using UnityEngine.XR;
 public class LevelModifierManager : MonoBehaviour
 {
     //when you make a new modifier, create a LevelModifier Object and then create the function that will apply the changes.
+    public static LevelModifierManager instance;
+
     GameObject modifierCardSelectionUI;
     [SerializeField] string functionName;
     [SerializeField] Button button1;
     [SerializeField] Button button2;
     [SerializeField] Button button3;
 
-
     [Inspectable] List<LevelModifier> modifiers;
 
     [SerializeField] DifficultyObject difficulty;
+
+    //hard
+    public bool schmovesOnly = false;
+    public bool daggersOnly = false;
+    public bool doubleEnemies = false;
+    public bool lowEnemyCooldowns = false;
+    public bool smallFastEnemies = false;
+
+    //normal
+    public bool boogieWoogie = false;
+    public bool shotgunOnly = false;
+    public bool rapidFireOnly = false;
+
+    //easy
+    public bool largerStage = false;
+    public bool lessHealth = false;
+    public bool savingGrace = false;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -58,10 +81,36 @@ public class LevelModifierManager : MonoBehaviour
                 }
                 break;
         }
-
-        
+        //DoubleEnemies();
+        //LowEnemyCooldowns();
+        //SmallFastEnemies();
     }
 
+    
+
+    public void ClearCurrentModifiers()
+    {
+        modifiers.Clear();
+
+        schmovesOnly = false;
+        daggersOnly = false;
+        doubleEnemies = false;
+        lowEnemyCooldowns = false;
+        smallFastEnemies = false;
+
+        //
+        boogieWoogie = false;
+
+        shotgunOnly = false;
+        rapidFireOnly = false;
+
+        largerStage = false;
+        lessHealth = false;
+        savingGrace = false;
+
+    }
+
+    #region Cards
     public void RandomizeCards()
     {
         #region Error Checking
@@ -135,12 +184,6 @@ public class LevelModifierManager : MonoBehaviour
             }
         }
     }
-
-    public void ClearCurrentModifiers()
-    {
-        modifiers.Clear();
-    }
-
     public void InitializeCards()
     {
         //Card1.icon = modifiers[0].icon;
@@ -161,8 +204,9 @@ public class LevelModifierManager : MonoBehaviour
         //button2.onClick.AddListener(delegate { SetFunctionToCall(button2.GetComponentInChildren<TextMeshProUGUI>()); });
         //button3.onClick.AddListener(delegate { SetFunctionToCall(button3.GetComponentInChildren<TextMeshProUGUI>()); });
     }
+    #endregion
 
-    
+    #region Function Modularity
     public void SetFunctionToCall(string newFunctionName)
     {
         functionName = newFunctionName;
@@ -180,4 +224,77 @@ public class LevelModifierManager : MonoBehaviour
             Invoke(functionName, 0f);
         }
     }
+    #endregion
+
+
+    //place modifier functions below of organization reasons
+    #region Modifier Methods
+    #region Hard
+    public void SchmovesOnly()
+    {
+        schmovesOnly = true;
+        FindFirstObjectByType<GameStartDagger>().mod_SchmovesOnly = true;
+        if (SceneManager.GetActiveScene().name == "Level_1")
+            ComboManager.instance.AddScoreNoMult(1000f);
+    }
+    public void DaggersOnly()
+    {
+        daggersOnly = true;
+    }
+
+    public void DoubleEnemies()
+    {
+        doubleEnemies = true;
+    }
+
+    public void LowEnemyCooldowns()
+    {
+        lowEnemyCooldowns = true;
+        //this method implementation is incomplete, it depends on the stopwatch being reworked to be on a time basis
+        //I will still implement an adjusted implementation based on the trigger tho
+    }
+
+    public void SmallFastEnemies()
+    {
+        smallFastEnemies = true;
+    }
+    #endregion
+
+
+    #region Normal
+    public void BoogieWoogieShuffle()
+    {
+        boogieWoogie = true;
+    }
+    public void ShotgunOnly()
+    {
+        shotgunOnly = true;
+    }
+
+    public void RapidfireOnly()
+    {
+        rapidFireOnly = true;
+    }
+    #endregion
+
+
+    #region Easy
+
+    public void LargerStage()
+    {
+        largerStage = true;
+    }
+
+    public void LessHealth()
+    {
+        lessHealth = true;
+    }
+
+    public void SavingGrace()
+    {
+        savingGrace = true;
+    }
+    #endregion
+
+    #endregion
 }

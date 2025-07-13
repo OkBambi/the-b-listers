@@ -2,43 +2,29 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Monk_MiniBoss : EnemyBase
+public class Monk_MiniBoss : MonoBehaviour
 {
-  float waveGrowthTimer = 0;
+    float waveGrowthTimer = 0;
 
 
     [Header("roaming movement")]
     [SerializeField] int faceTargetSpeed;
 
-    float CastTimer;
-    [SerializeField] float CastElapse;
 
     [SerializeField] PrimaryColor PrimaryColor;
     [SerializeField] int ColorChangeIndex;
+    Monk MonkBoss;
 
     private PrimaryColor[] colorRoutine = { PrimaryColor.RED, PrimaryColor.BLUE, PrimaryColor.YELLOW };
     private int currenColor;
 
-
-    //detectors 
-    bool isCasting = false;
     Color colorOriginal;
 
-
-    private void Awake()
+    void Start()
     {
-        OnAECAwake();
-        RandomizeColor();
-    }
+        MonkBoss = GetComponent<Monk>();
+        colorOriginal = MonkBoss.model.material.color;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    protected override void Start()
-    {
-        ColorSelection(setColor);
-
-        colorOriginal = model.material.color;
-      
-        name = "Monk Elite";
         StartCoroutine(ChangeColors());
     }
 
@@ -46,23 +32,11 @@ public class Monk_MiniBoss : EnemyBase
     void Update()
     {
 
-        FaceTarget();
     }
 
-
-    void FaceTarget()
-    {
-        Vector3 direction = GameManager.instance.player.transform.position - transform.position;
-        direction.y = 0f;
-        if (direction.sqrMagnitude > 0.001)
-        {
-            Quaternion rot = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
-        }
-    }
 
     //casting
-    
+
     IEnumerator ChangeColors()
     {
         while (true)
@@ -70,8 +44,8 @@ public class Monk_MiniBoss : EnemyBase
             yield return new WaitForSeconds(7);
 
             PrimaryColor newColor = colorRoutine[ColorChangeIndex];
-            setColor = newColor;
-            ColorSelection(newColor);
+            MonkBoss.setColor = newColor;
+            MonkBoss.ColorSelection(newColor);
 
             ColorChangeIndex = (ColorChangeIndex + 1) % colorRoutine.Length;
         }

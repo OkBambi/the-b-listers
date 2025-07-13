@@ -41,7 +41,7 @@ public class PlayerShooting : MonoBehaviour
         // mAnimator = GetComponent<Animator>();
     }
 
-  
+
     public void UpdateWeapon(PrimaryColor playerColor, PlayerArm playerArm)
     {
         shootTimer += Time.deltaTime;
@@ -50,101 +50,104 @@ public class PlayerShooting : MonoBehaviour
         {
             isHolding = true;
             holdTime += Time.deltaTime;
-
-            if (holdTime > tapThreshold)
+            if (!LevelModifierManager.instance.shotgunOnly)
             {
-                //spray
-                if (shootTimer > fireRate)
+                if (holdTime > tapThreshold)
                 {
-                    shootTimer = 0;
-                    mAnimator.SetTrigger("Shooting");
-                    AudioManager.instance.Play("Rapid");
-                    GameObject b = Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
-                    b.transform.Rotate(0, 0, UnityEngine.Random.Range(-360, 360));
-                    Gradient grad;
-                    switch (playerColor)
+                    //spray
+                    if (shootTimer > fireRate)
                     {
-                        case PrimaryColor.RED:
-                            b.GetComponent<Renderer>().material.color = Color.red;
-                            grad = ParticleManager.instance.DeflectRed;
-                            break;
-                        case PrimaryColor.BLUE:
-                            b.GetComponent<Renderer>().material.color = Color.blue;
-                            grad = ParticleManager.instance.DeflectBlue;
-                            break;
-                        case PrimaryColor.YELLOW:
-                            b.GetComponent<Renderer>().material.color = Color.yellow;
-                            grad = ParticleManager.instance.DeflectYellow;
-                            break;
-                        default:
-                            b.GetComponent<Renderer>().material.color = Color.black;
-                            grad = ParticleManager.instance.DeflectBlack;
-                            break;
-                    }
+                        shootTimer = 0;
+                        mAnimator.SetTrigger("Shooting");
+                        AudioManager.instance.Play("Rapid");
+                        GameObject b = Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
+                        b.transform.Rotate(0, 0, UnityEngine.Random.Range(-360, 360));
+                        Gradient grad;
+                        switch (playerColor)
+                        {
+                            case PrimaryColor.RED:
+                                b.GetComponent<Renderer>().material.color = Color.red;
+                                grad = ParticleManager.instance.DeflectRed;
+                                break;
+                            case PrimaryColor.BLUE:
+                                b.GetComponent<Renderer>().material.color = Color.blue;
+                                grad = ParticleManager.instance.DeflectBlue;
+                                break;
+                            case PrimaryColor.YELLOW:
+                                b.GetComponent<Renderer>().material.color = Color.yellow;
+                                grad = ParticleManager.instance.DeflectYellow;
+                                break;
+                            default:
+                                b.GetComponent<Renderer>().material.color = Color.black;
+                                grad = ParticleManager.instance.DeflectBlack;
+                                break;
+                        }
 
-                    StartCoroutine(camShaker.Shake(0.05f, 0.05f));
-                    StartCoroutine(playerArm.Recoil(0.05f, 0.006f, 0.04f));
-                    b.GetComponent<Dagger>().Initialize(playerColor, bulletSpeed, bulletLifeTime, ignoreLayer, grad);
+                        StartCoroutine(camShaker.Shake(0.05f, 0.05f));
+                        StartCoroutine(playerArm.Recoil(0.05f, 0.006f, 0.04f));
+                        b.GetComponent<Dagger>().Initialize(playerColor, bulletSpeed, bulletLifeTime, ignoreLayer, grad);
+                    }
                 }
             }
         }
-
         if (Input.GetMouseButtonUp(0))
         {
             isHolding = false;
-
-            if (holdTime <= tapThreshold && shootTimer > shotCooldown)
+            if (!LevelModifierManager.instance.rapidFireOnly)
             {
-                //shotgun
-                shootTimer = 0;
-                mAnimator.SetTrigger("Shotgun");
-                AudioManager.instance.Play("Shotgun_Shot");
-                float dotProduct = Vector3.Dot(playerCam.forward, -Vector3.up);
-                float inverCos = Mathf.Acos(dotProduct);
-                float angle = Mathf.Rad2Deg * inverCos;
-
-                if (angle < rocketJumpAngle && currentRocketJumps < maxRocketJumps)
+                if (holdTime <= tapThreshold && shootTimer > shotCooldown)
                 {
-                    print("ROCKET MANNNNN");
-                    currentRocketJumps++;
-                    rb.AddForce(Vector3.up * rocketJumpForce, ForceMode.Impulse);
-                }
+                    //shotgun
+                    shootTimer = 0;
+                    mAnimator.SetTrigger("Shotgun");
+                    AudioManager.instance.Play("Shotgun_Shot");
+                    float dotProduct = Vector3.Dot(playerCam.forward, -Vector3.up);
+                    float inverCos = Mathf.Acos(dotProduct);
+                    float angle = Mathf.Rad2Deg * inverCos;
 
-                for (int i = 0; i < bulletAmount; i++)
-                {
-                    GameObject b = Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
-                    b.transform.Rotate(
-                        UnityEngine.Random.Range(-spreadAngle, spreadAngle),
-                        UnityEngine.Random.Range(-spreadAngle, spreadAngle),
-                        UnityEngine.Random.Range(-360, 360));
-                    Gradient grad;
-                    switch (playerColor)
+                    if (angle < rocketJumpAngle && currentRocketJumps < maxRocketJumps)
                     {
-                        case PrimaryColor.RED:
-                            b.GetComponent<Renderer>().material.color = Color.red;
-                            grad = ParticleManager.instance.DeflectRed;
-                            break;
-                        case PrimaryColor.BLUE:
-                            b.GetComponent<Renderer>().material.color = Color.blue;
-                            grad = ParticleManager.instance.DeflectBlue;
-                            break;
-                        case PrimaryColor.YELLOW:
-                            b.GetComponent<Renderer>().material.color = Color.yellow;
-                            grad = ParticleManager.instance.DeflectYellow;
-                            break;
-                        default:
-                            b.GetComponent<Renderer>().material.color = Color.black;
-                            grad = ParticleManager.instance.DeflectBlack;
-                            break;
+                        print("ROCKET MANNNNN");
+                        currentRocketJumps++;
+                        rb.AddForce(Vector3.up * rocketJumpForce, ForceMode.Impulse);
                     }
 
-                    b.GetComponent<Dagger>().Initialize(playerColor, bulletSpeed, bulletLifeTime, ignoreLayer, grad);
-                }
-                StartCoroutine(playerArm.RecoilTween(0.2f, 0.01f, 0.2f, 0.1f));
-                StartCoroutine(camShaker.ShakeTween(0.2f, 0.2f, 0f, 0.3f));
-            }
+                    for (int i = 0; i < bulletAmount; i++)
+                    {
+                        GameObject b = Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
+                        b.transform.Rotate(
+                            UnityEngine.Random.Range(-spreadAngle, spreadAngle),
+                            UnityEngine.Random.Range(-spreadAngle, spreadAngle),
+                            UnityEngine.Random.Range(-360, 360));
+                        Gradient grad;
+                        switch (playerColor)
+                        {
+                            case PrimaryColor.RED:
+                                b.GetComponent<Renderer>().material.color = Color.red;
+                                grad = ParticleManager.instance.DeflectRed;
+                                break;
+                            case PrimaryColor.BLUE:
+                                b.GetComponent<Renderer>().material.color = Color.blue;
+                                grad = ParticleManager.instance.DeflectBlue;
+                                break;
+                            case PrimaryColor.YELLOW:
+                                b.GetComponent<Renderer>().material.color = Color.yellow;
+                                grad = ParticleManager.instance.DeflectYellow;
+                                break;
+                            default:
+                                b.GetComponent<Renderer>().material.color = Color.black;
+                                grad = ParticleManager.instance.DeflectBlack;
+                                break;
+                        }
 
-            holdTime = 0;
+                        b.GetComponent<Dagger>().Initialize(playerColor, bulletSpeed, bulletLifeTime, ignoreLayer, grad);
+                    }
+                    StartCoroutine(playerArm.RecoilTween(0.2f, 0.01f, 0.2f, 0.1f));
+                    StartCoroutine(camShaker.ShakeTween(0.2f, 0.2f, 0f, 0.3f));
+                }
+
+                holdTime = 0;
+            }
         }
     }
 }

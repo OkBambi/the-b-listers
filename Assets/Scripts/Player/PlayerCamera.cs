@@ -4,9 +4,9 @@ using UnityEngine;
 public class PlayerCamera : MonoBehaviour
 {
     [Header("Look Settings")]
-    [SerializeField] int sens;
+    public float sens;
     [SerializeField] int lockVertMin, lockVertMax;
-    [SerializeField] bool invertY;
+    public bool invertY;
 
     [Range(85, 110)]
     [SerializeField] int fov;
@@ -44,8 +44,8 @@ public class PlayerCamera : MonoBehaviour
     public void UpdateCamera(bool isGrounded)
     {
         // get input
-        float mouseX = Input.GetAxis("Mouse X") * sens * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * sens * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * 250f * sens * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * 250f * sens * Time.deltaTime;
 
         // give player options to invert look up and down
         if (invertY)

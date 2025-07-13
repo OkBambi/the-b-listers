@@ -5,19 +5,19 @@ using UnityEngine.Video;
 public class LockColorChange : MonoBehaviour
 {
     [SerializeField] Monk MonkPrimary;
+    [SerializeField] StopWatch StopwatchPrimary;
     [SerializeField] ChainMarker[] ChainToggleables;
     [SerializeField] RawImage[] ChainImageArray;
-    [SerializeField] PrimaryColor PrimaryColor;
+    [SerializeField] PrimaryColor primaryColor;
     [SerializeField] ColorSwapping ChangeColor;
     [SerializeField] WaveColorLockMonk ColorLockMonk;
 
 
     void Start()
-    {
-        PrimaryColor = MonkPrimary.setColor;
-
-        //find ColorSwapping Script in scene
-        ChangeColor = FindFirstObjectByType<ColorSwapping>();
+    {  
+            primaryColor = MonkPrimary.setColor;
+            //find ColorSwapping Script in scene
+            ChangeColor = FindFirstObjectByType<ColorSwapping>();
         //Find the object with chain marker script on the scene
         ChainToggleables = FindObjectsByType<ChainMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
@@ -26,14 +26,9 @@ public class LockColorChange : MonoBehaviour
             
     }
 
-
-    void Update()
+    public void SwapChainColor()
     {
-    }
-
-    public void SwapChainColorToMonk()
-    {
-        switch (PrimaryColor)
+        switch (primaryColor)
         {
             case PrimaryColor.RED:
                 ChainImageArray[0].color = Color.red;

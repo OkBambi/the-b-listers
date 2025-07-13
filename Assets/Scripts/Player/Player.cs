@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IColorLock
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour, IColorLock
     public bool canMove;
     public bool canCam;
     public bool canAction;
+    public bool canSchmove;
     public bool canColor;
     public bool isDead = false;
 
@@ -49,11 +51,10 @@ public class Player : MonoBehaviour, IColorLock
                 colorSwapper.UpdateColor(ref currentColor);
 
             if (canAction)
-            {
                 weapon.UpdateWeapon(currentColor, arm);
 
+            if (canSchmove)
                 schmover.UpdateInput(currentColor);
-            }
         }
 
         arm.UpdateArm(currentColor);
@@ -90,6 +91,7 @@ public class Player : MonoBehaviour, IColorLock
         }
         //disable player stuff
         canAction = false;
+        canSchmove = false;
         canMove = false;
         canCam = false;
         canColor = false;
@@ -99,17 +101,21 @@ public class Player : MonoBehaviour, IColorLock
 
         AudioManager.instance.Play("Game_Over");
 
-        //save score
-        //check for highscore
-        int highScore = PlayerPrefs.GetInt("Highscore");
-
-        if (ComboManager.instance.GetScore() > highScore)
+        //check for highscore then saves if found
+        List<int> highscores = HighScoreManager.theInstance.GetHighScores();
+        int totalScore = ComboManager.instance.GetScore();
+        for (int index = 0; index < highscores.Count; index++)
         {
-            GameManager.instance.SaveHighscore(ComboManager.instance.GetScore());
+            if (totalScore > highscores[index])
+            {
+                HighScoreManager.theInstance.SaveHighScore(totalScore);
+                break;
+            }
         }
 
         //lose menu
         GameManager.instance.OnEndCondition();
+        GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().LoseEndScreen();
     }
 
     //Monk Lock Color interface implentation **NEW**

@@ -18,13 +18,14 @@ public class ComboFeed : MonoBehaviour
     [SerializeField] TextMeshProUGUI finalScoreText;
     [SerializeField] int maxFeedLength;
     [SerializeField] float endFeedSpeed;
+    [SerializeField] float timeToWaitBeforeHighscores;
 
 
     [SerializeField] TextMeshProUGUI playerKilledText;
     private Queue<GameObject> currentFeedList = new Queue<GameObject>();
     private List<string> finalFeedList = new List<string>();
     private List<float> finalScoreList = new List<float>();
-    private float finalScore;
+    private static float finalScore;
 
     private void Awake()
     {
@@ -78,5 +79,7 @@ public class ComboFeed : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(endFeedSpeed);
         }
+        yield return new WaitForSecondsRealtime(timeToWaitBeforeHighscores);
+        HighScoreManager.theInstance.DisplayHighScoreTable();
     }
 }

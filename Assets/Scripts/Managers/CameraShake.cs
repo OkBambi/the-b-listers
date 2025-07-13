@@ -8,6 +8,9 @@ public class CameraShake : MonoBehaviour
     {
         Vector3 originalPos = transform.localPosition;
 
+        if (SettingsManager.instance.GetisReducedCameraShake())
+            magnitude *= 0.5f;
+
         float elapsed = 0.0f;
         float _x;
         float _y;
@@ -30,6 +33,9 @@ public class CameraShake : MonoBehaviour
     public IEnumerator ShakeTween(float duration, float magnitude, float easeDestination, float easeSpeed)
     {
         Vector3 originalPos = transform.localPosition;
+
+        if (SettingsManager.instance.GetisReducedCameraShake())
+            magnitude *= 0.5f;
 
         float elapsed = 0.0f;
         float _x;

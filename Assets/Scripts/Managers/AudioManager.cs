@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
             {
                 s.source = gameObject.AddComponent<AudioSource>();
                 s.source.clip = s.clip;
-                s.source.volume = s.volume * SettingsManager.instance.GetVFXVolume();
+                s.source.volume = s.volume * SettingsManager.instance.GetSFXVolume();
                 s.source.pitch = s.pitch;
             }
         }
@@ -118,7 +118,7 @@ public class AudioManager : MonoBehaviour
         {
             foreach (Sound s in array)
             {
-                s.source.volume = s.volume * SettingsManager.instance.GetVFXVolume();
+                s.source.volume = s.volume * SettingsManager.instance.GetSFXVolume();
             }
         }
     }

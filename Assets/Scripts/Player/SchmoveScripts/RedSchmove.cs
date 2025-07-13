@@ -97,7 +97,9 @@ public class RedSchmove : MonoBehaviour, ISchmove
                 Destroy(i);
                 Destroy(d);
                 player.canMove = true;
-                player.canAction = true;
+                if (!LevelModifierManager.instance.schmovesOnly)
+                    player.canAction = true;
+
                 Instantiate(ParticleManager.instance.RedSchmoveSlamEffect, i.transform.position, Quaternion.identity);
                 StartCoroutine(camShaker.ShakeTween(2f, 0.75f, 0f, 0.25f));
                 StartCoroutine(StopVelocity());

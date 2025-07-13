@@ -16,8 +16,8 @@ public class Monk : EnemyBase
     [Header("roaming movement")]
     [SerializeField] int faceTargetSpeed;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] int roamDist;
-    [SerializeField] int StopTime;
+    [SerializeField] float roamDist;
+    [SerializeField] float StopTime;
     float roamTimer;
 
     [Header("Seperation")]
@@ -50,8 +50,21 @@ public class Monk : EnemyBase
         }
         name = "Monk";
         roam();
-    }
 
+        if (LevelModifierManager.instance.lowEnemyCooldowns)
+        {
+            StopTime = StopTime * 0.25f;
+            pauseToCastTimer = pauseToCastTimer * 0.25f;
+            roamDist = roamDist * 0.25f;
+        }
+
+        if (LevelModifierManager.instance.smallFastEnemies)
+        {
+            model.transform.localScale = model.transform.localScale * 0.75f;
+            agent.speed = agent.speed * 2f;
+        }
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -147,7 +160,7 @@ public class Monk : EnemyBase
             yield return new WaitForSeconds(0.05f);
         }
         AudioManager.instance.Play("Monk_Cast");
-       
+
         yield return new WaitForSeconds(0.20f);
         Wave.SetActive(true);
         Wave.transform.localScale = Vector3.zero;
@@ -170,5 +183,4 @@ public class Monk : EnemyBase
         roam();
         isCasting = false;
     }
-
 }

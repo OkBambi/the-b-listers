@@ -17,16 +17,16 @@ public class BoidAI : EnemyBase
 
     [Space]
     [Header("Speeds")]
-    [SerializeField] float minSpeed;
-    [SerializeField] float maxSpeed;
+    [SerializeField] protected float minSpeed;
+    [SerializeField] protected float maxSpeed;
 
     [Space]
     [Header("Weights")]
     [SerializeField] float separationWeight = 8f;
     [SerializeField] float alignmentWeight = 1.0f;
     [SerializeField] float cohesionWeight = 1.2f;
-    [SerializeField] float stageWeight = 0.5f;
-    [SerializeField] float playerWeight = 1f;
+    [SerializeField] protected float stageWeight = 0.5f;
+    [SerializeField] protected float playerWeight = 1f;
 
     [Space]
     [Header("Noise")]
@@ -67,6 +67,15 @@ public class BoidAI : EnemyBase
         base.UpdateBoidAwareness();
         StartCoroutine(NoiseWeights());
         name = "Boid";
+
+        if (LevelModifierManager.instance.smallFastEnemies)
+        {
+            model.transform.localScale = model.transform.localScale * 0.75f;
+            maxSpeed = maxSpeed * 2f;
+            stageWeight = stageWeight * 1.5f;
+            playerWeight = playerWeight * 1.5f;
+
+        }
     }
 
     // Update is called once per frame
