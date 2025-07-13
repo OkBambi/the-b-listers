@@ -31,6 +31,7 @@ public class ComboFeed : MonoBehaviour
     private void Awake()
     {
         theInstance = this;
+        //clearFinalScore();
     }
 
     public void AddNewComboFeed(string _scoreFeed, float _score) //allows you to add to the kill feed (modifier is what is done to the score. Example + or -)
