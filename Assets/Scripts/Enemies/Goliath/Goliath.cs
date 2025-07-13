@@ -87,6 +87,7 @@ public class Goliath : EnemyBase
                 roamTime += Time.deltaTime;
                 if (roamTime >= roamStopTimer)
                 {
+                    Debug.Log("Roam");
                     PickRoamLocation();
                 }
             }
@@ -143,7 +144,7 @@ public class Goliath : EnemyBase
     {
         if (goliathHitLocation.transform.position == Vector3.zero)
         {
-            Vector3 divePos = new Vector3(Random.Range(-1f, 1f) * mapRadius, 1.1f, Random.Range(-1f, 1f) * mapRadius);
+            Vector3 divePos = new Vector3(Random.Range(-1f, 1f) * mapRadius, 0.1f, Random.Range(-1f, 1f) * mapRadius);
             goliathHitLocation.transform.position = divePos;
             goliathHitLocation.GetComponent<Renderer>().enabled = true;
         }
@@ -195,7 +196,7 @@ public class Goliath : EnemyBase
     void Breach()
     {
         //UP.
-        goliathHitLocation.transform.position = new Vector3(transform.position.x, 1.1f, transform.position.z);
+        goliathHitLocation.transform.position = new Vector3(transform.position.x, 0.1f, transform.position.z);
         goliathHitLocation.GetComponent<Renderer>().enabled = true;
         
         stateTimer += Time.deltaTime;
