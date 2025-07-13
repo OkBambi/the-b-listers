@@ -61,6 +61,7 @@ public class ComboFeed : MonoBehaviour
 
     private IEnumerator waitASec()
     {
+        finalScore = 0;
         for (int i = 0; i < finalFeedList.Count; i++)
         {
             GameObject newScoreFeed = Instantiate(feedListingPrefab, endFeed);
@@ -79,6 +80,7 @@ public class ComboFeed : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(endFeedSpeed);
         }
+        currentFinalFeedList.Clear();
 
         //clear screen for highscore
         yield return new WaitForSecondsRealtime(timeToWaitBeforeHighScores);
