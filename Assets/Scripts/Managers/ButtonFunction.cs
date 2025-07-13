@@ -74,7 +74,11 @@ public class ButtonFunction : MonoBehaviour
         GameManager.instance.BackButton();
     }
 
-  
+    public void OnButtonClicked()
+    {
+        AudioManager.instance.Play("Menu_Selection");
+    }
+
     public void onQuit()
     {
 #if !UNITY_EDITOR

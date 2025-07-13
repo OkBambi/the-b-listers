@@ -26,46 +26,67 @@ public class EnemyInfoManager : MonoBehaviour
     void ShowPanel(GameObject panelToShow)
     {
         //deactivate the currently active panel, if any
-        if (currentActivePanel != null)
-        {
-            currentActivePanel.SetActive(false);
-        }
+        //if (currentActivePanel != null)
+        //{
+        //    currentActivePanel.SetActive(false);
+        //}
 
         //activates the new panel
         if (panelToShow != null)
         {
+            //currentActivePanel.SetActive(false);
+            HideAllPanels();
             panelToShow.SetActive(true);
             currentActivePanel = panelToShow;   //updates the active panel tracker
         }
+    }
+    public void HideAllPanels()
+    {
+        monolithInfoPanel.SetActive(false);
+        boidsInfoPanel.SetActive(false);
+        angryBoidsInfoPanel.SetActive(false);
+        stopwatchInfoPanel.SetActive(false);
+        monkInfoPanel.SetActive(false);
+        snakeInfoPanel.SetActive(false);
+        goliathInfoPanel.SetActive(false);
     }
 
     //public methods that will because by button clicks
     public void OnMonolithButtonClicked()
     {
+        //currentActivePanel = monolithInfoPanel;
         ShowPanel(monolithInfoPanel);
     }
     public void OnBoidsButtonClicked()
     {
+        //currentActivePanel = boidsInfoPanel;
         ShowPanel(boidsInfoPanel);
     }
     public void OnAngryBoidsButtonClicked()
     {
+        //currentActivePanel = angryBoidsInfoPanel;
         ShowPanel(angryBoidsInfoPanel);
     }
     public void OnStopwatchButtonClicked()
     {
+        //currentActivePanel = stopwatchInfoPanel;
         ShowPanel(stopwatchInfoPanel);
     }
     public void OnMonkButtonClicked()
     {
+        //currentActivePanel = monkInfoPanel;
         ShowPanel(monkInfoPanel);
     }
     public void OnSnakeButtonClicked()
     {
+        //currentActivePanel = snakeInfoPanel;
         ShowPanel(snakeInfoPanel);
     }
     public void OnGoliathButtonClicked()
     {
+        //currentActivePanel = goliathInfoPanel;
         ShowPanel(goliathInfoPanel);
     }
+
+    
 }
