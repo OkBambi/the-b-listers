@@ -30,12 +30,12 @@ public class LevelModifierManager : MonoBehaviour
 
     //normal
     public bool boogieWoogie = false;
-    public bool enemyDrops = false;
-    public bool monkTaunt = false;
+    public bool shotgunOnly = false;
+    public bool rapidFireOnly = false;
 
     //easy
     public bool largerStage = false;
-    public bool reduceSpawnRate = false;
+    public bool lessHealth = false;
     public bool savingGrace = false;
 
     private void Awake()
@@ -98,12 +98,14 @@ public class LevelModifierManager : MonoBehaviour
         lowEnemyCooldowns = false;
         smallFastEnemies = false;
 
+        //
         boogieWoogie = false;
-        enemyDrops = false;
-        monkTaunt = false;
+
+        shotgunOnly = false;
+        rapidFireOnly = false;
 
         largerStage = false;
-        reduceSpawnRate = false;
+        lessHealth = false;
         savingGrace = false;
 
     }
@@ -264,28 +266,28 @@ public class LevelModifierManager : MonoBehaviour
     {
         boogieWoogie = true;
     }
-    public void EnemyDrop()
+    public void ShotgunOnly()
     {
-        enemyDrops = true;
+        shotgunOnly = true;
     }
 
-    public void MonkTaunt()
+    public void RapidfireOnly()
     {
-        monkTaunt = true;
-        GameManager.instance.playerScript.canColor = false;
+        rapidFireOnly = true;
     }
     #endregion
 
 
     #region Easy
+
     public void LargerStage()
     {
         largerStage = true;
     }
 
-    public void ReduceSpawnRate()
+    public void LessHealth()
     {
-        reduceSpawnRate = true;
+        lessHealth = true;
     }
 
     public void SavingGrace()
