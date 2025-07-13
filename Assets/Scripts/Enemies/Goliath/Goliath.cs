@@ -165,6 +165,7 @@ public class Goliath : EnemyBase
             {
                 currentState = State.Swimming;
                 goliathHitLocation.GetComponent<Renderer>().enabled = false;
+                goliathHitLocation.transform.position = Vector3.zero;
             }
         }        
     }
