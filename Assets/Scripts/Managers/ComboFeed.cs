@@ -18,11 +18,12 @@ public class ComboFeed : MonoBehaviour
     [SerializeField] TextMeshProUGUI finalScoreText;
     [SerializeField] int maxFeedLength;
     [SerializeField] float endFeedSpeed;
-    [SerializeField] float timeToWaitBeforeHighscores;
+    [SerializeField] float timeToWaitBeforeHighScores;
 
 
     [SerializeField] TextMeshProUGUI playerKilledText;
     private Queue<GameObject> currentFeedList = new Queue<GameObject>();
+    private Queue<GameObject> currentFinalFeedList = new Queue<GameObject>();
     private List<string> finalFeedList = new List<string>();
     private List<float> finalScoreList = new List<float>();
     private static float finalScore;
@@ -43,7 +44,6 @@ public class ComboFeed : MonoBehaviour
 
     private void AddToQueue(GameObject _newScoreFeed, float _score)
     {
-        
         currentFeedList.Enqueue(_newScoreFeed);
         finalScoreList.Add(_score);
         finalFeedList.Add(_newScoreFeed.GetComponent<FeedListing>().GetScoreAndHow());
@@ -71,12 +71,17 @@ public class ComboFeed : MonoBehaviour
             finalScore += finalScoreList[i];
             finalScoreText.text = finalScore.ToString();
 
+            currentFinalFeedList.Enqueue(newScoreFeed);
+            if (currentFinalFeedList.Count > maxFeedLength - 6)
+            {
+                Destroy(currentFinalFeedList.Dequeue());
+            }
 
             yield return new WaitForSecondsRealtime(endFeedSpeed);
         }
 
         //clear screen for highscore
-        yield return new WaitForSecondsRealtime(timeToWaitBeforeHighscores);
+        yield return new WaitForSecondsRealtime(timeToWaitBeforeHighScores);
         //check for highscore then saves if found
         if (GameManager.instance.player.GetComponentInParent<Player>().isDead)
         {
