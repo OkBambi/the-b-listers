@@ -218,6 +218,9 @@ public class LevelModifierManager : MonoBehaviour
     public void ShowCardUI()
     {
         GameManager.instance.statePause();
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         GameManager.instance.MenuActive = modifierCardSelectionUI;
         modifierCardSelectionUI.SetActive(true);
 
