@@ -35,8 +35,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] public GameObject stage;
 
     //and we have a spawn limit on the enemies
-    [SerializeField] int AEC;
-    [SerializeField] int currentEC;
+    [SerializeField] public int AEC;
+    [SerializeField] public int currentEC;
 
     //boids do not count towards AEC, but every other enemy counts as one AEC
     //we will also have a ticker that tracks the number of enemy kills.
@@ -128,7 +128,6 @@ public class EnemyManager : MonoBehaviour
 
         Vector3 spawnLocation = new Vector3(0, 6f, 15f);
 
-
         //retry in one second if theres no good spots right now
         if (spawnLocation == Vector3.zero)
         {
@@ -171,6 +170,11 @@ public class EnemyManager : MonoBehaviour
             ++spawnIndex;
         else
             spawnIndex = 0;
+
+        for (int tempEC = 1; tempEC < AEC; ++tempEC )
+        {
+            SpawnEnemy();
+        }
     }
 
     public void SpawnEnemy()
@@ -200,15 +204,24 @@ public class EnemyManager : MonoBehaviour
             case "Monolith_Enemy":
                 sp.enemyMesh = enemyMeshList[0];
                 sp.SetMesh(enemyMeshList[0]);
-                sp.modelFrame.transform.localScale = new Vector3(220f, 100f, 450f);
-                sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, UnityEngine.Random.Range(0, 360), 0);
+                sp.modelFrame.transform.localScale = new Vector3(162f, 67f, 322f);
+                sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 180f);
+                break;
+            case "StopWatch":
+                sp.enemyMesh = enemyMeshList[1];
+                sp.SetMesh(enemyMeshList[1]);
+                break;
+            case "Monk_Enemy":
+                sp.enemyMesh = enemyMeshList[2];
+                sp.SetMesh(enemyMeshList[2]);
+                sp.modelFrame.transform.localScale = new Vector3(20f, 20f, 20f);
+                sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
                 break;
             case "Snake":
-                //sp.enemyMesh = enemyMeshList[0];
-                //sp.SetMesh(enemyMeshList[0]);
-                //sp.modelFrame.transform.localScale = new Vector3(220f, 100f, 450f);
-                //sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, UnityEngine.Random.Range(0, 360), 0);
-                sp.transform.position -= new Vector3(0f, -0.5f, 0f);
+                sp.enemyMesh = enemyMeshList[3];
+                sp.SetMesh(enemyMeshList[3]);
+                //sp.modelFrame.transform.localScale = new Vector3(162f, 67f, 322f);
+                //sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 180f);
                 break;
         }
 
