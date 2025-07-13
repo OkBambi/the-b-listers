@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyBase : MonoBehaviour, IDamage
 {
@@ -20,6 +21,9 @@ public class EnemyBase : MonoBehaviour, IDamage
     public int hp;
     public int score = 50;
     protected bool isAlive = true;
+
+    public Image bossHPBar;
+    public float bossHPOrig;
 
 
 
@@ -122,11 +126,15 @@ public class EnemyBase : MonoBehaviour, IDamage
                 DeathCheck();
 
             //flash white
-            StartCoroutine(Flash());
-            if(gameObject.name != "Goliath")
+            if (gameObject.name != "Goliath")
             {
+                StartCoroutine(Flash());
                 StartCoroutine(ShakePos(0.2f, 0.5f));
                 StartCoroutine(ShakeSize(0.2f, 0.1f));
+            }
+            else
+            {
+                updateBossHPBar();
             }
 
             if (hitVfx)
@@ -145,6 +153,10 @@ public class EnemyBase : MonoBehaviour, IDamage
             OnAECDestroy();
             RemoveSelfFromTargetList();
             AudioManager.instance.Play("Enemy_Death");
+            if(gameObject.name == "Goliath")
+            {
+                GameManager.instance.OnEndCondition();
+            }
             Destroy(gameObject);
             return;
         }
@@ -243,5 +255,10 @@ public class EnemyBase : MonoBehaviour, IDamage
         }
 
         ParticleManager.instance.colorParticles.Play();
+    }
+
+    public void updateBossHPBar()
+    {
+        bossHPBar.fillAmount = hp / bossHPOrig;
     }
 }

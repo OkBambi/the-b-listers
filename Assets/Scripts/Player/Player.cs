@@ -116,6 +116,7 @@ public class Player : MonoBehaviour, IColorLock
         yield return new WaitForSeconds(duration);
         canColor = true;
     }
+  
 }
 
 //enum of primary colors

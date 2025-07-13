@@ -57,9 +57,11 @@ public class Dagger : MonoBehaviour
             {
                 //HIT EM
                 dmg.takeDamage(projColor, 1);
+                Destroy(gameObject);
             }
         }
 
         lastPos = transform.position;
+        
     }
 }
