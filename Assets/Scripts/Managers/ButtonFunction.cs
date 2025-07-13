@@ -77,7 +77,7 @@ public class ButtonFunction : MonoBehaviour
 
     public void OnButtonClicked()
     {
-        AudioManager.instance.Play("Menu_Selection");
+        AudioManager.instance.Play("Menu_Button_Click");
     }
 
     public void onQuit()
