@@ -249,7 +249,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case "Level_2":
-                AudioManager.instance.Play("Level 2");
+                AudioManager.instance.Play("Level_2");
                 break;
 
             case "Level_3":
@@ -257,7 +257,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case "Level_4":
-                AudioManager.instance.Play("Level4");
+                AudioManager.instance.Play("Level_4");
                 break;
 
             case "Bonus_Level":
