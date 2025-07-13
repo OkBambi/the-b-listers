@@ -37,12 +37,6 @@ public class SettingsManager : MonoBehaviour
         FOVSlider slider = FindFirstObjectByType<FOVSlider>(FindObjectsInactive.Include);
         slider.SetFOV(GetFOV());
 
-        //will need to be reworked because FindWithTag doesn't work on inactive objects
-        FindFirstObjectByType<ReducedCameraShake_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisReducedCameraShake();
-
-        FindFirstObjectByType<ButtonFunction>(FindObjectsInactive.Exclude).GetComponent<ButtonFunction>().ontoggleArcade(GetisArcadeFilter());
-        //FindFirstObjectByType<PixelCamera_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisArcadeFilter();
-
         SettingsMenu settingsMenu = FindFirstObjectByType<SettingsMenu>(FindObjectsInactive.Include);
 
         settingsMenu.SetResolution(Screen.resolutions[GetResolution()]);
@@ -55,6 +49,16 @@ public class SettingsManager : MonoBehaviour
 
         settingsMenu.SetMusic(GetMusicVolume());
 
+        //will need to be reworked because FindWithTag doesn't work on inactive objects
+        FindFirstObjectByType<ReducedCameraShake_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisReducedCameraShake();
+
+        FindFirstObjectByType<ButtonFunction>(FindObjectsInactive.Exclude).GetComponent<ButtonFunction>().ontoggleArcade(GetisArcadeFilter());
+        //FindFirstObjectByType<PixelCamera_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisArcadeFilter();
+
+        FindFirstObjectByType<InvertY_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisInvertY();
+        ApplyInvertY();
+
+        settingsMenu.SetMouseSensitivity(GetmouseSensitivity());
 
         ////Resolution
         //Dropdown dropDown = GameObject.FindWithTag("Resolution").GetComponent<Dropdown>();
@@ -188,7 +192,7 @@ public class SettingsManager : MonoBehaviour
     #region isInvertY
     public bool GetisInvertY()
     {
-        return settings.isReducedCameraShake;
+        return settings.isInvertY;
     }
     public void SetisInvertY(bool _isInvertY)
     {
@@ -281,7 +285,7 @@ public class SettingsManager : MonoBehaviour
     }
     #endregion
 
-    #region mouseSensitivity
+    #region MouseSensitivity
     public float GetmouseSensitivity()
     {
         return settings.mouseSensitivity;
@@ -297,5 +301,9 @@ public class SettingsManager : MonoBehaviour
     }
     #endregion
 
-
+    public void ApplyInvertY()
+    {
+        //Debug.Log(GetisInvertY());
+        GameManager.instance.playerScript.GetComponentInChildren<PlayerCamera>().invertY = GetisInvertY();
+    }
 }

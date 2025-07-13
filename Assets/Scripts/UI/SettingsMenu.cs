@@ -15,6 +15,8 @@ public class SettingsMenu : MonoBehaviour
     public TextMeshProUGUI sfxText;
     public Slider musicSlider;
     public TextMeshProUGUI musicText;
+    public Slider mouseSensitivitySlider;
+    public TextMeshProUGUI mouseSensitivityText;
 
 
     //res stuff
@@ -24,8 +26,8 @@ public class SettingsMenu : MonoBehaviour
     public TMP_Dropdown quality;
     public TMP_Dropdown window;
 
-    public TMP_Dropdown colourBlindness;
-    [Inspectable] public List<ColourBlindnessPreset> colorPresets;
+    //public TMP_Dropdown colourBlindness;
+    //[Inspectable] public List<ColourBlindnessPreset> colorPresets;
 
     void Start()
     {
@@ -154,6 +156,24 @@ public class SettingsMenu : MonoBehaviour
         {
             musicSlider.value = (volume * 80f) - 80f;
             UpdateMusicText();
+        }
+    }
+
+    public void UpdateMouseSensitivityText()
+    {
+        if (mouseSensitivityText != null)
+        {
+            mouseSensitivityText.text = (mouseSensitivitySlider.value * 100f).ToString("F0") + "%";
+        }
+        GameManager.instance.playerScript.GetComponentInChildren<PlayerCamera>().sens = mouseSensitivitySlider.value;
+    }
+
+    public void SetMouseSensitivity(float sensitivity)
+    {
+        if (mouseSensitivitySlider != null)
+        {
+            mouseSensitivitySlider.value = sensitivity;
+            UpdateMouseSensitivityText();
         }
     }
 
