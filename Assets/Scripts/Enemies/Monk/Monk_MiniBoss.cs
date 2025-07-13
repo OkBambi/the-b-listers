@@ -11,7 +11,7 @@ public class Monk_MiniBoss : EnemyBase
 
     [SerializeField] PrimaryColor PrimaryColor;
     [SerializeField] int ColorChangeIndex;
-    [SerializeField] private LockColorChange chainUI;
+    [SerializeField] private LockColorChangeMonk_boss chainUI;
     Monk MonkBoss;
 
     private PrimaryColor[] colorRoutine = { PrimaryColor.RED, PrimaryColor.BLUE, PrimaryColor.YELLOW };
@@ -28,10 +28,10 @@ public class Monk_MiniBoss : EnemyBase
     float waveGrowthTimer = 0;
 
     [SerializeField] float initialDelay;
-    [SerializeField] float middleDelay;
-    [SerializeField] float ResetTimer;
+    [SerializeField] float CastingDelay;
 
- [SerializeField] float StopTime;
+
+    [SerializeField] float StopTime;
     float roamTimer;
 
 
@@ -41,18 +41,18 @@ public class Monk_MiniBoss : EnemyBase
     {
         OnAECAwake();
         RandomizeColor();
-        agent = GetComponent<NavMeshAgent>();
-        MonkBoss = GetComponent<Monk>();
-        chainUI = FindFirstObjectByType<LockColorChange>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
-        startingPOS = transform.position;
+        agent = GetComponent<NavMeshAgent>();
+
+        chainUI = FindFirstObjectByType<LockColorChangeMonk_boss>();
         ColorSelection(setColor);
 
-        colorOriginal = MonkBoss.model.material.color;
+        colorOriginal = model.material.color;
+
         if (Wave != null)
         {
             waveSizeOriginal = Wave.transform.localScale;
@@ -72,26 +72,29 @@ public class Monk_MiniBoss : EnemyBase
             Quaternion rot = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
         }
-
+        if (!isCasting)
+        {
+            StartCoroutine(Cast());
+        }
     }
     //casting
-    IEnumerator Cast(PrimaryColor waveColor)
+    IEnumerator Cast()
     {
         isCasting = true;
 
+        yield return new WaitForSeconds(CastingDelay);
         for (int i = 0; i < 2; i++)
         {
             AudioManager.instance.Play("Monk_Blinker");
             model.material.color = Color.white;
             yield return new WaitForSeconds(0.05f);
-            model.material.color = colorOriginal;
+            ColorSelection(setColor);
             yield return new WaitForSeconds(0.05f);
         }
         AudioManager.instance.Play("Monk_Cast");
 
         yield return new WaitForSeconds(0.20f);
         Wave.SetActive(true);
-        Wave.transform.localScale = Vector3.zero;
         waveGrowthTimer = 0;
         while (waveGrowthTimer < waveGrowthSpeed)
         {
@@ -101,31 +104,25 @@ public class Monk_MiniBoss : EnemyBase
             yield return null;
         }
         Wave.transform.localScale = waveSizeOriginal;
-
+       
         isCasting = false;
     }
     //casting
 
     IEnumerator ChangeColors()
     {
-        yield return new WaitForSeconds(initialDelay);
-
         while (true)
         {
-            yield return StartCoroutine(Cast(colorRoutine[ColorChangeIndex]));
-
-            yield return new WaitForSeconds(middleDelay);
-
-            ColorChangeIndex = (ColorChangeIndex + 1) % colorRoutine.Length;
-            PrimaryColor newColor = colorRoutine[ColorChangeIndex];
-            MonkBoss.setColor = newColor;
-            MonkBoss.ColorSelection(newColor);
-            chainUI.SwapChainColor(newColor);
-            yield return StartCoroutine(Cast(newColor));
-
-            yield return new WaitForSeconds(ResetTimer);
+            //change color
+            setColor = colorRoutine[currenColor];
+            currenColor = (currenColor + 1) % colorRoutine.Length;
+            ColorSelection(setColor);
+            colorOriginal = model.material.color;
+            chainUI.SwapChainColor(setColor);
+            yield return new WaitForSeconds(initialDelay);
         }
     }
+
 }
 
 
