@@ -10,7 +10,7 @@ public class LevelModifier : ScriptableObject
     [Tooltip("This is the field that will be read for processing when randomizing modifiers")]
     public string modifierName;
     public string functionName;
-    [SerializeField] Image modifierIcon;
+    [SerializeField] public Sprite modifierIcon;
     [TextArea] public string description;
 
 }

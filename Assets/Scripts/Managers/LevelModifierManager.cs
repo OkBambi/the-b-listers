@@ -16,6 +16,10 @@ public class LevelModifierManager : MonoBehaviour
     [SerializeField] List<TextMeshProUGUI> card2Texts;
     [SerializeField] List<TextMeshProUGUI> card3Texts;
 
+    [SerializeField] Image card1Icon;
+    [SerializeField] Image card2Icon;
+    [SerializeField] Image card3Icon;
+
     [Inspectable] public List<LevelModifier> modifiers;
 
     [SerializeField] DifficultyObject difficulty;
@@ -207,6 +211,10 @@ public class LevelModifierManager : MonoBehaviour
         card3Texts[0].text = modifiers[2].modifierName;
         card3Texts[1].text = modifiers[2].functionName;
         card3Texts[2].text = modifiers[2].description;
+
+        card1Icon.sprite = modifiers[0].modifierIcon;
+        card2Icon.sprite = modifiers[1].modifierIcon;
+        card3Icon.sprite = modifiers[2].modifierIcon;
         //Card1.icon = modifiers[0].icon;
         //Card2.icon = modifiers[0].icon;
         //Card3.icon = modifiers[0].icon;
