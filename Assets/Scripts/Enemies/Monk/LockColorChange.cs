@@ -16,7 +16,7 @@ public class LockColorChange : MonoBehaviour
 
     void Start()
     {  
-            primaryColor = monk_mini.setColor;
+            primaryColor = MonkPrimary.setColor;
             //find ColorSwapping Script in scene
             ChangeColor = FindFirstObjectByType<ColorSwapping>();
         //Find the object with chain marker script on the scene
