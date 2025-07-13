@@ -1282,6 +1282,17 @@ MonoBehaviour:
   rotationSpeed: 0.5
   bobSpeed: 0
   amplitude: 0
+--- !u!114 &2112199294 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5676086157320398890, guid: 5021a8e7e148bd34295b5041db8b2c34, type: 3}
+  m_PrefabInstance: {fileID: 1665043154}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &543450651613830865
 Transform:
   m_ObjectHideFlags: 0
@@ -1361,6 +1372,10 @@ PrefabInstance:
       propertyPath: map
       value: 
       objectReference: {fileID: 8513859188497356809}
+    - target: {fileID: 4659325182028693950, guid: 22d2110474f111e4e846c8930368406f, type: 3}
+      propertyPath: bossHPBar
+      value: 
+      objectReference: {fileID: 2112199294}
     - target: {fileID: 4659325182028693950, guid: 22d2110474f111e4e846c8930368406f, type: 3}
       propertyPath: goliathHitLocation
       value: 
