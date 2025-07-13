@@ -78,13 +78,21 @@ public class ComboFeed : MonoBehaviour
         //clear screen for highscore
         yield return new WaitForSecondsRealtime(timeToWaitBeforeHighscores);
         //check for highscore then saves if found
-        if(HighScoreManager.theInstance.SaveIfHighScore())
+        if (GameManager.instance.player.GetComponentInParent<Player>().isDead)
         {
-            GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().NewHighScore();
+            if (HighScoreManager.theInstance.SaveIfHighScore())
+            {
+                GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().NewHighScore();
+            }
+            GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().LoseEndScreen();
+            finalScoreText.text = "";
+            playerKilledText.text = "";
+            HighScoreManager.theInstance.DisplayHighScoreTable();
         }
-        finalScoreText.text = "";
-        playerKilledText.text = "";
-        HighScoreManager.theInstance.DisplayHighScoreTable();
+        else
+        {
+            GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().NextStageEndScreen();
+        }
     }
 
     public void PlayerWasKilledBy(string killer)

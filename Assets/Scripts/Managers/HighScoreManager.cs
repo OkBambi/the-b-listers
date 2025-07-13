@@ -19,16 +19,10 @@ public class HighScoreManager : MonoBehaviour
     void Start()
     {
         theInstance = this;
-        ClearHighScores();
     }
 
     public void SaveHighScore(int newHighScore, int location, string userName)
     {
-        //List<int> highScores = GetHighScores();
-        //highScores.Add(newHighScore);
-        
-        //highScores = highScores.OrderByDescending(s => s).Take(maxHighScores).ToList();
-
         //shuffes everything else into order
         for (int index = location ; index < maxHighScores; index++)
         {

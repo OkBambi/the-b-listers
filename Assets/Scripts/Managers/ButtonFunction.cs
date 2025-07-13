@@ -20,7 +20,6 @@ public class ButtonFunction : MonoBehaviour
         Debug.Log("Reloading State...");
         GameManager.instance.stateUnPause();
         SceneManager.LoadScene(0);
-
     }
     public void onSettings()
     {

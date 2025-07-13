@@ -2468,7 +2468,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5713450046009948859}
+        m_TargetAssemblyTypeName: HighScoreManager, Assembly-CSharp
+        m_MethodName: SaveName
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4963,7 +4975,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9093637187599360220
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10333,6 +10345,7 @@ MonoBehaviour:
   tryAgainButton: {fileID: 2219253502291368727}
   nextStageButton: {fileID: 4570833360888958876}
   highScoreTable: {fileID: 1807696940002700191}
+  nameForNewScore: {fileID: 1117416226909170590}
 --- !u!1 &4536452552566938930
 GameObject:
   m_ObjectHideFlags: 0
@@ -10717,7 +10730,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7482719998417818484
 RectTransform:
   m_ObjectHideFlags: 0

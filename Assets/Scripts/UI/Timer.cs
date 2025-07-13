@@ -28,7 +28,6 @@ public class Timer : MonoBehaviour
         {
             timeRemainingInSeconds = 0;
             GameManager.instance.OnEndCondition();
-            GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().NextStageEndScreen();
         }
 
         minutes = Mathf.FloorToInt(timeRemainingInSeconds / 60);
