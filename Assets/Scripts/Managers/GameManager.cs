@@ -230,12 +230,10 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ExitChainScreen(int timer)
     {
-        Debug.Log("BEFORE EXIT CHAIN SCREEN TRIGGER");
         yield return new WaitForSeconds(timer);
         AudioManager.instance.Play("Monk_Wave_End");
       unlockedMarker.gameObject.SetActive(true);
         lockMarker.gameObject.SetActive(false);
-        Debug.Log("IVE GONE THROUGH IT, IT SHOULD WORK");
     }
 
     public void PlayLevelMusic()

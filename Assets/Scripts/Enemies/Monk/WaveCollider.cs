@@ -3,10 +3,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WaveColorLockMonk : MonoBehaviour
+public class WaveCollider : MonoBehaviour
 {
     [SerializeField] public int ColorLockTimer;
-    [SerializeField] LockColorChange LockColorChange;
+    [SerializeField] ChainUIMonk LockColorChange;
 
     [Header("BoogieWoogie")]
     [SerializeField] float ShockTime;

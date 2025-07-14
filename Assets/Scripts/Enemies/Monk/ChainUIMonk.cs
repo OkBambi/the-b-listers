@@ -2,14 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-public class LockColorChange : MonoBehaviour
+public class ChainUIMonk : MonoBehaviour
 {
     [SerializeField] Monk monk;
     [SerializeField] ChainMarker[] ChainToggleables;
     //[SerializeField] RawImage[] ChainImageArray;
     [SerializeField] PrimaryColor primaryColor;
     [SerializeField] ColorSwapping ChangeColor;
-    [SerializeField] WaveColorLockMonk ColorLockMonk;
+    [SerializeField] ChainUIMonk ColorLockMonk;
 
     //[SerializeField] RawImage locks;
     //[SerializeField] RawImage unlocks;
