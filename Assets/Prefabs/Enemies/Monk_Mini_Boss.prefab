@@ -103,7 +103,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monkBoss: {fileID: 679301647414257552}
   ChainToggleables: []
-  ChainImageArray: []
   primaryColor: 0
   ChangeColor: {fileID: 0}
   ColorLockMonk: {fileID: 465194171210896895}
@@ -133,10 +132,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2560
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
