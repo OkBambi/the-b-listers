@@ -12,9 +12,15 @@ public class WaveCollider : MonoBehaviour
     [SerializeField] float ShockTime;
     [SerializeField] float LaunchHight;
     private PrimaryColor waveColor;
+    [SerializeField]
+    private ChainUIMonkBoss chainUI;
+
+    [SerializeField] Monk_MiniBoss MMB;
+    
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (LevelModifierManager.instance.boogieWoogie)
         {
             Debug.Log("Player hit by shock wave!");
@@ -26,14 +32,19 @@ public class WaveCollider : MonoBehaviour
         }
         else
         {
-            Debug.Log("TRIGGER ENTERED");
+            if (MMB != null)
+            {
+                chainUI.SwapChainColor(MMB.setColor);
+            }
+
             Debug.Log(other.name);
             IColorLock colorLock = GameManager.instance.playerScript.GetComponent<IColorLock>();
             if (colorLock != null)
             {
                 colorLock.LockColorSelection(ColorLockTimer);
+
             }
-            
+
 
             GameManager.instance.ChainScreen(ColorLockTimer);
         }
