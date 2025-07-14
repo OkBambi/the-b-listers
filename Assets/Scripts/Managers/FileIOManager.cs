@@ -6,7 +6,7 @@ public class FileIOManager : MonoBehaviour
     //quick fix pls ty google
     public static FileIOManager instance;
     public SettingsObject settings;
-    public static string SavePath => Application.dataPath + "/savefile.json";
+    public static string SavePath => Application.persistentDataPath + "/savefile.json";
 
     private void Awake()
     {
@@ -17,7 +17,7 @@ public class FileIOManager : MonoBehaviour
     {
         string json = JsonUtility.ToJson(settings);
         File.WriteAllText(SavePath, json);
-        //Debug.Log("Data saved to: " + SavePath);
+        Debug.Log("Data saved to: " + SavePath);
     }
 
     public void LoadData()
@@ -26,11 +26,11 @@ public class FileIOManager : MonoBehaviour
         {
             string json = File.ReadAllText(SavePath);
             JsonUtility.FromJsonOverwrite(json, settings);
-            //Debug.Log("Data loaded from: " + SavePath);
+            Debug.Log("Data loaded from: " + SavePath);
         }
         else
         {
-            Debug.Log("No save file found at: " + SavePath);
+            SaveData();
         }
     }
 }
