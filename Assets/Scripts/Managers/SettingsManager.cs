@@ -34,6 +34,8 @@ public class SettingsManager : MonoBehaviour
             mainCamera = FindFirstObjectByType<MainCamera_Marker>(FindObjectsInactive.Include).GetComponent<Camera>();
             pixelCamera = FindFirstObjectByType<PixelCamera_Marker>(FindObjectsInactive.Include).GetComponent<Camera>();
         }
+
+        FileIOManager.instance.LoadData();
     }
 
     private void Start()
@@ -124,10 +126,12 @@ public class SettingsManager : MonoBehaviour
             if (Screen.resolutions[resIndex].Equals(_resolution))
                 settings.resolution = resIndex;
         }
+        FileIOManager.instance.SaveData();
     }
     public void SetResolution(TMP_Dropdown _resolution)
     {
         settings.resolution = _resolution.value;
+        FileIOManager.instance.SaveData();
     }
     #endregion
 
@@ -143,10 +147,12 @@ public class SettingsManager : MonoBehaviour
     public void SetQuality(int _quality)
     {
         settings.quality = _quality;
+        FileIOManager.instance.SaveData();
     }
     public void SetQuality(TMP_Dropdown _quality)
     {
         settings.quality = _quality.value;
+        FileIOManager.instance.SaveData();
     }
     #endregion
 
@@ -158,10 +164,12 @@ public class SettingsManager : MonoBehaviour
     public void SetWindowType(FullScreenMode _windowType)
     {
         settings.windowType = _windowType;
+        FileIOManager.instance.SaveData();
     }
     public void SetWindowType(TMP_Dropdown _windowType)
     {
         settings.windowType = (FullScreenMode)_windowType.value;
+        FileIOManager.instance.SaveData();
     }
     #endregion
 
@@ -173,11 +181,13 @@ public class SettingsManager : MonoBehaviour
     public void SetFOV(int _FOV)
     {
         settings.FOV = _FOV;
+        FileIOManager.instance.SaveData();
     }
 
     public void SetFOV(Slider _FOV)
     {
         settings.FOV = (int)_FOV.value;
+        FileIOManager.instance.SaveData();
     }
     #endregion
 
@@ -189,11 +199,13 @@ public class SettingsManager : MonoBehaviour
     public void SetisReducedCameraShake(bool _isReducedCameraShake)
     {
         settings.isReducedCameraShake = _isReducedCameraShake;
+        FileIOManager.instance.SaveData();
     }
 
     public void SetisReducedCameraShake(Toggle _isReducedCameraShake)
     {
         settings.isReducedCameraShake = _isReducedCameraShake.isOn;
+        FileIOManager.instance.SaveData();
     }
     #endregion
 
@@ -205,11 +217,13 @@ public class SettingsManager : MonoBehaviour
     public void SetisInvertY(bool _isInvertY)
     {
         settings.isInvertY = _isInvertY;
+        FileIOManager.instance.SaveData();
     }
 
     public void SetisInvertY(Toggle _isInvertY)
     {
         settings.isInvertY = _isInvertY.isOn;
+        FileIOManager.instance.SaveData();
     }
     #endregion
 
@@ -221,11 +235,13 @@ public class SettingsManager : MonoBehaviour
     public void SetisArcadeFilter(bool _isArcadeFilter)
     {
         settings.isArcadeFilter = _isArcadeFilter;
+        FileIOManager.instance.SaveData();
     }
 
     public void SetisArcadeFilter(Toggle _isArcadeFilter)
     {
         settings.isArcadeFilter = _isArcadeFilter.isOn;
+        FileIOManager.instance.SaveData();
     }
     #endregion
 
@@ -269,11 +285,13 @@ public class SettingsManager : MonoBehaviour
     public void SetSFXVolume(float _SFXVolume)
     {
         settings.SFXVolume = _SFXVolume;
+        FileIOManager.instance.SaveData();
     }
 
     public void SetSFXVolume(Slider _SFXVolume)
     {
         settings.SFXVolume = (_SFXVolume.value + 80f) / 80f;
+        FileIOManager.instance.SaveData();
     }
     #endregion
 
@@ -285,11 +303,13 @@ public class SettingsManager : MonoBehaviour
     public void SetMusicVolume(float _MusicVolume)
     {
         settings.MusicVolume = _MusicVolume;
+        FileIOManager.instance.SaveData();
     }
 
     public void SetMusicVolume(Slider _MusicVolume)
     {
         settings.MusicVolume = (_MusicVolume.value + 80f) / 80f;
+        FileIOManager.instance.SaveData();
     }
     #endregion
 
@@ -301,11 +321,13 @@ public class SettingsManager : MonoBehaviour
     public void SetmouseSensitivity(float _mouseSensitivity)
     {
         settings.mouseSensitivity = _mouseSensitivity;
+        FileIOManager.instance.SaveData();
     }
 
     public void SetmouseSensitivity(Slider _mouseSensitivity)
     {
         settings.mouseSensitivity = _mouseSensitivity.value;
+        FileIOManager.instance.SaveData();
     }
     #endregion
 
