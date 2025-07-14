@@ -116,11 +116,11 @@ public class Monk_MiniBoss : EnemyBase
             //change color
             setColor = colorRoutine[currenColor];
             currenColor = (currenColor + 1) % colorRoutine.Length;
-            ColorSelection(setColor);
+        //    ColorSelection(setColor);
 
-            colorOriginal = model.material.color;
-            chainUI.SwapChainColor(setColor);
-            yield return new WaitForSeconds(initialDelay);
+        //    colorOriginal = model.material.color;
+        //    chainUI.SwapChainColor(setColor);
+           yield return new WaitForSeconds(initialDelay);
         }
     }
 
