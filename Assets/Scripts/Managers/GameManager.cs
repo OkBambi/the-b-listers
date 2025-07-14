@@ -36,8 +36,8 @@ public class GameManager : MonoBehaviour
     //chain ui
     [Space]
     [Header("ChainUI")]
-    [SerializeField] WaveColorLockMonk ColorLockTimer;
-    [SerializeField] LockColorChange LockColorChange;
+    [SerializeField] WaveCollider ColorLockTimer;
+    [SerializeField] ChainUIMonk LockColorChange;
     public RawImage lockMarker;
     public RawImage unlockedMarker;
 

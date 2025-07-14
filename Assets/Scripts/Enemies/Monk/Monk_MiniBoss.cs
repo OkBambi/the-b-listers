@@ -11,7 +11,7 @@ public class Monk_MiniBoss : EnemyBase
 
     [SerializeField] PrimaryColor PrimaryColor;
     [SerializeField] int ColorChangeIndex;
-    [SerializeField] private LockColorChangeMonk_boss chainUI;
+    [SerializeField] private ChainUIMonkBoss chainUI;
     Monk MonkBoss;
 
     private PrimaryColor[] colorRoutine = { PrimaryColor.RED, PrimaryColor.BLUE, PrimaryColor.YELLOW };
@@ -48,7 +48,7 @@ public class Monk_MiniBoss : EnemyBase
     {
         agent = GetComponent<NavMeshAgent>();
 
-        chainUI = FindFirstObjectByType<LockColorChangeMonk_boss>();
+        chainUI = FindFirstObjectByType<ChainUIMonkBoss>();
         ColorSelection(setColor);
 
         colorOriginal = model.material.color;

@@ -13,7 +13,7 @@ public class stopWatchShockWave : MonoBehaviour
 
     [Header("BoogieWoogie")]
     [SerializeField] public int ColorLockTimer;
-    [SerializeField] LockColorChange ChainUIColor;
+    [SerializeField]  ChainUIStopWatch ChainUIColor;
 
     private PrimaryColor ShockColor;
 
@@ -21,7 +21,7 @@ public class stopWatchShockWave : MonoBehaviour
 
     private void Awake()
     {
-        ChainUIColor = GetComponent<LockColorChange>();
+        ChainUIColor = GetComponent<ChainUIStopWatch>();
     }
 
     void Start()
