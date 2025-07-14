@@ -20,6 +20,12 @@ public class HighScoreManager : MonoBehaviour
     void Start()
     {
         theInstance = this;
+        if (!PlayerPrefs.HasKey("MakeHighScoreTable"))
+        {
+            PlayerPrefs.SetInt("MakeHighScoreTable", 1);
+            ClearHighScores();
+            PlayerPrefs.Save();
+        }
         //ClearHighScores();
     }
 
