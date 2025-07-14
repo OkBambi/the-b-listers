@@ -41,6 +41,7 @@ public class AudioManager : MonoBehaviour
                 s.source.clip = s.clip;
                 s.source.volume = s.volume * SettingsManager.instance.GetSFXVolume();
                 s.source.pitch = s.pitch;
+                s.source.loop = s.looped;
             }
         }
 
@@ -51,10 +52,11 @@ public class AudioManager : MonoBehaviour
             s.source.clip = s.clip;
             s.source.volume = s.volume * SettingsManager.instance.GetMusicVolume();
             s.source.pitch = s.pitch;
+            s.source.loop = s.looped;
         }
     }
 
-    public void Play(string _name)
+    Sound SearchSound(string _name)
     {
         List<Sound[]> allSounds = new List<Sound[]>
         {
@@ -73,35 +75,57 @@ public class AudioManager : MonoBehaviour
             {
                 if (s.name == _name)
                 {
-                    s.source.Play();
+                    return s;
                 }
             }
+        }
+
+        return null;
+    }
+
+    public void Play(string _name)
+    {
+        Sound s = SearchSound(_name);
+        if (s != null)
+            s.source.Play();
+    }
+
+    public void Play(string _name, float _pitch)
+    {
+        Sound s = SearchSound(_name);
+        if (s != null)
+        {
+            s.source.pitch = _pitch;
+            s.source.Play();
+        }
+    }
+
+    public void Play(string _name, float _pitch, AudioSource _source)
+    {
+        Sound s = SearchSound(_name);
+        if (s != null)
+        {
+            s.source = _source;
+            s.source.pitch = _pitch;
+            s.source.Play();
+        }
+    }
+
+    public void Play(string _name, AudioSource _source)
+    {
+        Sound s = SearchSound(_name);
+        if (s != null)
+        {
+            s.source = _source;
+            s.source.Play();
         }
     }
 
     public void Stop(string _name)
     {
-        List<Sound[]> allSounds = new List<Sound[]>
-        {
-            PlayerSounds,
-            WeaponSounds,
-            SchmoveSounds,
-            UISounds,
-            EnemySounds,
-            WorldSounds,
-            Music
-        };
-
-        foreach (Sound[] array in allSounds)
-        {
-            foreach (Sound s in array)
-            {
-                if (s.name == _name)
-                {
-                    s.source.Stop();
-                }
-            }
-        }
+        Sound s = SearchSound(_name);
+        if (s != null)
+            s.source.Stop();
     }
 
     public void UpdateVFXVolume()
