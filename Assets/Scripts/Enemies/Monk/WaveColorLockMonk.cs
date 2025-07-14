@@ -27,6 +27,7 @@ public class WaveColorLockMonk : MonoBehaviour
         else
         {
             Debug.Log("TRIGGER ENTERED");
+            Debug.Log(other.name);
             IColorLock colorLock = GameManager.instance.playerScript.GetComponent<IColorLock>();
             if (colorLock != null)
             {
