@@ -38,8 +38,8 @@ public class GameManager : MonoBehaviour
     [Header("ChainUI")]
     [SerializeField] WaveColorLockMonk ColorLockTimer;
     [SerializeField] LockColorChange LockColorChange;
-    [SerializeField] ChainMarker lockMarker;
-    [SerializeField] ChainMarker unlockedMarker;
+    public RawImage lockMarker;
+    public RawImage unlockedMarker;
 
 
     void Awake()
@@ -60,14 +60,14 @@ public class GameManager : MonoBehaviour
 
 
 
-        lockMarker = GameObject.Find("ChainLock").GetComponent<ChainMarker>();
-        unlockedMarker = GameObject.Find("ChainUnlock").GetComponent<ChainMarker>();
+        //lockMarker = GameObject.Find("ChainLock").GetComponent<ChainMarker>();
+        //unlockedMarker = GameObject.Find("ChainUnlock").GetComponent<ChainMarker>();
 
-        lockMarker.gameObject.SetActive(false);
-        unlockedMarker.gameObject.SetActive(false);
+        //lockMarker.gameObject.SetActive(false);
+        //unlockedMarker.gameObject.SetActive(false);
 
-        lockMarker.AssignType(ChainType.Lock);
-        unlockedMarker.AssignType(ChainType.Unlock);
+        //lockMarker.AssignType(ChainType.Lock);
+        //unlockedMarker.AssignType(ChainType.Unlock);
 
 
         currentLevel = SceneManager.GetActiveScene();

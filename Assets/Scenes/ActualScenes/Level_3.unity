@@ -641,7 +641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152e0b49fb9e4fa40bc5bbc0925ae02b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chainType: 0
+  chainType: 1
 --- !u!1 &260631573
 GameObject:
   m_ObjectHideFlags: 0
@@ -2817,6 +2817,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monk_Mini_Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 6499282511719247565, guid: b1e1424a94b7f48439485450ea93395a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3085,6 +3089,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 466218795834014784, guid: 2ff37f62bb686324893e075301874d31, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 466218795834014784, guid: 2ff37f62bb686324893e075301874d31, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 466218795834014784, guid: 2ff37f62bb686324893e075301874d31, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 765095653579140490, guid: 2ff37f62bb686324893e075301874d31, type: 3}
       propertyPath: MainCamera
       value: 

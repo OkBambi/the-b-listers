@@ -1049,7 +1049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textForTimer: {fileID: 3418733906146754042}
-  timeRemainingInSeconds: 151
+  timeRemainingInSeconds: 181
   isCounting: 0
 --- !u!114 &3418733906146754042
 MonoBehaviour:
@@ -1071,7 +1071,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2:30
+  m_text: '3:00
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 71299bbdb7ddea74e89a529816d998a7, type: 2}
   m_sharedMaterial: {fileID: -3907019451045465018, guid: 71299bbdb7ddea74e89a529816d998a7, type: 2}
@@ -5334,7 +5336,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2018629127031736305
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16315,7 +16317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1402619208197878753
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24611,7 +24613,7 @@ PrefabInstance:
     - target: {fileID: 2638142906839803917, guid: 806d90e62f0c52a44b7f17a6138c4d49, type: 3}
       propertyPath: lockMarker
       value: 
-      objectReference: {fileID: 5876203575606574587}
+      objectReference: {fileID: 2088768094519683778}
     - target: {fileID: 2638142906839803917, guid: 806d90e62f0c52a44b7f17a6138c4d49, type: 3}
       propertyPath: MenuSettings
       value: 
@@ -24623,7 +24625,7 @@ PrefabInstance:
     - target: {fileID: 2638142906839803917, guid: 806d90e62f0c52a44b7f17a6138c4d49, type: 3}
       propertyPath: unlockedMarker
       value: 
-      objectReference: {fileID: 1195489065074098118}
+      objectReference: {fileID: 466218795834014784}
     - target: {fileID: 6822068222652555150, guid: 806d90e62f0c52a44b7f17a6138c4d49, type: 3}
       propertyPath: m_Name
       value: GameManager
