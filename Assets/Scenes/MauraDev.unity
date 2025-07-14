@@ -6727,7 +6727,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &331810753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20510,17 +20510,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1120748224}
   m_CullTransparentMesh: 1
---- !u!114 &1137997645 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
-  m_PrefabInstance: {fileID: 2070085625}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32a76791ede84a241a96989add6ab92e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1142246122
 GameObject:
   m_ObjectHideFlags: 0
@@ -31729,10 +31718,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4142131049381641079, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
-      propertyPath: audioGuy
-      value: 
-      objectReference: {fileID: 1137997645}
     - target: {fileID: 6192644320702053576, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: m_Name
       value: Menus
@@ -31741,10 +31726,6 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1771409508}
-    - target: {fileID: 8610999687703301076, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
-      propertyPath: audioGuy
-      value: 
-      objectReference: {fileID: 1137997645}
     - target: {fileID: 8694081817352513708, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -34793,7 +34774,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6faa682f1b110d040bd59d87dad007ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioGuy: {fileID: 0}
 --- !u!224 &1968817722
 RectTransform:
   m_ObjectHideFlags: 0
