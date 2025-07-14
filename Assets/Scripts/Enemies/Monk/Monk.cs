@@ -160,6 +160,7 @@ public class Monk : EnemyBase
             yield return new WaitForSeconds(0.05f);
         }
         AudioManager.instance.Play("Monk_Cast");
+        Debug.Log("Debug cast");
 
         yield return new WaitForSeconds(0.20f);
         Wave.SetActive(true);
