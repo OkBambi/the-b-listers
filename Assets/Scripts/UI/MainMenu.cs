@@ -11,7 +11,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void Start()
     {
-        AudioIsPlaying();
+        Invoke("AudioIsPlaying", 0.01f);
     }
 
     public void PlayButton()
@@ -32,7 +32,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void AudioIsPlaying()
     {
-        Debug.Log("It is deffinetly playing Audio");
+        //Debug.Log("It is deffinetly playing Audio");
         AudioManager.instance.Play("Main_Menu");
     }
 }

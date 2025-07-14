@@ -71,7 +71,7 @@ public class SpawnIndicator : MonoBehaviour
                         Instantiate(enemyToSpawn, transform.position + new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f)), transform.rotation);
 
                     AudioManager.instance.Play("Enemy_Spawn");
-                    Debug.Log("ENEMY HAS SPAWN NOW PLAY");
+                    //Debug.Log("ENEMY HAS SPAWN NOW PLAY");
                     Destroy(gameObject);
                 }
             }

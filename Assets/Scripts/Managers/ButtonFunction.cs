@@ -65,7 +65,7 @@ public class ButtonFunction : MonoBehaviour
             }
             else
             {
-                Debug.Log("default Camera");
+                //Debug.Log("default Camera");
                 //SettingsManager.instance.mainCamera.gameObject.SetActive(true);
                 SettingsManager.instance.pixelCamera.gameObject.SetActive(false);
             }
@@ -91,6 +91,4 @@ Application.Quit();
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
-
-
 }

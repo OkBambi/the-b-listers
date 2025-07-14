@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour, IDamage
     {
         if (collision.transform.CompareTag("groundTag"))
         {
-            print("Ground! sweet ground!");
+            //print("Ground! sweet ground!");
             canDash = true;
             isGrounded = true;
             jumpCount = 0;

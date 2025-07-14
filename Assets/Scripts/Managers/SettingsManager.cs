@@ -24,6 +24,8 @@ public class SettingsManager : MonoBehaviour
     public Camera mainCamera;
     public Camera pixelCamera;
 
+    public ButtonFunction button;
+
     private void Awake()
     {
         instance = this;
@@ -56,7 +58,9 @@ public class SettingsManager : MonoBehaviour
         //will need to be reworked because FindWithTag doesn't work on inactive objects
         FindFirstObjectByType<ReducedCameraShake_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisReducedCameraShake();
 
-        FindFirstObjectByType<ButtonFunction>(FindObjectsInactive.Exclude).GetComponent<ButtonFunction>().ontoggleArcade(GetisArcadeFilter());
+        
+        button = FindFirstObjectByType<ButtonFunction>(FindObjectsInactive.Exclude).GetComponent<ButtonFunction>();
+        button.ontoggleArcade(GetisArcadeFilter());
         //FindFirstObjectByType<PixelCamera_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisArcadeFilter();
 
         FindFirstObjectByType<InvertY_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisInvertY();
@@ -110,7 +114,7 @@ public class SettingsManager : MonoBehaviour
     #region Resolution
     public int GetResolution()
     {
-        Debug.Log(settings.resolution);
+        //Debug.Log(settings.resolution);
         return settings.resolution;
     }
     public void SetResolution(Resolution _resolution)

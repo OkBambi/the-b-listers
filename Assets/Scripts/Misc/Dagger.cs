@@ -37,7 +37,7 @@ public class Dagger : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(lastPos, rayDir, out hit, rayDist, ~ignoreMask))
         {
-            Debug.Log(hit.collider.name);
+            //Debug.Log(hit.collider.name);
 
             if(hit.collider.CompareTag("groundTag") && !reflected)
             {

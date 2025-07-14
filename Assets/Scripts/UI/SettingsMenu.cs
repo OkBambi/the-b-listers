@@ -214,7 +214,7 @@ public class SettingsMenu : MonoBehaviour
             if (Screen.resolutions[resolutionIndex].Equals(newResolution))
             {
                 resolutionDropdown.value = resolutionIndex;
-                Debug.Log(resolutionDropdown.value);
+                //Debug.Log(resolutionDropdown.value);
                 break;
             }
         }

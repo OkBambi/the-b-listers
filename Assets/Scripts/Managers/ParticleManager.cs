@@ -20,7 +20,7 @@ public class ParticleManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        Debug.Log("color spawn");
+        //Debug.Log("color spawn");
         colorParticles = Instantiate(colorParticlesGameObject, new Vector3(100, 100, 100), Quaternion.identity).GetComponent<ParticleSystem>();
         colorParticles.name = colorParticlesGameObject.name;
     }
