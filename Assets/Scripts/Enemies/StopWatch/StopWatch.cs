@@ -57,7 +57,6 @@ public class StopWatch : EnemyBase
             isSlamming = true;
             //StartSlam();
             StartCoroutine(slamer()); // Start the coroutine for slamming
-            //SacSpit();
         }
         
     }
@@ -115,16 +114,18 @@ public class StopWatch : EnemyBase
     IEnumerator ReturnToStart()
     {
         float elapsedTime = 0f;
+        Vector3 returnToStartPos = transform.position;
+        Vector3 returnToEndPos = StartPos;
         while (elapsedTime > slamDuration)
         {
             float t = elapsedTime / slamDuration;
             t = Mathf.Clamp01(t); // Ensure t is between 0 and 1
-            float easedT = EaseInBack(1, 0, t); 
-            transform.position = Vector3.Lerp(transform.position, StartPos, easedT);
+            float easedT = EaseInBack(0, 1, t); 
+            transform.position = Vector3.Lerp(returnToStartPos, returnToEndPos, easedT);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        transform.position = StartPos; // Ensure we end at the exact position
+        transform.position = returnToEndPos; // Ensure we end at the exact position
     }
 
 

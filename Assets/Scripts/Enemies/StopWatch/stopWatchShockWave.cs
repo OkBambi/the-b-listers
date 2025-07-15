@@ -38,7 +38,7 @@ public class stopWatchShockWave : MonoBehaviour
     IEnumerator myShock()
     {
         shockWave.SetActive(true);
-        yield return new WaitForSeconds(0.35f);
+        //yield return new WaitForSeconds(0.35f);
         AudioManager.instance.Play("Stopwatch_Smash");
         while (true)
         {
