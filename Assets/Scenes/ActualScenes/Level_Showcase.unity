@@ -435,17 +435,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 640ba846edda9d44b9072db8483c4861, type: 3}
---- !u!114 &672150147 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 679301647414257552, guid: b1e1424a94b7f48439485450ea93395a, type: 3}
-  m_PrefabInstance: {fileID: 739773701542713116}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f198423296473d84fad06ac724e78d67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &713343517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -650,17 +639,6 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1555977717975905376, guid: e7548f6da20774a4d9a23b3f87535b01, type: 3}
   m_PrefabInstance: {fileID: 814222467}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1015550210 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5782796787011602188, guid: b1e1424a94b7f48439485450ea93395a, type: 3}
-  m_PrefabInstance: {fileID: 739773701542713116}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3852ee4786e521f40ae438cf3533a034, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1177524904
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1264,18 +1242,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 465194171210896895, guid: b1e1424a94b7f48439485450ea93395a, type: 3}
-      propertyPath: MMB
-      value: 
-      objectReference: {fileID: 672150147}
-    - target: {fileID: 465194171210896895, guid: b1e1424a94b7f48439485450ea93395a, type: 3}
-      propertyPath: chainUI
-      value: 
-      objectReference: {fileID: 1015550210}
-    - target: {fileID: 5782796787011602188, guid: b1e1424a94b7f48439485450ea93395a, type: 3}
-      propertyPath: ColorLockMonk
-      value: 
-      objectReference: {fileID: 1015550210}
     - target: {fileID: 6242810555231706912, guid: b1e1424a94b7f48439485450ea93395a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -60.3
@@ -1321,8 +1287,7 @@ PrefabInstance:
       value: Monk_Mini_Boss
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 8489636999168747766, guid: b1e1424a94b7f48439485450ea93395a, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1e1424a94b7f48439485450ea93395a, type: 3}

@@ -113,13 +113,15 @@ public class Monk_MiniBoss : EnemyBase
     {
         while (true)
         {
+            yield return new WaitForSeconds(initialDelay);
             // change color
+
             setColor = colorRoutine[currenColor];
             currenColor = (currenColor + 1) % colorRoutine.Length;
             ColorSelection(setColor);
 
             colorOriginal = model.material.color;
-            yield return new WaitForSeconds(initialDelay);
+
         }
     }
 
