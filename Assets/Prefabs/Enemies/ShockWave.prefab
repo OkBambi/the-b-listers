@@ -101,11 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2766a998f6ef8fa4f8ec7b1927ba2d6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonkPrimary: {fileID: 0}
-  StopwatchPrimary: {fileID: 0}
+  monk: {fileID: 0}
   ChainToggleables: []
-  ChainImageArray: []
-  PrimaryColor: 0
+  primaryColor: 0
   ChangeColor: {fileID: 0}
   ColorLockMonk: {fileID: 0}
 --- !u!114 &8555228838603750137
@@ -121,10 +119,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shockWave: {fileID: 1049063256035287301}
-  speed: 10
-  maxSize: 10
+  speed: 20
+  MaxSize: 13
   ShockTime: 1
-  LaunchHight: 20
+  LaunchHeight: 25
+  KnockbackForce: 5
   ColorLockTimer: 5
   ChainUIColor: {fileID: 0}
 --- !u!64 &6574312267214464824
