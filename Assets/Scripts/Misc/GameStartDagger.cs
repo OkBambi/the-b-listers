@@ -11,6 +11,8 @@ public class GameStartDagger : MonoBehaviour
 
     public bool DaggerGot= false;
 
+    
+
     private void Start()
     {
         player = GameManager.instance.playerScript;
@@ -51,6 +53,7 @@ public class GameStartDagger : MonoBehaviour
         GameManager.instance.timer.isCounting = true;
         EnemyManager.instance.SpawnFirstEnemy();
         GameManager.instance.PlayLevelMusic();
+        LevelModifierManager.instance.largerStage = true;
         Destroy(gameObject);
 
     }
