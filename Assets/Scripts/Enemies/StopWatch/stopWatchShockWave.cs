@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class stopWatchShockWave : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class stopWatchShockWave : MonoBehaviour
     void Start()
     {
         StartCoroutine(myShock());
+        StartCoroutine(Shockwavesound());
     }
 
     // Update is called once per frame
@@ -38,8 +40,7 @@ public class stopWatchShockWave : MonoBehaviour
     IEnumerator myShock()
     {
         shockWave.SetActive(true);
-        //yield return new WaitForSeconds(0.35f);
-        AudioManager.instance.Play("Stopwatch_Smash");
+        
         while (true)
         {
             yield return null;
@@ -51,12 +52,17 @@ public class stopWatchShockWave : MonoBehaviour
                 break; // Exit the coroutine when the shock wave reaches its maximum size
             }
         }
-
         yield return new WaitForSeconds(3f);
         shockWave.SetActive(false);
         yield return new WaitForSeconds(2f);
         Destroy(gameObject); // Destroy the shock wave GameObject after it reaches its maximum size
     }
+        IEnumerator Shockwavesound()
+        {
+            yield return new WaitForSeconds(0.35f);
+
+            AudioManager.instance.Play("Stopwatch_Smash");
+        }
 
     private void OnTriggerEnter(Collider other)
     {
