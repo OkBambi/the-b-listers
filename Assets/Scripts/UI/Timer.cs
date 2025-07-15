@@ -32,6 +32,24 @@ public class Timer : MonoBehaviour
 
         minutes = Mathf.FloorToInt(timeRemainingInSeconds / 60);
         seconds = Mathf.FloorToInt(timeRemainingInSeconds % 60);
+
+
+        if (seconds == 10)
+        {
+            textForTimer.color = Color.red;
+        }
+
+        if (seconds <= 10)
+        {
+            shakeText();
+        }
+
+
         textForTimer.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+    }
+
+    private void shakeText()
+    {
+
     }
 }
