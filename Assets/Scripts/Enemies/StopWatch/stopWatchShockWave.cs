@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class stopWatchShockWave : MonoBehaviour
 {
-
     [SerializeField] GameObject shockWave;
     [SerializeField] float speed = 0.1f;
-    [SerializeField] float maxSize;
+    [SerializeField] float MaxSize;
     [SerializeField] float ShockTime;
-    [SerializeField] float LaunchHight;
+    [SerializeField] float LaunchHeight;
+    [SerializeField] float KnockbackForce;
 
     [Header("BoogieWoogie")]
     [SerializeField] public int ColorLockTimer;
@@ -27,7 +27,6 @@ public class stopWatchShockWave : MonoBehaviour
     void Start()
     {
         StartCoroutine(myShock());
-        
     }
 
     // Update is called once per frame
@@ -46,7 +45,7 @@ public class stopWatchShockWave : MonoBehaviour
             yield return null;
             shockWave.transform.localScale += new Vector3(speed * Time.deltaTime, 0f, speed * Time.deltaTime);
 
-            if (shockWave.transform.localScale.x >= maxSize)
+            if (shockWave.transform.localScale.x >= MaxSize)
             {
                 shockWave.transform.localScale = new Vector3(0f, 0f, 0f);
                 break; // Exit the coroutine when the shock wave reaches its maximum size
@@ -81,8 +80,19 @@ public class stopWatchShockWave : MonoBehaviour
                 GameManager.instance.playerScript.canAction = false; // Disable player actions
                 GameManager.instance.playerScript.canSchmove = false;
                 // You can add player damage logic here
-                GameManager.instance.player.GetComponent<Rigidbody>().AddForce(Vector3.up * LaunchHight, ForceMode.Impulse); // Example force to push the player up
-                Invoke("resetPlayer", ShockTime);
+                var playerRigidbody = GameManager.instance.player.GetComponent<Rigidbody>();
+                if (playerRigidbody != null)
+                {
+                    // Apply knockback force to the player
+                    Vector3 hitDirection = (other.transform.position - transform.position);
+                    hitDirection.y = 0f; // Keep the knockback force horizontal for consist arches
+                    hitDirection = hitDirection.normalized;
+
+                    //apply parabolic arc: horizontal force + upward force
+                    Vector3 force = hitDirection * KnockbackForce + Vector3.up * LaunchHeight;
+                    playerRigidbody.AddForce(force, ForceMode.Impulse);
+                }
+                Invoke ("resetPlayer", ShockTime); // Reset player actions after a delay
             }
 
 
