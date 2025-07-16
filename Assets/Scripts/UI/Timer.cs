@@ -33,7 +33,7 @@ public class Timer : MonoBehaviour
         {
             timeRemainingInSeconds -= Time.deltaTime;
         }
-        else if (timeRemainingInSeconds <= 0)
+        else if (timeRemainingInSeconds <= 1)
         {
             timeRemainingInSeconds = 0;
             GameManager.instance.OnEndCondition();
@@ -43,9 +43,11 @@ public class Timer : MonoBehaviour
         seconds = Mathf.FloorToInt(timeRemainingInSeconds % 60);
 
 
-        if (seconds == 10 && minutes == 0)
+        if (timeRemainingInSeconds == 10)
         {
             textForTimer.color = Color.red;
+            fadeInText.color = Color.red;
+            fadeOutText.color = Color.red;
         }
 
         if (seconds <= 10)
@@ -74,6 +76,7 @@ public class Timer : MonoBehaviour
     {
         isFading = true;
         int displaySeconds = (seconds - 1) % 10;
+
         if (seconds - 1 == -1)
         {
             Debug.Log("Hello");
@@ -87,7 +90,7 @@ public class Timer : MonoBehaviour
         {
             fadeInText.text = string.Format("{0:0}     {1:0}", "", displaySeconds);
         }
-        //fadeInText.text = string.Format("{0:0}:{1:00}", minutes, seconds - 1);
+
         fadeInText.CrossFadeAlpha(255f, 1f, false);
         yield return new WaitForSeconds(1);
         fadeInText.CrossFadeAlpha(1f, 0f, false);
@@ -97,7 +100,8 @@ public class Timer : MonoBehaviour
     IEnumerator FadeOutEffect()
     {
         int displaySeconds = (seconds + 1) % 10;
-        if (displaySeconds == 0 && seconds + 1 == 60)
+
+        if (seconds + 1 == 60)
         {
             fadeOutText.text = string.Format("{0:0} {1:00}", minutes + 1, 0);
         }
@@ -109,6 +113,7 @@ public class Timer : MonoBehaviour
         {
             fadeOutText.text = string.Format("{0:0}     {1:0}", "", displaySeconds);
         }
+
         fadeOutText.CrossFadeAlpha(1f, 1f, false);
         yield return new WaitForSeconds(1);
         fadeOutText.CrossFadeAlpha(255f, 0f, false);
