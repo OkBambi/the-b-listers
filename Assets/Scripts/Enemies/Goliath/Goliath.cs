@@ -74,6 +74,7 @@ public class Goliath : EnemyBase
         //For boss bar
         bossHPOrig = hp;
         bossName.text = gameObject.name;
+        bossHPBar.gameObject.transform.parent.gameObject.SetActive(true);
     }
 
     void Update()
@@ -236,6 +237,7 @@ public class Goliath : EnemyBase
         {
             GameManager.instance.isWon = true;
             GameManager.instance.OnEndCondition();
+            bossHPBar.gameObject.transform.parent.gameObject.SetActive(false);
         }
         base.DeathCheck();
     }
