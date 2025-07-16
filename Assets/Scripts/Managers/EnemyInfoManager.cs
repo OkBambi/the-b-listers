@@ -54,6 +54,7 @@ public class EnemyInfoManager : MonoBehaviour
     //public methods that will because by button clicks
     public void OnMonolithButtonClicked()
     {
+        AudioManager.instance.Play("Monolith_Spawn");
         ShowPanel(monolithInfoPanel);
     }
     public void OnBoidsButtonClicked()
@@ -62,10 +63,12 @@ public class EnemyInfoManager : MonoBehaviour
     }
     public void OnAngryBoidsButtonClicked()
     {
+        AudioManager.instance.Play("A_Boid_Dash");
         ShowPanel(angryBoidsInfoPanel);
     }
     public void OnStopwatchButtonClicked()
     {
+        AudioManager.instance.Play("Stopwatch_Indicator");
         ShowPanel(stopwatchInfoPanel);
     }
     public void OnMonkButtonClicked()
