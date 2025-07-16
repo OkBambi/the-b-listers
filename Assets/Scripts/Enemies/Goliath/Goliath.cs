@@ -72,6 +72,7 @@ public class Goliath : EnemyBase
         StartCoroutine(SwapColors());
 
         bossHPOrig = hp;
+        bossName.text = gameObject.name;
     }
 
     void Update()
@@ -226,5 +227,18 @@ public class Goliath : EnemyBase
 
             ColorSelection(setColor);
         }
+    }
+
+    public override void DeathCheck()
+    {
+        GameManager.instance.isWon = true;
+        GameManager.instance.OnEndCondition();
+        base.DeathCheck();
+    }
+
+    public override void takeDamage(PrimaryColor hitColor, int amount)
+    {
+        base.takeDamage(hitColor, amount);
+        updateBossHPBar();
     }
 }

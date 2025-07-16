@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +25,7 @@ public class EnemyBase : MonoBehaviour, IDamage
 
     public Image bossHPBar;
     public float bossHPOrig;
+    public TextMeshPro bossName;
 
 
 
@@ -135,10 +137,6 @@ public class EnemyBase : MonoBehaviour, IDamage
                 StartCoroutine(ShakePos(0.2f, 0.5f));
                 StartCoroutine(ShakeSize(0.2f, 0.1f));
             }
-            else 
-            {
-                updateBossHPBar();
-            }
 
             if (hitVfx)
                 Instantiate(hitVfx, transform.position, Quaternion.identity);
@@ -156,11 +154,6 @@ public class EnemyBase : MonoBehaviour, IDamage
             OnAECDestroy();
             RemoveSelfFromTargetList();
             AudioManager.instance.Play("Enemy_Death");
-            if(gameObject.name == "Goliath")
-            {
-                GameManager.instance.isWon = true;
-                GameManager.instance.OnEndCondition();
-            }
             Destroy(gameObject);
             return;
         }
