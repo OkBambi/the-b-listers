@@ -35,6 +35,7 @@ public class SettingsManager : MonoBehaviour
             pixelCamera = FindFirstObjectByType<PixelCamera_Marker>(FindObjectsInactive.Include).GetComponent<Camera>();
         }
 
+        //Debug.Log(PlayerPrefs.GetInt("resolution"));
         if (PlayerPrefs.HasKey("resolution"))
         {
             settings.resolution = PlayerPrefs.GetInt("resolution");
@@ -58,33 +59,7 @@ public class SettingsManager : MonoBehaviour
     {
         //on Start, read the settings object and apply the current settings to the settings screen in the scene
 
-        FOVSlider slider = FindFirstObjectByType<FOVSlider>(FindObjectsInactive.Include);
-        slider.SetFOV(GetFOV());
-
-        SettingsMenu settingsMenu = FindFirstObjectByType<SettingsMenu>(FindObjectsInactive.Include);
-
-        settingsMenu.SetResolution(Screen.resolutions[GetResolution()]);
-
-        settingsMenu.SetQuality(GetQuality());
-
-        settingsMenu.SetWindowSetting(GetWindowType());
-
-        settingsMenu.SetSFX(GetSFXVolume());
-
-        settingsMenu.SetMusic(GetMusicVolume());
-
-        //will need to be reworked because FindWithTag doesn't work on inactive objects
-        FindFirstObjectByType<ReducedCameraShake_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisReducedCameraShake();
-
-        
-        button = FindFirstObjectByType<ButtonFunction>(FindObjectsInactive.Exclude).GetComponent<ButtonFunction>();
-        button.ontoggleArcade(GetisArcadeFilter());
-        //FindFirstObjectByType<PixelCamera_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisArcadeFilter();
-
-        FindFirstObjectByType<InvertY_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisInvertY();
-        ApplyInvertY();
-
-        settingsMenu.SetMouseSensitivity(GetmouseSensitivity());
+        Invoke("ApplySettings", 0.01f);
 
         ////Resolution
         //Dropdown dropDown = GameObject.FindWithTag("Resolution").GetComponent<Dropdown>();
@@ -135,13 +110,9 @@ public class SettingsManager : MonoBehaviour
         //Debug.Log(settings.resolution);
         return settings.resolution;
     }
-    public void SetResolution(Resolution _resolution)
+    public void SetResolution(int _resolution)
     {
-        for (int resIndex = 0; resIndex < Screen.resolutions.Length; resIndex++)
-        {
-            if (Screen.resolutions[resIndex].Equals(_resolution))
-                settings.resolution = resIndex;
-        }
+        settings.resolution = _resolution;
         PlayerPrefs.SetInt("resolution", settings.resolution);
         PlayerPrefs.Save();
     }
@@ -376,15 +347,47 @@ public class SettingsManager : MonoBehaviour
 
     public void ResetSettings()
     {
-        SetResolution(Screen.resolutions[10]);
+        SetResolution(19);
         SetQuality(3);
-        SetWindowType(0);
+        SetWindowType(FullScreenMode.ExclusiveFullScreen);
         SetFOV(90);
         SetisReducedCameraShake(true);
         SetisInvertY(false);
         SetisArcadeFilter(false);
-        SetSFXVolume(0f);
-        SetMusicVolume(0f);
+        SetSFXVolume(1f);
+        SetMusicVolume(1f);
         SetmouseSensitivity(1f);
+        ApplySettings();
+    }
+
+    public void ApplySettings()
+    {
+        FOVSlider slider = FindFirstObjectByType<FOVSlider>(FindObjectsInactive.Include);
+        slider.SetFOV(GetFOV());
+
+        SettingsMenu settingsMenu = FindFirstObjectByType<SettingsMenu>(FindObjectsInactive.Include);
+        //Debug.Log(Screen.resolutions[GetResolution()]);
+        settingsMenu.SetResolution(GetResolution());
+
+        settingsMenu.SetQuality(GetQuality());
+
+        settingsMenu.SetWindowSetting(GetWindowType());
+
+        settingsMenu.SetSFX(GetSFXVolume());
+
+        settingsMenu.SetMusic(GetMusicVolume());
+
+        //will need to be reworked because FindWithTag doesn't work on inactive objects
+        FindFirstObjectByType<ReducedCameraShake_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisReducedCameraShake();
+
+
+        button = FindFirstObjectByType<ButtonFunction>(FindObjectsInactive.Exclude).GetComponent<ButtonFunction>();
+        button.ontoggleArcade(GetisArcadeFilter());
+        //FindFirstObjectByType<PixelCamera_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisArcadeFilter();
+
+        FindFirstObjectByType<InvertY_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisInvertY();
+        ApplyInvertY();
+
+        settingsMenu.SetMouseSensitivity(GetmouseSensitivity());
     }
 }

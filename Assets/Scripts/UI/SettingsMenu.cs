@@ -4,7 +4,6 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -18,6 +17,8 @@ public class SettingsMenu : MonoBehaviour
     public TextMeshProUGUI musicText;
     public Slider mouseSensitivitySlider;
     public TextMeshProUGUI mouseSensitivityText;
+
+    public Button resetSettingsButton;
 
 
     //res stuff
@@ -90,6 +91,8 @@ public class SettingsMenu : MonoBehaviour
 
         musicSlider.onValueChanged.AddListener(delegate { AudioManager.instance.Play("Setting_Music"); });
         musicSlider.onValueChanged.AddListener(delegate { AudioManager.instance.UpdateMusicVolume(); });
+
+        resetSettingsButton.onClick.AddListener(delegate { SettingsManager.instance.ResetSettings(); });
     }
 
 
@@ -199,26 +202,45 @@ public class SettingsMenu : MonoBehaviour
         //reads an input and sets the window resolution
         if (resolutions == null)
             resolutions = Screen.resolutions;
-        Resolution resolution = resolutions[resolutionDropdown.value];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
+        if (resolutionDropdown.value < 26)
+        {
+            Resolution resolution = resolutions[resolutionDropdown.value];
+            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreenMode);
+        }
+
+        else
+        {
+            Screen.SetResolution(Display.main.systemWidth, Display.main.systemHeight, Screen.fullScreenMode);
+        }
     }
 
-    public void SetResolution(Resolution newResolution)
+    public void SetResolution(int res)
     {
-        //reads an input and sets the window resolution
-        Resolution resolution = newResolution;
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-
-        for (int resolutionIndex = 0;  resolutionIndex < Screen.resolutions.Length; ++resolutionIndex)
+        if (res < 26)
         {
-            if (Screen.resolutions[resolutionIndex].Equals(newResolution))
-            {
-                resolutionDropdown.value = resolutionIndex;
-                //Debug.Log(resolutionDropdown.value);
-                break;
-            }
+            Resolution resolution = Screen.resolutions[res];
+            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         }
-        
+        else
+        {
+            Screen.SetResolution(Display.main.systemWidth, Display.main.systemHeight, Screen.fullScreen);
+        }
+        //reads an input and sets the window resolution
+
+        //Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
+        resolutionDropdown.value = res;
+        //for (int resolutionIndex = 0;  resolutionIndex < Screen.resolutions.Length; ++resolutionIndex)
+        //{
+        //    if (Screen.resolutions[resolutionIndex].Equals(newResolution))
+        //    {
+        //        resolutionDropdown.value = res;
+        //        //Debug.Log(resolutionDropdown.value);
+        //        break;
+        //    }
+        //}
+
     }
 
     public void SetWindowSetting()
@@ -226,13 +248,16 @@ public class SettingsMenu : MonoBehaviour
         switch (window.value)
         {
             case 0:
-                Screen.fullScreenMode = FullScreenMode.Windowed;
+                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
                 break;
             case 1:
                 Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
                 break;
             case 2:
-                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
+                break;
+            case 3:
+                Screen.fullScreenMode = FullScreenMode.Windowed;
                 break;
         }
     }
@@ -242,14 +267,17 @@ public class SettingsMenu : MonoBehaviour
         Screen.fullScreenMode = mode;
         switch (mode)
         {
-            case FullScreenMode.Windowed:
+            case FullScreenMode.ExclusiveFullScreen:
                 window.value = 0;
                 break;
             case FullScreenMode.FullScreenWindow:
                 window.value = 1;
                 break;
-            case FullScreenMode.ExclusiveFullScreen:
+            case FullScreenMode.MaximizedWindow:
                 window.value = 2;
+                break;
+            case FullScreenMode.Windowed:
+                window.value = 3;
                 break;
         }
     }
