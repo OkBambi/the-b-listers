@@ -35,7 +35,23 @@ public class SettingsManager : MonoBehaviour
             pixelCamera = FindFirstObjectByType<PixelCamera_Marker>(FindObjectsInactive.Include).GetComponent<Camera>();
         }
 
-        FileIOManager.instance.LoadData();
+        if (PlayerPrefs.HasKey("resolution"))
+        {
+            settings.resolution = PlayerPrefs.GetInt("resolution");
+            settings.quality = PlayerPrefs.GetInt("quality");
+            settings.windowType = (FullScreenMode)PlayerPrefs.GetInt("windowType");
+            settings.FOV = PlayerPrefs.GetInt("fov");
+            settings.isReducedCameraShake = (PlayerPrefs.GetInt("reducedCameraShake") == 1 ? true : false);
+            settings.isInvertY = (PlayerPrefs.GetInt("invertY") == 1 ? true : false);
+            settings.isArcadeFilter = (PlayerPrefs.GetInt("arcade") == 1 ? true : false);
+            settings.SFXVolume = PlayerPrefs.GetFloat("sfx");
+            settings.MusicVolume = PlayerPrefs.GetFloat("music");
+            settings.mouseSensitivity = PlayerPrefs.GetFloat("mouseSensitivity");
+        }
+        else
+        {
+            ResetSettings();
+        }
     }
 
     private void Start()
@@ -126,12 +142,14 @@ public class SettingsManager : MonoBehaviour
             if (Screen.resolutions[resIndex].Equals(_resolution))
                 settings.resolution = resIndex;
         }
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetInt("resolution", settings.resolution);
+        PlayerPrefs.Save();
     }
     public void SetResolution(TMP_Dropdown _resolution)
     {
         settings.resolution = _resolution.value;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetInt("resolution", settings.resolution);
+        PlayerPrefs.Save();
     }
     #endregion
 
@@ -147,12 +165,14 @@ public class SettingsManager : MonoBehaviour
     public void SetQuality(int _quality)
     {
         settings.quality = _quality;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetInt("quality", settings.quality);
+        PlayerPrefs.Save();
     }
     public void SetQuality(TMP_Dropdown _quality)
     {
         settings.quality = _quality.value;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetInt("quality", settings.quality);
+        PlayerPrefs.Save();
     }
     #endregion
 
@@ -164,12 +184,14 @@ public class SettingsManager : MonoBehaviour
     public void SetWindowType(FullScreenMode _windowType)
     {
         settings.windowType = _windowType;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetInt("windowType", (int)_windowType);
+        PlayerPrefs.Save();
     }
     public void SetWindowType(TMP_Dropdown _windowType)
     {
         settings.windowType = (FullScreenMode)_windowType.value;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetInt("windowType", _windowType.value);
+        PlayerPrefs.Save();
     }
     #endregion
 
@@ -181,13 +203,15 @@ public class SettingsManager : MonoBehaviour
     public void SetFOV(int _FOV)
     {
         settings.FOV = _FOV;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetInt("fov", settings.FOV);
+        PlayerPrefs.Save();
     }
 
     public void SetFOV(Slider _FOV)
     {
         settings.FOV = (int)_FOV.value;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetInt("fov", settings.FOV);
+        PlayerPrefs.Save();
     }
     #endregion
 
@@ -199,13 +223,15 @@ public class SettingsManager : MonoBehaviour
     public void SetisReducedCameraShake(bool _isReducedCameraShake)
     {
         settings.isReducedCameraShake = _isReducedCameraShake;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetInt("reducedCameraShake", (settings.isReducedCameraShake ? 1: 0));
+        PlayerPrefs.Save();
     }
 
     public void SetisReducedCameraShake(Toggle _isReducedCameraShake)
     {
         settings.isReducedCameraShake = _isReducedCameraShake.isOn;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetInt("reducedCameraShake", (settings.isReducedCameraShake ? 1 : 0));
+        PlayerPrefs.Save();
     }
     #endregion
 
@@ -217,13 +243,15 @@ public class SettingsManager : MonoBehaviour
     public void SetisInvertY(bool _isInvertY)
     {
         settings.isInvertY = _isInvertY;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetInt("invertY", (settings.isInvertY ? 1 : 0));
+        PlayerPrefs.Save();
     }
 
     public void SetisInvertY(Toggle _isInvertY)
     {
         settings.isInvertY = _isInvertY.isOn;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetInt("invertY", (settings.isInvertY ? 1 : 0));
+        PlayerPrefs.Save();
     }
     #endregion
 
@@ -235,13 +263,15 @@ public class SettingsManager : MonoBehaviour
     public void SetisArcadeFilter(bool _isArcadeFilter)
     {
         settings.isArcadeFilter = _isArcadeFilter;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetInt("arcade", (settings.isArcadeFilter ? 1 : 0));
+        PlayerPrefs.Save();
     }
 
     public void SetisArcadeFilter(Toggle _isArcadeFilter)
     {
         settings.isArcadeFilter = _isArcadeFilter.isOn;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetInt("arcade", (settings.isArcadeFilter ? 1 : 0));
+        PlayerPrefs.Save();
     }
     #endregion
 
@@ -285,13 +315,15 @@ public class SettingsManager : MonoBehaviour
     public void SetSFXVolume(float _SFXVolume)
     {
         settings.SFXVolume = _SFXVolume;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetFloat("sfx", settings.SFXVolume);
+        PlayerPrefs.Save();
     }
 
     public void SetSFXVolume(Slider _SFXVolume)
     {
         settings.SFXVolume = (_SFXVolume.value + 80f) / 80f;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetFloat("sfx", settings.SFXVolume);
+        PlayerPrefs.Save();
     }
     #endregion
 
@@ -303,13 +335,15 @@ public class SettingsManager : MonoBehaviour
     public void SetMusicVolume(float _MusicVolume)
     {
         settings.MusicVolume = _MusicVolume;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetFloat("music", settings.MusicVolume);
+        PlayerPrefs.Save();
     }
 
     public void SetMusicVolume(Slider _MusicVolume)
     {
         settings.MusicVolume = (_MusicVolume.value + 80f) / 80f;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetFloat("music", settings.MusicVolume);
+        PlayerPrefs.Save();
     }
     #endregion
 
@@ -321,13 +355,15 @@ public class SettingsManager : MonoBehaviour
     public void SetmouseSensitivity(float _mouseSensitivity)
     {
         settings.mouseSensitivity = _mouseSensitivity;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetFloat("mouseSensitivity", settings.mouseSensitivity);
+        PlayerPrefs.Save();
     }
 
     public void SetmouseSensitivity(Slider _mouseSensitivity)
     {
         settings.mouseSensitivity = _mouseSensitivity.value;
-        FileIOManager.instance.SaveData();
+        PlayerPrefs.SetFloat("mouseSensitivity", settings.mouseSensitivity);
+        PlayerPrefs.Save();
     }
     #endregion
 
@@ -336,5 +372,19 @@ public class SettingsManager : MonoBehaviour
         //Debug.Log(GetisInvertY());
         if (GameManager.instance)
             GameManager.instance.playerScript.GetComponentInChildren<PlayerCamera>().invertY = GetisInvertY();
+    }
+
+    public void ResetSettings()
+    {
+        SetResolution(Screen.resolutions[10]);
+        SetQuality(3);
+        SetWindowType(0);
+        SetFOV(90);
+        SetisReducedCameraShake(true);
+        SetisInvertY(false);
+        SetisArcadeFilter(false);
+        SetSFXVolume(0f);
+        SetMusicVolume(0f);
+        SetmouseSensitivity(1f);
     }
 }
