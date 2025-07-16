@@ -55,11 +55,13 @@ public class Timer : MonoBehaviour
 
         if (!isFading)
         {
-            StartCoroutine(FadeEffect());
+            StartCoroutine(FadeInEffect());
+            StartCoroutine(FadeOutEffect());
         }
         else
         {
             fadeInText.transform.position -= new Vector3(0, 0.2f, 0);
+            fadeOutText.transform.position -= new Vector3(0, 0.2f, 0);
         }
 
             textForTimer.text = string.Format("{0:0}:{1:00}", minutes, seconds);
@@ -68,7 +70,7 @@ public class Timer : MonoBehaviour
 
     }
 
-    IEnumerator FadeEffect()
+    IEnumerator FadeInEffect()//look to see if you make fade in and fade out work in the same fuction
     {
         isFading = true;
         fadeInText.text = string.Format("{0:0}:{1:00}", minutes, seconds - 1);
@@ -76,24 +78,20 @@ public class Timer : MonoBehaviour
         yield return new WaitForSeconds(1);
         fadeInText.CrossFadeAlpha(1f, 0f, false);
         fadeInText.transform.position = fadeInTextOrigPos;
-        //fadeInText.ap;
-
         isFading = false;
-
     }
+    IEnumerator FadeOutEffect()
+    {
+        fadeOutText.text = string.Format("{0:0}:{1:00}", minutes, seconds + 1);
+        fadeOutText.CrossFadeAlpha(1f, 0f, false);
+        yield return new WaitForSeconds(1);
+        fadeOutText.CrossFadeAlpha(255f, 1f, false);
+        fadeOutText.transform.position = fadeOutTextOrigPos;
+    }
+
 
     private void ShakeText()
     {
 
-    }
-
-    private void FadeEffecst()
-    {
-
-        
-
-        fadeOutText.text = string.Format("{0:0}:{1:00}", minutes, seconds + 1);
-        fadeOutText.CrossFadeAlpha(0, 0.5f, false);
-        fadeOutText.transform.localPosition -= new Vector3(0, 0.5f, 0);
     }
 }
