@@ -73,7 +73,21 @@ public class Timer : MonoBehaviour
     IEnumerator FadeInEffect()//look to see if you make fade in and fade out work in the same fuction
     {
         isFading = true;
-        fadeInText.text = string.Format("{0:0}:{1:00}", minutes, seconds - 1);
+        int displaySeconds = (seconds - 1) % 10;
+        if (seconds - 1 == -1)
+        {
+            Debug.Log("Hello");
+            fadeInText.text = string.Format("{0:0} {1:00}", minutes - 1, 59);
+        }
+        else if (displaySeconds == 0)
+        {
+            fadeInText.text = string.Format("{0:0}   {1:00}", "", seconds - 1);
+        }
+        else
+        {
+            fadeInText.text = string.Format("{0:0}     {1:0}", "", displaySeconds);
+        }
+        //fadeInText.text = string.Format("{0:0}:{1:00}", minutes, seconds - 1);
         fadeInText.CrossFadeAlpha(255f, 1f, false);
         yield return new WaitForSeconds(1);
         fadeInText.CrossFadeAlpha(1f, 0f, false);
@@ -85,7 +99,6 @@ public class Timer : MonoBehaviour
         int displaySeconds = (seconds + 1) % 10;
         if (displaySeconds == 0 && seconds + 1 == 60)
         {
-            Debug.Log("Hello");
             fadeOutText.text = string.Format("{0:0} {1:00}", minutes + 1, 0);
         }
         else if (displaySeconds == 0)
