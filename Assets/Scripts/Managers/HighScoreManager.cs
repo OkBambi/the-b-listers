@@ -20,9 +20,8 @@ public class HighScoreManager : MonoBehaviour
     void Start()
     {
         theInstance = this;
-        if (!PlayerPrefs.HasKey("MakeHighScoreTable"))
+        if (!PlayerPrefs.HasKey(highscorePrefix + 0))
         {
-            PlayerPrefs.SetInt("MakeHighScoreTable", 1);
             ClearHighScores();
             PlayerPrefs.Save();
         }
