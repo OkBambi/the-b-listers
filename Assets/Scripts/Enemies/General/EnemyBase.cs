@@ -34,12 +34,8 @@ public class EnemyBase : MonoBehaviour, IDamage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
-
         ColorSelection(setColor);
         UpdateBoidAwareness();
-    }
-    protected void Update()
-    {
         if (LevelModifierManager.instance.lessHealth)
         {
             int NewHP = hp;
@@ -135,15 +131,9 @@ public class EnemyBase : MonoBehaviour, IDamage
                 DeathCheck();
 
             //flash white
-            if (gameObject.name != "Goliath")
-            {
-                if (gameObject.name != "Monk_Mini_Boss")
-                {
-                    StartCoroutine(Flash());
-                }
-                StartCoroutine(ShakePos(0.2f, 0.5f));
-                StartCoroutine(ShakeSize(0.2f, 0.1f));
-            }
+            StartCoroutine(Flash());
+            StartCoroutine(ShakePos(0.2f, 0.5f));
+            StartCoroutine(ShakeSize(0.2f, 0.1f));
 
             if (hitVfx)
                 Instantiate(hitVfx, transform.position, Quaternion.identity);
@@ -218,7 +208,7 @@ public class EnemyBase : MonoBehaviour, IDamage
         transform.localScale = originalSize;
     }
 
-    private void spawnHitColorParticles()//spawn colors splats from the enemy
+    public void spawnHitColorParticles()//spawn colors splats from the enemy
     {
         ParticleManager.instance.colorParticles.transform.position = transform.position;
 

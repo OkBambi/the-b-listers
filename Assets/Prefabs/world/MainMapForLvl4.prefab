@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2597050145694526893}
   - component: {fileID: 960334485513416140}
   - component: {fileID: 1330086487133208506}
+  - component: {fileID: 2393224821719605674}
   - component: {fileID: 8756936194982599203}
   - component: {fileID: 1092800084730145619}
   - component: {fileID: 5911965898667208201}
@@ -2931,7 +2932,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 869
+  m_VersionIndex: 878
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2963,6 +2964,21 @@ MonoBehaviour:
         m_AxisDivisions: 20
         m_HeightCuts: 2
         m_Smooth: 0
+--- !u!114 &2393224821719605674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347494314285829768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0ab2d23bd2d8b408a83b90bccd6357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stage: {fileID: 1347494314285829768}
+  Pathway: {fileID: 0}
+  Scaler: 3
 --- !u!23 &8756936194982599203
 MeshRenderer:
   m_ObjectHideFlags: 0
