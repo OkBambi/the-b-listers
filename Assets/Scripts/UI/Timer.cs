@@ -77,9 +77,8 @@ public class Timer : MonoBehaviour
         isFading = true;
         int displaySeconds = (seconds - 1) % 10;
 
-        if (seconds - 1 == -1)
+        if (seconds == 0)
         {
-            Debug.Log("Hello");
             fadeInText.text = string.Format("{0:0} {1:00}", minutes - 1, 59);
         }
         else if (displaySeconds == 0)
