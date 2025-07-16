@@ -57,8 +57,12 @@ public class Monk_MiniBoss : EnemyBase
         {
             waveSizeOriginal = Wave.transform.localScale;
         }
-        name = "Monk_Mini_Boss";
+        name = "Maestro";
         StartCoroutine(ChangeColors());
+        //For boss bar
+        bossHPOrig = hp;
+        bossName.text = gameObject.name;
+        bossHPBar.gameObject.transform.parent.gameObject.SetActive(true);
 
     }
     // Update is called once per frame
@@ -124,6 +128,32 @@ public class Monk_MiniBoss : EnemyBase
 
         }
     }
+
+    public override void DeathCheck()
+    {
+        if (hp <= 0)
+        {
+            base.DeathCheck();
+            bossHPBar.gameObject.transform.parent.gameObject.SetActive(false);
+        }
+    }
+
+    public override void takeDamage(PrimaryColor hitColor, int amount)
+    {
+        if (hitColor == setColor || hitColor == PrimaryColor.OMNI || setColor == PrimaryColor.OMNI)
+        {
+            hp -= amount;
+            if (isAlive)
+                DeathCheck();
+
+            StartCoroutine(ShakePos(0.2f, 0.5f));
+            StartCoroutine(ShakeSize(0.2f, 0.1f));
+
+            spawnHitColorParticles();
+            updateBossHPBar();
+        }
+    }
+
 
 }
 
