@@ -83,9 +83,9 @@ public class Timer : MonoBehaviour
     IEnumerator FadeOutEffect()
     {
         fadeOutText.text = string.Format("{0:0}:{1:00}", minutes, seconds + 1);
-        fadeOutText.CrossFadeAlpha(1f, 0f, false);
+        fadeOutText.CrossFadeAlpha(1f, 1f, false);
         yield return new WaitForSeconds(1);
-        fadeOutText.CrossFadeAlpha(255f, 1f, false);
+        fadeOutText.CrossFadeAlpha(255f, 0f, false);
         fadeOutText.transform.position = fadeOutTextOrigPos;
     }
 
