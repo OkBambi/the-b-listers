@@ -58,18 +58,6 @@ public class GameManager : MonoBehaviour
             PlayLevelMusic();
         }
 
-
-
-        //lockMarker = GameObject.Find("ChainLock").GetComponent<ChainMarker>();
-        //unlockedMarker = GameObject.Find("ChainUnlock").GetComponent<ChainMarker>();
-
-        //lockMarker.gameObject.SetActive(false);
-        //unlockedMarker.gameObject.SetActive(false);
-
-        //lockMarker.AssignType(ChainType.Lock);
-        //unlockedMarker.AssignType(ChainType.Unlock);
-
-
         currentLevel = SceneManager.GetActiveScene();
 
     }
@@ -124,8 +112,6 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("MainMenu");
         }
     }
-
-
     public void statePause()
     {
         isPaused = !isPaused;
@@ -141,7 +127,6 @@ public class GameManager : MonoBehaviour
         MenuActive = MenuPause;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-
 
     }
     public void StateSettings()
@@ -159,13 +144,6 @@ public class GameManager : MonoBehaviour
         MenuActive.SetActive(false);
         MenuActive = null;
     }
-
-    public void LoadSettings()
-    {
-
-
-    }
-
     public void OnEndCondition()
     {
         //turn on the lose menu
@@ -187,14 +165,6 @@ public class GameManager : MonoBehaviour
         return MenuActive;
     }
 
-    //public void OnWinCondition()
-    //{
-    //    statePause();
-    //    GameObject.FindFirstObjectByType<Player>().Die();
-    //    MenuActive.SetActive(false);//so lose menu from die does not appear
-    //    MenuActive = MenuEnd;
-    //    MenuActive.SetActive(true);
-    //}
 
     public void OnCreditInfo()
     {

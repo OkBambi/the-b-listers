@@ -5,17 +5,19 @@ using UnityEngine.SceneManagement;
 public class GameStartDagger : MonoBehaviour
 {
     [SerializeField] Player player;
+    StageManager stageManager;
     [SerializeField] Renderer model;
     public bool mod_SchmovesOnly = false;
     public bool mod_DaggersOnly = false;
 
-    public bool DaggerGot= false;
+    public bool DaggerGot = false;
 
-    
+
 
     private void Start()
     {
         player = GameManager.instance.playerScript;
+        stageManager = FindAnyObjectByType<StageManager>();
     }
 
     private void Update()
@@ -53,7 +55,10 @@ public class GameStartDagger : MonoBehaviour
         GameManager.instance.timer.isCounting = true;
         EnemyManager.instance.SpawnFirstEnemy();
         GameManager.instance.PlayLevelMusic();
-        LevelModifierManager.instance.largerStage = true;
+        if (stageManager != null)
+        {
+            stageManager.Lvl3PathwayBlock();
+        }
         Destroy(gameObject);
 
     }
