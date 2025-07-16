@@ -83,7 +83,12 @@ public class Timer : MonoBehaviour
     IEnumerator FadeOutEffect()
     {
         int displaySeconds = (seconds + 1) % 10;
-        if (displaySeconds == 0)
+        if (displaySeconds == 0 && seconds + 1 == 60)
+        {
+            Debug.Log("Hello");
+            fadeOutText.text = string.Format("{0:0} {1:00}", minutes + 1, 0);
+        }
+        else if (displaySeconds == 0)
         {
             fadeOutText.text = string.Format("{0:0}   {1:00}", "", seconds + 1);
         }
