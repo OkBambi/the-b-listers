@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EasingLibrary;
 
 public class SpawnIndicator : MonoBehaviour
 {
@@ -21,16 +22,25 @@ public class SpawnIndicator : MonoBehaviour
     [SerializeField] List<Mesh> enemyMeshList;
     public GameObject enemyToSpawn;
 
-    [SerializeField] Color baseColour;
-    [SerializeField] Color flashColour;
-    private Material[] flashMats;
+    [SerializeField] Vector3 startScale;
+    [SerializeField] Vector3 currentScale;
+    [SerializeField] Vector3 endScale;
+    [SerializeField] float shrinkSpeed;
 
-    [SerializeField] float flashSpeed = 0.01f;
-    private float red;
-    private float green;
-    private float blue;
+    [SerializeField] float alpha = 0f;
 
-    private int flashIndex = 0;
+    //[SerializeField] Color baseColour;
+    //[SerializeField] Color flashColour;
+    //private Material[] flashMats;
+
+    //[SerializeField] float flashSpeed = 0.01f;
+    //private float red;
+    //private float green;
+    //private float blue;
+
+    //private int flashIndex = 0;
+
+
 
     public void SetMesh(Mesh newMesh)
     {
@@ -39,69 +49,81 @@ public class SpawnIndicator : MonoBehaviour
 
     private void Awake()
     {
-        red = baseColour.r;
-        green = baseColour.g;
-        blue = baseColour.b;
+        //transform.localScale = transform.localScale * startScale;
+        Color baseColor = indicatorRenderer.material.color;
+        indicatorRenderer.material.color = new Color(baseColor.r, baseColor.g, baseColor.b, alpha);
+        //red = baseColour.r;
+        //green = baseColour.g;
+        //blue = baseColour.b;
 
-        flashMats = new Material[indicatorRenderer.materials.Length];
-        for (int materialIndex = 0; materialIndex < indicatorRenderer.materials.Length; ++materialIndex)
-        {
-            flashMats[materialIndex] = new Material(EnemyManager.instance.spawnMat);
-        }
-        indicatorRenderer.materials = flashMats; 
-        StartCoroutine(Flash());
+        //flashMats = new Material[indicatorRenderer.materials.Length];
+        //for (int materialIndex = 0; materialIndex < indicatorRenderer.materials.Length; ++materialIndex)
+        //{
+        //    flashMats[materialIndex] = new Material(EnemyManager.instance.spawnMat);
+        //}
+        //indicatorRenderer.materials = flashMats; 
+        //StartCoroutine(Flash());
 
     }
 
 
-    IEnumerator Flash()
-    {
-        while (isActiveAndEnabled)
-        {
-            if (red == flashColour.r && green == flashColour.g && blue == flashColour.b)
-            {
-                red = baseColour.r;
-                green = baseColour.g;
-                blue = baseColour.b;
-                ++flashIndex;
-                if(flashIndex >= 3)
-                {
-                    Instantiate(enemyToSpawn, transform.position, transform.rotation);
-                    if (LevelModifierManager.instance.doubleEnemies)
-                        Instantiate(enemyToSpawn, transform.position + new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f)), transform.rotation);
+    //IEnumerator Flash()
+    //{
+    //    while (isActiveAndEnabled)
+    //    {
+    //        if (red == flashColour.r && green == flashColour.g && blue == flashColour.b)
+    //        {
+    //            red = baseColour.r;
+    //            green = baseColour.g;
+    //            blue = baseColour.b;
+    //            ++flashIndex;
+    //            if(flashIndex >= 3)
+    //            {
+    //                Instantiate(enemyToSpawn, transform.position, transform.rotation);
+    //                if (LevelModifierManager.instance.doubleEnemies)
+    //                    Instantiate(enemyToSpawn, transform.position + new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f)), transform.rotation);
 
-                    AudioManager.instance.Play("Enemy_Spawn");
-                    //Debug.Log("ENEMY HAS SPAWN NOW PLAY");
-                    Destroy(gameObject);
-                }
-            }
+    //                AudioManager.instance.Play("Enemy_Spawn");
+    //                //Debug.Log("ENEMY HAS SPAWN NOW PLAY");
+    //                Destroy(gameObject);
+    //            }
+    //        }
 
-            red = Mathf.Lerp(red, flashColour.r, flashSpeed);
-            if (Mathf.Abs(red - flashColour.r) <= 0.05f)
-            {
-                red = flashColour.r;
-            }
+    //        red = Mathf.Lerp(red, flashColour.r, flashSpeed);
+    //        if (Mathf.Abs(red - flashColour.r) <= 0.05f)
+    //        {
+    //            red = flashColour.r;
+    //        }
 
-            green = Mathf.Lerp(green, flashColour.g, flashSpeed);
-            if (Mathf.Abs(green - flashColour.g) <= 0.05f)
-            {
-                green = flashColour.g;
-            }
+    //        green = Mathf.Lerp(green, flashColour.g, flashSpeed);
+    //        if (Mathf.Abs(green - flashColour.g) <= 0.05f)
+    //        {
+    //            green = flashColour.g;
+    //        }
 
-            blue = Mathf.Lerp(blue, flashColour.b, flashSpeed);
-            if (Mathf.Abs(blue - flashColour.b) <= 0.05f)
-            {
-                blue = flashColour.b;
-            }
+    //        blue = Mathf.Lerp(blue, flashColour.b, flashSpeed);
+    //        if (Mathf.Abs(blue - flashColour.b) <= 0.05f)
+    //        {
+    //            blue = flashColour.b;
+    //        }
 
-            foreach (Material material in indicatorRenderer.materials)
-            {
-                material.color = new Color(red, green, blue);
-            }
+    //        foreach (Material material in indicatorRenderer.materials)
+    //        {
+    //            material.color = new Color(red, green, blue);
+    //        }
             
-            yield return null;
-        }
+    //        yield return null;
+    //    }
       
+    //}
+
+    IEnumerator Shrink()
+    {
+        //currentScale = EasingLibrary.EaseInBack(currentScale, endScale, shrinkSpeed);
+
+        //transform.lo
+
+        yield return new WaitForFixedUpdate();
     }
      
 }
