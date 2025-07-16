@@ -1,18 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textForTimer;
+    [SerializeField] TextMeshProUGUI fadeInText;
+    [SerializeField] TextMeshProUGUI fadeOutText;
+
     [SerializeField] float timeRemainingInSeconds;
 
     public bool isCounting;
     int minutes;
     int seconds;
+    Vector3 fadeInTextOrigPos;
+    Vector3 fadeOutTextOrigPos;
+    bool isFading;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        fadeInTextOrigPos = fadeInText.transform.position;
+        fadeOutTextOrigPos = fadeOutText.transform.position;
     }
 
     // Update is called once per frame
@@ -41,15 +50,50 @@ public class Timer : MonoBehaviour
 
         if (seconds <= 10)
         {
-            shakeText();
+            ShakeText();
         }
 
+        if (!isFading)
+        {
+            StartCoroutine(FadeEffect());
+        }
+        else
+        {
+            fadeInText.transform.position -= new Vector3(0, 0.2f, 0);
+        }
 
-        textForTimer.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+            textForTimer.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+        
+
+
     }
 
-    private void shakeText()
+    IEnumerator FadeEffect()
+    {
+        isFading = true;
+        fadeInText.text = string.Format("{0:0}:{1:00}", minutes, seconds - 1);
+        fadeInText.CrossFadeAlpha(255f, 1f, false);
+        yield return new WaitForSeconds(1);
+        fadeInText.CrossFadeAlpha(1f, 0f, false);
+        fadeInText.transform.position = fadeInTextOrigPos;
+        //fadeInText.ap;
+
+        isFading = false;
+
+    }
+
+    private void ShakeText()
     {
 
+    }
+
+    private void FadeEffecst()
+    {
+
+        
+
+        fadeOutText.text = string.Format("{0:0}:{1:00}", minutes, seconds + 1);
+        fadeOutText.CrossFadeAlpha(0, 0.5f, false);
+        fadeOutText.transform.localPosition -= new Vector3(0, 0.5f, 0);
     }
 }
