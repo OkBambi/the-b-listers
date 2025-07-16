@@ -43,7 +43,7 @@ public class Timer : MonoBehaviour
         seconds = Mathf.FloorToInt(timeRemainingInSeconds % 60);
 
 
-        if (seconds == 10)
+        if (seconds == 10 && minutes == 0)
         {
             textForTimer.color = Color.red;
         }
@@ -82,7 +82,15 @@ public class Timer : MonoBehaviour
     }
     IEnumerator FadeOutEffect()
     {
-        fadeOutText.text = string.Format("{0:0}:{1:00}", minutes, seconds + 1);
+        int displaySeconds = (seconds + 1) % 10;
+        if (displaySeconds == 0)
+        {
+            fadeOutText.text = string.Format("{0:0}   {1:00}", "", seconds + 1);
+        }
+        else
+        {
+            fadeOutText.text = string.Format("{0:0}     {1:0}", "", displaySeconds);
+        }
         fadeOutText.CrossFadeAlpha(1f, 1f, false);
         yield return new WaitForSeconds(1);
         fadeOutText.CrossFadeAlpha(255f, 0f, false);
