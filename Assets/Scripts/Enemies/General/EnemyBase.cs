@@ -22,10 +22,11 @@ public class EnemyBase : MonoBehaviour, IDamage
     public int hp;
     public int score = 50;
     protected bool isAlive = true;
-
+    [Space]
+    [Header("Boss Stuff")]
     public Image bossHPBar;
     public float bossHPOrig;
-    public TextMeshPro bossName;
+    public TextMeshProUGUI bossName;
 
 
 

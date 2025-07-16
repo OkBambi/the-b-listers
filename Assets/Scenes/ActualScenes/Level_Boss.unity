@@ -1013,6 +1013,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ff37f62bb686324893e075301874d31, type: 3}
+--- !u!114 &1837331689 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6744182805441955166, guid: 2ff37f62bb686324893e075301874d31, type: 3}
+  m_PrefabInstance: {fileID: 1837331688}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1846515651 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4286932813153953689, guid: a17c33c97e9996b4f919d0b48f85565f, type: 3}
@@ -1270,6 +1281,10 @@ PrefabInstance:
       propertyPath: map
       value: 
       objectReference: {fileID: 8513859188497356809}
+    - target: {fileID: 4659325182028693950, guid: 22d2110474f111e4e846c8930368406f, type: 3}
+      propertyPath: bossName
+      value: 
+      objectReference: {fileID: 1837331689}
     - target: {fileID: 4659325182028693950, guid: 22d2110474f111e4e846c8930368406f, type: 3}
       propertyPath: bossHPBar
       value: 
