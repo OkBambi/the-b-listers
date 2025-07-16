@@ -70,6 +70,7 @@ public class EnemyInfoManager : MonoBehaviour
     }
     public void OnMonkButtonClicked()
     {
+        AudioManager.instance.Play("Monk_Cast");
         ShowPanel(monkInfoPanel);
     }
     public void OnSnakeButtonClicked()
