@@ -231,8 +231,11 @@ public class Goliath : EnemyBase
 
     public override void DeathCheck()
     {
-        GameManager.instance.isWon = true;
-        GameManager.instance.OnEndCondition();
+        if (hp <= 0)
+        {
+            GameManager.instance.isWon = true;
+            GameManager.instance.OnEndCondition();
+        }
         base.DeathCheck();
     }
 
