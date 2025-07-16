@@ -60,8 +60,8 @@ public class Timer : MonoBehaviour
         }
         else
         {
-            fadeInText.transform.position -= new Vector3(0, 0.2f, 0);
-            fadeOutText.transform.position -= new Vector3(0, 0.2f, 0);
+            fadeInText.transform.position -= new Vector3(0, 50f, 0) * Time.deltaTime;
+            fadeOutText.transform.position -= new Vector3(0, 50f, 0) * Time.deltaTime;
         }
 
             textForTimer.text = string.Format("{0:0}:{1:00}", minutes, seconds);
