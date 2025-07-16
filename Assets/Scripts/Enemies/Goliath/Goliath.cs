@@ -178,6 +178,8 @@ public class Goliath : EnemyBase
     void Swimming()
     {
         //track the player and move towards it under the ground
+        goliathHitLocation.transform.position = new Vector3(transform.position.x, 0.1f, transform.position.z);
+        goliathHitLocation.GetComponent<Renderer>().enabled = true;
 
         Vector3 playerRelativePos = new Vector3(playerTransform.position.x, 
             transform.position.y, playerTransform.position.z);
@@ -199,8 +201,6 @@ public class Goliath : EnemyBase
     void Breach()
     {
         //UP.
-        goliathHitLocation.transform.position = new Vector3(transform.position.x, 0.1f, transform.position.z);
-        goliathHitLocation.GetComponent<Renderer>().enabled = true;
         
         stateTimer += Time.deltaTime;
         if (stateTimer > timeBeforeBreach)
