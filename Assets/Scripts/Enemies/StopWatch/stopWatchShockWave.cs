@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.VFX;
 using static UnityEngine.Rendering.DebugUI;
 
 public class stopWatchShockWave : MonoBehaviour
@@ -18,11 +19,20 @@ public class stopWatchShockWave : MonoBehaviour
 
     private PrimaryColor ShockColor;
 
+    private ParticleSystem particleEffect; // Reference to the Visual Effect component
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     private void Awake()
     {
         ChainUIColor = GetComponent<ChainUIStopWatch>();
+
+        //Get the Visual Effect component if it exists
+        particleEffect = shockWave.GetComponent<ParticleSystem>();
+        if (particleEffect == null)
+        {
+            Debug.LogWarning("Particle Effect component not found.");
+        }
     }
 
     void Start()
