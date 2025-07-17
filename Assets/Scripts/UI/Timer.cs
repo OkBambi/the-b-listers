@@ -22,11 +22,11 @@ public class Timer : MonoBehaviour
     {
         if (!isCounting) return;
 
-        if (timeRemainingInSeconds > 0)
+        if (timeRemainingInSeconds > 1)
         {
             timeRemainingInSeconds -= Time.deltaTime;
         }
-        else if (timeRemainingInSeconds <= 1)
+        else
         {
             timeRemainingInSeconds = 0;
             GameManager.instance.OnEndCondition();
@@ -52,14 +52,13 @@ public class Timer : MonoBehaviour
         {
             StartCoroutine(FadeInEffect());
             StartCoroutine(FadeOutEffect());
+            textForTimer.text = string.Format("{0:0}:{1:00}", minutes, seconds);
         }
         else
         {
             fadeInText.transform.position = Vector3.MoveTowards(fadeInText.transform.position, textForTimer.transform.position, fadeMovementSpeed * Time.deltaTime);
             fadeOutText.transform.position = Vector3.MoveTowards(fadeOutText.transform.position, fadeOutText.transform.position - new Vector3(0,fadeMovementSpeed, 0), fadeMovementSpeed * Time.deltaTime);
         }
-
-            textForTimer.text = string.Format("{0:0}:{1:00}", minutes, seconds);
         
 
 
