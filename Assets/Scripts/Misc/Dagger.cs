@@ -24,6 +24,8 @@ public class Dagger : MonoBehaviour
         trail.colorOverLifetime = _trailGradient;
         trail.colorOverTrail = _trailGradient;
 
+        lastPos = transform.position;//initialize lastPos to the current position
+
         Destroy(gameObject, _lifeTime);
     }
 

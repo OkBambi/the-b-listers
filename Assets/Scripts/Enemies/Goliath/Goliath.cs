@@ -71,8 +71,10 @@ public class Goliath : EnemyBase
 
         StartCoroutine(SwapColors());
 
+        //For boss bar
         bossHPOrig = hp;
         bossName.text = gameObject.name;
+        bossHPBar.gameObject.transform.parent.gameObject.SetActive(true);
     }
 
     void Update()
@@ -235,13 +237,21 @@ public class Goliath : EnemyBase
         {
             GameManager.instance.isWon = true;
             GameManager.instance.OnEndCondition();
+            bossHPBar.gameObject.transform.parent.gameObject.SetActive(false);
         }
         base.DeathCheck();
     }
 
     public override void takeDamage(PrimaryColor hitColor, int amount)
     {
-        base.takeDamage(hitColor, amount);
-        updateBossHPBar();
+        if (hitColor == setColor || hitColor == PrimaryColor.OMNI || setColor == PrimaryColor.OMNI)
+        {
+            hp -= amount;
+            if (isAlive)
+                DeathCheck();
+
+            spawnHitColorParticles();
+            updateBossHPBar();
+        }
     }
 }
