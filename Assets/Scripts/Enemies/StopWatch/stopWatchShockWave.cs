@@ -13,13 +13,14 @@ public class stopWatchShockWave : MonoBehaviour
     [SerializeField] float LaunchHeight;
     [SerializeField] float KnockbackForce;
 
+    [SerializeField] ParticleSystem particleEffect; // Reference to the Visual Effect component
+
     [Header("BoogieWoogie")]
     [SerializeField] public int ColorLockTimer;
     [SerializeField]  ChainUIStopWatch ChainUIColor;
 
     private PrimaryColor ShockColor;
 
-    private ParticleSystem particleEffect; // Reference to the Visual Effect component
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -50,7 +51,8 @@ public class stopWatchShockWave : MonoBehaviour
     IEnumerator myShock()
     {
         shockWave.SetActive(true);
-        
+
+
         while (true)
         {
             yield return null;
@@ -62,7 +64,19 @@ public class stopWatchShockWave : MonoBehaviour
                 break; // Exit the coroutine when the shock wave reaches its maximum size
             }
         }
+
+        if (particleEffect != null)
+        {
+            // Play the particle effect if it exists
+            particleEffect.Play();
+        }
+
+
         yield return new WaitForSeconds(3f);
+        if (particleEffect != null)
+        {
+            particleEffect.Stop();
+        }
         shockWave.SetActive(false);
         yield return new WaitForSeconds(2f);
         Destroy(gameObject); // Destroy the shock wave GameObject after it reaches its maximum size
