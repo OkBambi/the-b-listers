@@ -28,8 +28,7 @@ public class FOVSlider : MonoBehaviour
         //this updates the text initially
         if (fovText != null )
         {
-            //fovText.text = "FOV: " + fovSlider.value.ToString("F0");
-            fovText.text = fovSlider.value.ToString("F0");    //displays it as a whole number
+            fovText.text = fovSlider.value.ToString("F0") + "%";    //displays it as a whole number
         }
     }
 
@@ -47,8 +46,7 @@ public class FOVSlider : MonoBehaviour
         //again, if added text, this updates the text just like the above one
         if (fovText != null )
         {
-            //fovText.text = "FOV: " + newFOV.ToString("F0");
-            fovText.text = newFOV.ToString("F0");
+            fovText.text = newFOV.ToString("F0") + "%";
         }
     }
 
