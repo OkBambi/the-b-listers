@@ -13,13 +13,14 @@ public class stopWatchShockWave : MonoBehaviour
     [SerializeField] float LaunchHeight;
     [SerializeField] float KnockbackForce;
 
+    [SerializeField] ParticleSystem particleEffect; // Reference to the Visual Effect component
+
     [Header("BoogieWoogie")]
     [SerializeField] public int ColorLockTimer;
     [SerializeField]  ChainUIStopWatch ChainUIColor;
 
     private PrimaryColor ShockColor;
 
-    private ParticleSystem particleEffect; // Reference to the Visual Effect component
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
