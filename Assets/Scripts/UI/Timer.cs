@@ -15,13 +15,7 @@ public class Timer : MonoBehaviour
     public float fadeMovementSpeed = 100;
     int minutes;
     int seconds;
-    Vector3 fadeOutMovePosition;
     bool isFading;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        fadeOutMovePosition = textForTimer.transform.position - new Vector3(0, fadeMovementSpeed, 0);
-    }
 
     // Update is called once per frame
     void Update()
@@ -62,7 +56,7 @@ public class Timer : MonoBehaviour
         else
         {
             fadeInText.transform.position = Vector3.MoveTowards(fadeInText.transform.position, textForTimer.transform.position, fadeMovementSpeed * Time.deltaTime);
-            fadeOutText.transform.position = Vector3.MoveTowards(fadeOutText.transform.position, fadeOutMovePosition, fadeMovementSpeed * Time.deltaTime);
+            fadeOutText.transform.position = Vector3.MoveTowards(fadeOutText.transform.position, fadeOutText.transform.position - new Vector3(0,fadeMovementSpeed, 0), fadeMovementSpeed * Time.deltaTime);
         }
 
             textForTimer.text = string.Format("{0:0}:{1:00}", minutes, seconds);
@@ -78,15 +72,15 @@ public class Timer : MonoBehaviour
 
         if (seconds == 0)
         {
-            fadeInText.text = string.Format("{0:0} {1:00}", minutes - 1, 59);
+            fadeInText.text = string.Format("{0:0}<alpha=#00>:<alpha=#FF>{1:00}", minutes - 1, 59);
         }
         else if (displaySeconds == 0)
         {
-            fadeInText.text = string.Format("{0:0}   {1:00}", "", seconds - 1);
+            fadeInText.text = string.Format("<alpha=#00>{0:0}:<alpha=#FF>{1:00}", minutes, seconds - 1);
         }
         else
         {
-            fadeInText.text = string.Format("{0:0}     {1:0}", "", displaySeconds);
+            fadeInText.text = string.Format("<alpha=#00>{0:0}:{1:0<alpha=#FF>0}", minutes, displaySeconds);
         }
 
         fadeInText.CrossFadeAlpha(255f, 1f, false);
@@ -102,15 +96,15 @@ public class Timer : MonoBehaviour
 
         if (seconds + 1 == 60)
         {
-            fadeOutText.text = string.Format("{0:0} {1:00}", minutes + 1, 0);
+            fadeOutText.text = string.Format("{0:0}<alpha=#00>:<alpha=#FF>{1:00}", minutes + 1, 0);
         }
         else if (displaySeconds == 0)
         {
-            fadeOutText.text = string.Format("{0:0}   {1:00}", "", seconds + 1);
+            fadeOutText.text = string.Format("<alpha=#00>{0:0}:<alpha=#FF>{1:00}", minutes, seconds + 1);
         }
         else
         {
-            fadeOutText.text = string.Format("{0:0}     {1:0}", "", displaySeconds);
+            fadeOutText.text = string.Format("<alpha=#00>{0:0}:{1:0<alpha=#FF>0}", minutes, displaySeconds);
         }
 
         fadeOutText.CrossFadeAlpha(1f, 1f, false);
