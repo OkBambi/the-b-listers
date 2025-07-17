@@ -36,16 +36,12 @@ public class Timer : MonoBehaviour
         seconds = Mathf.FloorToInt(timeRemainingInSeconds % 60);
 
 
-        if (timeRemainingInSeconds == 10)
+        if (timeRemainingInSeconds <= 11)
         {
             textForTimer.color = Color.red;
             fadeInText.color = Color.red;
             fadeOutText.color = Color.red;
-        }
-
-        if (seconds <= 10)
-        {
-            ShakeText();
+            StartCoroutine(ShakeText(timeRemainingInSeconds));
         }
 
         if (!isFading)
@@ -90,7 +86,6 @@ public class Timer : MonoBehaviour
     }
     IEnumerator FadeOutEffect()
     {
-        isFading = true;
         int displaySeconds = (seconds + 1) % 10;
 
         if (seconds + 1 == 60)
@@ -110,12 +105,30 @@ public class Timer : MonoBehaviour
         yield return new WaitForSeconds(1);
         fadeOutText.CrossFadeAlpha(255f, 0f, false);
         fadeOutText.transform.position = fadeOutText.transform.position + new Vector3(0f, fadeMovementSpeed, 0f);
-        isFading = false;
     }
 
 
-    private void ShakeText()
+    private IEnumerator ShakeText(float timeLeft)
     {
+        Vector3 originalPos = transform.localPosition;
 
+        float elapsed = 0.0f;
+        float _x;
+        float _y;
+        float shakeAmount = 15 - timeLeft;
+
+        while (elapsed < 0.5f)
+        {
+            if (Time.timeScale == 0f) yield break;
+            _x = Random.Range(-1f, 1f) * shakeAmount;
+            _y = Random.Range(-1f, 1f) * shakeAmount;
+
+            transform.localPosition = originalPos + new Vector3(_x, _y, 0);
+
+            elapsed += Time.deltaTime;
+
+            yield return null;
+        }
+        transform.localPosition = originalPos;
     }
 }
