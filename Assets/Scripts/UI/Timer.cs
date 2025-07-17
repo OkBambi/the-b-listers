@@ -12,16 +12,15 @@ public class Timer : MonoBehaviour
     [SerializeField] float timeRemainingInSeconds;
 
     public bool isCounting;
+    public float fadeMovementSpeed = 100;
     int minutes;
     int seconds;
-    Vector3 fadeInTextOrigPos;
-    Vector3 fadeOutTextOrigPos;
+    Vector3 fadeOutMovePosition;
     bool isFading;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        fadeInTextOrigPos = fadeInText.transform.position;
-        fadeOutTextOrigPos = fadeOutText.transform.position;
+        fadeOutMovePosition = textForTimer.transform.position - new Vector3(0, fadeMovementSpeed, 0);
     }
 
     // Update is called once per frame
@@ -62,8 +61,8 @@ public class Timer : MonoBehaviour
         }
         else
         {
-            fadeInText.transform.position -= new Vector3(0, 50f, 0) * Time.deltaTime;
-            fadeOutText.transform.position -= new Vector3(0, 50f, 0) * Time.deltaTime;
+            fadeInText.transform.position = Vector3.MoveTowards(fadeInText.transform.position, textForTimer.transform.position, fadeMovementSpeed * Time.deltaTime);
+            fadeOutText.transform.position = Vector3.MoveTowards(fadeOutText.transform.position, fadeOutMovePosition, fadeMovementSpeed * Time.deltaTime);
         }
 
             textForTimer.text = string.Format("{0:0}:{1:00}", minutes, seconds);
@@ -93,11 +92,12 @@ public class Timer : MonoBehaviour
         fadeInText.CrossFadeAlpha(255f, 1f, false);
         yield return new WaitForSeconds(1);
         fadeInText.CrossFadeAlpha(1f, 0f, false);
-        fadeInText.transform.position = fadeInTextOrigPos;
+        fadeInText.transform.position += new Vector3(0f, fadeMovementSpeed, 0f);
         isFading = false;
     }
     IEnumerator FadeOutEffect()
     {
+        isFading = true;
         int displaySeconds = (seconds + 1) % 10;
 
         if (seconds + 1 == 60)
@@ -116,7 +116,8 @@ public class Timer : MonoBehaviour
         fadeOutText.CrossFadeAlpha(1f, 1f, false);
         yield return new WaitForSeconds(1);
         fadeOutText.CrossFadeAlpha(255f, 0f, false);
-        fadeOutText.transform.position = fadeOutTextOrigPos;
+        fadeOutText.transform.position += new Vector3(0f, fadeMovementSpeed, 0f);
+        isFading = false;
     }
 
 
