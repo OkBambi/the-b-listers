@@ -176,6 +176,7 @@ MonoBehaviour:
   score: 60
   bossHPBar: {fileID: 0}
   bossHPOrig: 0
+  bossName: {fileID: 0}
   Wave: {fileID: 3166157826796465087}
   pauseToCastTimer: 10
   waveSize: 60
@@ -287,7 +288,7 @@ Transform:
   m_GameObject: {fileID: 3166157826796465087}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.018, z: -0.005}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -362,7 +363,7 @@ MonoBehaviour:
   ChainToggleables: []
   primaryColor: 0
   ChangeColor: {fileID: 0}
-  ColorLockMonk: {fileID: 0}
+  ColorLockMonk: {fileID: 562988025177513330}
 --- !u!114 &6484883120799959230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,6 +380,10 @@ MonoBehaviour:
   LockColorChange: {fileID: 562988025177513330}
   ShockTime: 1
   LaunchHight: 20
+  chainUI: {fileID: 0}
+  MonkChainUI: {fileID: 562988025177513330}
+  MMB: {fileID: 0}
+  monkboy: {fileID: 678332203169664480}
 --- !u!135 &1144159770599546745
 SphereCollider:
   m_ObjectHideFlags: 0

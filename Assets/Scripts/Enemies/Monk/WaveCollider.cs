@@ -12,11 +12,12 @@ public class WaveCollider : MonoBehaviour
     [SerializeField] float ShockTime;
     [SerializeField] float LaunchHight;
     private PrimaryColor waveColor;
-    [SerializeField]
-    private ChainUIMonkBoss chainUI;
+    [SerializeField]private ChainUIMonkBoss chainUI;
+    [SerializeField] private ChainUIMonk MonkChainUI;
 
     [SerializeField] Monk_MiniBoss MMB;
-    
+    [SerializeField] Monk monkboy;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -32,23 +33,32 @@ public class WaveCollider : MonoBehaviour
         }
         else
         {
-            if (MMB != null)
+            if (MMB != null || monkboy != null)
             {
-                chainUI.SwapChainColor(MMB.setColor);
+                if (MMB)
+                {
+                    chainUI.SwapChainColor(MMB.setColor);
+                }
+
+                if (monkboy)
+                {
+                    MonkChainUI.SwapChainColor(monkboy.setColor); 
+                }
             }
-
-            Debug.Log(other.name);
-            IColorLock colorLock = GameManager.instance.playerScript.GetComponent<IColorLock>();
-            if (colorLock != null)
-            {
-                colorLock.LockColorSelection(ColorLockTimer);
-
-            }
-
-
-            GameManager.instance.ChainScreen(ColorLockTimer);
         }
+
+        Debug.Log(other.name);
+        IColorLock colorLock = GameManager.instance.playerScript.GetComponent<IColorLock>();
+        if (colorLock != null)
+        {
+            colorLock.LockColorSelection(ColorLockTimer);
+
+        }
+
+
+        GameManager.instance.ChainScreen(ColorLockTimer);
     }
+
 
     private void resetPlayer()
     {
