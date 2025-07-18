@@ -17,7 +17,7 @@ public class Timer : MonoBehaviour
     int minutes;
     int seconds;
     bool isFading;
-    bool bob;
+    bool isColorSet;
 
     TMP_Text timerTextMesh;
     TMP_Text fadeInTextMesh;
@@ -60,15 +60,7 @@ public class Timer : MonoBehaviour
 
         if (seconds <= 20)
         {
-            if(!bob)
-            {
-                bob = true;
-                textForTimer.CrossFadeColor(Color.red, 10f, false, false);
-                fadeInText.color = new Color(Color.red.r, Color.red.g, Color.red.b, fadeInText.alpha);
-            }
-            Debug.Log("Work");
-            var newColor = textForTimer.canvasRenderer.GetColor();
-            fadeOutText.color = new Color(newColor.r, newColor.g, newColor.b, fadeOutText.alpha);
+            ChangeColors();
         }
 
         if (!isFading)
@@ -132,6 +124,18 @@ public class Timer : MonoBehaviour
         yield return new WaitForSeconds(1);
         fadeOutText.CrossFadeAlpha(255f, 0f, false);
         fadeOutText.transform.position = fadeOutText.transform.position + new Vector3(0f, fadeMovementSpeed, 0f);
+    }
+
+    private void ChangeColors()
+    {
+        if (!isColorSet)
+        {
+            isColorSet = true;
+            textForTimer.CrossFadeColor(Color.red, 10f, false, false);
+            fadeInText.color = new Color(Color.red.r, Color.red.g, Color.red.b, fadeInText.alpha);
+        }
+        var newColor = textForTimer.canvasRenderer.GetColor();
+        fadeOutText.color = new Color(newColor.r, newColor.g, newColor.b, fadeOutText.alpha);
     }
 
     private void ShakeTextPerChar(TMP_Text textMesh)
