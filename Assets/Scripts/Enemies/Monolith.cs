@@ -16,6 +16,8 @@ public class Monolith : EnemyBase
     [SerializeField] int angryBoidSpawnAmt;
 
     [SerializeField] AudioSource growl;
+    [SerializeField] AudioSource pop;
+    [SerializeField] AudioSource ambiance;
 
     private Rigidbody rb;
     bool isSpawning;
@@ -41,7 +43,7 @@ public class Monolith : EnemyBase
             model.transform.localScale = model.transform.localScale * 0.75f;
             rotationSpeed = rotationSpeed * 2f;
         }
-        //AudioManager.instance.Play("Monolith_Growl", growl);
+        AudioManager.instance.Play("Enemy_Ambiance", 0.5f, ambiance);
     }
 
     // Update is called once per frame
@@ -66,22 +68,44 @@ public class Monolith : EnemyBase
         {
             yield return new WaitForSeconds(0.1f);
             Instantiate(normalBoid, transform.position, Quaternion.identity);
+            AudioManager.instance.Play("Boid_Spawn", Random.Range(0.8f, 1.2f), pop);
+            StartCoroutine(ShakePos(0.2f, 0.05f));
+            StartCoroutine(ShakeSize(0.2f, 0.05f));
+            StartCoroutine(CameraShake.instance.ShakeWithDistance(0.1f, 0.2f, gameObject));
             if (LevelModifierManager.instance.doubleEnemies)
+            {
+                yield return new WaitForSeconds(0.05f);
                 Instantiate(normalBoid, transform.position + new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)), Quaternion.identity);
+                AudioManager.instance.Play("Boid_Spawn", Random.Range(0.8f, 1.2f), pop);
+                StartCoroutine(ShakePos(0.2f, 0.05f));
+                StartCoroutine(ShakeSize(0.2f, 0.05f));
+                StartCoroutine(CameraShake.instance.ShakeWithDistance(0.1f, 0.2f, gameObject));
+            }
         }
 
         for (int spawnCount = 0; spawnCount < angryBoidSpawnAmt; spawnCount++)//angry spawn
         {
             yield return new WaitForSeconds(0.5f);
             Instantiate(angryBoid, transform.position, Quaternion.identity);
+            AudioManager.instance.Play("Boid_Spawn", Random.Range(0.8f, 1.2f), pop);
+            StartCoroutine(ShakePos(0.4f, 0.05f));
+            StartCoroutine(ShakeSize(0.4f, 0.05f));
+            StartCoroutine(CameraShake.instance.ShakeWithDistance(0.1f, 0.2f, gameObject));
             if (LevelModifierManager.instance.doubleEnemies)
+            {
+                yield return new WaitForSeconds(0.05f);
                 Instantiate(angryBoid, transform.position + new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)), Quaternion.identity);
+                AudioManager.instance.Play("Boid_Spawn", Random.Range(0.8f, 1.2f), pop);
+                StartCoroutine(ShakePos(0.4f, 0.05f));
+                StartCoroutine(ShakeSize(0.4f, 0.05f));
+                StartCoroutine(CameraShake.instance.ShakeWithDistance(0.1f, 0.2f, gameObject));
+            }
         }
         yield return new WaitForSeconds(timeBetweenSpawns * (3f / 4f));
 
         isSpawning = false;
-        StartCoroutine(ShakePos(0.2f, 0.1f));
-        StartCoroutine(ShakeSize(0.2f, 0.1f));
+        //StartCoroutine(ShakePos(0.2f, 0.1f));
+        //StartCoroutine(ShakeSize(0.2f, 0.1f));
     }
 
     void movement()

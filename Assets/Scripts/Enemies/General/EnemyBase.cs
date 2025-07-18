@@ -30,6 +30,7 @@ public class EnemyBase : MonoBehaviour, IDamage
     public TextMeshProUGUI bossName;
 
     private Vector3 currentSize;
+    private Vector3 originalSize;
 
 
 
@@ -99,6 +100,7 @@ public class EnemyBase : MonoBehaviour, IDamage
     //call this when an AEC enemy spawn
     public void OnAECAwake()
     {
+        originalSize = transform.localScale;
         currentSize = Vector3.zero;
         transform.localScale = currentSize;
         StartCoroutine(SpawnJuice());
@@ -261,9 +263,9 @@ public class EnemyBase : MonoBehaviour, IDamage
         float timer = 0f;
         while (timer <= 0.1f)
         {
-            currentSize.x = EasingLibrary.EaseInBounce(currentSize.x, 2f, 0.4f);
-            currentSize.y = EasingLibrary.EaseInBounce(currentSize.y, 2f, 0.4f);
-            currentSize.z = EasingLibrary.EaseInBounce(currentSize.z, 2f, 0.4f);
+            currentSize.x = EasingLibrary.EaseInBounce(currentSize.x, originalSize.x * 2f, 0.4f);
+            currentSize.y = EasingLibrary.EaseInBounce(currentSize.y, originalSize.y * 2f, 0.4f);
+            currentSize.z = EasingLibrary.EaseInBounce(currentSize.z, originalSize.z * 2f, 0.4f);
 
             transform.localScale = currentSize;
             timer += Time.deltaTime;
@@ -273,15 +275,15 @@ public class EnemyBase : MonoBehaviour, IDamage
         timer = 0f;
         while (timer <= 0.5f)   
         {
-            currentSize.x = EasingLibrary.EaseOutBounce(currentSize.x, 1f, 0.2f);
-            currentSize.y = EasingLibrary.EaseOutBounce(currentSize.y, 1f, 0.2f);
-            currentSize.z = EasingLibrary.EaseOutBounce(currentSize.z, 1f, 0.2f);
+            currentSize.x = EasingLibrary.EaseOutBounce(currentSize.x, originalSize.x, 0.2f);
+            currentSize.y = EasingLibrary.EaseOutBounce(currentSize.y, originalSize.y, 0.2f);
+            currentSize.z = EasingLibrary.EaseOutBounce(currentSize.z, originalSize.z, 0.2f);
 
             transform.localScale = currentSize;
             timer += Time.deltaTime;
             yield return new WaitForFixedUpdate();
         }
         yield return null;
-        transform.localScale = Vector3.one;
+        transform.localScale = originalSize;
     }
 }

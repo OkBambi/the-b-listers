@@ -108,6 +108,7 @@ public class SpawnIndicator : MonoBehaviour
         var mainModule = absorb.main;
         mainModule.startColor = baseColour;
         mainModule.duration = 0.5f;
+        absorb.Play();
 
         baseColour.a = alpha;
         indicatorRenderer.material.color = baseColour;
@@ -164,6 +165,7 @@ public class SpawnIndicator : MonoBehaviour
                     Instantiate(enemyToSpawn, transform.position + new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f)), transform.rotation);
 
                 AudioManager.instance.Play("Enemy_Spawn", Random.Range(1.4f, 1.6f), spawnSfx);
+                StartCoroutine(CameraShake.instance.ShakeWithDistance(0.5f, 0.3f, gameObject));
             }
 
             yield return new WaitForFixedUpdate();

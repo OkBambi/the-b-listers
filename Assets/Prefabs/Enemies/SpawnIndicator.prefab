@@ -57,15 +57,16 @@ MonoBehaviour:
   canvas: {fileID: 7917897357146101280}
   boxImage: {fileID: 8145834969278146299}
   canvasLookPlayer: 0
-  startScale: {x: 100, y: 100, z: 100}
+  startScale: {x: 50, y: 50, z: 50}
   currentScale: {x: 0, y: 0, z: 0}
-  endScale: {x: 1, y: 1, z: 1}
   shrinkSpeed: 0.1
   shrinkTime: 2
   pauseTime: 1
   alpha: 0
   baseColour: {r: 0, g: 0, b: 0, a: 0}
   spawnSfx: {fileID: 694807220075432238}
+  absorbObject: {fileID: 0}
+  absorb: {fileID: 0}
 --- !u!82 &694807220075432238
 AudioSource:
   m_ObjectHideFlags: 0
