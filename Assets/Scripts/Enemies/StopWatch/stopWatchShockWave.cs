@@ -77,8 +77,6 @@ public class stopWatchShockWave : MonoBehaviour
         {
             particleEffect.Stop();
         }
-        shockWave.SetActive(false);
-        yield return new WaitForSeconds(2f);
         Destroy(gameObject); // Destroy the shock wave GameObject after it reaches its maximum size
     }
         IEnumerator Shockwavesound()

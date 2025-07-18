@@ -190,7 +190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2362246457872072167, guid: 94fe91a114c94e04084fd8ad76d07088, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7898798004148002361, guid: 94fe91a114c94e04084fd8ad76d07088, type: 3}
       propertyPath: m_LocalPosition.x
@@ -308,7 +308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3703748537186476124, guid: 640ba846edda9d44b9072db8483c4861, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3943148142247391701, guid: 640ba846edda9d44b9072db8483c4861, type: 3}
       propertyPath: m_LocalPosition.x
@@ -556,7 +556,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5220979843335486042, guid: e7548f6da20774a4d9a23b3f87535b01, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: e7548f6da20774a4d9a23b3f87535b01, type: 3}
 --- !u!23 &814222468 stripped
 MeshRenderer:
@@ -617,7 +620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8502500128498722891, guid: 22a6ca0a46b690a40a1381114e3228bb, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -638,7 +641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2130920958900456391, guid: e2adbfc455e061644bc6d452f457d0a9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8974869154418730767, guid: e2adbfc455e061644bc6d452f457d0a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -873,7 +876,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: b5eedad95ff457a40b63d866053e6635, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1148,7 +1151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4843311458845422002, guid: 65f629433d980e7478fbb9d049d2dd19, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1343,6 +1346,10 @@ PrefabInstance:
     - target: {fileID: 6499282511719247565, guid: b1e1424a94b7f48439485450ea93395a, type: 3}
       propertyPath: m_Name
       value: Monk_Mini_Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 6499282511719247565, guid: b1e1424a94b7f48439485450ea93395a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -27,6 +27,7 @@ public class ComboFeed : MonoBehaviour
     private List<string> finalFeedList = new List<string>();
     private List<float> finalScoreList = new List<float>();
     private static float finalScore;
+    private bool highScoreObtained;
 
     private void Awake()
     {
@@ -86,10 +87,9 @@ public class ComboFeed : MonoBehaviour
         }
         currentFinalFeedList.Clear();
 
-        
-        bool highScoreObtained = HighScoreManager.theInstance.SaveIfHighScore();
-        if (highScoreObtained)
+        if ((GameManager.instance.player.GetComponentInParent<Player>().isDead || GameManager.instance.isWon) && HighScoreManager.theInstance.IsHighScore())
         {
+            highScoreObtained = true;
             GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().NewHighScore();
         }
 
@@ -101,6 +101,7 @@ public class ComboFeed : MonoBehaviour
             if (highScoreObtained)
             {
                 GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().EnterHighScoreName();
+                highScoreObtained = false;
             }
 
             GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().WinOrLoseEndScreen();
