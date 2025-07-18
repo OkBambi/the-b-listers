@@ -51,19 +51,19 @@ public class ChainUIMonk : MonoBehaviour
             case PrimaryColor.RED:
                 GameManager.instance.lockMarker.color = Color.red;
                 GameManager.instance.unlockedMarker.color = Color.red;
-                ChangeColor.SwapToColour(GameManager.instance.playerScript.GetPlayerColor(), PrimaryColor.RED, ref GameManager.instance.playerScript.currentColor);
+                ChangeColor.SwapToColour(PrimaryColor.RED, ref GameManager.instance.playerScript.currentColor);
                 break;
 
             case PrimaryColor.BLUE:
                 GameManager.instance.lockMarker.color = Color.blue;
                 GameManager.instance.unlockedMarker.color = Color.blue;
-                ChangeColor.SwapToColour(GameManager.instance.playerScript.GetPlayerColor(), PrimaryColor.BLUE, ref GameManager.instance.playerScript.currentColor);
+                ChangeColor.SwapToColour(PrimaryColor.BLUE, ref GameManager.instance.playerScript.currentColor);
                 break;
 
             case PrimaryColor.YELLOW:
                 GameManager.instance.lockMarker.color = Color.yellow;
                 GameManager.instance.unlockedMarker.color = Color.yellow;
-                ChangeColor.SwapToColour(GameManager.instance.playerScript.GetPlayerColor(), PrimaryColor.YELLOW, ref GameManager.instance.playerScript.currentColor);
+                ChangeColor.SwapToColour(PrimaryColor.YELLOW, ref GameManager.instance.playerScript.currentColor);
                 break;
         }
     }
