@@ -17,6 +17,10 @@ public class HighScoreManager : MonoBehaviour
     public TextMeshProUGUI highScoresNamesTableText;
     public TMP_InputField userName;
     private int indexForNewName;
+    private bool isHighScoreDisplayed;
+
+    TMP_Text highScoresTableTextMesh;
+    TMP_Text highScoresNamesTableTextMesh;
 
     void Start()
     {
@@ -26,11 +30,17 @@ public class HighScoreManager : MonoBehaviour
             ClearHighScores();
             PlayerPrefs.Save();
         }
+        highScoresTableTextMesh = highScoresTableText.GetComponent<TMP_Text>();
+        highScoresNamesTableTextMesh = highScoresNamesTableText.GetComponent<TMP_Text>();
     }
 
     private void Update()
     {
-        
+        if (isHighScoreDisplayed)
+        {
+            AnimateText(highScoresTableTextMesh, 10f, PerChar, Wobble);
+            AnimateText(highScoresNamesTableTextMesh, 10f, PerChar, Wobble);
+        }
     }
 
     public void SaveHighScore(int newHighScore, int location, string userName)
@@ -76,17 +86,18 @@ public class HighScoreManager : MonoBehaviour
 
     public void DisplayHighScoreTable()
     {
+        isHighScoreDisplayed = true;
         string highScoreTable = "High Scores:\n";
         string highScoreNameTable = "\n";
         List<int> highScores = GetScores();
         List<string> highScoresNames = GetNames();
         for (int index = 0; index < maxHighScores; ++index)
         {
-           highScoreNameTable += highScoresNames[index] + "\n";
-           highScoreTable += (index + 1) + ". " + highScores[index] + "\n";
+            highScoreNameTable += highScoresNames[index] + "\n";
+            highScoreTable += (index + 1) + ". " + highScores[index] + "\n";
         }
-        highScoresTableText.text = highScoreTable;
         highScoresNamesTableText.text = highScoreNameTable;
+        highScoresTableText.text = highScoreTable;
     }
 
     public void ClearHighScores()
