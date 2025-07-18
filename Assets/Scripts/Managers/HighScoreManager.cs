@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static TextAnimations;
 
 public class HighScoreManager : MonoBehaviour
 {
@@ -25,6 +26,11 @@ public class HighScoreManager : MonoBehaviour
             ClearHighScores();
             PlayerPrefs.Save();
         }
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void SaveHighScore(int newHighScore, int location, string userName)

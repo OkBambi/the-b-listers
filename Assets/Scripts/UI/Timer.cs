@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static TextAnimations;
 
 public class Timer : MonoBehaviour
 {
@@ -22,8 +23,6 @@ public class Timer : MonoBehaviour
     TMP_Text timerTextMesh;
     TMP_Text fadeInTextMesh;
     TMP_Text fadeOutTextMesh;
-    Mesh mesh;
-    Vector3[] vertices;
 
     private void Start()
     {
@@ -53,9 +52,9 @@ public class Timer : MonoBehaviour
 
         if (timeRemainingInSeconds <= 11)
         {
-            ShakeTextPerChar(timerTextMesh);
-            ShakeTextPerChar(fadeInTextMesh);
-            ShakeTextPerChar(fadeOutTextMesh);
+            ShakeTextPerChar(timerTextMesh, 10 - timeRemainingInSeconds);
+            ShakeTextPerChar(fadeInTextMesh, 10 - timeRemainingInSeconds);
+            ShakeTextPerChar(fadeOutTextMesh, 10 - timeRemainingInSeconds);
         }
 
         if (timeRemainingInSeconds <= 21)
@@ -137,39 +136,4 @@ public class Timer : MonoBehaviour
         var newColor = textForTimer.canvasRenderer.GetColor();
         fadeOutText.color = new Color(newColor.r, newColor.g, newColor.b, fadeOutText.alpha);
     }
-
-    private void ShakeTextPerChar(TMP_Text textMesh)
-    {
-        textMesh.ForceMeshUpdate();
-        mesh = textMesh.mesh;
-        vertices = mesh.vertices;
-
-        for (int index = 0; index < textMesh.textInfo.characterCount; index++)
-        {
-            TMP_CharacterInfo c = textMesh.textInfo.characterInfo[index];
-
-            int loc = c.vertexIndex;
-
-            Vector3 offset = Shake(timeRemainingInSeconds);
-            vertices[loc] += offset;
-            vertices[loc + 1] += offset;
-            vertices[loc + 2] += offset;
-            vertices[loc + 3] += offset;
-        }
-
-        mesh.vertices = vertices;
-        textMesh.canvasRenderer.SetMesh(mesh);
-    }
-    private Vector2 Shake(float timeLeft)
-    {
-        float _x;
-        float _y;
-        float shakeAmount = 10 - timeLeft;
-
-        _x = Random.Range(-1f, 1f) * shakeAmount;
-        _y = Random.Range(-1f, 1f) * shakeAmount;
-
-        return new Vector2(_x, _y);
-    }
-
 }
