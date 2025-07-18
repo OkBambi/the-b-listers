@@ -157,6 +157,7 @@ public class EnemyManager : MonoBehaviour
                 sp.SetMesh(enemyMeshList[2]);
                 sp.modelFrame.transform.localScale = new Vector3(20f, 20f, 20f);
                 sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+                sp.modelFrame.transform.position = sp.modelFrame.transform.position - new Vector3(0f, 5f, 0f);
                 break;
             case "Snake":
                 sp.enemyMesh = enemyMeshList[3];

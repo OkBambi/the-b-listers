@@ -3,6 +3,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static EasingLibrary;
 
 public class EnemyBase : MonoBehaviour, IDamage
 {
@@ -27,6 +28,8 @@ public class EnemyBase : MonoBehaviour, IDamage
     public Image bossHPBar;
     public float bossHPOrig;
     public TextMeshProUGUI bossName;
+
+    private Vector3 currentSize;
 
 
 
@@ -84,32 +87,25 @@ public class EnemyBase : MonoBehaviour, IDamage
     //CALL THIS METHOD IN THE START OF ALL ENEMIES
     protected void UpdateBoidAwareness()
     {
-        //this code is being refactored, when an enemy spawns, it should add its own rigid body to the boidreferences rigidbody list in the enemy manager
-        //this rigid body list is what all boids will use
-
         EnemyManager.instance.boidReferences.Add(GetComponent<Rigidbody>());
-        //BoidAI[] activeboids = FindObjectsByType<BoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-        //for (int boidCount = 0; boidCount < activeboids.Length; boidCount++)
-        //{
-        //    activeboids[boidCount].boids.Add(GetComponent<Rigidbody>());
-        //}
     }
 
     //CALL THIS METHOD IN THE DEATH OF ALL ENEMIES
     protected void RemoveSelfFromTargetList()
     {
         EnemyManager.instance.boidReferences.Remove(GetComponent<Rigidbody>());
-        //BoidAI[] activeboids = FindObjectsByType<BoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-        //for (int boidCount = 0; boidCount < activeboids.Length; boidCount++)
-        //{
-        //    activeboids[boidCount].boids.Remove(GetComponent<Rigidbody>());
-        //}
     }
 
     //call this when an AEC enemy spawn
     public void OnAECAwake()
     {
+        currentSize = Vector3.zero;
+        transform.localScale = currentSize;
+        StartCoroutine(SpawnJuice());
+        StartCoroutine(ShakePos(0.2f, 0.2f));
+
         EnemyManager.instance.OnAECAwake();
+        
     }
     //call this when an AEC enemy dies
     public void OnAECDestroy()
@@ -258,5 +254,34 @@ public class EnemyBase : MonoBehaviour, IDamage
     public void updateBossHPBar()
     {
         bossHPBar.fillAmount = hp / bossHPOrig;
+    }
+
+    IEnumerator SpawnJuice()
+    {
+        float timer = 0f;
+        while (timer <= 0.1f)
+        {
+            currentSize.x = EasingLibrary.EaseInBounce(currentSize.x, 2f, 0.4f);
+            currentSize.y = EasingLibrary.EaseInBounce(currentSize.y, 2f, 0.4f);
+            currentSize.z = EasingLibrary.EaseInBounce(currentSize.z, 2f, 0.4f);
+
+            transform.localScale = currentSize;
+            timer += Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+
+        timer = 0f;
+        while (timer <= 0.5f)   
+        {
+            currentSize.x = EasingLibrary.EaseOutBounce(currentSize.x, 1f, 0.2f);
+            currentSize.y = EasingLibrary.EaseOutBounce(currentSize.y, 1f, 0.2f);
+            currentSize.z = EasingLibrary.EaseOutBounce(currentSize.z, 1f, 0.2f);
+
+            transform.localScale = currentSize;
+            timer += Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+        yield return null;
+        transform.localScale = Vector3.one;
     }
 }

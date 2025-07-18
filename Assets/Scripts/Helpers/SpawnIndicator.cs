@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static EasingLibrary;
 
 public class SpawnIndicator : MonoBehaviour
@@ -14,22 +15,36 @@ public class SpawnIndicator : MonoBehaviour
 
     //How i think I'm going to do this is that this prefab will bethe one to actually spawn the enemies,
     //and the enemy manager will instantiate and control these.
+    [Header("Rendering")]
     public Renderer indicatorRenderer;
     [SerializeField] MeshFilter meshFilter;
     public GameObject modelFrame;
     public Mesh enemyMesh; //this will be set when this is instantiated
 
+    [Header("Enemy")]
     [SerializeField] List<Mesh> enemyMeshList;
     public GameObject enemyToSpawn;
+    public PrimaryColor colour;
 
+    [Header("Canvas")]
+    [SerializeField] GameObject canvas;
+    [SerializeField] Image boxImage;
+    [SerializeField] bool canvasLookPlayer;
+
+
+    [Header("Animation")]
     [SerializeField] Vector3 startScale;
     [SerializeField] Vector3 currentScale;
     [SerializeField] Vector3 endScale;
     [SerializeField] float shrinkSpeed;
+    [SerializeField] float shrinkTime;
+    [SerializeField] float pauseTime = 1f;
 
     [SerializeField] float alpha = 0f;
+    [SerializeField] Color baseColour;
 
-    //[SerializeField] Color baseColour;
+    [Header("Sound")]
+    [SerializeField] AudioSource spawnSfx;
     //[SerializeField] Color flashColour;
     //private Material[] flashMats;
 
@@ -49,9 +64,45 @@ public class SpawnIndicator : MonoBehaviour
 
     private void Awake()
     {
-        //transform.localScale = transform.localScale * startScale;
-        Color baseColor = indicatorRenderer.material.color;
-        indicatorRenderer.material.color = new Color(baseColor.r, baseColor.g, baseColor.b, alpha);
+        colour = (PrimaryColor)Random.Range(0, 3);
+
+        switch (colour)
+        {
+            case PrimaryColor.RED:
+                indicatorRenderer.material.color = Color.red;
+                //nameStr = "Red";
+                break;
+            case PrimaryColor.YELLOW:
+                indicatorRenderer.material.color = Color.yellow;
+                //nameStr = "Yellow";
+                break;
+            case PrimaryColor.BLUE:
+                indicatorRenderer.material.color = Color.blue;
+                //nameStr = "Blue";
+                break;
+            case PrimaryColor.OMNI:
+            default:
+                indicatorRenderer.material.color = Color.black;
+                //nameStr = "Omni";
+                break;
+        }
+
+        shrinkTime *= (1f - shrinkSpeed);
+        transform.localScale = startScale;
+        currentScale = startScale;
+
+        //colour
+        baseColour = indicatorRenderer.material.color;
+        boxImage.color = baseColour;
+        baseColour.a = alpha;
+        indicatorRenderer.material.color = baseColour;
+
+        //animations
+        StartCoroutine(Shrink());
+        canvasLookPlayer = true;
+        StartCoroutine(CanvasLookPlayer());
+        AudioManager.instance.Play("Enemy_Spawn", Random.Range(1.25f, 1.75f), spawnSfx);
+        //spawnSfx = AudioManager.
         //red = baseColour.r;
         //green = baseColour.g;
         //blue = baseColour.b;
@@ -66,64 +117,55 @@ public class SpawnIndicator : MonoBehaviour
 
     }
 
-
-    //IEnumerator Flash()
-    //{
-    //    while (isActiveAndEnabled)
-    //    {
-    //        if (red == flashColour.r && green == flashColour.g && blue == flashColour.b)
-    //        {
-    //            red = baseColour.r;
-    //            green = baseColour.g;
-    //            blue = baseColour.b;
-    //            ++flashIndex;
-    //            if(flashIndex >= 3)
-    //            {
-    //                Instantiate(enemyToSpawn, transform.position, transform.rotation);
-    //                if (LevelModifierManager.instance.doubleEnemies)
-    //                    Instantiate(enemyToSpawn, transform.position + new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f)), transform.rotation);
-
-    //                AudioManager.instance.Play("Enemy_Spawn");
-    //                //Debug.Log("ENEMY HAS SPAWN NOW PLAY");
-    //                Destroy(gameObject);
-    //            }
-    //        }
-
-    //        red = Mathf.Lerp(red, flashColour.r, flashSpeed);
-    //        if (Mathf.Abs(red - flashColour.r) <= 0.05f)
-    //        {
-    //            red = flashColour.r;
-    //        }
-
-    //        green = Mathf.Lerp(green, flashColour.g, flashSpeed);
-    //        if (Mathf.Abs(green - flashColour.g) <= 0.05f)
-    //        {
-    //            green = flashColour.g;
-    //        }
-
-    //        blue = Mathf.Lerp(blue, flashColour.b, flashSpeed);
-    //        if (Mathf.Abs(blue - flashColour.b) <= 0.05f)
-    //        {
-    //            blue = flashColour.b;
-    //        }
-
-    //        foreach (Material material in indicatorRenderer.materials)
-    //        {
-    //            material.color = new Color(red, green, blue);
-    //        }
-            
-    //        yield return null;
-    //    }
-      
-    //}
-
     IEnumerator Shrink()
     {
-        //currentScale = EasingLibrary.EaseInBack(currentScale, endScale, shrinkSpeed);
+        float timer = 0f;
+        bool hasSpawned = false;
+        while (timer <= shrinkTime)
+        {
+            currentScale.x = EasingLibrary.EaseOutBounce(currentScale.x, 0f, shrinkSpeed);
+            currentScale.y = EasingLibrary.EaseOutBounce(currentScale.y, 0f, shrinkSpeed);
+            currentScale.z = EasingLibrary.EaseOutBounce(currentScale.z, 0f, shrinkSpeed);
 
-        //transform.lo
+            alpha = EasingLibrary.EaseOutBounce(alpha, 1f, shrinkSpeed);
 
-        yield return new WaitForFixedUpdate();
+            //alpha = timer / shrinkTime;
+            //Debug.Log(alpha);
+
+            baseColour.a = alpha;
+            indicatorRenderer.material.color = baseColour;
+
+            transform.localScale = currentScale;
+            timer += Time.deltaTime;
+
+            if (!hasSpawned && currentScale.x < 0.1f)
+            {
+                hasSpawned = true;
+                EnemyBase enemy = Instantiate(enemyToSpawn, transform.position, transform.rotation).GetComponent<EnemyBase>();
+                enemy.setColor = colour;
+                if (LevelModifierManager.instance.doubleEnemies)
+                    Instantiate(enemyToSpawn, transform.position + new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f)), transform.rotation);
+
+                AudioManager.instance.Play("Enemy_Spawn", Random.Range(1.4f, 1.6f), spawnSfx);
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        transform.localScale = Vector3.zero;
+        yield return new WaitForSecondsRealtime(1f);
+        Destroy(gameObject);
+
+        yield return null;
     }
-     
+
+    IEnumerator CanvasLookPlayer()
+    {
+        while (canvasLookPlayer)
+        {
+            canvas.transform.LookAt(GameManager.instance.player.transform.position);
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
 }

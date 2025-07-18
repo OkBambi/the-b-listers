@@ -15,12 +15,14 @@ public class Monolith : EnemyBase
     [SerializeField] int normalBoidSpawnAmt;
     [SerializeField] int angryBoidSpawnAmt;
 
+    [SerializeField] AudioSource growl;
+
     private Rigidbody rb;
     bool isSpawning;
 
     private void Awake()
     {
-        RandomizeColor();
+        //RandomizeColor();
         OnAECAwake();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,6 +41,7 @@ public class Monolith : EnemyBase
             model.transform.localScale = model.transform.localScale * 0.75f;
             rotationSpeed = rotationSpeed * 2f;
         }
+        //AudioManager.instance.Play("Monolith_Growl", growl);
     }
 
     // Update is called once per frame
@@ -55,11 +58,13 @@ public class Monolith : EnemyBase
     IEnumerator SpawnBoids()
     {
         isSpawning = true;
-        AudioManager.instance.Play("Monolith_Growl");
+        
         //thiss should make it so that the first boid spawn for monoliths is almost instant, but afterwards, it will be the correct amount of time
         yield return new WaitForSeconds(timeBetweenSpawns / 4f);
+        AudioManager.instance.Play("Monolith_Growl", Random.Range(0.9f, 1.1f), growl);
         for (int spawnCount = 0; spawnCount < normalBoidSpawnAmt; spawnCount++)//normal spawn
         {
+            yield return new WaitForSeconds(0.1f);
             Instantiate(normalBoid, transform.position, Quaternion.identity);
             if (LevelModifierManager.instance.doubleEnemies)
                 Instantiate(normalBoid, transform.position + new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)), Quaternion.identity);
@@ -67,6 +72,7 @@ public class Monolith : EnemyBase
 
         for (int spawnCount = 0; spawnCount < angryBoidSpawnAmt; spawnCount++)//angry spawn
         {
+            yield return new WaitForSeconds(0.5f);
             Instantiate(angryBoid, transform.position, Quaternion.identity);
             if (LevelModifierManager.instance.doubleEnemies)
                 Instantiate(angryBoid, transform.position + new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)), Quaternion.identity);

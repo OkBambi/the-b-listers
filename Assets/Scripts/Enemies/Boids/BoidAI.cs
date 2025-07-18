@@ -58,7 +58,8 @@ public class BoidAI : EnemyBase
 
         //finding the player
         player = GameManager.instance.player;
-        rb.AddForce(Vector3.up * startUpForce * Time.deltaTime, ForceMode.Acceleration);
+        Vector3 randUp = new Vector3(Random.Range(-50f, 50f), startUpForce, Random.Range(-50f, 50f));
+        rb.AddForce(randUp, ForceMode.Impulse);
     }
 
     protected override void Start()

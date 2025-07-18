@@ -140,6 +140,9 @@ MonoBehaviour:
   hitVfx: {fileID: 3182796100078218705, guid: 29f4ce75b6fb46e4c84cf17f94908403, type: 3}
   hp: 10
   score: 80
+  bossHPBar: {fileID: 0}
+  bossHPOrig: 0
+  bossName: {fileID: 0}
   rb: {fileID: 5077083023810088317}
   stageGround: {fileID: 0}
   player: {fileID: 0}
@@ -156,7 +159,7 @@ MonoBehaviour:
   noiseMax: 1.5
   groundAvoidance: 200
   skyAvoidance: 25
-  startUpForce: 70000
+  startUpForce: 200
   maxHeight: 20
   minHeight: 5
   chargeCooldown:
