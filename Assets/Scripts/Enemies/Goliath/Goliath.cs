@@ -107,6 +107,7 @@ public class Goliath : EnemyBase
             if (stateTimer > topRoamTime)
             {
                 currentState = State.Diving;
+                AudioManager.instance.Play("Goliath_Dive");
                 roamTime = 0;
                 Debug.Log("Goliath is diving!");
             }
@@ -118,6 +119,7 @@ public class Goliath : EnemyBase
         }
         else if (currentState == State.Swimming)
         {
+
             Swimming();
         }
         else if (currentState == State.Breach)
@@ -147,6 +149,7 @@ public class Goliath : EnemyBase
     
     void Diving()
     {
+                    StartCoroutine(WhaleSplashsNoise());
         if (goliathHitLocation.transform.position == Vector3.zero)
         {
             Vector3 divePos = new Vector3(Random.Range(-1f, 1f) * mapRadius, 0.1f, Random.Range(-1f, 1f) * mapRadius);
@@ -154,7 +157,7 @@ public class Goliath : EnemyBase
             goliathHitLocation.GetComponent<Renderer>().enabled = true;
         }
 
-
+        StartCoroutine(WhaleSplashsNoise());
         stateTimer += Time.deltaTime;
 
         //go down to indicator and through the map
@@ -189,6 +192,7 @@ public class Goliath : EnemyBase
         Vector3 horizontalDirection = (playerRelativePos - transform.position).normalized;
 
         //jaws music...
+
         transform.Translate(horizontalDirection * swimSpeed * Time.deltaTime);
 
         stateTimer += Time.deltaTime;
@@ -203,7 +207,7 @@ public class Goliath : EnemyBase
     void Breach()
     {
         //UP.
-        
+        StartCoroutine(WhaleSplashsNoise());
         stateTimer += Time.deltaTime;
         if (stateTimer > timeBeforeBreach)
         {
@@ -229,6 +233,12 @@ public class Goliath : EnemyBase
 
             ColorSelection(setColor);
         }
+    }
+
+    IEnumerator WhaleSplashsNoise()
+    {
+        yield return new WaitForSeconds(0.1f);
+        AudioManager.instance.Play("Goliath_Splash");
     }
 
     public override void DeathCheck()
