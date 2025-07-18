@@ -58,7 +58,7 @@ public class Timer : MonoBehaviour
             ShakeTextPerChar(fadeOutTextMesh);
         }
 
-        if (seconds <= 20)
+        if (timeRemainingInSeconds <= 21)
         {
             ChangeColors();
         }
