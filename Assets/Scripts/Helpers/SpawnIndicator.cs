@@ -35,7 +35,7 @@ public class SpawnIndicator : MonoBehaviour
     [Header("Animation")]
     [SerializeField] Vector3 startScale;
     [SerializeField] Vector3 currentScale;
-    [SerializeField] Vector3 endScale;
+    //[SerializeField] Vector3 endScale;
     [SerializeField] float shrinkSpeed;
     [SerializeField] float shrinkTime;
     [SerializeField] float pauseTime = 1f;
@@ -45,6 +45,10 @@ public class SpawnIndicator : MonoBehaviour
 
     [Header("Sound")]
     [SerializeField] AudioSource spawnSfx;
+
+    [Header("Particles")]
+    [SerializeField] GameObject absorbObject;
+    [SerializeField] ParticleSystem absorb;
     //[SerializeField] Color flashColour;
     //private Material[] flashMats;
 
@@ -87,13 +91,24 @@ public class SpawnIndicator : MonoBehaviour
                 break;
         }
 
+        //scale
         shrinkTime *= (1f - shrinkSpeed);
         transform.localScale = startScale;
         currentScale = startScale;
 
+        absorbObject = Instantiate(ParticleManager.instance.absorbEffect, transform.position, transform.rotation);
+        absorb = absorbObject.GetComponent<ParticleSystem>();
+        absorbObject.transform.localScale = startScale;
+
+
         //colour
         baseColour = indicatorRenderer.material.color;
         boxImage.color = baseColour;
+
+        var mainModule = absorb.main;
+        mainModule.startColor = baseColour;
+        mainModule.duration = 0.5f;
+
         baseColour.a = alpha;
         indicatorRenderer.material.color = baseColour;
 
@@ -136,6 +151,8 @@ public class SpawnIndicator : MonoBehaviour
             indicatorRenderer.material.color = baseColour;
 
             transform.localScale = currentScale;
+            if (absorbObject)
+                absorbObject.transform.localScale = currentScale;
             timer += Time.deltaTime;
 
             if (!hasSpawned && currentScale.x < 0.1f)
