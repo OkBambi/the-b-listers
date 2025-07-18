@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
+using static TextAnimations;
 
 public class Timer : MonoBehaviour
 {
@@ -12,16 +14,21 @@ public class Timer : MonoBehaviour
     [SerializeField] float timeRemainingInSeconds;
 
     public bool isCounting;
+    public float fadeMovementSpeed = 100;
     int minutes;
     int seconds;
-    Vector3 fadeInTextOrigPos;
-    Vector3 fadeOutTextOrigPos;
     bool isFading;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    bool isColorSet;
+
+    TMP_Text timerTextMesh;
+    TMP_Text fadeInTextMesh;
+    TMP_Text fadeOutTextMesh;
+
+    private void Start()
     {
-        fadeInTextOrigPos = fadeInText.transform.position;
-        fadeOutTextOrigPos = fadeOutText.transform.position;
+        timerTextMesh = textForTimer.GetComponent<TMP_Text>();
+        fadeInTextMesh = fadeInText.GetComponent<TMP_Text>();
+        fadeOutTextMesh = fadeOutText.GetComponent<TMP_Text>();
     }
 
     // Update is called once per frame
@@ -29,11 +36,11 @@ public class Timer : MonoBehaviour
     {
         if (!isCounting) return;
 
-        if (timeRemainingInSeconds > 0)
+        if (timeRemainingInSeconds > 1)
         {
             timeRemainingInSeconds -= Time.deltaTime;
         }
-        else if (timeRemainingInSeconds <= 1)
+        else
         {
             timeRemainingInSeconds = 0;
             GameManager.instance.OnEndCondition();
@@ -43,30 +50,29 @@ public class Timer : MonoBehaviour
         seconds = Mathf.FloorToInt(timeRemainingInSeconds % 60);
 
 
-        if (timeRemainingInSeconds == 10)
+        if (timeRemainingInSeconds <= 11)
         {
-            textForTimer.color = Color.red;
-            fadeInText.color = Color.red;
-            fadeOutText.color = Color.red;
+            AnimateText(timerTextMesh, 10 - timeRemainingInSeconds, PerChar, Shake);
+            AnimateText(fadeInTextMesh, 10 - timeRemainingInSeconds, PerChar, Shake);
+            AnimateText(fadeOutTextMesh, 10 - timeRemainingInSeconds, PerChar, Shake);
         }
 
-        if (seconds <= 10)
+        if (timeRemainingInSeconds <= 21)
         {
-            ShakeText();
+            ChangeColors();
         }
 
         if (!isFading)
         {
             StartCoroutine(FadeInEffect());
             StartCoroutine(FadeOutEffect());
+            textForTimer.text = string.Format("{0:0}:{1:00}", minutes, seconds);
         }
         else
         {
-            fadeInText.transform.position -= new Vector3(0, 50f, 0) * Time.deltaTime;
-            fadeOutText.transform.position -= new Vector3(0, 50f, 0) * Time.deltaTime;
+            fadeInText.transform.position = Vector3.MoveTowards(fadeInText.transform.position, textForTimer.transform.position, fadeMovementSpeed * Time.deltaTime);
+            fadeOutText.transform.position = Vector3.MoveTowards(fadeOutText.transform.position, fadeOutText.transform.position - new Vector3(0,fadeMovementSpeed, 0), fadeMovementSpeed * Time.deltaTime);
         }
-
-            textForTimer.text = string.Format("{0:0}:{1:00}", minutes, seconds);
         
 
 
@@ -77,24 +83,23 @@ public class Timer : MonoBehaviour
         isFading = true;
         int displaySeconds = (seconds - 1) % 10;
 
-        if (seconds - 1 == -1)
+        if (seconds == 0)
         {
-            Debug.Log("Hello");
-            fadeInText.text = string.Format("{0:0} {1:00}", minutes - 1, 59);
+            fadeInText.text = string.Format("{0:0}<alpha=#00>:<alpha=#FF>{1:00}", minutes - 1, 59);
         }
         else if (displaySeconds == 0)
         {
-            fadeInText.text = string.Format("{0:0}   {1:00}", "", seconds - 1);
+            fadeInText.text = string.Format("<alpha=#00>{0:0}:<alpha=#FF>{1:00}", minutes, seconds - 1);
         }
         else
         {
-            fadeInText.text = string.Format("{0:0}     {1:0}", "", displaySeconds);
+            fadeInText.text = string.Format("<alpha=#00>{0:0}:{1:0<alpha=#FF>0}", minutes, displaySeconds);
         }
 
         fadeInText.CrossFadeAlpha(255f, 1f, false);
         yield return new WaitForSeconds(1);
         fadeInText.CrossFadeAlpha(1f, 0f, false);
-        fadeInText.transform.position = fadeInTextOrigPos;
+        fadeInText.transform.position = fadeInText.transform.position + new Vector3(0f, fadeMovementSpeed, 0f);
         isFading = false;
     }
     IEnumerator FadeOutEffect()
@@ -103,26 +108,32 @@ public class Timer : MonoBehaviour
 
         if (seconds + 1 == 60)
         {
-            fadeOutText.text = string.Format("{0:0} {1:00}", minutes + 1, 0);
+            fadeOutText.text = string.Format("{0:0}<alpha=#00>:<alpha=#FF>{1:00}", minutes + 1, 0);
         }
         else if (displaySeconds == 0)
         {
-            fadeOutText.text = string.Format("{0:0}   {1:00}", "", seconds + 1);
+            fadeOutText.text = string.Format("<alpha=#00>{0:0}:<alpha=#FF>{1:00}", minutes, seconds + 1);
         }
         else
         {
-            fadeOutText.text = string.Format("{0:0}     {1:0}", "", displaySeconds);
+            fadeOutText.text = string.Format("<alpha=#00>{0:0}:{1:0<alpha=#FF>0}", minutes, displaySeconds);
         }
 
         fadeOutText.CrossFadeAlpha(1f, 1f, false);
         yield return new WaitForSeconds(1);
         fadeOutText.CrossFadeAlpha(255f, 0f, false);
-        fadeOutText.transform.position = fadeOutTextOrigPos;
+        fadeOutText.transform.position = fadeOutText.transform.position + new Vector3(0f, fadeMovementSpeed, 0f);
     }
 
-
-    private void ShakeText()
+    private void ChangeColors()
     {
-
+        if (!isColorSet)
+        {
+            isColorSet = true;
+            textForTimer.CrossFadeColor(Color.red, 10f, false, false);
+            fadeInText.color = new Color(Color.red.r, Color.red.g, Color.red.b, fadeInText.alpha);
+        }
+        var newColor = textForTimer.canvasRenderer.GetColor();
+        fadeOutText.color = new Color(newColor.r, newColor.g, newColor.b, fadeOutText.alpha);
     }
 }

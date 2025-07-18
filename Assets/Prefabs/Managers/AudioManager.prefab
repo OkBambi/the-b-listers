@@ -110,6 +110,60 @@ MonoBehaviour:
     pitch: 1
     looped: 0
     source: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0
+    looped: 0
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0
+    looped: 0
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0
+    looped: 0
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0
+    looped: 0
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0
+    looped: 0
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0
+    looped: 0
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 0
+    looped: 0
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0
+    looped: 0
+    source: {fileID: 0}
+  - name: Menu_Selection
+    clip: {fileID: 8300000, guid: 935128692d1bdf047bc7f73f3b3de5b8, type: 3}
+    volume: 0.345
+    pitch: 1
+    looped: 0
+    source: {fileID: 0}
   EnemySounds:
   - name: Monk_Cast
     clip: {fileID: 8300000, guid: f1cfb96b3644d0e4481084590700455b, type: 3}
@@ -185,6 +239,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Boid_Spawn
     clip: {fileID: 8300000, guid: 16cdf47d91098b347ad12cba0455514f, type: 3}
+  - name: Goliath_Dive
+    clip: {fileID: 8300000, guid: d8b00f63d79ba164f86c554f37b0c346, type: 3}
     volume: 0.339
     pitch: 1
     looped: 0
@@ -194,6 +250,17 @@ MonoBehaviour:
     volume: 0.339
     pitch: 1
     looped: 1
+  - name: Goliath_Indicator
+    clip: {fileID: 8300000, guid: c392974aa70c3ff498f8a253858b167d, type: 3}
+    volume: 0.339
+    pitch: 1
+    looped: 0
+    source: {fileID: 0}
+  - name: Goliath_Breach
+    clip: {fileID: 8300000, guid: d8b00f63d79ba164f86c554f37b0c346, type: 3}
+    volume: 0.339
+    pitch: 1
+    looped: 0
     source: {fileID: 0}
   WorldSounds: []
   Music:
@@ -234,14 +301,14 @@ MonoBehaviour:
     looped: 1
     source: {fileID: 0}
   - name: Boss_Level
-    clip: {fileID: 8300000, guid: d164d706d84771448b7a85e8097163a2, type: 3}
+    clip: {fileID: 8300000, guid: 29f625d7bc8004f43abe5e4d9a4a2c30, type: 3}
     volume: 0.5
     pitch: 1
     looped: 1
     source: {fileID: 0}
   - name: Main_Menu
     clip: {fileID: 8300000, guid: 9a04582ed68558a479b95ecbb2d92e6e, type: 3}
-    volume: 0.5
+    volume: 0.629
     pitch: 1
     looped: 1
     source: {fileID: 0}

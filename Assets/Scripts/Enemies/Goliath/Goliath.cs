@@ -71,8 +71,10 @@ public class Goliath : EnemyBase
 
         StartCoroutine(SwapColors());
 
+        //For boss bar
         bossHPOrig = hp;
         bossName.text = gameObject.name;
+        bossHPBar.gameObject.transform.parent.gameObject.SetActive(true);
     }
 
     void Update()
@@ -105,6 +107,7 @@ public class Goliath : EnemyBase
             if (stateTimer > topRoamTime)
             {
                 currentState = State.Diving;
+                AudioManager.instance.Play("Goliath_Dive");
                 roamTime = 0;
                 Debug.Log("Goliath is diving!");
             }
@@ -116,6 +119,7 @@ public class Goliath : EnemyBase
         }
         else if (currentState == State.Swimming)
         {
+
             Swimming();
         }
         else if (currentState == State.Breach)
@@ -145,6 +149,7 @@ public class Goliath : EnemyBase
     
     void Diving()
     {
+                    StartCoroutine(WhaleSplashsNoise());
         if (goliathHitLocation.transform.position == Vector3.zero)
         {
             Vector3 divePos = new Vector3(Random.Range(-1f, 1f) * mapRadius, 0.1f, Random.Range(-1f, 1f) * mapRadius);
@@ -152,7 +157,7 @@ public class Goliath : EnemyBase
             goliathHitLocation.GetComponent<Renderer>().enabled = true;
         }
 
-
+        StartCoroutine(WhaleSplashsNoise());
         stateTimer += Time.deltaTime;
 
         //go down to indicator and through the map
@@ -178,6 +183,8 @@ public class Goliath : EnemyBase
     void Swimming()
     {
         //track the player and move towards it under the ground
+        goliathHitLocation.transform.position = new Vector3(transform.position.x, 0.1f, transform.position.z);
+        goliathHitLocation.GetComponent<Renderer>().enabled = true;
 
         Vector3 playerRelativePos = new Vector3(playerTransform.position.x, 
             transform.position.y, playerTransform.position.z);
@@ -185,6 +192,7 @@ public class Goliath : EnemyBase
         Vector3 horizontalDirection = (playerRelativePos - transform.position).normalized;
 
         //jaws music...
+
         transform.Translate(horizontalDirection * swimSpeed * Time.deltaTime);
 
         stateTimer += Time.deltaTime;
@@ -199,9 +207,7 @@ public class Goliath : EnemyBase
     void Breach()
     {
         //UP.
-        goliathHitLocation.transform.position = new Vector3(transform.position.x, 0.1f, transform.position.z);
-        goliathHitLocation.GetComponent<Renderer>().enabled = true;
-        
+        StartCoroutine(WhaleSplashsNoise());
         stateTimer += Time.deltaTime;
         if (stateTimer > timeBeforeBreach)
         {
@@ -229,16 +235,33 @@ public class Goliath : EnemyBase
         }
     }
 
+    IEnumerator WhaleSplashsNoise()
+    {
+        yield return new WaitForSeconds(0.1f);
+        AudioManager.instance.Play("Goliath_Splash");
+    }
+
     public override void DeathCheck()
     {
-        GameManager.instance.isWon = true;
-        GameManager.instance.OnEndCondition();
+        if (hp <= 0)
+        {
+            GameManager.instance.isWon = true;
+            GameManager.instance.OnEndCondition();
+            bossHPBar.gameObject.transform.parent.gameObject.SetActive(false);
+        }
         base.DeathCheck();
     }
 
     public override void takeDamage(PrimaryColor hitColor, int amount)
     {
-        base.takeDamage(hitColor, amount);
-        updateBossHPBar();
+        if (hitColor == setColor || hitColor == PrimaryColor.OMNI || setColor == PrimaryColor.OMNI)
+        {
+            hp -= amount;
+            if (isAlive)
+                DeathCheck();
+
+            spawnHitColorParticles();
+            updateBossHPBar();
+        }
     }
 }

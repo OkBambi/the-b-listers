@@ -643,6 +643,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
+      propertyPath: EnemySounds.Array.size
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
+      propertyPath: EnemySounds.Array.data[12].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: c392974aa70c3ff498f8a253858b167d, type: 3}
+    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
+      propertyPath: EnemySounds.Array.data[14].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: c392974aa70c3ff498f8a253858b167d, type: 3}
+    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
+      propertyPath: EnemySounds.Array.data[15].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 58ec13dbe027a10449169665495da965, type: 3}
+    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
+      propertyPath: EnemySounds.Array.data[15].name
+      value: Goliath_Splash
+      objectReference: {fileID: 0}
+    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
+      propertyPath: EnemySounds.Array.data[15].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
+      propertyPath: EnemySounds.Array.data[12].volume
+      value: 0.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
+      propertyPath: EnemySounds.Array.data[15].volume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2952979188818049576, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -996,10 +1028,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2564090128206168261, guid: 2ff37f62bb686324893e075301874d31, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4020258067905937690, guid: 2ff37f62bb686324893e075301874d31, type: 3}
       propertyPath: m_Name
       value: UI
@@ -1272,10 +1300,6 @@ PrefabInstance:
     - target: {fileID: 728601701052533488, guid: 22d2110474f111e4e846c8930368406f, type: 3}
       propertyPath: m_Name
       value: Goliath
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659325182028693950, guid: 22d2110474f111e4e846c8930368406f, type: 3}
-      propertyPath: hp
-      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4659325182028693950, guid: 22d2110474f111e4e846c8930368406f, type: 3}
       propertyPath: map

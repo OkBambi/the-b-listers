@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.VFX;
 using static UnityEngine.Rendering.DebugUI;
 
 public class stopWatchShockWave : MonoBehaviour
@@ -12,17 +13,27 @@ public class stopWatchShockWave : MonoBehaviour
     [SerializeField] float LaunchHeight;
     [SerializeField] float KnockbackForce;
 
+    [SerializeField] ParticleSystem particleEffect; // Reference to the Visual Effect component
+
     [Header("BoogieWoogie")]
     [SerializeField] public int ColorLockTimer;
     [SerializeField]  ChainUIStopWatch ChainUIColor;
 
     private PrimaryColor ShockColor;
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     private void Awake()
     {
         ChainUIColor = GetComponent<ChainUIStopWatch>();
+
+        //Get the Visual Effect component if it exists
+        particleEffect = shockWave.GetComponent<ParticleSystem>();
+        if (particleEffect == null)
+        {
+            Debug.LogWarning("Particle Effect component not found.");
+        }
     }
 
     void Start()
@@ -40,7 +51,8 @@ public class stopWatchShockWave : MonoBehaviour
     IEnumerator myShock()
     {
         shockWave.SetActive(true);
-        
+
+
         while (true)
         {
             yield return null;
@@ -52,9 +64,19 @@ public class stopWatchShockWave : MonoBehaviour
                 break; // Exit the coroutine when the shock wave reaches its maximum size
             }
         }
+
+        if (particleEffect != null)
+        {
+            // Play the particle effect if it exists
+            particleEffect.Play();
+        }
+
+
         yield return new WaitForSeconds(3f);
-        shockWave.SetActive(false);
-        yield return new WaitForSeconds(2f);
+        if (particleEffect != null)
+        {
+            particleEffect.Stop();
+        }
         Destroy(gameObject); // Destroy the shock wave GameObject after it reaches its maximum size
     }
         IEnumerator Shockwavesound()
