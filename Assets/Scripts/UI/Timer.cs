@@ -17,13 +17,17 @@ public class Timer : MonoBehaviour
     int seconds;
     bool isFading;
 
-    TMP_Text textMesh;
+    TMP_Text timerTextMesh;
+    TMP_Text fadeInTextMesh;
+    TMP_Text fadeOutTextMesh;
     Mesh mesh;
-    Vector3[] verticies;
+    Vector3[] vertices;
 
     private void Start()
     {
-        textMesh = textForTimer.GetComponent<TMP_Text>();
+        timerTextMesh = textForTimer.GetComponent<TMP_Text>();
+        fadeInTextMesh = fadeInText.GetComponent<TMP_Text>();
+        fadeOutTextMesh = fadeOutText.GetComponent<TMP_Text>();
     }
 
     // Update is called once per frame
@@ -50,7 +54,9 @@ public class Timer : MonoBehaviour
             textForTimer.color = Color.red;
             fadeInText.color = Color.red;
             fadeOutText.color = Color.red;
-            ShakeTextPerChar();
+            ShakeTextPerChar(timerTextMesh);
+            ShakeTextPerChar(fadeInTextMesh);
+            ShakeTextPerChar(fadeOutTextMesh);
         }
 
         if (!isFading)
@@ -116,11 +122,11 @@ public class Timer : MonoBehaviour
         fadeOutText.transform.position = fadeOutText.transform.position + new Vector3(0f, fadeMovementSpeed, 0f);
     }
 
-    private void ShakeTextPerChar()
+    private void ShakeTextPerChar(TMP_Text textMesh)
     {
         textMesh.ForceMeshUpdate();
         mesh = textMesh.mesh;
-        verticies = mesh.vertices;
+        vertices = mesh.vertices;
 
         for (int index = 0; index < textMesh.textInfo.characterCount; index++)
         {
@@ -129,13 +135,13 @@ public class Timer : MonoBehaviour
             int loc = c.vertexIndex;
 
             Vector3 offset = Shake(timeRemainingInSeconds);
-            verticies[loc] += offset;
-            verticies[loc + 1] += offset;
-            verticies[loc + 2] += offset;
-            verticies[loc + 3] += offset;
+            vertices[loc] += offset;
+            vertices[loc + 1] += offset;
+            vertices[loc + 2] += offset;
+            vertices[loc + 3] += offset;
         }
 
-        mesh.vertices = verticies;
+        mesh.vertices = vertices;
         textMesh.canvasRenderer.SetMesh(mesh);
     }
     private Vector2 Shake(float timeLeft)
