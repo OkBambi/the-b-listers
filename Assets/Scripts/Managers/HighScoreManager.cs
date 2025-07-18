@@ -25,7 +25,6 @@ public class HighScoreManager : MonoBehaviour
             ClearHighScores();
             PlayerPrefs.Save();
         }
-        //ClearHighScores();
     }
 
     public void SaveHighScore(int newHighScore, int location, string userName)

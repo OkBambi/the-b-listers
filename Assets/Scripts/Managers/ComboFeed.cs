@@ -86,18 +86,13 @@ public class ComboFeed : MonoBehaviour
         }
         currentFinalFeedList.Clear();
 
-        
-        bool highScoreObtained = HighScoreManager.theInstance.SaveIfHighScore();
-        if (highScoreObtained)
-        {
-            GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().NewHighScore();
-        }
-
         //clear screen for highscore
         yield return new WaitForSecondsRealtime(timeToWaitBeforeHighScores);
         //check for highscore then saves if found
         if (GameManager.instance.player.GetComponentInParent<Player>().isDead || GameManager.instance.isWon)
         {
+
+
             if (highScoreObtained)
             {
                 GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().EnterHighScoreName();
