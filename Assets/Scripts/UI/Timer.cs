@@ -52,9 +52,9 @@ public class Timer : MonoBehaviour
 
         if (timeRemainingInSeconds <= 11)
         {
-            AnimateTextPerChar(timerTextMesh, 10 - timeRemainingInSeconds, Shake);
-            AnimateTextPerChar(fadeInTextMesh, 10 - timeRemainingInSeconds, Shake);
-            AnimateTextPerChar(fadeOutTextMesh, 10 - timeRemainingInSeconds, Shake);
+            AnimateText(timerTextMesh, 10 - timeRemainingInSeconds, PerChar, Shake);
+            AnimateText(fadeInTextMesh, 10 - timeRemainingInSeconds, PerChar, Shake);
+            AnimateText(fadeOutTextMesh, 10 - timeRemainingInSeconds, PerChar, Shake);
         }
 
         if (timeRemainingInSeconds <= 21)
