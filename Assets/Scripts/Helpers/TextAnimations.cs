@@ -11,7 +11,7 @@ public static class TextAnimations
     static TMP_Text textMesh;
     static List<int> wordIndex;
     static List<int> wordLength;
-    public delegate Vector2 AnimationName(float powerAmt);
+    public delegate Vector3 AnimationName(float powerAmt);
     public delegate void AnimationStyle(float powerAmt, AnimationName animationName);
 
     public static void AnimateText(TMP_Text textField, float powerAmt, AnimationStyle animationType, AnimationName animationName)
@@ -99,5 +99,7 @@ public static class TextAnimations
     {
         return new Vector2(Mathf.Sin(Time.deltaTime * powerAmt), Mathf.Cos(Time.deltaTime * (powerAmt - 0.2f)));
     }
+
+    
     #endregion
 }
