@@ -92,7 +92,7 @@ public class HighScoreManager : MonoBehaviour
         }
     }
 
-    public bool SaveIfHighScore()
+    public bool IsHighScore()
     {
         bool isHighscore = false;
         List<int> highscores = GetScores();
