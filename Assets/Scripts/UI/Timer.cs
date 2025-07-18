@@ -17,6 +17,15 @@ public class Timer : MonoBehaviour
     int seconds;
     bool isFading;
 
+    TMP_Text textMesh;
+    Mesh mesh;
+    Vector3[] verticies;
+
+    private void Start()
+    {
+        textMesh = textForTimer.GetComponent<TMP_Text>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -41,7 +50,7 @@ public class Timer : MonoBehaviour
             textForTimer.color = Color.red;
             fadeInText.color = Color.red;
             fadeOutText.color = Color.red;
-            StartCoroutine(ShakeText(timeRemainingInSeconds));
+            ShakeTextPerChar();
         }
 
         if (!isFading)
@@ -107,28 +116,38 @@ public class Timer : MonoBehaviour
         fadeOutText.transform.position = fadeOutText.transform.position + new Vector3(0f, fadeMovementSpeed, 0f);
     }
 
-
-    private IEnumerator ShakeText(float timeLeft)
+    private void ShakeTextPerChar()
     {
-        Vector3 originalPos = transform.localPosition;
+        textMesh.ForceMeshUpdate();
+        mesh = textMesh.mesh;
+        verticies = mesh.vertices;
 
-        float elapsed = 0.0f;
+        for (int index = 0; index < textMesh.textInfo.characterCount; index++)
+        {
+            TMP_CharacterInfo c = textMesh.textInfo.characterInfo[index];
+
+            int loc = c.vertexIndex;
+
+            Vector3 offset = Shake(timeRemainingInSeconds);
+            verticies[loc] += offset;
+            verticies[loc + 1] += offset;
+            verticies[loc + 2] += offset;
+            verticies[loc + 3] += offset;
+        }
+
+        mesh.vertices = verticies;
+        textMesh.canvasRenderer.SetMesh(mesh);
+    }
+    private Vector2 Shake(float timeLeft)
+    {
         float _x;
         float _y;
-        float shakeAmount = 15 - timeLeft;
+        float shakeAmount = 10 - timeLeft;
 
-        while (elapsed < 0.5f)
-        {
-            if (Time.timeScale == 0f) yield break;
-            _x = Random.Range(-1f, 1f) * shakeAmount;
-            _y = Random.Range(-1f, 1f) * shakeAmount;
+        _x = Random.Range(-1f, 1f) * shakeAmount;
+        _y = Random.Range(-1f, 1f) * shakeAmount;
 
-            transform.localPosition = originalPos + new Vector3(_x, _y, 0);
-
-            elapsed += Time.deltaTime;
-
-            yield return null;
-        }
-        transform.localPosition = originalPos;
+        return new Vector2(_x, _y);
     }
+
 }
