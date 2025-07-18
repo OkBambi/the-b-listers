@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Timer : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Timer : MonoBehaviour
     int minutes;
     int seconds;
     bool isFading;
+    bool bob;
 
     TMP_Text timerTextMesh;
     TMP_Text fadeInTextMesh;
@@ -51,12 +53,22 @@ public class Timer : MonoBehaviour
 
         if (timeRemainingInSeconds <= 11)
         {
-            textForTimer.color = Color.red;
-            fadeInText.color = Color.red;
-            fadeOutText.color = Color.red;
             ShakeTextPerChar(timerTextMesh);
             ShakeTextPerChar(fadeInTextMesh);
             ShakeTextPerChar(fadeOutTextMesh);
+        }
+
+        if (seconds <= 20)
+        {
+            if(!bob)
+            {
+                bob = true;
+                textForTimer.CrossFadeColor(Color.red, 10f, false, false);
+                fadeInText.color = new Color(Color.red.r, Color.red.g, Color.red.b, fadeInText.alpha);
+            }
+            Debug.Log("Work");
+            var newColor = textForTimer.canvasRenderer.GetColor();
+            fadeOutText.color = new Color(newColor.r, newColor.g, newColor.b, fadeOutText.alpha);
         }
 
         if (!isFading)
