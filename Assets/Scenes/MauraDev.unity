@@ -17524,6 +17524,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 957210964}
   m_CullTransparentMesh: 1
+--- !u!1 &960778262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6026333597437396889, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
+  m_PrefabInstance: {fileID: 1809786786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &960778266
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960778262}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 28ac64fe3f68f634fb5ef139671583e4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &960980435
 GameObject:
   m_ObjectHideFlags: 0
@@ -31754,6 +31781,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 330448499507203081, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 716085004237752899, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: m_Name
       value: AngryBoids
@@ -31790,6 +31821,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1899677996741572050, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1969384014383804508, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -31805,6 +31840,10 @@ PrefabInstance:
     - target: {fileID: 1969384014383804508, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165072744179538277, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2743411646172583778, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: m_AnchorMax.x
@@ -31954,6 +31993,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 4408004435642627480, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4520685625177452611, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.2
@@ -31974,6 +32017,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: AngryBoids (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4938054992899254903, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4950429765830474278, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5183629540679957706, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5396672799793692499, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -31993,6 +32048,10 @@ PrefabInstance:
     - target: {fileID: 5718803065703234760, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6026333597437396889, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
+      propertyPath: m_Name
+      value: Snakes
       objectReference: {fileID: 0}
     - target: {fileID: 6192644320702053576, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: m_Name
@@ -32049,6 +32108,10 @@ PrefabInstance:
     - target: {fileID: 7479767546534184264, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7559091852697233866, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7666074719753340454, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       propertyPath: m_Name
@@ -32148,6 +32211,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 716085004237752899, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 619170277}
+    - targetCorrespondingSourceObject: {fileID: 6026333597437396889, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 960778266}
   m_SourcePrefab: {fileID: 100100000, guid: 814310951fdb90546ba36e1c0a09a7a6, type: 3}
 --- !u!1 &1809786787 stripped
 GameObject:
