@@ -24,6 +24,7 @@ public class StopWatch : EnemyBase
         ColorSelection(setColor);
         startPosition = transform.position.y;
         isSlamming = false;
+        transform.rotation = Quaternion.Euler(90, 0, 0);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -49,7 +50,6 @@ public class StopWatch : EnemyBase
             NewHP = hp / 2;
             hp = NewHP;
         }
-
     }
 
     void CountDownTimer()
