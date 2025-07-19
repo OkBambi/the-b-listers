@@ -40,12 +40,6 @@ public class EnemyBase : MonoBehaviour, IDamage
     {
         ColorSelection(setColor);
         UpdateBoidAwareness();
-        if (LevelModifierManager.instance.lessHealth)
-        {
-            int NewHP = hp;
-            NewHP = hp / 2;
-            hp = NewHP;
-        }
     }
 
     protected void RandomizeColor()

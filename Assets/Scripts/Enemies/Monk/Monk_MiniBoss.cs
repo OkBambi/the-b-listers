@@ -46,6 +46,13 @@ public class Monk_MiniBoss : EnemyBase
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
+        if (LevelModifierManager.instance.lessHealth)
+        {
+            int NewHP = hp;
+            NewHP = hp / 2;
+            hp = NewHP;
+        }
+
         agent = GetComponent<NavMeshAgent>();
 
         chainUI = FindFirstObjectByType<ChainUIMonkBoss>();

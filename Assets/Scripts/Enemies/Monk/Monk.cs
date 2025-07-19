@@ -40,6 +40,7 @@ public class Monk : EnemyBase
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
+
         startingPOS = transform.position;
         ColorSelection(setColor);
         agent = GetComponent<NavMeshAgent>();
@@ -64,6 +65,12 @@ public class Monk : EnemyBase
             agent.speed = agent.speed * 2f;
         }
 
+        if (LevelModifierManager.instance.lessHealth)
+        {
+            int NewHP = hp;
+            NewHP = hp / 2;
+            hp = NewHP;
+        }
     }
     // Update is called once per frame
     void Update()

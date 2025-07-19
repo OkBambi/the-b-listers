@@ -41,6 +41,13 @@ public class Snake_MiniBoss : Snake
             movementSpeed = movementSpeed * 2f;
             Snakeagent.speed = movementSpeed;
         }
+
+        if (LevelModifierManager.instance.lessHealth)
+        {
+            int NewHP = hp;
+            NewHP = hp / 2;
+            hp = NewHP;
+        }
         StartCoroutine(RandomizeDestinationOffset());
     }
 
