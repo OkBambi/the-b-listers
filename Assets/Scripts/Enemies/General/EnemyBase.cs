@@ -26,7 +26,7 @@ public class EnemyBase : MonoBehaviour, IDamage
     [Space]
     [Header("Boss Stuff")]
     public Image bossHPBar;
-    public float bossHPOrig;
+    public float bossHPOrig = 1;
     public TextMeshProUGUI bossName;
 
     private Vector3 currentSize;

@@ -69,6 +69,7 @@ public class Goliath : EnemyBase
             hp = NewHP;
         }
 
+        GameManager.instance.PlayerHUD.transform.GetChild(6).gameObject.SetActive(true);//This is the boss health bar
         goliathHitLocation = GameObject.Find("GoliathHitMarker");
         map = GameObject.Find("Boss_Map");
         bossName = GameObject.Find("Enemy Name").GetComponent<TextMeshProUGUI>();
@@ -87,11 +88,28 @@ public class Goliath : EnemyBase
 
         StartCoroutine(SwapColors());
 
+        StartCoroutine(FillHPBar());
         //For boss bar
         bossHPOrig = hp;
         gameObject.name = "Goliath";
         bossName.text = gameObject.name;
-        bossHPBar.gameObject.transform.parent.gameObject.SetActive(true);
+    }
+
+    IEnumerator FillHPBar()
+    {
+        int fillAmount = 0;
+        while (fillAmount < hp)
+        {
+            fillAmount += 1;
+            CinimaticBossHPBar(fillAmount);
+            yield return new WaitForSeconds(0.0001f);
+
+        }
+    }
+
+    public void CinimaticBossHPBar(int amount)
+    {
+        bossHPBar.fillAmount = amount / bossHPOrig;
     }
 
     void Update()

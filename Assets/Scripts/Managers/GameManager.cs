@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject MenuSettings;
     [SerializeField] GameObject MenuCredits;
     [SerializeField] GameObject MenuGameInfo;
-    [SerializeField] GameObject PlayerHUD;
+    [SerializeField] public GameObject PlayerHUD;
 
 
     public GameObject player;
