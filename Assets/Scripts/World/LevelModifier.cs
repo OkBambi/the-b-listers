@@ -12,5 +12,4 @@ public class LevelModifier : ScriptableObject
     public string functionName;
     [SerializeField] public Sprite modifierIcon;
     [TextArea] public string description;
-
 }
