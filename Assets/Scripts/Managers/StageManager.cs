@@ -36,7 +36,6 @@ public class StageManager : MonoBehaviour
         {
             AudioManager.instance.Play("Floor_Crumble");
             Pathway.SetActive(false);
-
         }
     }
 }
