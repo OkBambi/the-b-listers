@@ -48,8 +48,6 @@ public class SnakeHead_MiniBoss : SnakeHead
                 newOrb.GetComponent<SnakeOrb>().parentHead = this;
             }
             
-            //Instantiate(snakeOrb, transform.position, Quaternion.identity).GetComponent<SnakeOrb>().parentHead = this;
-            //Instantiate(snakeOrb, transform.position, Quaternion.identity).GetComponent<SnakeOrb>().parentHead = this;
 
             col.enabled = false;
             killBox.SetActive(false);

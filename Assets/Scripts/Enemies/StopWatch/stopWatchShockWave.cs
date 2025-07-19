@@ -30,22 +30,12 @@ public class stopWatchShockWave : MonoBehaviour
 
         //Get the Visual Effect component if it exists
         particleEffect = shockWave.GetComponent<ParticleSystem>();
-        if (particleEffect == null)
-        {
-            Debug.LogWarning("Particle Effect component not found.");
-        }
     }
 
     void Start()
     {
         StartCoroutine(myShock());
         StartCoroutine(Shockwavesound());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     IEnumerator myShock()
@@ -104,7 +94,6 @@ public class stopWatchShockWave : MonoBehaviour
             else
             {
                 // Handle player damage or effects here
-                Debug.Log("Player hit by shock wave!");
                 GameManager.instance.playerScript.canAction = false; // Disable player actions
                 GameManager.instance.playerScript.canSchmove = false;
                 // You can add player damage logic here
@@ -129,7 +118,6 @@ public class stopWatchShockWave : MonoBehaviour
 
     private void resetPlayer()
     {
-        Debug.Log("reset");
         GameManager.instance.playerScript.canAction = true; // Re-enable player actions
         GameManager.instance.playerScript.canSchmove = true;
     }
