@@ -64,7 +64,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6d35b9e06615ecf499e700890ec1e628, type: 2}
+  - {fileID: 2100000, guid: e8dc8d40bfa836b488bc418d3efdd1e6, type: 2}
+  - {fileID: 2100000, guid: bf9b9cb3f3fa5fe41adc21d61e309374, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -190,13 +191,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6879201478727345457}
-  blueWindup: 1
-  stickySpeed: 40
-  timeBetweenPulses: 1
-  pulseMaxRadius: 10
-  pulseSpeed: 2
-  amountOfPulses: 3
-  pulseDmg: 1
 --- !u!1818360608 &1878262452338918042
 PositionConstraint:
   m_ObjectHideFlags: 0
