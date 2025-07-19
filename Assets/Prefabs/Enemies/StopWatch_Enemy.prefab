@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 751922278311181290}
   - component: {fileID: 2350332780393853857}
   - component: {fileID: 2537083421555204562}
+  - component: {fileID: 7066391010607447355}
   m_Layer: 7
   m_Name: StopWatch_Enemy
   m_TagString: Untagged
@@ -140,6 +141,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!65 &7066391010607447355
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348640562570076331}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.02262742, y: 0.022627417, z: 0.039800003}
+  m_Center: {x: 4.656613e-10, y: 0, z: 0.009}
 --- !u!1 &965146822399950773
 GameObject:
   m_ObjectHideFlags: 0
