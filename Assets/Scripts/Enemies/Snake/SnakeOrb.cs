@@ -66,8 +66,10 @@ public class SnakeOrb : EnemyBase
         parentHead.hp += Mathf.CeilToInt((float)parentHead.maxHp / 3f);
 
         isAlive = false;
+        parentHead.orbs.Clear();
         Destroy(gameObject);
         RemoveSelfFromTargetList();
+
         yield return null;
     }
 

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -312,5 +313,17 @@ public class SettingsManager : MonoBehaviour
         ApplyInvertY();
 
         settingsMenu.SetMouseSensitivity(GetmouseSensitivity());
+        StartCoroutine(FixScreen(settingsMenu));
+    }
+
+    public IEnumerator FixScreen(SettingsMenu settingsMenu)
+    {
+        FullScreenMode tempHolder = GetWindowType();
+        settingsMenu.SetWindowSetting(FullScreenMode.MaximizedWindow);
+        Debug.LogError("before");
+        yield return new WaitForSecondsRealtime(5f);
+        Debug.LogError("after");
+        Debug.LogError(tempHolder);
+        settingsMenu.SetWindowSetting(tempHolder);
     }
 }
