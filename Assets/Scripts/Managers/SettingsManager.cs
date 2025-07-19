@@ -320,10 +320,10 @@ public class SettingsManager : MonoBehaviour
     {
         FullScreenMode tempHolder = GetWindowType();
         settingsMenu.SetWindowSetting(FullScreenMode.MaximizedWindow);
-        Debug.LogError("before");
-        yield return new WaitForSecondsRealtime(5f);
-        Debug.LogError("after");
-        Debug.LogError(tempHolder);
+        //Debug.LogError("before");
+        yield return new WaitForSecondsRealtime(0.1f);
+        //Debug.LogError("after");
+        //Debug.LogError(tempHolder);
         settingsMenu.SetWindowSetting(tempHolder);
     }
 }
