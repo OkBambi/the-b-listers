@@ -126,7 +126,6 @@ public class Goliath : EnemyBase
                 currentState = State.Diving;
                 AudioManager.instance.Play("Goliath_Dive");
                 roamTime = 0;
-                Debug.Log("Goliath is diving!");
             }
         }
         else if (currentState == State.Diving)
@@ -166,7 +165,6 @@ public class Goliath : EnemyBase
     
     void Diving()
     {
-        StartCoroutine(WhaleSplashsNoise());
         if (goliathHitLocation.transform.position == Vector3.zero)
         {
             Vector3 divePos = new Vector3(Random.Range(-1f, 1f) * mapRadius, 0.1f, Random.Range(-1f, 1f) * mapRadius);
@@ -174,7 +172,6 @@ public class Goliath : EnemyBase
             goliathHitLocation.GetComponent<Renderer>().enabled = true;
         }
 
-        StartCoroutine(WhaleSplashsNoise());
         stateTimer += Time.deltaTime;
 
         //go down to indicator and through the map
@@ -190,6 +187,7 @@ public class Goliath : EnemyBase
 
             if (transform.position.y < -20f)
             {
+                StartCoroutine(WhaleSplashsNoise());
                 currentState = State.Swimming;
                 goliathHitLocation.GetComponent<Renderer>().enabled = false;
                 goliathHitLocation.transform.position = Vector3.zero;
