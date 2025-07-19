@@ -165,6 +165,7 @@ public class EnemyBase : MonoBehaviour, IDamage
 
         while (elapsed < duration)
         {
+            if (!this) yield break;
             if (Time.timeScale == 0f) yield break;
             _x = Random.Range(-1f, 1f) * magnitude;
             _y = Random.Range(-1f, 1f) * magnitude;
@@ -175,7 +176,8 @@ public class EnemyBase : MonoBehaviour, IDamage
 
             yield return null;
         }
-        transform.localPosition = originalPos;
+        if (!this)
+            transform.localPosition = originalPos;
     }
 
     public IEnumerator ShakeSize(float duration, float magnitude)
@@ -187,6 +189,7 @@ public class EnemyBase : MonoBehaviour, IDamage
 
         while (elapsed < duration)
         {
+            if (!this) yield break;
             if (Time.timeScale == 0f) yield break;
             _x = Random.Range(-1f, 1f) * magnitude;
             _y = Random.Range(-1f, 1f) * magnitude;
@@ -197,7 +200,8 @@ public class EnemyBase : MonoBehaviour, IDamage
 
             yield return null;
         }
-        transform.localScale = originalSize;
+        if (!this)
+            transform.localScale = originalSize;
     }
 
     public void spawnHitColorParticles()//spawn colors splats from the enemy

@@ -19,6 +19,10 @@ public class ParticleManager : MonoBehaviour
     public GameObject geyserEffect;
     public GameObject MonkEffect;
 
+    public GameObject yellowSchmoveExplosion;
+    public GameObject yellowSchmoveHit;
+    public GameObject yellowSchmoveRailgunCircles;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
