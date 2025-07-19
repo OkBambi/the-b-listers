@@ -27,7 +27,9 @@ public class Snake : EnemyBase
     //FOLLOWING
     [SerializeField] protected Transform player;
     [SerializeField] protected float followRange = 10f;
+    [SerializeField] protected float increaseFollowRange = 5f;
 
+    private bool isPlayerFound;
 
     //ATTACKING
 
@@ -83,9 +85,20 @@ public class Snake : EnemyBase
         {
             //follow the player
             Snakeagent.destination = player.position;
+            if (!isPlayerFound)
+            {
+                AudioManager.instance.Play("Snake", gameObject.GetComponent<AudioSource>());
+                followRange += increaseFollowRange;
+                isPlayerFound = true;
+            }
         }
         else
         {
+            if (isPlayerFound)
+            {
+                followRange -= increaseFollowRange;
+                isPlayerFound = false;
+            }
             //wander if not following
             if (timer <= 0)
             {
@@ -98,9 +111,10 @@ public class Snake : EnemyBase
     }
 
 
+
+
     void GetNewWanderTarget()
     {
-        AudioManager.instance.Play("Snake", gameObject.GetComponent<AudioSource>());
         wanderingTarget = RandomNavPOS(transform.position, wanderingRadius, -1); // -1 for all layers
     }
 
