@@ -38,8 +38,8 @@ public class HighScoreManager : MonoBehaviour
     {
         if (isHighScoreDisplayed)
         {
-            AnimateText(highScoresTableTextMesh, 10f, PerChar, Wobble);
-            AnimateText(highScoresNamesTableTextMesh, 10f, PerChar, Wobble);
+            AnimateText(highScoresTableTextMesh, 0.1f, PerChar, Shake);
+            AnimateText(highScoresNamesTableTextMesh, 0.2f, PerChar, Shake);
         }
     }
 
