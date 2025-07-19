@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static EasingLibrary;
@@ -6,9 +7,17 @@ using static EasingLibrary;
 public class ColorSwapping : MonoBehaviour
 {
 
-    [SerializeField] GameObject red_m2;
-    [SerializeField] GameObject yellow_m2;
-    [SerializeField] GameObject blue_m2;
+    public TextMeshProUGUI m2;
+    //[SerializeField] GameObject red_m2;
+    //[SerializeField] GameObject yellow_m2;
+    //[SerializeField] GameObject blue_m2;
+    [SerializeField] RectTransform currentBar;
+
+    [Header("CoolDownBars")]
+    [SerializeField] Image RedCD_UI;
+    public Image YellowCD_UI;
+    [SerializeField] Image BlueCD_UI;
+
     [SerializeField] Image colourTint;
     //[SerializeField] RectTransform redTint;
     //[SerializeField] RectTransform yellowTint;
@@ -131,7 +140,9 @@ public class ColorSwapping : MonoBehaviour
             colourTint.color = currentColour;
             --currentAnimationFrames;
         }
-        
+
+
+        m2.transform.localPosition = new Vector3(EaseOutBack(m2.transform.localPosition.x, currentBar.localPosition.x + currentBar.sizeDelta.x + 10f, 0.2f), EaseOutBack(m2.transform.localPosition.y, currentBar.localPosition.y, 0.2f), m2.transform.localPosition.z);
     }
 
     public void SwapToColour(PrimaryColor finalColour, ref PrimaryColor playerColor)
@@ -145,20 +156,38 @@ public class ColorSwapping : MonoBehaviour
             case PrimaryColor.RED:
                 endcolour = Color.red;
                 playerColor = PrimaryColor.RED;
+                MoveM2(RedCD_UI.rectTransform);
+                if (GameManager.instance.schmover.RedCD > 50)
+                    m2.color = Color.gray;
+                else
+                    m2.color = Color.white;
+
                 break;
             case PrimaryColor.YELLOW:
                 endcolour = Color.yellow;
                 playerColor = PrimaryColor.YELLOW;
+                MoveM2(YellowCD_UI.rectTransform);
+                if (GameManager.instance.schmover.YellowCD > 50)
+                    m2.color = Color.gray;
+                else
+                    m2.color = Color.white;
+
                 break;
             case PrimaryColor.BLUE:
                 endcolour = Color.blue;
                 playerColor = PrimaryColor.BLUE;
+                MoveM2(BlueCD_UI.rectTransform);
+                if (GameManager.instance.schmover.BlueCD > 50)
+                    m2.color = Color.gray;
+                else
+                    m2.color = Color.white;
+
                 break;
             
         }
-        ProcessCurrentColour(ref playerColor);
+        EnemyManager.instance.TriggerStopwatch(); // Trigger the stopwatch event when color changes
+        //ProcessCurrentColour(ref playerColor);
         currentAnimationFrames += framesPerAnimation;
-
     }
 
 
@@ -170,55 +199,60 @@ public class ColorSwapping : MonoBehaviour
     //        currentTint.localPosition = new Vector3(1920, 0, 0);
     //}
 
-    IEnumerator MoveTint(RectTransform tint, bool isGoingRight)
+    //IEnumerator MoveTint(RectTransform tint, bool isGoingRight)
+    //{
+    //    float oldX = tint.localPosition.x;
+    //    Debug.Log(oldX);
+    //    float finalX = oldX + (isGoingRight ? 1920 : -1920);
+    //    Debug.Log(finalX);
+    //    float currX = oldX;
+    //    Debug.Log(currX);
+    //    int counter = 0;
+
+    //    while (counter <= 100)
+    //    {
+    //        if (isGoingRight)
+    //            currX = EaseInCubic(currX, finalX, screenFlashSpeed);
+    //        else
+    //            currX = EaseInCubic(currX, finalX, screenFlashSpeed);
+    //        tint.localPosition = new Vector3(currX, tint.localPosition.y, tint.localPosition.z);
+    //        ++counter;
+    //        yield return null;
+    //    }
+    //    tint.localPosition = new Vector3(finalX, tint.localPosition.y, tint.localPosition.z);
+    //    yield return null;
+    //}
+
+    //private void ProcessCurrentColour(ref PrimaryColor playerColour)
+    //{
+    //    switch (playerColour)
+    //    {
+    //        case PrimaryColor.RED:
+    //            red_m2.SetActive(true);
+    //            yellow_m2.SetActive(false);
+    //            blue_m2.SetActive(false);
+    //            //currentTint = redTint;
+    //            break;
+
+    //        case PrimaryColor.YELLOW:
+    //            red_m2.SetActive(false);
+    //            yellow_m2.SetActive(true);
+    //            blue_m2.SetActive(false);
+    //            //currentTint = yellowTint;
+    //            break;
+
+    //        case PrimaryColor.BLUE:
+    //            red_m2.SetActive(false);
+    //            yellow_m2.SetActive(false);
+    //            blue_m2.SetActive(true);
+    //            //currentTint = blueTint;
+    //            break;
+    //    }
+    //    EnemyManager.instance.TriggerStopwatch(); // Trigger the stopwatch event when color changes
+    //}
+
+    void MoveM2(RectTransform bar)
     {
-        float oldX = tint.localPosition.x;
-        Debug.Log(oldX);
-        float finalX = oldX + (isGoingRight ? 1920 : -1920);
-        Debug.Log(finalX);
-        float currX = oldX;
-        Debug.Log(currX);
-        int counter = 0;
-
-        while (counter <= 100)
-        {
-            if (isGoingRight)
-                currX = EaseInCubic(currX, finalX, screenFlashSpeed);
-            else
-                currX = EaseInCubic(currX, finalX, screenFlashSpeed);
-            tint.localPosition = new Vector3(currX, tint.localPosition.y, tint.localPosition.z);
-            ++counter;
-            yield return null;
-        }
-        tint.localPosition = new Vector3(finalX, tint.localPosition.y, tint.localPosition.z);
-        yield return null;
-    }
-
-    private void ProcessCurrentColour(ref PrimaryColor playerColour)
-    {
-        switch (playerColour)
-        {
-            case PrimaryColor.RED:
-                red_m2.SetActive(true);
-                yellow_m2.SetActive(false);
-                blue_m2.SetActive(false);
-                //currentTint = redTint;
-                break;
-
-            case PrimaryColor.YELLOW:
-                red_m2.SetActive(false);
-                yellow_m2.SetActive(true);
-                blue_m2.SetActive(false);
-                //currentTint = yellowTint;
-                break;
-
-            case PrimaryColor.BLUE:
-                red_m2.SetActive(false);
-                yellow_m2.SetActive(false);
-                blue_m2.SetActive(true);
-                //currentTint = blueTint;
-                break;
-        }
-        EnemyManager.instance.TriggerStopwatch(); // Trigger the stopwatch event when color changes
+        currentBar = bar;
     }
 }
