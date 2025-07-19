@@ -97,6 +97,24 @@ MonoBehaviour:
     pitch: 1
     looped: 0
     source: {fileID: 0}
+  - name: Fizzle
+    clip: {fileID: 8300000, guid: 571e483c96a438447bd33e87f566d425, type: 3}
+    volume: 0.05
+    pitch: 1
+    looped: 0
+    source: {fileID: 0}
+  - name: Ding
+    clip: {fileID: 8300000, guid: acac76803db48a8449fb423452a781a8, type: 3}
+    volume: 0.05
+    pitch: 1
+    looped: 0
+    source: {fileID: 0}
+  - name: Invalid
+    clip: {fileID: 8300000, guid: 040c4af3f8494e64ea437e7cc55e17fa, type: 3}
+    volume: 0.1
+    pitch: 1
+    looped: 0
+    source: {fileID: 0}
   UISounds:
   - name: Game_Over
     clip: {fileID: 8300000, guid: b12120315ae629f428aec0fefd43ca3a, type: 3}
@@ -112,7 +130,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: 
     clip: {fileID: 0}
-    volume: 0
+    volume: 0.12
     pitch: 0
     looped: 0
     source: {fileID: 0}
@@ -279,7 +297,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 052f5921db1ef164390dc04919895dd1, type: 3}
     volume: 0.5
     pitch: 1
-    looped: 1
+    looped: 0
     source: {fileID: 0}
   - name: Level_1
     clip: {fileID: 8300000, guid: d1baf33d9bebe1945855dc8e8d837fdd, type: 3}

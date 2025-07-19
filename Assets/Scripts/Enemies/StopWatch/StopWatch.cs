@@ -23,6 +23,7 @@ public class StopWatch : EnemyBase
     {
         //RandomizeColor();
         OnAECAwake();
+        ColorSelection(setColor);
         startPosition = transform.position.y;
         //endPosition = 3f; // Adjust the end position as needed
         isSlamming = false;
@@ -31,7 +32,7 @@ public class StopWatch : EnemyBase
     protected override void Start()
     {
         counter = 0;
-        ColorSelection(setColor);
+        
         //base.UpdateBoidAwareness(); //this will need to be commented out once/if the stopwatch gets a rigidbody
         rb = GetComponent<Rigidbody>();
         // Keep gravity off initially

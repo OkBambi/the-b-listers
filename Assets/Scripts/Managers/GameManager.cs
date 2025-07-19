@@ -110,6 +110,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.KeypadPlus))
         {
             SceneManager.LoadScene("MainMenu");
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
     public void statePause()

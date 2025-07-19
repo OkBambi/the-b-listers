@@ -12,7 +12,7 @@ public class WaveCollider : MonoBehaviour
     [SerializeField] float ShockTime;
     [SerializeField] float LaunchHight;
     private PrimaryColor waveColor;
-    [SerializeField]private ChainUIMonkBoss chainUI;
+    [SerializeField] private ChainUIMonkBoss chainUI;
     [SerializeField] private ChainUIMonk MonkChainUI;
 
     [SerializeField] Monk_MiniBoss MMB;
@@ -21,10 +21,9 @@ public class WaveCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
+        StartCoroutine(CameraShake.instance.Shake(0.25f, 1f));
         if (LevelModifierManager.instance.boogieWoogie)
         {
-            Debug.Log("Player hit by shock wave!");
             GameManager.instance.playerScript.canAction = false; // Disable player actions
             GameManager.instance.playerScript.canSchmove = false;
             // You can add player damage logic here
@@ -42,27 +41,22 @@ public class WaveCollider : MonoBehaviour
 
                 if (monkboy)
                 {
-                    MonkChainUI.SwapChainColor(monkboy.setColor); 
+                    MonkChainUI.SwapChainColor(monkboy.setColor);
                 }
             }
+            Debug.Log(other.name);
+            IColorLock colorLock = GameManager.instance.playerScript.GetComponent<IColorLock>();
+            if (colorLock != null)
+            {
+                colorLock.LockColorSelection(ColorLockTimer);
+            }
+            GameManager.instance.ChainScreen(ColorLockTimer);
         }
-
-        Debug.Log(other.name);
-        IColorLock colorLock = GameManager.instance.playerScript.GetComponent<IColorLock>();
-        if (colorLock != null)
-        {
-            colorLock.LockColorSelection(ColorLockTimer);
-
-        }
-
-
-        GameManager.instance.ChainScreen(ColorLockTimer);
     }
 
 
     private void resetPlayer()
     {
-        Debug.Log("reset");
         GameManager.instance.playerScript.canAction = true; // Re-enable player actions
         GameManager.instance.playerScript.canSchmove = true;
     }
