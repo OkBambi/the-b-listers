@@ -193,8 +193,7 @@ public class Goliath : EnemyBase
                 currentState = State.Swimming;
                 goliathHitLocation.GetComponent<Renderer>().enabled = false;
                 goliathHitLocation.transform.position = Vector3.zero;
-                EnemyManager.instance.AEC = 5;
-                while (enemiesSpawned <= 5)
+                while (enemiesSpawned <= 6)
                 {
                     EnemyManager.instance.SpawnEnemy();
                     enemiesSpawned += 1;
@@ -219,8 +218,6 @@ public class Goliath : EnemyBase
 
         transform.Translate(horizontalDirection * swimSpeed * Time.deltaTime);
         stateTimer += Time.deltaTime;
-
-        EnemyManager.instance.AEC = 0;
 
 
         if (stateTimer > swimTime)
