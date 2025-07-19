@@ -20,6 +20,7 @@ public class HighScoreManager : MonoBehaviour
     public TMP_InputField userName;
     private int indexForNewName;
     private bool isHighScoreDisplayed;
+    private bool shakeForMe;
 
     TMP_Text highScoresTableTextMesh;
     TMP_Text highScoresNamesTableTextMesh;
@@ -32,6 +33,7 @@ public class HighScoreManager : MonoBehaviour
             ClearHighScores();
             PlayerPrefs.Save();
         }
+        ClearHighScores();
         highScoresTableTextMesh = highScoresTableText.GetComponent<TMP_Text>();
         highScoresNamesTableTextMesh = highScoresNamesTableText.GetComponent<TMP_Text>();
     }
@@ -41,6 +43,13 @@ public class HighScoreManager : MonoBehaviour
         if (isHighScoreDisplayed)
         {
             UpdateHighScoreTable();
+        }
+
+        if (shakeForMe)
+        {
+            AnimateText(highScoresNamesTableTextMesh, 5f, PerChar, Shake);
+            AnimateText(highScoresTableTextMesh, 2f, PerChar, Shake);
+            StartCoroutine(ShakeTheTable());
         }
     }
 
@@ -95,8 +104,6 @@ public class HighScoreManager : MonoBehaviour
         List<string> highScoresNames = GetNames();
         for (int index = 0; index < maxHighScores; ++index)
         {
-            //highScoreNameTable += highScoresNames[index] + "\n";
-            //highScoreTable += (index + 1) + ". " + highScores[index] + "\n";
             highScoresNamesTableText.text += highScoresNames[index] + "\n";
             highScoresTableText.text += (index + 1) + ". " + highScores[index] + "\n";
             yield return new WaitForSecondsRealtime(0.2f);
@@ -124,11 +131,17 @@ public class HighScoreManager : MonoBehaviour
         highScoresTableText.text = highScoreTable;
     }
 
+    IEnumerator ShakeTheTable()
+    {
+        yield return new WaitForSecondsRealtime(0.0001f);
+        shakeForMe = false;
+    }
+
     public void ClearHighScores()
     {
         for (int index = 0; index < maxHighScores; ++index)
         {
-            PlayerPrefs.SetInt(highscorePrefix + index, 1000);
+            PlayerPrefs.SetInt(highscorePrefix + index, 0);
             PlayerPrefs.SetString(playerNamePrefix + index, "Alphonsine");
         }
     }
@@ -155,5 +168,6 @@ public class HighScoreManager : MonoBehaviour
     {
         AudioManager.instance.Play("Key_Click", UnityEngine.Random.Range(0.9f, 1.1f));
         PlayerPrefs.SetString(playerNamePrefix + indexForNewName, userName.text);
+        shakeForMe = true;
     }
 }
