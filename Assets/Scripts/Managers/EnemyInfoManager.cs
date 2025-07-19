@@ -53,7 +53,7 @@ public class EnemyInfoManager : MonoBehaviour
     }
     public void OnBoidsButtonClicked()
     {
-        AudioManager.instance.Play("Enemy_Spawn");
+        AudioManager.instance.Play("Boid_Spawn");
         ShowPanel(boidsInfoPanel);
     }
     public void OnAngryBoidsButtonClicked()
