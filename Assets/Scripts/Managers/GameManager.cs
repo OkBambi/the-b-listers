@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.transform.parent.GetComponent<Player>();
         shootingPoint = GameObject.FindGameObjectWithTag("ShootingPoint").transform;
-        //TimeScaleOrigin = Time.timeScale;
         TimeScaleOrigin = 1f;
         Time.timeScale = TimeScaleOrigin;
         Cursor.lockState = CursorLockMode.Locked;
