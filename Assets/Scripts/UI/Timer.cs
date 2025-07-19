@@ -99,7 +99,7 @@ public class Timer : MonoBehaviour
         fadeInText.CrossFadeAlpha(255f, 1f, false);
         yield return new WaitForSeconds(1);
         fadeInText.CrossFadeAlpha(1f, 0f, false);
-        fadeInText.transform.localPosition = fadeInText.transform.localPosition + new Vector3(0f, fadeMovementSpeed, 0f);
+        fadeInText.transform.localPosition = textForTimer.transform.localPosition + new Vector3(0f, fadeMovementSpeed, 0f);
         isFading = false;
     }
     IEnumerator FadeOutEffect()
