@@ -110,6 +110,21 @@ public class HighScoreManager : MonoBehaviour
         }
     }
 
+    public void UpdateHighScoreTable()
+    {
+        string highScoreTable = "High Scores:\n";
+        string highScoreNameTable = "\n";
+        List<int> highScores = GetScores();
+        List<string> highScoresNames = GetNames();
+        for (int index = 0; index < maxHighScores; ++index)
+        {
+            highScoreNameTable += highScoresNames[index] + "\n";
+            highScoreTable += (index + 1) + ". " + highScores[index] + "\n";
+        }
+        highScoresNamesTableText.text = highScoreNameTable;
+        highScoresTableText.text = highScoreTable;
+    }
+
     public void ClearHighScores()
     {
         for (int index = 0; index < maxHighScores; ++index)
@@ -141,6 +156,6 @@ public class HighScoreManager : MonoBehaviour
     {
         AudioManager.instance.Play("Key_Click", UnityEngine.Random.Range(0.9f, 1.1f));
         PlayerPrefs.SetString(playerNamePrefix + indexForNewName, userName.text);
-        //DisplayHighScoreTable();
+        UpdateHighScoreTable();
     }
 }
