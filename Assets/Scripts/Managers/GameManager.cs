@@ -110,6 +110,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.KeypadPlus))
         {
             SceneManager.LoadScene("MainMenu");
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
     public void statePause()
@@ -215,7 +217,6 @@ public class GameManager : MonoBehaviour
             case "Level_1":
 
                 AudioManager.instance.Play("Level_1");
-                Debug.Log("MUSIC IS PLAYING OR ELSE");
                 break;
 
             case "Level_2":
