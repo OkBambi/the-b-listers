@@ -16,23 +16,15 @@ public class FeedListing : MonoBehaviour
     public void SetScoreAndHow(string _scoreFeed)
     {
         gameObject.GetComponent<TextMeshProUGUI>().text = _scoreFeed;
-        var playerColor = GameManager.instance.playerScript.currentColor;
-        if (playerColor == PrimaryColor.RED)
-        {
-            gameObject.GetComponent<TextMeshProUGUI>().color = Color.red;
-        }
-        else if (playerColor == PrimaryColor.BLUE)
-        {
-            gameObject.GetComponent<TextMeshProUGUI>().color = Color.blue;
-        }
-        else
-        {
-            gameObject.GetComponent<TextMeshProUGUI>().color = Color.yellow;
-        }
     }
     public string GetScoreAndHow()
     {
         return gameObject.GetComponent<TextMeshProUGUI>().text;
+    }
+
+    public void SetColor(Color setColor)
+    {
+        gameObject.GetComponent<TextMeshProUGUI>().color = setColor;
     }
 
     private void ChangeAlpha()

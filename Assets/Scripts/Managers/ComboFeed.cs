@@ -26,6 +26,7 @@ public class ComboFeed : MonoBehaviour
     private Queue<GameObject> currentFinalFeedList = new Queue<GameObject>();
     private List<string> finalFeedList = new List<string>();
     private List<float> finalScoreList = new List<float>();
+    private List<Color> finalColorList = new List<Color>();
     private static float finalScore;
     private bool highScoreObtained;
 
@@ -40,6 +41,7 @@ public class ComboFeed : MonoBehaviour
         GameObject newScoreFeed = Instantiate(feedListingPrefab, transform);
         newScoreFeed.transform.SetSiblingIndex(0);
         newScoreFeed.GetComponent<FeedListing>().SetScoreAndHow(_scoreFeed);
+        newScoreFeed.GetComponent<FeedListing>().SetColor(FindPlayerColor());
 
         AddToQueue(newScoreFeed, _score);
     }
@@ -49,10 +51,31 @@ public class ComboFeed : MonoBehaviour
         currentFeedList.Enqueue(_newScoreFeed);
         finalScoreList.Add(_score);
         finalFeedList.Add(_newScoreFeed.GetComponent<FeedListing>().GetScoreAndHow());
+        finalColorList.Add(FindPlayerColor());
+
         if (currentFeedList.Count > maxFeedLength)
         {
             Destroy(currentFeedList.Dequeue());
         }
+    }
+
+    private Color FindPlayerColor()
+    {
+        var playerColor = GameManager.instance.playerScript.currentColor;
+        Color textColor;
+        if (playerColor == PrimaryColor.RED)
+        {
+            textColor = Color.red;
+        }
+        else if (playerColor == PrimaryColor.BLUE)
+        {
+            textColor = Color.blue;
+        }
+        else
+        {
+            textColor = Color.yellow;
+        }
+        return textColor;
     }
 
     public void FinalScore()
@@ -74,6 +97,7 @@ public class ComboFeed : MonoBehaviour
             newScoreFeed.GetComponent<FeedListing>().GetComponent<TextMeshProUGUI>().fontSize = 55;
             newScoreFeed.GetComponent<FeedListing>().GetComponent<TextMeshProUGUI>().alignment = TextAlignmentOptions.Center;
             newScoreFeed.GetComponent<FeedListing>().SetScoreAndHow(finalFeedList[i]);
+            newScoreFeed.GetComponent<FeedListing>().SetColor(finalColorList[i]);
             finalScore += finalScoreList[i];
             finalScoreText.text = finalScore.ToString();
 
