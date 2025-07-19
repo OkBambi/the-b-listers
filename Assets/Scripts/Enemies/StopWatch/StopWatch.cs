@@ -21,7 +21,6 @@ public class StopWatch : EnemyBase
     private void Awake()
     {
         OnAECAwake();
-        ColorSelection(setColor);
         startPosition = transform.position.y;
         isSlamming = false;
         transform.rotation = Quaternion.Euler(90, 0, 0);
@@ -30,7 +29,7 @@ public class StopWatch : EnemyBase
     protected override void Start()
     {
         counter = 0;
-        
+        ColorSelection(setColor);
         rb = GetComponent<Rigidbody>();
         // Keep gravity off initially
         rb.useGravity = false;
