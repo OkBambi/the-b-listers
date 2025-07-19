@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -85,20 +86,28 @@ public class HighScoreManager : MonoBehaviour
         return highScoreNames;
     }
 
-    public void DisplayHighScoreTable()
+    public IEnumerator DisplayHighScoreTable()
     {
         isHighScoreDisplayed = true;
         string highScoreTable = "High Scores:\n";
         string highScoreNameTable = "\n";
+        highScoresNamesTableText.text += highScoreNameTable;
+        highScoresTableText.text += highScoreTable;
         List<int> highScores = GetScores();
         List<string> highScoresNames = GetNames();
         for (int index = 0; index < maxHighScores; ++index)
         {
-            highScoreNameTable += highScoresNames[index] + "\n";
-            highScoreTable += (index + 1) + ". " + highScores[index] + "\n";
+            //highScoreNameTable += highScoresNames[index] + "\n";
+            //highScoreTable += (index + 1) + ". " + highScores[index] + "\n";
+            highScoresNamesTableText.text += highScoresNames[index] + "\n";
+            highScoresTableText.text += (index + 1) + ". " + highScores[index] + "\n";
+            yield return new WaitForSecondsRealtime(0.2f);
         }
-        highScoresNamesTableText.text = highScoreNameTable;
-        highScoresTableText.text = highScoreTable;
+
+        if (ComboFeed.theInstance.isHighScoreObtained)
+        {
+            GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().EnterHighScoreName();
+        }
     }
 
     public void ClearHighScores()
@@ -132,6 +141,6 @@ public class HighScoreManager : MonoBehaviour
     {
         AudioManager.instance.Play("Key_Click", UnityEngine.Random.Range(0.9f, 1.1f));
         PlayerPrefs.SetString(playerNamePrefix + indexForNewName, userName.text);
-        DisplayHighScoreTable();
+        //DisplayHighScoreTable();
     }
 }
