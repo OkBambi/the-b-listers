@@ -100,6 +100,7 @@ public class ComboFeed : MonoBehaviour
             newScoreFeed.GetComponent<FeedListing>().SetColor(finalColorList[i]);
             finalScore += finalScoreList[i];
             finalScoreText.text = finalScore.ToString();
+            finalScoreText.color = finalColorList[i];
 
             currentFinalFeedList.Enqueue(newScoreFeed);
             if (currentFinalFeedList.Count > maxFeedLength - 6)
