@@ -84,7 +84,6 @@ public class AngryBoidRework : BoidAI
 
     protected IEnumerator SwitchAIMode()
     {
-        Debug.Log("switching");
         yield return new WaitForSeconds(Random.Range(chargeCooldown[0], chargeCooldown[1]));
         isNormalAI = !isNormalAI;
         StartCoroutine(FacePlayer());
@@ -93,12 +92,10 @@ public class AngryBoidRework : BoidAI
 
     IEnumerator SlowDown()
     {
-        //chargePhase = 0
         float currentTime = 0f;
         rb.AddForce(Vector3.up * 100f, ForceMode.Acceleration);
         while (currentTime < slowDownDuration)
         {
-            Debug.Log("slowing");
             currentTime += Time.deltaTime;
             rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, Vector3.zero, slowDownSpeed);
             yield return new WaitForFixedUpdate();
@@ -114,7 +111,6 @@ public class AngryBoidRework : BoidAI
     {
         while (chargePhase < 2)
         {
-            Debug.Log("faceplayer");
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(player.transform.position - transform.position), lookSpeed);
             yield return new WaitForFixedUpdate();
         }
@@ -125,9 +121,7 @@ public class AngryBoidRework : BoidAI
     IEnumerator Charge()
     {
         chargingTime = 0f;
-        //chargePhase = 1
         AudioManager.instance.Play("A_Boid_Charge");
-        Debug.Log("charging");
         StartCoroutine(TelegraphBlink());
         while (chargingTime <= chargeDuration)
         {
@@ -142,12 +136,9 @@ public class AngryBoidRework : BoidAI
 
     IEnumerator Dash()
     {
-        //chargePhase = 2
         trail.enabled = true;
-        Debug.Log("dashing");
         AudioManager.instance.Play("A_Boid_Dash");
         yield return new WaitForSeconds(pauseDuration);
-        //chargePhase = 3
         ++chargePhase;
         //end the blinking
         StartCoroutine(ChargeSquish());
@@ -198,7 +189,6 @@ public class AngryBoidRework : BoidAI
 
     IEnumerator ChargeSquish()
     {
-        Debug.Log("squish");
         int count = 0;
         while (count < 40)
         {
@@ -215,7 +205,6 @@ public class AngryBoidRework : BoidAI
             yield return new WaitForFixedUpdate();
         }
         model.transform.localScale = scaleOriginal;
-        Debug.Log("stop squish");
         yield return null;
 
     }
