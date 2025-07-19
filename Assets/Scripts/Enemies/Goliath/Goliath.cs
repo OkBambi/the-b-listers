@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Security.Cryptography;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -57,6 +58,7 @@ public class Goliath : EnemyBase
 
     float stateTimer;
     Vector3 startPos;
+    int enemiesSpawned;
 
     protected override void Start()
     {
@@ -191,6 +193,13 @@ public class Goliath : EnemyBase
                 currentState = State.Swimming;
                 goliathHitLocation.GetComponent<Renderer>().enabled = false;
                 goliathHitLocation.transform.position = Vector3.zero;
+                EnemyManager.instance.AEC = 5;
+                while (enemiesSpawned <= 5)
+                {
+                    EnemyManager.instance.SpawnEnemy();
+                    enemiesSpawned += 1;
+                }
+
             }
         }        
     }
@@ -209,13 +218,16 @@ public class Goliath : EnemyBase
         //jaws music...
 
         transform.Translate(horizontalDirection * swimSpeed * Time.deltaTime);
-
         stateTimer += Time.deltaTime;
+
+        EnemyManager.instance.AEC = 0;
+
 
         if (stateTimer > swimTime)
         {
             stateTimer = 0;
             currentState = State.Breach;
+            enemiesSpawned = 0;
         }
     }
 
