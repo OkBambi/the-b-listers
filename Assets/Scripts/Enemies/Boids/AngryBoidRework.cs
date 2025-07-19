@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class AngryBoidRework : BoidAI
 {
-    [SerializeField] List<float> chargeCooldown;
+    [SerializeField] protected List<float> chargeCooldown;
     [SerializeField] bool isNormalAI = true;
     [SerializeField] GameObject telegraphs;
     [SerializeField] GameObject redTelegraph;
     [SerializeField] GameObject whiteTelegraph;
-    [SerializeField] TrailRenderer trail;
+    [SerializeField] protected TrailRenderer trail;
 
     private int chargePhase = 0;
 
@@ -29,7 +29,7 @@ public class AngryBoidRework : BoidAI
 
     [SerializeField] GameObject squishModel;
 
-    Vector3 scaleOriginal;
+    protected Vector3 scaleOriginal;
     [SerializeField] Vector3 scaleSquished;
     protected override void Start()
     {
@@ -67,6 +67,10 @@ public class AngryBoidRework : BoidAI
         }
 
         StartCoroutine(SwitchAIMode());
+
+        ParticleSystem geyser = Instantiate(ParticleManager.instance.geyserEffect, transform.position + new Vector3(0f, 2f, 0f), Quaternion.identity).GetComponent<ParticleSystem>();
+        var mainModule = geyser.main;
+        mainModule.startColor = trail.material.color;
     }
 
     protected override void FixedUpdate()
@@ -78,7 +82,7 @@ public class AngryBoidRework : BoidAI
             base.FixedUpdate();
     }
 
-    IEnumerator SwitchAIMode()
+    protected IEnumerator SwitchAIMode()
     {
         Debug.Log("switching");
         yield return new WaitForSeconds(Random.Range(chargeCooldown[0], chargeCooldown[1]));
@@ -91,6 +95,7 @@ public class AngryBoidRework : BoidAI
     {
         //chargePhase = 0
         float currentTime = 0f;
+        rb.AddForce(Vector3.up * 100f, ForceMode.Acceleration);
         while (currentTime < slowDownDuration)
         {
             Debug.Log("slowing");
@@ -109,6 +114,7 @@ public class AngryBoidRework : BoidAI
     {
         while (chargePhase < 2)
         {
+            Debug.Log("faceplayer");
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(player.transform.position - transform.position), lookSpeed);
             yield return new WaitForFixedUpdate();
         }

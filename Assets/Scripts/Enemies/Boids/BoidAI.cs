@@ -48,6 +48,12 @@ public class BoidAI : EnemyBase
     [SerializeField] float maxHeight = 50f;
     [SerializeField] float minHeight = 5;
 
+    [Space]
+    [Header("Sounds")]
+    [SerializeField] AudioSource ambiance;
+
+    
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -58,7 +64,9 @@ public class BoidAI : EnemyBase
 
         //finding the player
         player = GameManager.instance.player;
-        rb.AddForce(Vector3.up * startUpForce * Time.deltaTime, ForceMode.Acceleration);
+        Vector3 randUp = new Vector3(Random.Range(-50f, 50f), startUpForce, Random.Range(-50f, 50f));
+        rb.AddForce(randUp, ForceMode.Impulse);
+        AudioManager.instance.Play("Enemy_Ambiance", 2f, ambiance);
     }
 
     protected override void Start()
@@ -75,6 +83,21 @@ public class BoidAI : EnemyBase
             stageWeight = stageWeight * 1.5f;
             playerWeight = playerWeight * 1.5f;
 
+        }
+
+        ParticleSystem geyser = Instantiate(ParticleManager.instance.geyserEffect, transform.position + new Vector3(0f, 2f, 0f), Quaternion.identity).GetComponent<ParticleSystem>();
+        var mainModule = geyser.main;
+        switch (setColor)
+        {
+            case PrimaryColor.RED:
+                mainModule.startColor = Color.red;
+                break;
+            case PrimaryColor.YELLOW:
+                mainModule.startColor = Color.yellow;
+                break;
+            case PrimaryColor.BLUE:
+                mainModule.startColor = Color.blue;
+                break;
         }
     }
 

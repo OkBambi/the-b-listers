@@ -21,7 +21,7 @@ public class StopWatch : EnemyBase
 
     private void Awake()
     {
-        RandomizeColor();
+        //RandomizeColor();
         OnAECAwake();
         startPosition = transform.position.y;
         //endPosition = 3f; // Adjust the end position as needed
