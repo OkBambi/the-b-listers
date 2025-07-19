@@ -20,6 +20,8 @@ public class Timer : MonoBehaviour
     bool isFading;
     bool isColorSet;
 
+    bool spawnedBoss = false;
+
     TMP_Text timerTextMesh;
     TMP_Text fadeInTextMesh;
     TMP_Text fadeOutTextMesh;
@@ -43,36 +45,52 @@ public class Timer : MonoBehaviour
         else
         {
             timeRemainingInSeconds = 0;
-            GameManager.instance.OnEndCondition();
+            if (!EnemyManager.instance.bossEnemy)
+                GameManager.instance.OnEndCondition();
+            else
+            {
+                if (!spawnedBoss)
+                {
+                    spawnedBoss = true;
+                    EnemyManager.instance.SpawnBoss();
+                    textForTimer.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+                    fadeOutText.gameObject.SetActive(false);
+                }
+            }
+                
         }
 
+        
         minutes = Mathf.FloorToInt(timeRemainingInSeconds / 60);
         seconds = Mathf.FloorToInt(timeRemainingInSeconds % 60);
 
+        if (!spawnedBoss)
+        {
+            if (timeRemainingInSeconds <= 11)
+            {
+                AnimateText(timerTextMesh, 10 - timeRemainingInSeconds, PerChar, Shake);
+                AnimateText(fadeInTextMesh, 10 - timeRemainingInSeconds, PerChar, Shake);
+                AnimateText(fadeOutTextMesh, 10 - timeRemainingInSeconds, PerChar, Shake);
+            }
 
-        if (timeRemainingInSeconds <= 11)
-        {
-            AnimateText(timerTextMesh, 10 - timeRemainingInSeconds, PerChar, Shake);
-            AnimateText(fadeInTextMesh, 10 - timeRemainingInSeconds, PerChar, Shake);
-            AnimateText(fadeOutTextMesh, 10 - timeRemainingInSeconds, PerChar, Shake);
-        }
+            if (timeRemainingInSeconds <= 21)
+            {
+                ChangeColors(); 
+            }
 
-        if (timeRemainingInSeconds <= 21)
-        {
-            ChangeColors();
+            if (!isFading)
+            {
+                StartCoroutine(FadeInEffect());
+                StartCoroutine(FadeOutEffect());
+                textForTimer.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+            }
+            else
+            {
+                fadeInText.transform.localPosition = Vector3.MoveTowards(fadeInText.transform.localPosition, textForTimer.transform.localPosition, fadeMovementSpeed * Time.deltaTime);
+                fadeOutText.transform.localPosition = Vector3.MoveTowards(fadeOutText.transform.localPosition, fadeOutText.transform.localPosition - new Vector3(0, fadeMovementSpeed, 0), fadeMovementSpeed * Time.deltaTime);
+            }
         }
-
-        if (!isFading)
-        {
-            StartCoroutine(FadeInEffect());
-            StartCoroutine(FadeOutEffect());
-            textForTimer.text = string.Format("{0:0}:{1:00}", minutes, seconds);
-        }
-        else
-        {
-            fadeInText.transform.localPosition = Vector3.MoveTowards(fadeInText.transform.localPosition, textForTimer.transform.localPosition, fadeMovementSpeed * Time.deltaTime);
-            fadeOutText.transform.localPosition = Vector3.MoveTowards(fadeOutText.transform.localPosition, fadeOutText.transform.localPosition - new Vector3(0,fadeMovementSpeed, 0), fadeMovementSpeed * Time.deltaTime);
-        }
+        
     }
 
     IEnumerator FadeInEffect()//look to see if you make fade in and fade out work in the same fuction

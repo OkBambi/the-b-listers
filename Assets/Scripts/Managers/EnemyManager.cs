@@ -19,6 +19,7 @@ public class EnemyManager : MonoBehaviour
 
     //so we have a list of enemies that spawn in a repeating order
     public List<GameObject> spawnList;
+    public GameObject bossEnemy;
     [SerializeField] List<Mesh> enemyMeshList;
 
     //this will track what enemy to spawn
@@ -35,13 +36,13 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] public GameObject stage;
 
     //and we have a spawn limit on the enemies
-    [SerializeField] public int AEC;
-    [SerializeField] public int currentEC;
+    public int AEC;
+    public int currentEC;
 
     //boids do not count towards AEC, but every other enemy counts as one AEC
     //we will also have a ticker that tracks the number of enemy kills.
-    [SerializeField] int ticker;
-    [SerializeField] int tickerLimit = 5;
+    public int ticker;
+    public int tickerLimit = 5;
     //when the ticker reaches 5 enemy kills, it will increase the AEC by 1;
 
     public Material flashMat;
@@ -263,6 +264,90 @@ public class EnemyManager : MonoBehaviour
         else
             spawnIndex = 0;
     }
+
+    public void SpawnBoss()
+    {
+        //safety checks
+        if (!isSpawningEnemies) return;
+        //if (currentEC >= AEC) return;
+
+        Vector3 spawnLocation = new Vector3(0, 6f, 0f);
+
+        //retry in one second if theres no good spots right now
+        //if (spawnLocation == Vector3.zero)
+        //{
+        //    Invoke("SpawnEnemy", 1f);
+        //    return;
+        //}
+
+        //spawn the indicator which will telegraph the enemy spawn
+        SpawnIndicator sp = Instantiate(spawnIndicator, spawnLocation, Quaternion.identity).GetComponent<SpawnIndicator>();
+        sp.enemyToSpawn = bossEnemy;
+
+        //what the spawn indicator will actually show
+        switch (sp.enemyToSpawn.name)
+        {
+            case "Monolith_Enemy":
+                sp.enemyMesh = enemyMeshList[0];
+                sp.SetMesh(enemyMeshList[0]);
+                sp.modelFrame.transform.localScale = new Vector3(162f, 67f, 322f);
+                sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 180f);
+                break;
+            case "StopWatch_Enemy":
+                sp.enemyMesh = enemyMeshList[1];
+                sp.SetMesh(enemyMeshList[1]);
+                break;
+            case "Monk_Enemy":
+                sp.enemyMesh = enemyMeshList[2];
+                sp.SetMesh(enemyMeshList[2]);
+                sp.modelFrame.transform.localScale = new Vector3(20f, 20f, 20f);
+                //sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+                sp.modelFrame.transform.position = sp.modelFrame.transform.position - new Vector3(0f, 5f, 0f);
+                break;
+            case "Snake w_ NavMesh":
+                sp.enemyMesh = enemyMeshList[3];
+                sp.SetMesh(enemyMeshList[3]);
+                //sp.modelFrame.transform.localScale = new Vector3(162f, 67f, 322f);
+                //sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 180f);
+                break;
+            case "Level_1_FlyingBoid":
+                sp.enemyMesh = enemyMeshList[4];
+                sp.SetMesh(enemyMeshList[4]);
+                //sp.modelFrame.transform.localScale = new Vector3(162f, 67f, 322f);
+                //sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 180f);
+                break;
+            case "Level_1_AngryBoid_Reworked":
+                sp.enemyMesh = enemyMeshList[5];
+                sp.SetMesh(enemyMeshList[5]);
+                //sp.modelFrame.transform.localScale = new Vector3(162f, 67f, 322f);
+                //sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 180f);
+                break;
+            case "Goliath":
+                sp.enemyMesh = enemyMeshList[6];
+                sp.SetMesh(enemyMeshList[6]);
+                sp.transform.position = new Vector3(spawnLocation.x, 26f, spawnLocation.z);
+                //sp.modelFrame.transform.localScale = new Vector3(162f, 67f, 322f);
+                //sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 180f);
+                break;
+            case "Snake Mini-Boss":
+                sp.enemyMesh = enemyMeshList[3];
+                sp.SetMesh(enemyMeshList[3]);
+                sp.modelFrame.transform.localScale = new Vector3(6f, 6f, 6f);
+                //sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 180f);
+                break;
+        }
+
+        if (spawnIndex < spawnList.Count - 1)
+            ++spawnIndex;
+        else
+            spawnIndex = 0;
+
+        for (int tempEC = 1; tempEC < AEC; ++tempEC)
+        {
+            SpawnEnemy();
+        }
+    }
+
 
     public Vector3 RandomizeSpawnLocation()
     {

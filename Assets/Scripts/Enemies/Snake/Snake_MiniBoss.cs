@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.ProBuilder;
+using UnityEngine.SceneManagement;
 
 public class Snake_MiniBoss : Snake
 {
@@ -16,6 +17,9 @@ public class Snake_MiniBoss : Snake
 
     private void Awake()
     {
+        EnemyManager.instance.AEC = 0;
+        EnemyManager.instance.ticker = 0;
+        EnemyManager.instance.tickerLimit = 100;
         for (int headIndex = 0; headIndex < theBois.Count; headIndex++)
         {
             int rand = Random.Range(0, colourIndexes.Count - 1);
@@ -75,11 +79,14 @@ public class Snake_MiniBoss : Snake
 
     public override void DeathCheck()
     {
+        //Debug.Log(hp);
         if (hp <= 0)
         {
             isAlive = false;
             RemoveSelfFromTargetList();
             AudioManager.instance.Play("Enemy_Death");
+            if (SceneManager.GetActiveScene().name != "Level_Showcase")
+                GameManager.instance.OnEndCondition();
             Destroy(gameObject);
             return;
         }

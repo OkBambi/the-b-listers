@@ -81,7 +81,8 @@ public class StopWatch : EnemyBase
         }
         transform.position = endPos; // Ensure we end at the exact position
         isSlamming = false;
-        Instantiate(ShockWave, transform.position - new Vector3(0f,1f,0f), Quaternion.identity).GetComponent<stopWatchShockWave>(); // Instantiate shockwave effect
+        ChainUIStopWatch chain =  Instantiate(ShockWave, transform.position - new Vector3(0f,1f,0f), Quaternion.identity).GetComponent<ChainUIStopWatch>(); // Instantiate shockwave effect
+        chain.Stopwatch = this;
         StartCoroutine(ReturnToStart()); // Return to start position after slamming 
     }
 

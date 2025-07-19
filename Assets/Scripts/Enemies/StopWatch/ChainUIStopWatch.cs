@@ -5,7 +5,7 @@ using UnityEngine.Video;
 public class ChainUIStopWatch : MonoBehaviour
 {
 
-    [SerializeField] StopWatch Stopwatch;
+    public StopWatch Stopwatch;
     [SerializeField] ChainMarker[] ChainToggleables;
 
     [SerializeField] PrimaryColor primaryColor;
