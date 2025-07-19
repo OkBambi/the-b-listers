@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static EasingLibrary;
 
 public static class TextAnimations
 {
@@ -21,7 +22,7 @@ public static class TextAnimations
         mesh = textMesh.mesh;
         vertices = mesh.vertices;
 
-        animationType(powerAmt,animationName);
+        animationType(powerAmt, animationName);
 
         mesh.vertices = vertices;
         textMesh.canvasRenderer.SetMesh(mesh);
@@ -86,18 +87,18 @@ public static class TextAnimations
     #region Animations
     public static Vector2 Shake(float powerAmt)
     {
-        float _x;
-        float _y;
-
-        _x = UnityEngine.Random.Range(-1f, 1f) * powerAmt;
-        _y = UnityEngine.Random.Range(-1f, 1f) * powerAmt;
-
-        return new Vector2(_x, _y);
+        return new Vector2(UnityEngine.Random.Range(-1f, 1f) * powerAmt, UnityEngine.Random.Range(-1f, 1f) * powerAmt);
     }
 
     public static Vector2 Wobble(float powerAmt)
     {
-        return new Vector2(Mathf.Sin(Time.deltaTime * powerAmt), Mathf.Cos(Time.deltaTime * (powerAmt - 0.2f)));
+        return new Vector2(Mathf.Sin(Time.unscaledDeltaTime * powerAmt), Mathf.Cos(Time.unscaledDeltaTime * (powerAmt - 0.2f)));
+    }
+
+    public static Vector2 ZoomIn(float powerAmt)
+    {
+        float scale = EaseInOutBack(0, 100, powerAmt);
+        return new Vector2(scale, scale);
     }
     #endregion
 }

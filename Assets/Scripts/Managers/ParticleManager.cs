@@ -17,6 +17,7 @@ public class ParticleManager : MonoBehaviour
     public int deathParticleAmt;
     public GameObject absorbEffect;
     public GameObject geyserEffect;
+    public GameObject MonkEffect;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()

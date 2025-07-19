@@ -130,7 +130,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: 
     clip: {fileID: 0}
-    volume: 0
+    volume: 0.12
     pitch: 0
     looped: 0
     source: {fileID: 0}
@@ -285,13 +285,19 @@ MonoBehaviour:
     pitch: 1
     looped: 0
     source: {fileID: 0}
+  - name: Snake
+    clip: {fileID: 8300000, guid: 8fff534c015b12f40b5525049fa47eba, type: 3}
+    volume: 0.339
+    pitch: 1
+    looped: 0
+    source: {fileID: 0}
   WorldSounds: []
   Music:
   - name: Setting_Music
     clip: {fileID: 8300000, guid: 052f5921db1ef164390dc04919895dd1, type: 3}
     volume: 0.5
     pitch: 1
-    looped: 1
+    looped: 0
     source: {fileID: 0}
   - name: Level_1
     clip: {fileID: 8300000, guid: d1baf33d9bebe1945855dc8e8d837fdd, type: 3}

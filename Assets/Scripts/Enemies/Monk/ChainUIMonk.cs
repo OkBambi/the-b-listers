@@ -43,6 +43,11 @@ public class ChainUIMonk : MonoBehaviour
             primaryColor = monk.setColor;
         }
     }
+    public void SwapChainColor(PrimaryColor color)
+    {
+        primaryColor = color;
+        SwapChainColor();
+    }
 
     public void SwapChainColor()
     {

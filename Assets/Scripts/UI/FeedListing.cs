@@ -17,10 +17,14 @@ public class FeedListing : MonoBehaviour
     {
         gameObject.GetComponent<TextMeshProUGUI>().text = _scoreFeed;
     }
-
     public string GetScoreAndHow()
     {
         return gameObject.GetComponent<TextMeshProUGUI>().text;
+    }
+
+    public void SetColor(Color setColor)
+    {
+        gameObject.GetComponent<TextMeshProUGUI>().color = setColor;
     }
 
     private void ChangeAlpha()
