@@ -40,8 +40,7 @@ public class HighScoreManager : MonoBehaviour
     {
         if (isHighScoreDisplayed)
         {
-            AnimateText(highScoresTableTextMesh, 0.1f, PerChar, Shake);
-            AnimateText(highScoresNamesTableTextMesh, 0.2f, PerChar, Shake);
+            UpdateHighScoreTable();
         }
     }
 
@@ -88,7 +87,6 @@ public class HighScoreManager : MonoBehaviour
 
     public IEnumerator DisplayHighScoreTable()
     {
-        isHighScoreDisplayed = true;
         string highScoreTable = "High Scores:\n";
         string highScoreNameTable = "\n";
         highScoresNamesTableText.text += highScoreNameTable;
@@ -108,6 +106,7 @@ public class HighScoreManager : MonoBehaviour
         {
             GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().EnterHighScoreName();
         }
+        isHighScoreDisplayed = true;
     }
 
     public void UpdateHighScoreTable()
@@ -129,7 +128,7 @@ public class HighScoreManager : MonoBehaviour
     {
         for (int index = 0; index < maxHighScores; ++index)
         {
-            PlayerPrefs.SetInt(highscorePrefix + index, 0);
+            PlayerPrefs.SetInt(highscorePrefix + index, 1000);
             PlayerPrefs.SetString(playerNamePrefix + index, "Alphonsine");
         }
     }
@@ -156,6 +155,5 @@ public class HighScoreManager : MonoBehaviour
     {
         AudioManager.instance.Play("Key_Click", UnityEngine.Random.Range(0.9f, 1.1f));
         PlayerPrefs.SetString(playerNamePrefix + indexForNewName, userName.text);
-        UpdateHighScoreTable();
     }
 }
