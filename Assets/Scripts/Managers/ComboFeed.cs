@@ -28,12 +28,11 @@ public class ComboFeed : MonoBehaviour
     private List<float> finalScoreList = new List<float>();
     private List<Color> finalColorList = new List<Color>();
     private static float finalScore;
-    private bool highScoreObtained;
+    public bool isHighScoreObtained;
 
     private void Awake()
     {
         theInstance = this;
-        //clearFinalScore();
     }
 
     public void AddNewComboFeed(string _scoreFeed, float _score) //allows you to add to the kill feed (modifier is what is done to the score. Example + or -)
@@ -80,7 +79,6 @@ public class ComboFeed : MonoBehaviour
 
     public void FinalScore()
     {
-        Debug.Log("Final Print");
         if (GameManager.instance.isWon)
         {
             GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().WonGame();
@@ -114,7 +112,7 @@ public class ComboFeed : MonoBehaviour
 
         if ((GameManager.instance.player.GetComponentInParent<Player>().isDead || GameManager.instance.isWon) && HighScoreManager.theInstance.IsHighScore())
         {
-            highScoreObtained = true;
+            isHighScoreObtained = true;
             GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().NewHighScore();
         }
 
@@ -123,16 +121,11 @@ public class ComboFeed : MonoBehaviour
         //check for highscore then saves if found
         if (GameManager.instance.player.GetComponentInParent<Player>().isDead || GameManager.instance.isWon)
         {
-            if (highScoreObtained)
-            {
-                GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().EnterHighScoreName();
-                highScoreObtained = false;
-            }
 
             GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().WinOrLoseEndScreen();
             finalScoreText.text = "";
             playerKilledText.text = "";
-            HighScoreManager.theInstance.DisplayHighScoreTable();
+            StartCoroutine(HighScoreManager.theInstance.DisplayHighScoreTable());
         }
         else
         {

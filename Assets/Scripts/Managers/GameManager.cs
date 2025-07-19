@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject MenuSettings;
     [SerializeField] GameObject MenuCredits;
     [SerializeField] GameObject MenuGameInfo;
-    [SerializeField] GameObject PlayerHUD;
+    [SerializeField] public GameObject PlayerHUD;
 
 
     public GameObject player;
@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.transform.parent.GetComponent<Player>();
         shootingPoint = GameObject.FindGameObjectWithTag("ShootingPoint").transform;
-        //TimeScaleOrigin = Time.timeScale;
         TimeScaleOrigin = 1f;
         Time.timeScale = TimeScaleOrigin;
         Cursor.lockState = CursorLockMode.Locked;
@@ -100,10 +99,6 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("Level_4");
         }
         if (Input.GetKeyDown(KeyCode.Keypad5))
-        {
-            SceneManager.LoadScene("Level_Bonus");
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad6))
         {
             SceneManager.LoadScene("Level_Boss");
         }
@@ -229,10 +224,6 @@ public class GameManager : MonoBehaviour
 
             case "Level_4":
                 AudioManager.instance.Play("Level_4");
-                break;
-
-            case "Bonus_Level":
-                AudioManager.instance.Play("Bonus_Level");
                 break;
 
             case "Boss_Level":

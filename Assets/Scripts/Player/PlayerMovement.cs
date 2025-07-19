@@ -41,7 +41,6 @@ public class PlayerMovement : MonoBehaviour, IDamage
         moveDir = (Input.GetAxis("Horizontal") * transform.right)
                 + (Input.GetAxis("Vertical") * transform.forward);
 
-        //transform.Translate(moveDir * speed * Time.deltaTime);
         rb.MovePosition(transform.position + moveDir * speed);
 
         //jump, dash, etc etc
@@ -70,14 +69,12 @@ public class PlayerMovement : MonoBehaviour, IDamage
                     if(Input.GetAxisRaw("Vertical") == 1 && Input.GetAxisRaw("Horizontal") == 0)
                     {
                         //forward dash
-                        Debug.Log("FDash");
                         rb.AddForce(Camera.main.transform.forward * dashForce, ForceMode.Impulse);
                         canDash = false;
                     }
                     else
                     {
                         //directional dash
-                        Debug.Log("DirDash");
                         rb.AddForce(moveDir * dashForce, ForceMode.Impulse);
                         canDash = false;
                     }
@@ -85,7 +82,6 @@ public class PlayerMovement : MonoBehaviour, IDamage
                 else if (moveDir.magnitude == 0)
                 {
                     //groundslam
-                    Debug.Log("SLAM!");
                     rb.AddForce(-transform.up * slamForce, ForceMode.Impulse);
                 }
 

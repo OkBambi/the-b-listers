@@ -7,16 +7,11 @@ public class ChainUIStopWatch : MonoBehaviour
 
     [SerializeField] StopWatch Stopwatch;
     [SerializeField] ChainMarker[] ChainToggleables;
-    //[SerializeField] RawImage[] ChainImageArray;
+
     [SerializeField] PrimaryColor primaryColor;
     [SerializeField] ColorSwapping ChangeColor;
     [SerializeField] ChainUIStopWatch ColorLockMonk;
 
-    //[SerializeField] RawImage locks;
-    //[SerializeField] RawImage unlocks;
-
-    //[SerializeField] ChainMarker lockMarker;
-    //[SerializeField] ChainMarker unlockedMarker;
 
 
     void Start()
@@ -27,16 +22,6 @@ public class ChainUIStopWatch : MonoBehaviour
         //Find the object with chain marker script on the scene
         ChainToggleables = FindObjectsByType<ChainMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
-        //add Images to ChainImageArray
-        //ChainImageArray = new RawImage[2] { ChainToggleables[0].GetComponent<RawImage>(), ChainToggleables[1].GetComponent<RawImage>() };
-        //lockMarker = GameObject.Find("ChainLock").GetComponent<ChainMarker>();
-        //unlockedMarker = GameObject.Find("ChainUnlock").GetComponent<ChainMarker>();
-
-        //locks = lockMarker.gameObject.GetComponent<RawImage>();
-        //unlocks = unlockedMarker.gameObject.GetComponent<RawImage>();
-
-        //lockMarker.gameObject.SetActive(false);
-        //unlockedMarker.gameObject.SetActive(false);
 
     }
 

@@ -22,7 +22,6 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        //Debug.Log(SettingsManager.instance);
         List<Sound[]> allSounds = new List<Sound[]>
         {
             PlayerSounds,

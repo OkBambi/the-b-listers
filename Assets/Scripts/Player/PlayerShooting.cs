@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -27,6 +26,7 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] float rocketJumpForce;
     [SerializeField] int maxRocketJumps;
     [SerializeField] Animator mAnimator;
+    [SerializeField] AudioSource ShootyMcShootFace;
 
     float shootTimer;
     bool isHolding;
@@ -38,7 +38,6 @@ public class PlayerShooting : MonoBehaviour
     public void Initialize()
     {
         camShaker = GameObject.FindFirstObjectByType<CameraShake>();
-        // mAnimator = GetComponent<Animator>();
     }
 
 
@@ -59,7 +58,7 @@ public class PlayerShooting : MonoBehaviour
                     {
                         shootTimer = 0;
                         mAnimator.SetTrigger("Shooting");
-                        AudioManager.instance.Play("Rapid");
+                        AudioManager.instance.Play("Rapid", Random.Range(0.8f, 1.1f), ShootyMcShootFace);
                         GameObject b = Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
                         b.transform.Rotate(0, 0, UnityEngine.Random.Range(-360, 360));
                         Gradient grad;

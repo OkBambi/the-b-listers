@@ -18,7 +18,7 @@ public class EnemyManager : MonoBehaviour
     [Space]
 
     //so we have a list of enemies that spawn in a repeating order
-    [SerializeField] List<GameObject> spawnList;
+    public List<GameObject> spawnList;
     [SerializeField] List<Mesh> enemyMeshList;
 
     //this will track what enemy to spawn
@@ -174,6 +174,13 @@ public class EnemyManager : MonoBehaviour
             case "Level_1_AngryBoid_Reworked":  
                 sp.enemyMesh = enemyMeshList[5];
                 sp.SetMesh(enemyMeshList[5]);
+                //sp.modelFrame.transform.localScale = new Vector3(162f, 67f, 322f);
+                //sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 180f);
+                break;
+            case "Goliath":
+                sp.enemyMesh = enemyMeshList[6];
+                sp.SetMesh(enemyMeshList[6]);
+                sp.transform.position = new Vector3(spawnLocation.x, 26f, spawnLocation.z);
                 //sp.modelFrame.transform.localScale = new Vector3(162f, 67f, 322f);
                 //sp.modelFrame.transform.rotation = Quaternion.Euler(-90f, 0f, 180f);
                 break;

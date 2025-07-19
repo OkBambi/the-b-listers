@@ -35,7 +35,6 @@ public class SpawnIndicator : MonoBehaviour
     [Header("Animation")]
     [SerializeField] Vector3 startScale;
     [SerializeField] Vector3 currentScale;
-    //[SerializeField] Vector3 endScale;
     [SerializeField] float shrinkSpeed;
     [SerializeField] float shrinkTime;
     [SerializeField] float pauseTime = 1f;
@@ -49,15 +48,6 @@ public class SpawnIndicator : MonoBehaviour
     [Header("Particles")]
     [SerializeField] GameObject absorbObject;
     [SerializeField] ParticleSystem absorb;
-    //[SerializeField] Color flashColour;
-    //private Material[] flashMats;
-
-    //[SerializeField] float flashSpeed = 0.01f;
-    //private float red;
-    //private float green;
-    //private float blue;
-
-    //private int flashIndex = 0;
 
 
 
@@ -74,20 +64,16 @@ public class SpawnIndicator : MonoBehaviour
         {
             case PrimaryColor.RED:
                 indicatorRenderer.material.color = Color.red;
-                //nameStr = "Red";
                 break;
             case PrimaryColor.YELLOW:
                 indicatorRenderer.material.color = Color.yellow;
-                //nameStr = "Yellow";
                 break;
             case PrimaryColor.BLUE:
                 indicatorRenderer.material.color = Color.blue;
-                //nameStr = "Blue";
                 break;
             case PrimaryColor.OMNI:
             default:
                 indicatorRenderer.material.color = Color.black;
-                //nameStr = "Omni";
                 break;
         }
 
@@ -96,7 +82,7 @@ public class SpawnIndicator : MonoBehaviour
         transform.localScale = startScale;
         currentScale = startScale;
 
-        absorbObject = Instantiate(ParticleManager.instance.absorbEffect, transform.position, transform.rotation);
+        absorbObject = Instantiate(ParticleManager.instance.absorbEffect, transform.position, transform.rotation, transform);
         absorb = absorbObject.GetComponent<ParticleSystem>();
         absorbObject.transform.localScale = startScale;
 
@@ -118,19 +104,6 @@ public class SpawnIndicator : MonoBehaviour
         canvasLookPlayer = true;
         StartCoroutine(CanvasLookPlayer());
         AudioManager.instance.Play("Enemy_Spawn", Random.Range(1.25f, 1.75f), spawnSfx);
-        //spawnSfx = AudioManager.
-        //red = baseColour.r;
-        //green = baseColour.g;
-        //blue = baseColour.b;
-
-        //flashMats = new Material[indicatorRenderer.materials.Length];
-        //for (int materialIndex = 0; materialIndex < indicatorRenderer.materials.Length; ++materialIndex)
-        //{
-        //    flashMats[materialIndex] = new Material(EnemyManager.instance.spawnMat);
-        //}
-        //indicatorRenderer.materials = flashMats; 
-        //StartCoroutine(Flash());
-
     }
 
     IEnumerator Shrink()
@@ -144,9 +117,6 @@ public class SpawnIndicator : MonoBehaviour
             currentScale.z = EasingLibrary.EaseOutBounce(currentScale.z, 0f, shrinkSpeed);
 
             alpha = EasingLibrary.EaseOutBounce(alpha, 1f, shrinkSpeed);
-
-            //alpha = timer / shrinkTime;
-            //Debug.Log(alpha);
 
             baseColour.a = alpha;
             indicatorRenderer.material.color = baseColour;
@@ -173,6 +143,11 @@ public class SpawnIndicator : MonoBehaviour
 
         transform.localScale = Vector3.zero;
         yield return new WaitForSecondsRealtime(1f);
+        if (enemyToSpawn.name == "Goliath")
+        {
+            EnemyManager.instance.spawnList.RemoveAt(0);
+        }
+
         Destroy(gameObject);
 
         yield return null;

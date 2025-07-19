@@ -73,9 +73,6 @@ public class Timer : MonoBehaviour
             fadeInText.transform.localPosition = Vector3.MoveTowards(fadeInText.transform.localPosition, textForTimer.transform.localPosition, fadeMovementSpeed * Time.deltaTime);
             fadeOutText.transform.localPosition = Vector3.MoveTowards(fadeOutText.transform.localPosition, fadeOutText.transform.localPosition - new Vector3(0,fadeMovementSpeed, 0), fadeMovementSpeed * Time.deltaTime);
         }
-        
-
-
     }
 
     IEnumerator FadeInEffect()//look to see if you make fade in and fade out work in the same fuction

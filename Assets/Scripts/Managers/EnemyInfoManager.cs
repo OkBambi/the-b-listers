@@ -25,12 +25,6 @@ public class EnemyInfoManager : MonoBehaviour
     //this is a helper method to hide all panels and then show the desired one
     void ShowPanel(GameObject panelToShow)
     {
-        //deactivate the currently active panel, if any
-        //if (currentActivePanel != null)
-        //{
-        //    currentActivePanel.SetActive(false);
-        //}
-
         //activates the new panel
         if (panelToShow != null)
         {

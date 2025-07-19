@@ -1,7 +1,10 @@
 using System.Collections;
+using System.Security.Cryptography;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Goliath : EnemyBase
 {
@@ -55,6 +58,7 @@ public class Goliath : EnemyBase
 
     float stateTimer;
     Vector3 startPos;
+    int enemiesSpawned;
 
     protected override void Start()
     {
@@ -64,6 +68,12 @@ public class Goliath : EnemyBase
             NewHP = hp / 2;
             hp = NewHP;
         }
+
+        GameManager.instance.PlayerHUD.transform.GetChild(6).gameObject.SetActive(true);//This is the boss health bar
+        goliathHitLocation = GameObject.Find("GoliathHitMarker");
+        map = GameObject.Find("Boss_Map");
+        bossName = GameObject.Find("Enemy Name").GetComponent<TextMeshProUGUI>();
+        bossHPBar = GameObject.Find("EnemyHPBar").GetComponent<Image>();
 
         ColorSelection(setColor);
         startPos = transform.position;
@@ -78,10 +88,28 @@ public class Goliath : EnemyBase
 
         StartCoroutine(SwapColors());
 
+        StartCoroutine(FillHPBar());
         //For boss bar
         bossHPOrig = hp;
+        gameObject.name = "Goliath";
         bossName.text = gameObject.name;
-        bossHPBar.gameObject.transform.parent.gameObject.SetActive(true);
+    }
+
+    IEnumerator FillHPBar()
+    {
+        int fillAmount = 0;
+        while (fillAmount < hp)
+        {
+            fillAmount += 1;
+            CinimaticBossHPBar(fillAmount);
+            yield return new WaitForSeconds(0.0001f);
+
+        }
+    }
+
+    public void CinimaticBossHPBar(int amount)
+    {
+        bossHPBar.fillAmount = amount / bossHPOrig;
     }
 
     void Update()
@@ -116,7 +144,6 @@ public class Goliath : EnemyBase
                 currentState = State.Diving;
                 AudioManager.instance.Play("Goliath_Dive");
                 roamTime = 0;
-                Debug.Log("Goliath is diving!");
             }
         }
         else if (currentState == State.Diving)
@@ -156,7 +183,6 @@ public class Goliath : EnemyBase
     
     void Diving()
     {
-                    StartCoroutine(WhaleSplashsNoise());
         if (goliathHitLocation.transform.position == Vector3.zero)
         {
             Vector3 divePos = new Vector3(Random.Range(-1f, 1f) * mapRadius, 0.1f, Random.Range(-1f, 1f) * mapRadius);
@@ -164,7 +190,6 @@ public class Goliath : EnemyBase
             goliathHitLocation.GetComponent<Renderer>().enabled = true;
         }
 
-        StartCoroutine(WhaleSplashsNoise());
         stateTimer += Time.deltaTime;
 
         //go down to indicator and through the map
@@ -180,9 +205,16 @@ public class Goliath : EnemyBase
 
             if (transform.position.y < -20f)
             {
+                StartCoroutine(WhaleSplashsNoise());
                 currentState = State.Swimming;
                 goliathHitLocation.GetComponent<Renderer>().enabled = false;
                 goliathHitLocation.transform.position = Vector3.zero;
+                while (enemiesSpawned <= 6)
+                {
+                    EnemyManager.instance.SpawnEnemy();
+                    enemiesSpawned += 1;
+                }
+
             }
         }        
     }
@@ -201,13 +233,14 @@ public class Goliath : EnemyBase
         //jaws music...
 
         transform.Translate(horizontalDirection * swimSpeed * Time.deltaTime);
-
         stateTimer += Time.deltaTime;
+
 
         if (stateTimer > swimTime)
         {
             stateTimer = 0;
             currentState = State.Breach;
+            enemiesSpawned = 0;
         }
     }
 

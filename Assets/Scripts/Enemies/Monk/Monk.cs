@@ -34,7 +34,6 @@ public class Monk : EnemyBase
     private void Awake()
     {
         OnAECAwake();
-        //RandomizeColor();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -117,22 +116,6 @@ public class Monk : EnemyBase
         agent.SetDestination(hit.position);
     }
 
-    //spacing
-    //void monkScan()
-    //{
-    //    Collider[] colliders = Physics.OverlapSphere(transform.position, minSeperationDistance);
-    //    for (int i = 0; i < colliders.Length; i++)
-    //    {
-    //        {
-    //            Collider collider = colliders[i];
-    //            if (collider.gameObject != gameObject && collider.CompareTag("monkEnemy"))
-    //            {
-    //                MonkSpacing(collider);
-    //                break;
-    //            }
-    //        }
-    //    }
-    //}
 
     void MonkSpacing(Collider other)
     {
