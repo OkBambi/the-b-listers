@@ -17,7 +17,6 @@ public class Spin : MonoBehaviour
     void Update()
     {
         transform.Rotate(new Vector3(0, 0, rotationSpeed * Time.deltaTime));
-
         float y = Mathf.PingPong(Time.time * bobSpeed, 1) * amplitude + originalY;
         transform.position = new Vector3(0, y, 0);
     }
