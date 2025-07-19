@@ -96,7 +96,7 @@ public class SpawnIndicator : MonoBehaviour
         transform.localScale = startScale;
         currentScale = startScale;
 
-        absorbObject = Instantiate(ParticleManager.instance.absorbEffect, transform.position, transform.rotation);
+        absorbObject = Instantiate(ParticleManager.instance.absorbEffect, transform.position, transform.rotation, transform);
         absorb = absorbObject.GetComponent<ParticleSystem>();
         absorbObject.transform.localScale = startScale;
 
@@ -173,6 +173,11 @@ public class SpawnIndicator : MonoBehaviour
 
         transform.localScale = Vector3.zero;
         yield return new WaitForSecondsRealtime(1f);
+        if (enemyToSpawn.name == "Goliath")
+        {
+            EnemyManager.instance.spawnList.RemoveAt(0);
+        }
+
         Destroy(gameObject);
 
         yield return null;

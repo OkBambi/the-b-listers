@@ -129,6 +129,7 @@ public class HighScoreManager : MonoBehaviour
 
     public void SaveName()
     {
+        AudioManager.instance.Play("Key_Click");
         PlayerPrefs.SetString(playerNamePrefix + indexForNewName, userName.text);
         DisplayHighScoreTable();
     }

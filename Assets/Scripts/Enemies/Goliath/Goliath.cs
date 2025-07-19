@@ -1,7 +1,9 @@
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Goliath : EnemyBase
 {
@@ -65,6 +67,11 @@ public class Goliath : EnemyBase
             hp = NewHP;
         }
 
+        goliathHitLocation = GameObject.Find("GoliathHitMarker");
+        map = GameObject.Find("Boss_Map");
+        bossName = GameObject.Find("Enemy Name").GetComponent<TextMeshProUGUI>();
+        bossHPBar = GameObject.Find("EnemyHPBar").GetComponent<Image>();
+
         ColorSelection(setColor);
         startPos = transform.position;
 
@@ -80,6 +87,7 @@ public class Goliath : EnemyBase
 
         //For boss bar
         bossHPOrig = hp;
+        gameObject.name = "Goliath";
         bossName.text = gameObject.name;
         bossHPBar.gameObject.transform.parent.gameObject.SetActive(true);
     }
@@ -156,7 +164,7 @@ public class Goliath : EnemyBase
     
     void Diving()
     {
-                    StartCoroutine(WhaleSplashsNoise());
+        StartCoroutine(WhaleSplashsNoise());
         if (goliathHitLocation.transform.position == Vector3.zero)
         {
             Vector3 divePos = new Vector3(Random.Range(-1f, 1f) * mapRadius, 0.1f, Random.Range(-1f, 1f) * mapRadius);
