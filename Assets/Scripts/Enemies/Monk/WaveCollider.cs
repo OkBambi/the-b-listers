@@ -33,6 +33,8 @@ public class WaveCollider : MonoBehaviour
         }
         else
         {
+            CameraShake.instance.Shake(1, 20);
+            Debug.Log("SHAKE WHAT YA MAMA GAVE YA SSFKLKFKFSJ");
             if (MMB != null || monkboy != null)
             {
                 if (MMB)
@@ -46,16 +48,12 @@ public class WaveCollider : MonoBehaviour
                 }
             }
         }
-
         Debug.Log(other.name);
         IColorLock colorLock = GameManager.instance.playerScript.GetComponent<IColorLock>();
         if (colorLock != null)
         {
             colorLock.LockColorSelection(ColorLockTimer);
-
         }
-
-
         GameManager.instance.ChainScreen(ColorLockTimer);
     }
 
