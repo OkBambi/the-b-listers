@@ -37,7 +37,6 @@ public class SpawnIndicator : MonoBehaviour
     [SerializeField] Vector3 currentScale;
     [SerializeField] float shrinkSpeed;
     [SerializeField] float shrinkTime;
-    [SerializeField] float pauseTime = 1f;
 
     [SerializeField] float alpha = 0f;
     [SerializeField] Color baseColour;
