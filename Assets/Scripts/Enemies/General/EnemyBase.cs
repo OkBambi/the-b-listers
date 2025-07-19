@@ -54,20 +54,16 @@ public class EnemyBase : MonoBehaviour, IDamage
         {
             case PrimaryColor.RED:
                 model.material.color = Color.red;
-                //nameStr = "Red";
                 break;
             case PrimaryColor.YELLOW:
                 model.material.color = Color.yellow;
-                //nameStr = "Yellow";
                 break;
             case PrimaryColor.BLUE:
                 model.material.color = Color.blue;
-                //nameStr = "Blue";
                 break;
             case PrimaryColor.OMNI:
             default:
                 model.material.color = Color.black;
-                //nameStr = "Omni";
                 break;
         }
         baseColor = model.material.color;

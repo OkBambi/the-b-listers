@@ -44,7 +44,6 @@ public class WaveCollider : MonoBehaviour
                     MonkChainUI.SwapChainColor(monkboy.setColor);
                 }
             }
-            Debug.Log(other.name);
             IColorLock colorLock = GameManager.instance.playerScript.GetComponent<IColorLock>();
             if (colorLock != null)
             {

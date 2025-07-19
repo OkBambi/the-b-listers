@@ -5,10 +5,7 @@ public class Monolith : EnemyBase
 {
     [SerializeField] GameObject normalBoid;
     [SerializeField] GameObject angryBoid;
-    //[SerializeField] float rotationRadius = 2f;
-    //[SerializeField] float angularSpeed = 2f;
     [SerializeField] float rotationSpeed = 1f;
-    //[SerializeField] float posX, posZ, angle = 0f;
     [SerializeField] float timeBetweenSpawns;
     [SerializeField] int normalBoidSpawnAmt;
     [SerializeField] int angryBoidSpawnAmt;
@@ -22,7 +19,6 @@ public class Monolith : EnemyBase
 
     private void Awake()
     {
-        //RandomizeColor();
         OnAECAwake();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -110,8 +106,6 @@ public class Monolith : EnemyBase
         yield return new WaitForSeconds(timeBetweenSpawns * (3f / 4f));
 
         isSpawning = false;
-        //StartCoroutine(ShakePos(0.2f, 0.1f));
-        //StartCoroutine(ShakeSize(0.2f, 0.1f));
     }
 
     void movement()

@@ -4,7 +4,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SettingsObject", menuName = "Settings", order = 1)]
 public class SettingsObject : ScriptableObject
 {
-    //public enum WindowType { Windowed, Fullscreen, FullscreenWindowed }
 
     [Header("Graphics")]
 
@@ -19,8 +18,6 @@ public class SettingsObject : ScriptableObject
     public bool isReducedCameraShake;
     public bool isInvertY;
     public bool isArcadeFilter;
-    //public bool isOutlineFilter;
-    //public bool isColourBlindnessMode;
 
     [Space]
     [Header("Sounds")]
@@ -30,7 +27,4 @@ public class SettingsObject : ScriptableObject
     [Space]
     [Header("Controls")]
     [Range(0.1f, 2f)] public float mouseSensitivity;
-
-    //public ColourBlindnessPreset colorPreset;
-
 }

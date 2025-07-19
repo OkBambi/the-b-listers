@@ -60,48 +60,6 @@ public class SettingsManager : MonoBehaviour
         //on Start, read the settings object and apply the current settings to the settings screen in the scene
 
         Invoke("ApplySettings", 0.01f);
-
-        ////Resolution
-        //Dropdown dropDown = GameObject.FindWithTag("Resolution").GetComponent<Dropdown>();
-        //var options = dropDown.options;
-
-        //for (int resIndex = 0; resIndex < options.Count; ++resIndex)
-        //{
-        //    if (options[resIndex].text == GetResolution().ToString())
-        //    {
-        //        dropDown.value = resIndex;
-        //        settingsMenu.SetResolution(resIndex);
-        //    }
-        //}
-
-        ////Quality
-        //dropDown = GameObject.FindWithTag("Quality").GetComponent<Dropdown>();
-        //options = dropDown.options;
-
-        //for (int qualityIndex = 0; qualityIndex < options.Count; ++qualityIndex)
-        //{
-        //    if (options[qualityIndex].text == GetResolution().ToString())
-        //    {
-        //        dropDown.value = qualityIndex;
-        //        settingsMenu.SetQuality(qualityIndex);
-        //    }
-        //}
-
-        ////WindowSettings
-        //dropDown = GameObject.FindWithTag("WindowSetting").GetComponent<Dropdown>();
-        //options = dropDown.options;
-
-        //for (int winIndex = 0; winIndex < options.Count; ++winIndex)
-        //{
-        //    if (options[winIndex].text == GetResolution().ToString())
-        //    {
-        //        dropDown.value = winIndex;
-        //        //settingsMenu.SetWindow(winIndex);
-        //    }
-        //}
-
-
-
     }
 
     #region Resolution
@@ -246,38 +204,6 @@ public class SettingsManager : MonoBehaviour
     }
     #endregion
 
-    //#region isOutlineFilter
-    //public bool GetisOutlineFilter()
-    //{
-    //    return settings.isOutlineFilter;
-    //}
-    //public void SetisOutlineFilter(bool _isOutlineFilter)
-    //{
-    //    settings.isOutlineFilter = _isOutlineFilter;
-    //}
-
-    //public void SetisOutlineFilter(Toggle _isOutlineFilter)
-    //{
-    //    settings.isOutlineFilter = _isOutlineFilter.isOn;
-    //}
-    //#endregion
-
-    //#region isColourBlindnessMode
-    //public bool GetisColourBlindnessMode()
-    //{
-    //    return settings.isColourBlindnessMode;
-    //}
-    //public void SetisColourBlindnessMode(bool _isColourBlindnessMode)
-    //{
-    //    settings.isColourBlindnessMode = _isColourBlindnessMode;
-    //}
-
-    //public void SetisColourBlindnessMode(Toggle _isColourBlindnessMode)
-    //{
-    //    settings.isColourBlindnessMode = _isColourBlindnessMode.isOn;
-    //}
-    //#endregion
-
     #region SFXVolume
     public float GetSFXVolume()
     {
@@ -340,7 +266,6 @@ public class SettingsManager : MonoBehaviour
 
     public void ApplyInvertY()
     {
-        //Debug.Log(GetisInvertY());
         if (GameManager.instance)
             GameManager.instance.playerScript.GetComponentInChildren<PlayerCamera>().invertY = GetisInvertY();
     }
@@ -366,7 +291,7 @@ public class SettingsManager : MonoBehaviour
         slider.SetFOV(GetFOV());
 
         SettingsMenu settingsMenu = FindFirstObjectByType<SettingsMenu>(FindObjectsInactive.Include);
-        //Debug.Log(Screen.resolutions[GetResolution()]);
+
         settingsMenu.SetResolution(GetResolution());
 
         settingsMenu.SetQuality(GetQuality());
@@ -383,8 +308,6 @@ public class SettingsManager : MonoBehaviour
 
         button = FindFirstObjectByType<ButtonFunction>(FindObjectsInactive.Exclude).GetComponent<ButtonFunction>();
         button.ontoggleArcade(GetisArcadeFilter());
-        //FindFirstObjectByType<PixelCamera_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisArcadeFilter();
-
         FindFirstObjectByType<InvertY_Marker>(FindObjectsInactive.Include).GetComponent<Toggle>().isOn = GetisInvertY();
         ApplyInvertY();
 

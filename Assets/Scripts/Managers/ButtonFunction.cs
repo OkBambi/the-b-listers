@@ -17,7 +17,6 @@ public class ButtonFunction : MonoBehaviour
 
     public void onRestart()
     {
-        Debug.Log("Reloading State...");
         GameManager.instance.statePause();
         SceneManager.LoadScene(0);
         ComboFeed.theInstance.clearFinalScore();
@@ -41,14 +40,10 @@ public class ButtonFunction : MonoBehaviour
     { 
         if (ArcadeToggler.isOn)
         {
-            Debug.Log("Filter On");
-            //SettingsManager.instance.mainCamera.gameObject.SetActive(false);
             SettingsManager.instance.pixelCamera.gameObject.SetActive(true);
         }
         else
         {
-            Debug.Log("default Camera");
-            //SettingsManager.instance.mainCamera.gameObject.SetActive(true);
             SettingsManager.instance.pixelCamera.gameObject.SetActive(false);
         }
     }
@@ -59,14 +54,10 @@ public class ButtonFunction : MonoBehaviour
         {
             if (toggle)
             {
-                Debug.Log("Filter On");
-                //SettingsManager.instance.mainCamera.gameObject.SetActive(false);
                 SettingsManager.instance.pixelCamera.gameObject.SetActive(true);
             }
             else
             {
-                //Debug.Log("default Camera");
-                //SettingsManager.instance.mainCamera.gameObject.SetActive(true);
                 SettingsManager.instance.pixelCamera.gameObject.SetActive(false);
             }
         }

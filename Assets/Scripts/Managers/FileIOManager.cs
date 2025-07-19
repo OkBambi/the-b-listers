@@ -17,7 +17,6 @@ public class FileIOManager : MonoBehaviour
     {
         string json = JsonUtility.ToJson(settings);
         File.WriteAllText(SavePath, json);
-        Debug.Log("Data saved to: " + SavePath);
     }
 
     public void LoadData()
@@ -26,7 +25,6 @@ public class FileIOManager : MonoBehaviour
         {
             string json = File.ReadAllText(SavePath);
             JsonUtility.FromJsonOverwrite(json, settings);
-            Debug.Log("Data loaded from: " + SavePath);
         }
         else
         {

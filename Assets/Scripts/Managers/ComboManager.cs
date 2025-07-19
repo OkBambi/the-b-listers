@@ -15,8 +15,6 @@ public class ComboManager : MonoBehaviour
     [SerializeField] float totalScore;
     [SerializeField] float currentComboScore;
     [SerializeField] ComboGrade comboGrade;
-    //[SerializeField] float comboHoldTimer;
-    //[SerializeField] float currentMult;
 
     [Header("UI")]
     [SerializeField] TextMeshProUGUI comboGradeUGUI;

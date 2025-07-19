@@ -39,7 +39,6 @@ public class Monk_MiniBoss : EnemyBase
 
     private void Awake()
     {
-        //OnAECAwake();
         RandomizeColor();
     }
 

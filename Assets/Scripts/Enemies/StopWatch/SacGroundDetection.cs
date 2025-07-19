@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class SacGroundDetection : EnemyBase
 {
-    //[SerializeField] Renderer model;
   
     string groundTag = "groundTag";
 
@@ -12,7 +11,6 @@ public class SacGroundDetection : EnemyBase
         Debug.Log("test check");
         if (collision.gameObject.tag == groundTag)
         {
-            Debug.Log("Ground detected");
             Destroy(gameObject);
         }
     }
