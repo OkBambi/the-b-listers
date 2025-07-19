@@ -34,8 +34,11 @@ public class HighScoreManager : MonoBehaviour
             PlayerPrefs.Save();
         }
         ClearHighScores();
-        highScoresTableTextMesh = highScoresTableText.GetComponent<TMP_Text>();
-        highScoresNamesTableTextMesh = highScoresNamesTableText.GetComponent<TMP_Text>();
+        if (highScoresTableText)
+        {
+            highScoresNamesTableTextMesh = highScoresNamesTableText.GetComponent<TMP_Text>();
+            highScoresTableTextMesh = highScoresTableText.GetComponent<TMP_Text>();
+        }
     }
 
     private void Update()

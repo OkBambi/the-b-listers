@@ -64,9 +64,11 @@ public class LevelModifierManager : MonoBehaviour
             case DifficultyObject.DifficultyType.Normal:
                 switch (sceneName)
                 {
+                    case "Level_1":
                     case "Level_2":
                     case "Level_3":
                     case "Level_4":
+                    case "Level_Boss":
                         ShowCardUI();
                         break;
                 }
@@ -74,9 +76,11 @@ public class LevelModifierManager : MonoBehaviour
             case DifficultyObject.DifficultyType.Easy:
                 switch (sceneName)
                 {
+                    case "Level_1":
                     case "Level_2":
                     case "Level_3":
                     case "Level_4":
+                    case "Level_Boss":
                         ShowCardUI();
                         break;
                 }

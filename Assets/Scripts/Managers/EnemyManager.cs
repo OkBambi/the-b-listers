@@ -37,6 +37,7 @@ public class EnemyManager : MonoBehaviour
 
     //and we have a spawn limit on the enemies
     public int AEC;
+    public int maxAEC = 5;
     public int currentEC;
 
     //boids do not count towards AEC, but every other enemy counts as one AEC
@@ -64,7 +65,8 @@ public class EnemyManager : MonoBehaviour
     #region AEC
     private void IncrementAEC()
     {
-        ++AEC;
+        if (AEC + 1 <= maxAEC)
+            ++AEC;
     }
 
     public void ResetAEC()

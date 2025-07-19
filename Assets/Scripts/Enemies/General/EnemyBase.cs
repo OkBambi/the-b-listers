@@ -161,7 +161,7 @@ public class EnemyBase : MonoBehaviour, IDamage
 
         while (elapsed < duration)
         {
-            if (!this) yield break;
+            if (this) yield break;
             if (Time.timeScale == 0f) yield break;
             _x = Random.Range(-1f, 1f) * magnitude;
             _y = Random.Range(-1f, 1f) * magnitude;
@@ -172,7 +172,7 @@ public class EnemyBase : MonoBehaviour, IDamage
 
             yield return null;
         }
-        if (!this)
+        if (this)
             transform.localPosition = originalPos;
     }
 
@@ -185,7 +185,7 @@ public class EnemyBase : MonoBehaviour, IDamage
 
         while (elapsed < duration)
         {
-            if (!this) yield break;
+            if (this) yield break;
             if (Time.timeScale == 0f) yield break;
             _x = Random.Range(-1f, 1f) * magnitude;
             _y = Random.Range(-1f, 1f) * magnitude;
@@ -196,7 +196,7 @@ public class EnemyBase : MonoBehaviour, IDamage
 
             yield return null;
         }
-        if (!this)
+        if (this)
             transform.localScale = originalSize;
     }
 

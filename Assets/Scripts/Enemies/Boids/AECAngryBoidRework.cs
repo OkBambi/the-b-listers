@@ -38,6 +38,13 @@ public class AECAngryBoidRework : AngryBoidRework
             playerWeight = playerWeight * 1.5f;
         }
 
+        if (LevelModifierManager.instance.lessHealth)
+        {
+            int NewHP = hp;
+            NewHP = hp / 2;
+            hp = NewHP;
+        }
+
         StartCoroutine(SwitchAIMode());
     }
 
