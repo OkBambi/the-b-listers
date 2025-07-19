@@ -43,6 +43,14 @@ public class Monolith : EnemyBase
             model.transform.localScale = model.transform.localScale * 0.75f;
             rotationSpeed = rotationSpeed * 2f;
         }
+
+        if (LevelModifierManager.instance.lessHealth)
+        {
+            int NewHP = hp;
+            NewHP = hp / 2;
+            hp = NewHP;
+        }
+
         AudioManager.instance.Play("Enemy_Ambiance", 0.5f, ambiance);
     }
 

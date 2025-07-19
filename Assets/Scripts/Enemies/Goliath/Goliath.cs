@@ -58,6 +58,13 @@ public class Goliath : EnemyBase
 
     protected override void Start()
     {
+        if (LevelModifierManager.instance.lessHealth)
+        {
+            int NewHP = hp;
+            NewHP = hp / 2;
+            hp = NewHP;
+        }
+
         ColorSelection(setColor);
         startPos = transform.position;
 

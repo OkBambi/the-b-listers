@@ -71,6 +71,7 @@ public class BoidAI : EnemyBase
 
     protected override void Start()
     {
+
         ColorSelection(setColor);
         base.UpdateBoidAwareness();
         StartCoroutine(NoiseWeights());
@@ -83,6 +84,13 @@ public class BoidAI : EnemyBase
             stageWeight = stageWeight * 1.5f;
             playerWeight = playerWeight * 1.5f;
 
+        }
+
+        if (LevelModifierManager.instance.lessHealth)
+        {
+            int NewHP = hp;
+            NewHP = hp / 2;
+            hp = NewHP;
         }
 
         ParticleSystem geyser = Instantiate(ParticleManager.instance.geyserEffect, transform.position + new Vector3(0f, 2f, 0f), Quaternion.identity).GetComponent<ParticleSystem>();

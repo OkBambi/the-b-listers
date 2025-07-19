@@ -70,8 +70,8 @@ public class Timer : MonoBehaviour
         }
         else
         {
-            fadeInText.transform.position = Vector3.MoveTowards(fadeInText.transform.position, textForTimer.transform.position, fadeMovementSpeed * Time.deltaTime);
-            fadeOutText.transform.position = Vector3.MoveTowards(fadeOutText.transform.position, fadeOutText.transform.position - new Vector3(0,fadeMovementSpeed, 0), fadeMovementSpeed * Time.deltaTime);
+            fadeInText.transform.localPosition = Vector3.MoveTowards(fadeInText.transform.localPosition, textForTimer.transform.localPosition, fadeMovementSpeed * Time.deltaTime);
+            fadeOutText.transform.localPosition = Vector3.MoveTowards(fadeOutText.transform.localPosition, fadeOutText.transform.localPosition - new Vector3(0,fadeMovementSpeed, 0), fadeMovementSpeed * Time.deltaTime);
         }
         
 
@@ -99,7 +99,7 @@ public class Timer : MonoBehaviour
         fadeInText.CrossFadeAlpha(255f, 1f, false);
         yield return new WaitForSeconds(1);
         fadeInText.CrossFadeAlpha(1f, 0f, false);
-        fadeInText.transform.position = fadeInText.transform.position + new Vector3(0f, fadeMovementSpeed, 0f);
+        fadeInText.transform.localPosition = textForTimer.transform.localPosition + new Vector3(0f, fadeMovementSpeed, 0f);
         isFading = false;
     }
     IEnumerator FadeOutEffect()
@@ -122,7 +122,7 @@ public class Timer : MonoBehaviour
         fadeOutText.CrossFadeAlpha(1f, 1f, false);
         yield return new WaitForSeconds(1);
         fadeOutText.CrossFadeAlpha(255f, 0f, false);
-        fadeOutText.transform.position = fadeOutText.transform.position + new Vector3(0f, fadeMovementSpeed, 0f);
+        fadeOutText.transform.localPosition = textForTimer.transform.localPosition;
     }
 
     private void ChangeColors()

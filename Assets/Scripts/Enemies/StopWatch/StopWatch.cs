@@ -47,6 +47,13 @@ public class StopWatch : EnemyBase
         if (LevelModifierManager.instance.smallFastEnemies)
             model.transform.localScale = model.transform.localScale * 0.75f;
 
+        if (LevelModifierManager.instance.lessHealth)
+        {
+            int NewHP = hp;
+            NewHP = hp / 2;
+            hp = NewHP;
+        }
+
     }
 
     void CountDownTimer()
