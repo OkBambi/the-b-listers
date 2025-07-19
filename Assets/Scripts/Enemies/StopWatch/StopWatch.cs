@@ -21,15 +21,15 @@ public class StopWatch : EnemyBase
     private void Awake()
     {
         OnAECAwake();
-        ColorSelection(setColor);
         startPosition = transform.position.y;
         isSlamming = false;
+        transform.rotation = Quaternion.Euler(90, 0, 0);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
         counter = 0;
-        
+        ColorSelection(setColor);
         rb = GetComponent<Rigidbody>();
         // Keep gravity off initially
         rb.useGravity = false;
@@ -49,7 +49,6 @@ public class StopWatch : EnemyBase
             NewHP = hp / 2;
             hp = NewHP;
         }
-
     }
 
     void CountDownTimer()
