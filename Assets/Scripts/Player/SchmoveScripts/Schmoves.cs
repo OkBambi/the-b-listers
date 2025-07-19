@@ -117,10 +117,10 @@ public class Schmoves : MonoBehaviour
     public float YellowCD;
     public float BlueCD;
 
-    [Header("CoolDownText")]
-    [SerializeField] TextMeshProUGUI RedCD_M2;
-    [SerializeField] TextMeshProUGUI YellowCD_M2;
-    [SerializeField] TextMeshProUGUI BlueCD_M2;
+    //[Header("CoolDownText")]
+    //[SerializeField] TextMeshProUGUI RedCD_M2;
+    //[SerializeField] TextMeshProUGUI YellowCD_M2;
+    //[SerializeField] TextMeshProUGUI BlueCD_M2;
 
     [Header("CoolDownFinish")]
     [SerializeField] float finishSpeed;
@@ -260,21 +260,21 @@ public class Schmoves : MonoBehaviour
         Color originalColour = colourBar.color;
         colourBar.color = Color.black;
 
-        switch (colourBar.name)
-        {
-            case "Red":
-                RedCD_M2.color = Color.white;
-                break;
-            case "Yellow":
-                YellowCD_M2.color = Color.white;
-                break;
-            case "Blue":
-                BlueCD_M2.color = Color.white;
-                break;
-        }
+        //switch (colourBar.name)
+        //{
+        //    case "Red":
+        //        RedCD_M2.color = Color.white;
+        //        break;
+        //    case "Yellow":
+        //        YellowCD_M2.color = Color.white;
+        //        break;
+        //    case "Blue":
+        //        BlueCD_M2.color = Color.white;
+        //        break;
+        //}
 
         bool isPlayedSound = true;
-        StartCoroutine(CameraShake.instance.Shake(0.5f, 0.08f));
+        StartCoroutine(CameraShake.instance.Shake(0.1f, 0.08f));
         while (true)
         {
             if (animationPhase == 2) break;
