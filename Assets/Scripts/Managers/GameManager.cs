@@ -215,6 +215,7 @@ public class GameManager : MonoBehaviour
             case "Level_1":
 
                 AudioManager.instance.Play("Level_1");
+                Debug.Log("MUSIC IS PLAYING OR ELSE");
                 break;
 
             case "Level_2":
