@@ -160,8 +160,7 @@ public class Monk : EnemyBase
             yield return new WaitForSeconds(0.05f);
         }
         AudioManager.instance.Play("Monk_Cast");
-        Debug.Log("Debug cast");
-
+        StartCoroutine(Sparkles());
         yield return new WaitForSeconds(0.20f);
         Wave.SetActive(true);
         Wave.transform.localScale = Vector3.zero;
@@ -173,15 +172,16 @@ public class Monk : EnemyBase
             waveGrowthTimer += Time.deltaTime;
             yield return null;
         }
+        
         Wave.transform.localScale = waveSizeOriginal;
 
-
-
-        //if (monkInRange)
-        //{
-        //    monkScan();
-        //}
         roam();
         isCasting = false;
+    }
+
+    IEnumerator Sparkles()
+    {
+        yield return new WaitForSeconds(0.25f);
+        Instantiate(ParticleManager.instance.MonkEffect, transform.position, Quaternion.identity);
     }
 }
