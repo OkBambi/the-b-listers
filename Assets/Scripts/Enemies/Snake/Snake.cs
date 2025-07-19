@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.AI; // for NavMeshAgent
+using UnityEngine.AI;
+using Unity.VisualScripting; // for NavMeshAgent
 
 //CHANGE COMMENTS WHEN CODE CHANGES PLZ
 public class Snake : EnemyBase
@@ -99,6 +100,7 @@ public class Snake : EnemyBase
 
     void GetNewWanderTarget()
     {
+        AudioManager.instance.Play("Snake", gameObject.GetComponent<AudioSource>());
         wanderingTarget = RandomNavPOS(transform.position, wanderingRadius, -1); // -1 for all layers
     }
 
