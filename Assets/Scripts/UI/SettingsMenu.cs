@@ -28,37 +28,11 @@ public class SettingsMenu : MonoBehaviour
     public TMP_Dropdown quality;
     public TMP_Dropdown window;
 
-    //public TMP_Dropdown colourBlindness;
-    //[Inspectable] public List<ColourBlindnessPreset> colorPresets;
 
     void Start()
     {
         //resolution
         resolutions = Screen.resolutions;
-
-        //maura's code I used to
-        //resolutionDropdown.ClearOptions();  //clear all existing options from the dropdown
-        
-        //List<string> options = new List<string>();  //create a list of options to populate the dropdown
-
-        //int currentResolutionIndex = 0; //track the index of the current screen resolution
-        ////loop for each element in our array
-        //for (int i = 0; i < resolutions.Length; i++)
-        //{
-        //    //string option = "width" + " x " + "height";
-        //    string option = resolutions[i].width + " x " + resolutions[i].height;   //a nicely formated string will be crated for them
-        //    options.Add(option);    //then gets added to the list
-
-        //    if (resolutions[i].width == Screen.currentResolution.width &&
-        //        resolutions[i].height == Screen.currentResolution.height)
-        //    {
-        //        currentResolutionIndex = i;
-        //    }
-        //}
-        //resolutionDropdown.AddOptions(options); //once done, it gets back added to the res dropdown
-        //resolutionDropdown.value = currentResolutionIndex;
-        //resolutionDropdown.RefreshShownValue();
-
         //beginning of the volume stuff
         //gets the initial volume from the AudioMixer and set the slider and text
         if (audioMixer != null && sfxSlider != null && sfxText != null)
@@ -109,20 +83,13 @@ public class SettingsMenu : MonoBehaviour
 
         if (sfxText != null)
         {
-            //updates the text display
-            //the slider val will be in dB if you set your slider from -80 to 0. which it is unless someone changes it *stare* ._.
-            //since it is, we're displaying it as a percentage for readability
-            //volText.text = ConvertDbToPercentage(volume).ToString("F0") + "%";
-
             //yoga's version of the vfx text update
             sfxText.text = ((sfxSlider.value + 80f) * 1.25f).ToString("F0") + "%";
-
         }
     }
 
     public void SetSFX(float volume)
     {
-        //Debug.Log("Setting Volume to: {volume}"); //uncomment to see the slider's val
         if (audioMixer != null)
         {
             //sets the exposed parameter in the AudioMixer
@@ -132,11 +99,6 @@ public class SettingsMenu : MonoBehaviour
 
         if (sfxText != null)
         {
-            //updates the text display
-            //the slider val will be in dB if you set your slider from -80 to 0. which it is unless someone changes it *stare* ._.
-            //since it is, we're displaying it as a percentage for readability
-            //volText.text = ConvertDbToPercentage(volume).ToString("F0") + "%";
-
             sfxSlider.value = (volume * 80f) - 80f;
 
             //yoga's version of the vfx text update
@@ -150,7 +112,6 @@ public class SettingsMenu : MonoBehaviour
         if (musicText != null)
         {
             musicText.text = ((musicSlider.value + 80f) * 1.25f).ToString("F0") + "%";
-
         }
     }
 
@@ -208,7 +169,6 @@ public class SettingsMenu : MonoBehaviour
             Resolution resolution = resolutions[resolutionDropdown.value];
             Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreenMode);
         }
-
         else
         {
             Screen.SetResolution(Display.main.systemWidth, Display.main.systemHeight, Screen.fullScreenMode);
@@ -226,21 +186,7 @@ public class SettingsMenu : MonoBehaviour
         {
             Screen.SetResolution(Display.main.systemWidth, Display.main.systemHeight, Screen.fullScreen);
         }
-        //reads an input and sets the window resolution
-
-        //Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-
         resolutionDropdown.value = res;
-        //for (int resolutionIndex = 0;  resolutionIndex < Screen.resolutions.Length; ++resolutionIndex)
-        //{
-        //    if (Screen.resolutions[resolutionIndex].Equals(newResolution))
-        //    {
-        //        resolutionDropdown.value = res;
-        //        //Debug.Log(resolutionDropdown.value);
-        //        break;
-        //    }
-        //}
-
     }
 
     public void SetWindowSetting()
