@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 using static TextAnimations;
@@ -129,7 +130,7 @@ public class HighScoreManager : MonoBehaviour
 
     public void SaveName()
     {
-        AudioManager.instance.Play("Key_Click");
+        AudioManager.instance.Play("Key_Click", UnityEngine.Random.Range(0.9f, 1.1f));
         PlayerPrefs.SetString(playerNamePrefix + indexForNewName, userName.text);
         DisplayHighScoreTable();
     }
