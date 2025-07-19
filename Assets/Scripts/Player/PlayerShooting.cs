@@ -38,7 +38,6 @@ public class PlayerShooting : MonoBehaviour
     public void Initialize()
     {
         camShaker = GameObject.FindFirstObjectByType<CameraShake>();
-        // mAnimator = GetComponent<Animator>();
     }
 
 
