@@ -4,7 +4,6 @@ using static EasingLibrary;
 
 public class StopWatch : EnemyBase
 {
-    //[SerializeField] GameObject SpitSac;
     [SerializeField] GameObject ShockWave;
 
     int counter;
@@ -21,11 +20,9 @@ public class StopWatch : EnemyBase
 
     private void Awake()
     {
-        //RandomizeColor();
         OnAECAwake();
         ColorSelection(setColor);
         startPosition = transform.position.y;
-        //endPosition = 3f; // Adjust the end position as needed
         isSlamming = false;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -33,7 +30,6 @@ public class StopWatch : EnemyBase
     {
         counter = 0;
         
-        //base.UpdateBoidAwareness(); //this will need to be commented out once/if the stopwatch gets a rigidbody
         rb = GetComponent<Rigidbody>();
         // Keep gravity off initially
         rb.useGravity = false;
@@ -63,42 +59,12 @@ public class StopWatch : EnemyBase
         {
             counter = 0;
             isSlamming = true;
-            //StartSlam();
             StartCoroutine(slamer()); // Start the coroutine for slamming
         }
         
     }
 
-    //void SacSpit()
-    //{
-    //    SacGroundDetection mySac = Instantiate(SpitSac,transform.position,Quaternion.identity).GetComponent<SacGroundDetection>();
-    //    mySac.setColor = this.setColor;
-    //}
-
-    //void StartSlam()
-    //{
-    //    Debug.Log("Slam started!");
-    //    if (isSlamming)
-    //    {
-    //        Debug.Log("Already slamming, ignoring request.");
-    //        slamDuration = 5f; // Normalized time (0 to 1)
-
-    //        // Apply EaseInBack using your Easing Library
-    //        float easedPosition = EaseInBack(startPosition, endPosition, slamDuration); // Replace EasingLibrary with your library's name
-
-    //        transform.position = new Vector3(transform.position.x, easedPosition, transform.position.z);
-
-    //        isSlamming = true;
-    //    }
-    //}
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if(other.CompareTag("groundTag"))
-    //    {
-            
-    //    }
-    //}
+    
 
     IEnumerator slamer() {         float elapsedTime = 0f;
         Vector3 startPos = transform.position;
