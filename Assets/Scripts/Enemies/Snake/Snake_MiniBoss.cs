@@ -20,8 +20,6 @@ public class Snake_MiniBoss : Snake
         {
             int rand = Random.Range(0, colourIndexes.Count - 1);
             theBois[headIndex].setColor = (PrimaryColor)colourIndexes[rand];
-
-            Debug.Log((PrimaryColor)colourIndexes[rand]);
             colourIndexes.Remove(colourIndexes[rand]);
         }
 
@@ -62,25 +60,6 @@ public class Snake_MiniBoss : Snake
         else
             Snakeagent.destination = player.position + offset;
 
-        //timer -= Time.deltaTime;
-
-        //float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        //if (distanceToPlayer < followRange)
-        //{
-        //    //follow the player
-        //    Snakeagent.destination = player.position;
-        //}
-        //else
-        //{
-        //    //wander if not following
-        //    if (timer <= 0)
-        //    {
-        //        GetNewWanderTarget();
-        //        Snakeagent.destination = wanderingTarget;
-        //        timer = wanderingTimer;
-        //    }
-        //}
     }
 
     IEnumerator RandomizeDestinationOffset()
