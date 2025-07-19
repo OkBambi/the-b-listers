@@ -59,6 +59,7 @@ public class EnemyInfoManager : MonoBehaviour
     }
     public void OnBoidsButtonClicked()
     {
+        AudioManager.instance.Play("Enemy_Spawn");
         ShowPanel(boidsInfoPanel);
     }
     public void OnAngryBoidsButtonClicked()
@@ -78,6 +79,7 @@ public class EnemyInfoManager : MonoBehaviour
     }
     public void OnSnakeButtonClicked()
     {
+        AudioManager.instance.Play("Snake");
         ShowPanel(snakeInfoPanel);
     }
     public void OnGoliathButtonClicked()
