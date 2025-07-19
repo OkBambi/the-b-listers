@@ -727,7 +727,7 @@ GameObject:
   - component: {fileID: 1028143254619544310}
   - component: {fileID: 6479415613077287375}
   - component: {fileID: 1904669838089248497}
-  - component: {fileID: 7140664805517116937}
+  - component: {fileID: 2672442925511285025}
   m_Layer: 13
   m_Name: Snake w_ NavMesh
   m_TagString: Untagged
@@ -908,7 +908,7 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!82 &7140664805517116937
+--- !u!82 &2672442925511285025
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -918,21 +918,21 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0fd10244b77d12c49b736fcb75ab559d, type: 3}
-  m_Resource: {fileID: 8300000, guid: 0fd10244b77d12c49b736fcb75ab559d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0344c77cb7dc83d4682311d8285b50b8, type: 3}
+  m_Resource: {fileID: 8300000, guid: 0344c77cb7dc83d4682311d8285b50b8, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 3.66
   MinDistance: 1
-  MaxDistance: 40
+  MaxDistance: 20
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -940,7 +940,7 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.08483887
       value: 1
       inSlope: 0
       outSlope: 0
@@ -965,7 +965,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -980,7 +980,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.19722222
       inSlope: 0
       outSlope: 0
       tangentMode: 0
