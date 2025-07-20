@@ -16,6 +16,9 @@ public class ComboManager : MonoBehaviour
     [SerializeField] float currentComboScore;
     [SerializeField] ComboGrade comboGrade;
 
+    [SerializeField] DifficultyObject difficulty;
+    [SerializeField] float difficultyMult;
+
     [Header("UI")]
     [SerializeField] TextMeshProUGUI comboGradeUGUI;
     [SerializeField] TextMeshProUGUI comboMultUGUI;
@@ -90,6 +93,19 @@ public class ComboManager : MonoBehaviour
 
         ease = Ease.EaseInQuint;
         func = GetEasingFunction(ease); //DO THIS IN AWAKE OR START
+
+        switch (difficulty.difficulty)
+        {
+            case DifficultyObject.DifficultyType.Normal:
+                difficultyMult = 1.0f;
+                break;
+            case DifficultyObject.DifficultyType.Easy:
+                difficultyMult = 0.5f;
+                break;
+            case DifficultyObject.DifficultyType.Hard:
+                difficultyMult = 2f;
+                break;
+        }
     }
 
     void Update()
@@ -272,7 +288,7 @@ public class ComboManager : MonoBehaviour
 
     public void AddScore(float amount)
     {
-        currentComboScore += amount * comboMults[(int)comboGrade];
+        currentComboScore += amount * comboMults[(int)comboGrade] * difficultyMult;
         currentComboScore = Mathf.Clamp(currentComboScore, 0, 2500);
         totalScore += amount * comboMults[(int)comboGrade];
         popScore = true;
@@ -280,7 +296,7 @@ public class ComboManager : MonoBehaviour
 
     public float getScoreTimesMult(float score)
     {
-        return score * comboMults[(int)comboGrade];
+        return score * comboMults[(int)comboGrade] * difficultyMult;
     }
 
     public void RemoveScore(float amount)

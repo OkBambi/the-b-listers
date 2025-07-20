@@ -78,36 +78,36 @@ public class GameManager : MonoBehaviour
                 stateUnPause();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Keypad0))
-        {
-            SceneManager.LoadScene("Level_Showcase");
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            SceneManager.LoadScene("Level_1");
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            SceneManager.LoadScene("Level_2");
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad3))
-        {
-            SceneManager.LoadScene("Level_3");
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad4))
-        {
-            SceneManager.LoadScene("Level_4");
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad5))
-        {
-            SceneManager.LoadScene("Level_Boss");
-        }
-        if (Input.GetKeyDown(KeyCode.KeypadPlus))
-        {
-            SceneManager.LoadScene("MainMenu");
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
+        //if (Input.GetKeyDown(KeyCode.Keypad0))
+        //{
+        //    SceneManager.LoadScene("Level_Showcase");
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad1))
+        //{
+        //    SceneManager.LoadScene("Level_1");
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad2))
+        //{
+        //    SceneManager.LoadScene("Level_2");
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad3))
+        //{
+        //    SceneManager.LoadScene("Level_3");
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad4))
+        //{
+        //    SceneManager.LoadScene("Level_4");
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad5))
+        //{
+        //    SceneManager.LoadScene("Level_Boss");
+        //}
+        //if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        //{
+        //    SceneManager.LoadScene("MainMenu");
+        //    Cursor.visible = true;
+        //    Cursor.lockState = CursorLockMode.None;
+        //}
     }
     public void statePause()
     {
