@@ -36,6 +36,7 @@ public class StickyMechanics : MonoBehaviour
                 if (currentWindUp > blueWindup)
                 {
                     WindUp();
+                    AudioManager.instance.Play("Blue_Launch");
                 }
             }
             else
