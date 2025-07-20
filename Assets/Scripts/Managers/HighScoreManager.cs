@@ -143,16 +143,15 @@ public class HighScoreManager : MonoBehaviour
     {
         for (int index = 0; index < maxHighScores; ++index)
         {
-            PlayerPrefs.SetInt(highscorePrefix + index, 0);
+            PlayerPrefs.SetInt(highscorePrefix + index, 10000);
             PlayerPrefs.SetString(playerNamePrefix + index, "Alphonsine");
         }
     }
 
-    public bool IsHighScore()
+    public bool IsHighScore(int totalScore)
     {
         bool isHighscore = false;
         List<int> highscores = GetScores();
-        int totalScore = ComboManager.instance.GetScore();
         for (int index = 0; index < highscores.Count; index++)
         {
             if (totalScore > highscores[index])

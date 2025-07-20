@@ -12,9 +12,7 @@ public class Aurora : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(auroraMaterial.GetInt("_ColorSwap"));
         sinTime = Mathf.Sin(Time.time);
-        Debug.Log(sinTime);
         if (sinTime >= 0)
         {
             auroraMaterial.SetInt("_ColorSwap", 1);

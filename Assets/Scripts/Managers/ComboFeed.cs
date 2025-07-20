@@ -110,7 +110,7 @@ public class ComboFeed : MonoBehaviour
         }
         currentFinalFeedList.Clear();
 
-        if ((GameManager.instance.player.GetComponentInParent<Player>().isDead || GameManager.instance.isWon) && HighScoreManager.theInstance.IsHighScore())
+        if ((GameManager.instance.player.GetComponentInParent<Player>().isDead || GameManager.instance.isWon) && HighScoreManager.theInstance.IsHighScore((int)finalScore))
         {
             isHighScoreObtained = true;
             GameManager.instance.GetActiveMenu().GetComponent<TypeOfEndScreen>().NewHighScore();

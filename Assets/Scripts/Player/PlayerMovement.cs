@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour, IDamage
     {
         if (Input.GetButtonDown("Jump"))
         {
-            print("i am PRESSING SPACE.");
+            //print("i am PRESSING SPACE.");
             if (isGrounded)
             {
                 if (jumpCount < jumpMax)

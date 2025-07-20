@@ -29,7 +29,7 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] AudioSource ShootyMcShootFace;
 
     float shootTimer;
-    bool isHolding;
+    //bool isHolding;
     float holdTime;
     [HideInInspector] public int currentRocketJumps;
 
@@ -47,7 +47,7 @@ public class PlayerShooting : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            isHolding = true;
+            //isHolding = true;
             holdTime += Time.deltaTime;
             if (!LevelModifierManager.instance.shotgunOnly)
             {
@@ -91,7 +91,7 @@ public class PlayerShooting : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            isHolding = false;
+            //isHolding = false;
             if (!LevelModifierManager.instance.rapidFireOnly)
             {
                 if (holdTime <= tapThreshold && shootTimer > shotCooldown)
