@@ -34,8 +34,12 @@ public class StageManager : MonoBehaviour
 
     public IEnumerator Lvl3PathwayBlock()
     {
-        AudioManager.instance.Play("Floor_Crumble");
-        Pathway.SetActive(false);
-        yield return new WaitForSecondsRealtime(0.01f);
+        if (Pathway != null)
+        {
+            AudioManager.instance.Play("Floor_Crumble");
+            Pathway.SetActive(false);
+            yield return new WaitForSecondsRealtime(0.01f);
+        }
+    }
     }
 }
