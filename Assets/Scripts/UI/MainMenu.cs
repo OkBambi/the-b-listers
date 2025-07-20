@@ -31,7 +31,7 @@ public class MainMenuScript : MonoBehaviour
 
     public IEnumerator AudioIsPlaying()
     {
-        AudioManager.instance.Play("Main_Menu");
         yield return new WaitForSecondsRealtime(0.01f);
+        AudioManager.instance.Play("Main_Menu");
     }
 }
