@@ -64,6 +64,7 @@ public class Snake_MiniBoss : Snake
             NewHP = hp / 2;
             hp = NewHP;
         }
+        AudioManager.instance.Play("Snake");
         StartCoroutine(RandomizeDestinationOffset());
     }
 
@@ -77,7 +78,6 @@ public class Snake_MiniBoss : Snake
             Snakeagent.destination = player.position;
         else
             Snakeagent.destination = player.position + offset;
-
     }
 
     IEnumerator RandomizeDestinationOffset()

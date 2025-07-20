@@ -8,7 +8,7 @@ public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private void Awake()
     {
-        NormalPosition = transform.position;
+        NormalPosition = transform.localPosition;
     }
 
     private void OnEnable()
@@ -19,17 +19,17 @@ public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.position += new Vector3(0f, 80f, 0f);
+        transform.localPosition += new Vector3(0f, 80f, 0f);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        transform.position -= new Vector3(0f, 80f, 0f);
+        transform.localPosition -= new Vector3(0f, 80f, 0f);
     }
 
     public void ReturnButton()
     {
-        transform.position = NormalPosition;
+        transform.localPosition = NormalPosition;
     }
 
 }

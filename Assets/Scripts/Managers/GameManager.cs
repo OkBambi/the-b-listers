@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
     }
     public void StateSettings()
     {
-        PlayerHUD.SetActive(false);
+        //PlayerHUD.SetActive(false);
         MenuActive = MenuSettings;
         MenuActive.SetActive(true);
     }
