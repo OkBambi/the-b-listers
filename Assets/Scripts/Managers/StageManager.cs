@@ -41,5 +41,4 @@ public class StageManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.01f);
         }
     }
-    }
 }
