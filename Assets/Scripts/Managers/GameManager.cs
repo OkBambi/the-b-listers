@@ -226,7 +226,7 @@ public class GameManager : MonoBehaviour
                 AudioManager.instance.Play("Level_4");
                 break;
 
-            case "Boss_Level":
+            case "Level_Boss":
                 AudioManager.instance.Play("Boss_Level");
                 break;
 

@@ -93,6 +93,7 @@ public class Goliath : EnemyBase
         bossHPOrig = hp;
         gameObject.name = "Goliath";
         bossName.text = gameObject.name;
+        AudioManager.instance.Play("Goliath_Dive");
     }
 
     IEnumerator FillHPBar()
@@ -103,7 +104,6 @@ public class Goliath : EnemyBase
             fillAmount += 1;
             CinimaticBossHPBar(fillAmount);
             yield return new WaitForSeconds(0.0001f);
-
         }
     }
 
@@ -142,7 +142,6 @@ public class Goliath : EnemyBase
             if (stateTimer > topRoamTime)
             {
                 currentState = State.Diving;
-                AudioManager.instance.Play("Goliath_Dive");
                 roamTime = 0;
             }
         }
