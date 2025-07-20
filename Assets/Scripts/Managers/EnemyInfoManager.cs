@@ -78,7 +78,7 @@ public class EnemyInfoManager : MonoBehaviour
     }
     public void OnGoliathButtonClicked()
     {
-        AudioManager.instance.Play("Goliath_Indicator");
+        AudioManager.instance.Play("Goliath_Dive");
         ShowPanel(goliathInfoPanel);
     }
 }
