@@ -42,7 +42,7 @@ public class FOVSlider : MonoBehaviour
         //again, if added text, this updates the text just like the above one
         if (fovText != null )
         {
-            fovText.text = newFOV.ToString("F0") + "%";
+            fovText.text = newFOV.ToString("F0");
         }
     }
 

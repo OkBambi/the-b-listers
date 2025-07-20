@@ -85,6 +85,7 @@ public class SettingsMenu : MonoBehaviour
         {
             //yoga's version of the vfx text update
             sfxText.text = ((sfxSlider.value + 80f) * 1.25f).ToString("F0") + "%";
+            AudioManager.instance.Play("Setting_Music");
         }
     }
 

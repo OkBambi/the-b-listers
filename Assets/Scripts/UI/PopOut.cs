@@ -6,6 +6,16 @@ public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] Vector3 NormalPosition;
     [SerializeField] Vector3 HoverPosition;
 
+    private void Awake()
+    {
+        NormalPosition = transform.position;
+    }
+
+    private void OnEnable()
+    {
+        ReturnButton();
+    }
+
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -19,7 +29,7 @@ public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void ReturnButton()
     {
-        transform.position -= new Vector3(0f, 80f, 0f);
+        transform.position = NormalPosition;
     }
 
 }

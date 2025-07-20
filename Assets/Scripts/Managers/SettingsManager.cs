@@ -273,7 +273,7 @@ public class SettingsManager : MonoBehaviour
 
     public void ResetSettings()
     {
-        SetResolution(19);
+        SetResolution(26);
         SetQuality(3);
         SetWindowType(FullScreenMode.ExclusiveFullScreen);
         SetFOV(90);
