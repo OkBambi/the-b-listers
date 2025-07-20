@@ -275,6 +275,7 @@ public class LevelModifierManager : MonoBehaviour
         schmovesOnly = true;
         FindFirstObjectByType<GameStartDagger>().mod_SchmovesOnly = true;
         ComboManager.instance.AddScoreNoMult(1000f);
+        ComboFeed.theInstance.AddNewComboFeed("+ 1000 Schmoves only", 1000f);
     }
     public void DaggersOnly()
     {

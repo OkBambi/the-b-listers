@@ -17,7 +17,7 @@ public class ComboManager : MonoBehaviour
     [SerializeField] ComboGrade comboGrade;
 
     [SerializeField] DifficultyObject difficulty;
-    [SerializeField] float difficultyMult;
+    [SerializeField] public float difficultyMult;
 
     [Header("UI")]
     [SerializeField] TextMeshProUGUI comboGradeUGUI;
@@ -288,7 +288,7 @@ public class ComboManager : MonoBehaviour
 
     public void AddScore(float amount)
     {
-        currentComboScore += amount * comboMults[(int)comboGrade] * difficultyMult;
+        currentComboScore += amount * comboMults[(int)comboGrade];
         currentComboScore = Mathf.Clamp(currentComboScore, 0, 2500);
         totalScore += amount * comboMults[(int)comboGrade];
         popScore = true;
@@ -296,7 +296,7 @@ public class ComboManager : MonoBehaviour
 
     public float getScoreTimesMult(float score)
     {
-        return score * comboMults[(int)comboGrade] * difficultyMult;
+        return score * comboMults[(int)comboGrade];
     }
 
     public void RemoveScore(float amount)

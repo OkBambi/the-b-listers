@@ -107,6 +107,20 @@ public class ComboFeed : MonoBehaviour
             }
 
             yield return new WaitForSecondsRealtime(endFeedSpeed);
+
+            if (i == finalFeedList.Count - 1)
+            {
+                GameObject finalMultiplier = Instantiate(feedListingPrefab, endFeed);
+                finalMultiplier.transform.SetSiblingIndex(0);
+                finalMultiplier.GetComponent<FeedListing>().GetComponent<TextMeshProUGUI>().fontSize = 55;
+                finalMultiplier.GetComponent<FeedListing>().GetComponent<TextMeshProUGUI>().alignment = TextAlignmentOptions.Center;
+                finalMultiplier.GetComponent<FeedListing>().SetScoreAndHow("* " + ComboManager.instance.difficultyMult + " Difficulty Multiplier");
+                finalMultiplier.GetComponent<FeedListing>().SetColor(Color.white);
+
+                finalScore *= ComboManager.instance.difficultyMult;
+                finalScoreText.text = finalScore.ToString();
+                finalScoreText.color = Color.white;
+            }
         }
         currentFinalFeedList.Clear();
 
