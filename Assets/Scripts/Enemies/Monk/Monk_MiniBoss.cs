@@ -102,7 +102,7 @@ public class Monk_MiniBoss : EnemyBase
             yield return new WaitForSeconds(0.05f);
         }
         AudioManager.instance.Play("Monk_Cast");
-
+        StartCoroutine(Sparkles());
         yield return new WaitForSeconds(0.20f);
         Wave.SetActive(true);
         waveGrowthTimer = 0;
@@ -119,6 +119,11 @@ public class Monk_MiniBoss : EnemyBase
     }
     //casting
 
+    IEnumerator Sparkles()
+    {
+        yield return new WaitForSeconds(0.25f);
+        Instantiate(ParticleManager.instance.MonkEffect, transform.position, Quaternion.identity);
+    }
     IEnumerator ChangeColors()
     {
         while (true)

@@ -121,9 +121,4 @@ public class stopWatchShockWave : MonoBehaviour
         GameManager.instance.playerScript.canAction = true; // Re-enable player actions
         GameManager.instance.playerScript.canSchmove = true;
     }
-
-    public void LockColorSelection(float duration)
-    {
-        throw new System.NotImplementedException();
-    }
 }
