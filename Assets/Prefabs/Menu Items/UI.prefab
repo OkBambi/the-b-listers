@@ -1067,7 +1067,7 @@ GameObject:
   - component: {fileID: 4573786894963732006}
   - component: {fileID: 3713941477659068946}
   - component: {fileID: 5273215593631889913}
-  - component: {fileID: 9138819042075910994}
+  - component: {fileID: 1467778909004829733}
   m_Layer: 5
   m_Name: ModifierSelectionScreen
   m_TagString: Untagged
@@ -1136,7 +1136,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &9138819042075910994
+--- !u!114 &1467778909004829733
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1605,12 +1605,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 3
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 5625779512697108030}
-    m_SelectOnLeft: {fileID: 7910651556499495109}
-    m_SelectOnRight: {fileID: 8461388011288600284}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.56926143, g: 0.6334032, b: 0.67295593, a: 1}
@@ -5209,7 +5209,7 @@ GameObject:
   - component: {fileID: 8605939918012992475}
   - component: {fileID: 4424764448605818402}
   - component: {fileID: 1261522730912980933}
-  - component: {fileID: 2216064999893226930}
+  - component: {fileID: 4871861295534492259}
   m_Layer: 5
   m_Name: Restart
   m_TagString: Untagged
@@ -5331,7 +5331,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2216064999893226930
+--- !u!114 &4871861295534492259
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5756,12 +5756,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 3
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 7353977056026210865}
+    m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 7910651556499495109}
-    m_SelectOnRight: {fileID: 8461388011288600284}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.39215687, g: 1, b: 0.39215687, a: 1}
@@ -5893,7 +5893,7 @@ MonoBehaviour:
   textForTimer: {fileID: 3418733906146754042}
   fadeInText: {fileID: 6472955354144476503}
   fadeOutText: {fileID: 8277400668884484537}
-  timeRemainingInSeconds: 121
+  timeRemainingInSeconds: 181
   isCounting: 0
   fadeMovementSpeed: 100
 --- !u!1 &2453253249291662824
@@ -6550,12 +6550,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 3
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 5625779512697108030}
-    m_SelectOnLeft: {fileID: 7353977056026210865}
-    m_SelectOnRight: {fileID: 7910651556499495109}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.56926143, g: 0.6334032, b: 0.67295593, a: 1}
@@ -8234,12 +8234,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 3
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 5625779512697108030}
-    m_SelectOnLeft: {fileID: 8461388011288600284}
-    m_SelectOnRight: {fileID: 7353977056026210865}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.56926143, g: 0.6334032, b: 0.67295593, a: 1}
@@ -10363,9 +10363,9 @@ RectTransform:
   - {fileID: 7856541497232897915}
   - {fileID: 504029642793585715}
   - {fileID: 1072828241110802424}
-  - {fileID: 268331846949762117}
   - {fileID: 8741390897824642913}
   - {fileID: 8351726580663586251}
+  - {fileID: 268331846949762117}
   - {fileID: 8947639834832786216}
   - {fileID: 4573786894963732006}
   - {fileID: 3616396603339416697}
@@ -12594,7 +12594,7 @@ GameObject:
   - component: {fileID: 5378807266410765330}
   - component: {fileID: 3821895733171949645}
   - component: {fileID: 7560194695699292294}
-  - component: {fileID: 8590942573183309599}
+  - component: {fileID: 3267047907444621049}
   m_Layer: 5
   m_Name: NextStage
   m_TagString: Untagged
@@ -12716,7 +12716,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8590942573183309599
+--- !u!114 &3267047907444621049
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14169,7 +14169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2713747669970088261
 RectTransform:
   m_ObjectHideFlags: 0
