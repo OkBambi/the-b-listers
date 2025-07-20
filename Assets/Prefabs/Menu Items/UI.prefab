@@ -16917,6 +16917,7 @@ MonoBehaviour:
   endFeedSpeed: 0.2
   timeToWaitBeforeHighScores: 5
   playerKilledText: {fileID: 5237988103968117983}
+  isHighScoreObtained: 0
 --- !u!222 &1930181065766711300
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18070,9 +18071,6 @@ MonoBehaviour:
   RedCD: 0
   YellowCD: 0
   BlueCD: 0
-  RedCD_M2: {fileID: 451204754124004586}
-  YellowCD_M2: {fileID: 0}
-  BlueCD_M2: {fileID: 0}
   finishSpeed: 0.2
   animationDurations: 0a0000000a000000
 --- !u!114 &6198968398227689191
@@ -23670,6 +23668,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1593424491982852960, guid: 5021a8e7e148bd34295b5041db8b2c34, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 1593424491982852960, guid: 5021a8e7e148bd34295b5041db8b2c34, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3520867819982394991, guid: 5021a8e7e148bd34295b5041db8b2c34, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3520867819982394991, guid: 5021a8e7e148bd34295b5041db8b2c34, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -50
+      objectReference: {fileID: 0}
     - target: {fileID: 7498959329709610747, guid: 5021a8e7e148bd34295b5041db8b2c34, type: 3}
       propertyPath: m_Name
       value: EnemyHPBackGround
@@ -23681,13 +23695,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1359512070709795248, guid: 5021a8e7e148bd34295b5041db8b2c34, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5936760166768706394}
   m_SourcePrefab: {fileID: 100100000, guid: 5021a8e7e148bd34295b5041db8b2c34, type: 3}
 --- !u!224 &4642600687852454495 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 858227236880241761, guid: 5021a8e7e148bd34295b5041db8b2c34, type: 3}
   m_PrefabInstance: {fileID: 5441717953053709886}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6438221826826080142 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1359512070709795248, guid: 5021a8e7e148bd34295b5041db8b2c34, type: 3}
+  m_PrefabInstance: {fileID: 5441717953053709886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5936760166768706394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6438221826826080142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92b56a8adc1dfb46a7e5db875be4c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5742695118356780335
 PrefabInstance:
   m_ObjectHideFlags: 0

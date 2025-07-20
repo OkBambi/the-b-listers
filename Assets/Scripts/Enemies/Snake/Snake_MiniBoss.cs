@@ -1,8 +1,9 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.ProBuilder;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Snake_MiniBoss : Snake
 {
@@ -10,6 +11,9 @@ public class Snake_MiniBoss : Snake
     //normal snake, but when you kill the head it breaks into 3 orbs.
     //if the player doesnt break the 3 orbs in time, it gets re absorbed by the snake to regrow the head
 
+    [SerializeField] GameObject bossHpBg;
+    [SerializeField] Image bossHpBar;
+    [SerializeField] TextMeshProUGUI bossHpName;
     public float offsetRange = 3f;
     [SerializeField] Vector3 offset;
 
@@ -35,6 +39,16 @@ public class Snake_MiniBoss : Snake
     protected override void Start()
     {
         player = GameManager.instance.player.transform;
+        bossHpBar = FindFirstObjectByType<BossHpBar_Marker>(FindObjectsInactive.Include).GetComponent<Image>();
+        bossHpBg = bossHpBar.transform.parent.gameObject;
+        bossHpName = bossHpBg.GetComponentInChildren<TextMeshProUGUI>();
+
+        bossHpName.text = "Naga";
+        bossHpBar.fillAmount = 0f;
+        StartCoroutine(FillHpBar());
+        bossHpBg.SetActive(true);
+
+        FindFirstObjectByType<Timer>().textForTimer.gameObject.SetActive(false);
 
         name = "Snake Mini Boss";
 
@@ -80,6 +94,7 @@ public class Snake_MiniBoss : Snake
     public override void DeathCheck()
     {
         //Debug.Log(hp);
+        bossHpBar.fillAmount = hp / 3f;
         if (hp <= 0)
         {
             isAlive = false;
@@ -90,5 +105,17 @@ public class Snake_MiniBoss : Snake
             Destroy(gameObject);
             return;
         }
+    }
+
+    IEnumerator FillHpBar()
+    {
+        float timer = 0f;
+        while (timer <= 1f)
+        {
+            timer += Time.deltaTime;
+            bossHpBar.fillAmount = timer / 1f;
+            yield return new WaitForFixedUpdate();
+        }
+        bossHpBar.fillAmount = 1f;
     }
 }

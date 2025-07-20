@@ -7,7 +7,7 @@ using static TextAnimations;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI textForTimer;
+    public TextMeshProUGUI textForTimer;
     [SerializeField] TextMeshProUGUI fadeInText;
     [SerializeField] TextMeshProUGUI fadeOutText;
 

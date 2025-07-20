@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+
 public class SnakeHead_MiniBoss : SnakeHead
 {
     public GameObject killBox;
