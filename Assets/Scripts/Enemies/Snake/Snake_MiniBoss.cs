@@ -50,7 +50,7 @@ public class Snake_MiniBoss : Snake
 
         FindFirstObjectByType<Timer>().textForTimer.gameObject.SetActive(false);
 
-        name = "Snake Mini Boss";
+        name = "Naga";
 
         if (LevelModifierManager.instance.smallFastEnemies)
         {
@@ -102,6 +102,7 @@ public class Snake_MiniBoss : Snake
             AudioManager.instance.Play("Enemy_Death");
             if (SceneManager.GetActiveScene().name != "Level_Showcase")
                 GameManager.instance.OnEndCondition();
+            OnAECDestroy();
             Destroy(gameObject);
             return;
         }
