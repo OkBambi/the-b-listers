@@ -109,7 +109,7 @@ public class ComboManager : MonoBehaviour
         //TESTING STUFF
         if (Input.GetKeyDown(KeyCode.G))
         {
-            AddScore(100);
+            //AddScore(100);
         }
     }
 
