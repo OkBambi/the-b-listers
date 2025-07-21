@@ -4,7 +4,6 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -19,6 +18,8 @@ public class SettingsMenu : MonoBehaviour
     public Slider mouseSensitivitySlider;
     public TextMeshProUGUI mouseSensitivityText;
 
+    public Button resetSettingsButton;
+
 
     //res stuff
     public TMP_Dropdown resolutionDropdown;
@@ -27,37 +28,11 @@ public class SettingsMenu : MonoBehaviour
     public TMP_Dropdown quality;
     public TMP_Dropdown window;
 
-    //public TMP_Dropdown colourBlindness;
-    //[Inspectable] public List<ColourBlindnessPreset> colorPresets;
 
     void Start()
     {
         //resolution
         resolutions = Screen.resolutions;
-
-        //maura's code I used to
-        //resolutionDropdown.ClearOptions();  //clear all existing options from the dropdown
-        
-        //List<string> options = new List<string>();  //create a list of options to populate the dropdown
-
-        //int currentResolutionIndex = 0; //track the index of the current screen resolution
-        ////loop for each element in our array
-        //for (int i = 0; i < resolutions.Length; i++)
-        //{
-        //    //string option = "width" + " x " + "height";
-        //    string option = resolutions[i].width + " x " + resolutions[i].height;   //a nicely formated string will be crated for them
-        //    options.Add(option);    //then gets added to the list
-
-        //    if (resolutions[i].width == Screen.currentResolution.width &&
-        //        resolutions[i].height == Screen.currentResolution.height)
-        //    {
-        //        currentResolutionIndex = i;
-        //    }
-        //}
-        //resolutionDropdown.AddOptions(options); //once done, it gets back added to the res dropdown
-        //resolutionDropdown.value = currentResolutionIndex;
-        //resolutionDropdown.RefreshShownValue();
-
         //beginning of the volume stuff
         //gets the initial volume from the AudioMixer and set the slider and text
         if (audioMixer != null && sfxSlider != null && sfxText != null)
@@ -90,6 +65,8 @@ public class SettingsMenu : MonoBehaviour
 
         musicSlider.onValueChanged.AddListener(delegate { AudioManager.instance.Play("Setting_Music"); });
         musicSlider.onValueChanged.AddListener(delegate { AudioManager.instance.UpdateMusicVolume(); });
+
+        resetSettingsButton.onClick.AddListener(delegate { SettingsManager.instance.ResetSettings(); });
     }
 
 
@@ -106,20 +83,14 @@ public class SettingsMenu : MonoBehaviour
 
         if (sfxText != null)
         {
-            //updates the text display
-            //the slider val will be in dB if you set your slider from -80 to 0. which it is unless someone changes it *stare* ._.
-            //since it is, we're displaying it as a percentage for readability
-            //volText.text = ConvertDbToPercentage(volume).ToString("F0") + "%";
-
             //yoga's version of the vfx text update
             sfxText.text = ((sfxSlider.value + 80f) * 1.25f).ToString("F0") + "%";
-
+            AudioManager.instance.Play("Setting_Music");
         }
     }
 
     public void SetSFX(float volume)
     {
-        //Debug.Log("Setting Volume to: {volume}"); //uncomment to see the slider's val
         if (audioMixer != null)
         {
             //sets the exposed parameter in the AudioMixer
@@ -129,11 +100,6 @@ public class SettingsMenu : MonoBehaviour
 
         if (sfxText != null)
         {
-            //updates the text display
-            //the slider val will be in dB if you set your slider from -80 to 0. which it is unless someone changes it *stare* ._.
-            //since it is, we're displaying it as a percentage for readability
-            //volText.text = ConvertDbToPercentage(volume).ToString("F0") + "%";
-
             sfxSlider.value = (volume * 80f) - 80f;
 
             //yoga's version of the vfx text update
@@ -147,7 +113,6 @@ public class SettingsMenu : MonoBehaviour
         if (musicText != null)
         {
             musicText.text = ((musicSlider.value + 80f) * 1.25f).ToString("F0") + "%";
-
         }
     }
 
@@ -199,26 +164,30 @@ public class SettingsMenu : MonoBehaviour
         //reads an input and sets the window resolution
         if (resolutions == null)
             resolutions = Screen.resolutions;
-        Resolution resolution = resolutions[resolutionDropdown.value];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
+        if (resolutionDropdown.value < 26)
+        {
+            Resolution resolution = resolutions[resolutionDropdown.value];
+            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreenMode);
+        }
+        else
+        {
+            Screen.SetResolution(Display.main.systemWidth, Display.main.systemHeight, Screen.fullScreenMode);
+        }
     }
 
-    public void SetResolution(Resolution newResolution)
+    public void SetResolution(int res)
     {
-        //reads an input and sets the window resolution
-        Resolution resolution = newResolution;
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-
-        for (int resolutionIndex = 0;  resolutionIndex < Screen.resolutions.Length; ++resolutionIndex)
+        if (res < 26)
         {
-            if (Screen.resolutions[resolutionIndex].Equals(newResolution))
-            {
-                resolutionDropdown.value = resolutionIndex;
-                //Debug.Log(resolutionDropdown.value);
-                break;
-            }
+            Resolution resolution = Screen.resolutions[res];
+            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         }
-        
+        else
+        {
+            Screen.SetResolution(Display.main.systemWidth, Display.main.systemHeight, Screen.fullScreen);
+        }
+        resolutionDropdown.value = res;
     }
 
     public void SetWindowSetting()
@@ -226,13 +195,16 @@ public class SettingsMenu : MonoBehaviour
         switch (window.value)
         {
             case 0:
-                Screen.fullScreenMode = FullScreenMode.Windowed;
+                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
                 break;
             case 1:
                 Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
                 break;
             case 2:
-                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
+                break;
+            case 3:
+                Screen.fullScreenMode = FullScreenMode.Windowed;
                 break;
         }
     }
@@ -242,14 +214,17 @@ public class SettingsMenu : MonoBehaviour
         Screen.fullScreenMode = mode;
         switch (mode)
         {
-            case FullScreenMode.Windowed:
+            case FullScreenMode.ExclusiveFullScreen:
                 window.value = 0;
                 break;
             case FullScreenMode.FullScreenWindow:
                 window.value = 1;
                 break;
-            case FullScreenMode.ExclusiveFullScreen:
+            case FullScreenMode.MaximizedWindow:
                 window.value = 2;
+                break;
+            case FullScreenMode.Windowed:
+                window.value = 3;
                 break;
         }
     }

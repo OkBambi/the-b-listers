@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+
 public class SnakeHead_MiniBoss : SnakeHead
 {
     public GameObject killBox;
@@ -48,20 +49,11 @@ public class SnakeHead_MiniBoss : SnakeHead
                 newOrb.GetComponent<SnakeOrb>().parentHead = this;
             }
             
-            //Instantiate(snakeOrb, transform.position, Quaternion.identity).GetComponent<SnakeOrb>().parentHead = this;
-            //Instantiate(snakeOrb, transform.position, Quaternion.identity).GetComponent<SnakeOrb>().parentHead = this;
 
             col.enabled = false;
             killBox.SetActive(false);
             model.gameObject.SetActive(false);
             trail.enabled = false;
-            //gameObject.SetActive(false);
-            //isAlive = false;
-            //ComboManager.instance.AddScore(score);
-            //float scoreWithMult = ComboManager.instance.getScoreTimesMult(score);
-            //ComboFeed.theInstance.AddNewComboFeed("+ " + scoreWithMult.ToString() + " " + transform.name, scoreWithMult);
-            //snakeBody.takeDamage(PrimaryColor.OMNI, 1);
-            //Destroy(gameObject);
             return;
         }
     }
@@ -70,9 +62,6 @@ public class SnakeHead_MiniBoss : SnakeHead
     {
         gameObject.SetActive(false);
         isAlive = false;
-        //ComboManager.instance.AddScore(score);
-        //float scoreWithMult = ComboManager.instance.getScoreTimesMult(score);
-        //ComboFeed.theInstance.AddNewComboFeed("+ " + scoreWithMult.ToString() + " " + transform.name, scoreWithMult);
         snakeBody.takeDamage(PrimaryColor.OMNI, 1);
         Destroy(gameObject);
     }

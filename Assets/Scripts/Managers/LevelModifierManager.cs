@@ -64,9 +64,11 @@ public class LevelModifierManager : MonoBehaviour
             case DifficultyObject.DifficultyType.Normal:
                 switch (sceneName)
                 {
+                    case "Level_1":
                     case "Level_2":
                     case "Level_3":
                     case "Level_4":
+                    case "Level_Boss":
                         ShowCardUI();
                         break;
                 }
@@ -74,9 +76,11 @@ public class LevelModifierManager : MonoBehaviour
             case DifficultyObject.DifficultyType.Easy:
                 switch (sceneName)
                 {
+                    case "Level_1":
                     case "Level_2":
                     case "Level_3":
                     case "Level_4":
+                    case "Level_Boss":
                         ShowCardUI();
                         break;
                 }
@@ -271,6 +275,7 @@ public class LevelModifierManager : MonoBehaviour
         schmovesOnly = true;
         FindFirstObjectByType<GameStartDagger>().mod_SchmovesOnly = true;
         ComboManager.instance.AddScoreNoMult(1000f);
+        ComboFeed.theInstance.AddNewComboFeed("+ 1000 Schmoves only", 1000f);
     }
     public void DaggersOnly()
     {

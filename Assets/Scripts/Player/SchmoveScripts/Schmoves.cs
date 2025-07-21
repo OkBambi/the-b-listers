@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using static EasingLibrary;
 
 public class Schmoves : MonoBehaviour
 {
@@ -42,10 +42,11 @@ public class Schmoves : MonoBehaviour
                             {
                                 redSchmover.Activate();
                                 cooldownRed = maxCooldownRed;
-                                RedCD_M2.color = Color.gray;
+                                GameManager.instance.colorSwapper.m2.color = Color.grey;
                                 ComboManager.instance.RemoveScore(100);
                                 ComboFeed.theInstance.AddNewComboFeed("- 100 redSchmove", -100);
                                 StartCoroutine(UpdateCoolDownUIRed());
+                                StartCoroutine(CooldownStartFlash(RedCD_UI));
                             }
                             break;
                         case PrimaryColor.BLUE:
@@ -53,10 +54,11 @@ public class Schmoves : MonoBehaviour
                             {
                                 blueSchmover.Activate();
                                 cooldownBlue = maxCooldownBlue;
-                                BlueCD_M2.color = Color.gray;
+                                GameManager.instance.colorSwapper.m2.color = Color.grey;
                                 ComboManager.instance.RemoveScore(100);
                                 ComboFeed.theInstance.AddNewComboFeed("- 100 blueSchmove", -100);
                                 StartCoroutine(UpdateCoolDownUIBlue());
+                                StartCoroutine(CooldownStartFlash(BlueCD_UI));
                             }
                             break;
                         default:
@@ -64,7 +66,7 @@ public class Schmoves : MonoBehaviour
                             {
                                 yellowSchmover.Activate();
                                 cooldownYel = maxCooldownYel;
-                                YellowCD_M2.color = Color.gray;
+                                //YellowCD_M2.color = Color.gray;
                                 //the coroutine starts when you release the railgun
                             }
                             break;
@@ -87,6 +89,7 @@ public class Schmoves : MonoBehaviour
     IEnumerator InvalidFlash()
     {
         invalidScore.SetActive(true);
+        AudioManager.instance.Play("Invalid");
         yield return new WaitForSeconds(0.4f);
         invalidScore.SetActive(false);
     }
@@ -94,6 +97,7 @@ public class Schmoves : MonoBehaviour
     IEnumerator DisabledFlash()
     {
         disabledSchmoves.SetActive(true);
+        AudioManager.instance.Play("Invalid");
         yield return new WaitForSeconds(0.4f);
         disabledSchmoves.SetActive(false);
     }
@@ -105,18 +109,18 @@ public class Schmoves : MonoBehaviour
     //UI
     [Header("CoolDownBars")]
     [SerializeField] Image RedCD_UI;
-    [SerializeField] Image YellowCD_UI;
+    public Image YellowCD_UI;
     [SerializeField] Image BlueCD_UI;
 
     [Header("CoolDownLerps")]
-    [SerializeField] float RedCD;
-    [SerializeField] float YellowCD;
-    [SerializeField] float BlueCD;
+    public float RedCD;
+    public float YellowCD;
+    public float BlueCD;
 
-    [Header("CoolDownText")]
-    [SerializeField] TextMeshProUGUI RedCD_M2;
-    [SerializeField] TextMeshProUGUI YellowCD_M2;
-    [SerializeField] TextMeshProUGUI BlueCD_M2;
+    //[Header("CoolDownText")]
+    //[SerializeField] TextMeshProUGUI RedCD_M2;
+    //[SerializeField] TextMeshProUGUI YellowCD_M2;
+    //[SerializeField] TextMeshProUGUI BlueCD_M2;
 
     [Header("CoolDownFinish")]
     [SerializeField] float finishSpeed;
@@ -132,6 +136,7 @@ public class Schmoves : MonoBehaviour
     #region Animations
     public IEnumerator UpdateCoolDownUIRed()
     {
+        AudioManager.instance.Play("Fizzle");
         bool redIsCD = false;
 
         do
@@ -148,26 +153,31 @@ public class Schmoves : MonoBehaviour
                 redIsCD = false;
                 Debug.Log("twice?");
                 StartCoroutine(CooldownComplete(RedCD_UI));
+                AudioManager.instance.Stop("Fizzle");
+                break;
             }
 
             RedCD = 50f + (200f * (cooldownRed / maxCooldownRed));
-            RedCD_UI.rectTransform.sizeDelta = new Vector2(RedCD, 34.41f);
+            //size.x = EaseOutBack(size.x, RedCD, 0.1f);
+            RedCD_UI.rectTransform.sizeDelta = new Vector2(EaseOutBack(RedCD_UI.rectTransform.sizeDelta.x, RedCD, 0.1f), RedCD_UI.rectTransform.sizeDelta.y);
 
-            if (RedCD_UI.rectTransform.sizeDelta.x == 50)
+            if (RedCD == 50)
             {
                 Debug.Log("break out");
                 break;
             }
 
-            yield return null;
+            yield return new WaitForFixedUpdate();
         } while (true);
 
-        yield return null;
+        yield return new WaitForFixedUpdate();
     }
 
     public IEnumerator UpdateCoolDownUIYellow()
     {
+        AudioManager.instance.Play("Fizzle");
         bool yellowIsCD = false;
+        //Vector2 size = new Vector2(50f, 34.41f);
 
         do
         {
@@ -181,27 +191,31 @@ public class Schmoves : MonoBehaviour
             {
                 yellowIsCD = false;
                 StartCoroutine(CooldownComplete(YellowCD_UI));
+                AudioManager.instance.Stop("Fizzle");
+                break;
             }
 
             YellowCD = 50f + (200f * (cooldownYel / maxCooldownYel));
-            YellowCD_UI.rectTransform.sizeDelta = new Vector2(YellowCD, 34.41f);
 
-            if (YellowCD_UI.rectTransform.sizeDelta.x == 50)
+            YellowCD_UI.rectTransform.sizeDelta = new Vector2(EaseOutBack(YellowCD_UI.rectTransform.sizeDelta.x, YellowCD, 0.1f), YellowCD_UI.rectTransform.sizeDelta.y);
+
+            if (YellowCD == 50)
             {
                 Debug.Log("break out");
                 break;
             }
 
-            yield return null;
+            yield return new WaitForFixedUpdate();
         } while (true);
 
-        yield return null;
+        yield return new WaitForFixedUpdate();
     }
 
     public IEnumerator UpdateCoolDownUIBlue()
     {
+        AudioManager.instance.Play("Fizzle");
         bool blueIsCD = false;
-
+        //Vector2 size = new Vector2(50f, 34.41f);
 
         do
         {
@@ -215,21 +229,25 @@ public class Schmoves : MonoBehaviour
             {
                 blueIsCD = false;
                 StartCoroutine(CooldownComplete(BlueCD_UI));
+                AudioManager.instance.Stop("Fizzle");
+                break;
             }
 
             BlueCD = 50f + (200f * (cooldownBlue / maxCooldownBlue));
-            BlueCD_UI.rectTransform.sizeDelta = new Vector2(BlueCD, 34.41f);
+            //size.x = EaseOutBack(size.x, BlueCD, 0.1f);
+            //BlueCD_UI.rectTransform.sizeDelta = size;
+            BlueCD_UI.rectTransform.sizeDelta = new Vector2(EaseOutBack(BlueCD_UI.rectTransform.sizeDelta.x, BlueCD, 0.1f), BlueCD_UI.rectTransform.sizeDelta.y);
 
-            if (BlueCD_UI.rectTransform.sizeDelta.x == 50)
+            if (BlueCD == 50)
             {
                 Debug.Log("break out");
                 break;
             }
 
-            yield return null;
+            yield return new WaitForFixedUpdate();
         } while (true);
 
-        yield return null;
+        yield return new WaitForFixedUpdate();
     }
 
     IEnumerator CooldownComplete(Image colourBar)
@@ -242,19 +260,21 @@ public class Schmoves : MonoBehaviour
         Color originalColour = colourBar.color;
         colourBar.color = Color.black;
 
-        switch (colourBar.name)
-        {
-            case "Red":
-                RedCD_M2.color = Color.white;
-                break;
-            case "Yellow":
-                YellowCD_M2.color = Color.white;
-                break;
-            case "Blue":
-                BlueCD_M2.color = Color.white;
-                break;
-        }
+        //switch (colourBar.name)
+        //{
+        //    case "Red":
+        //        RedCD_M2.color = Color.white;
+        //        break;
+        //    case "Yellow":
+        //        YellowCD_M2.color = Color.white;
+        //        break;
+        //    case "Blue":
+        //        BlueCD_M2.color = Color.white;
+        //        break;
+        //}
 
+        bool isPlayedSound = true;
+        StartCoroutine(CameraShake.instance.Shake(0.1f, 0.08f));
         while (true)
         {
             if (animationPhase == 2) break;
@@ -266,25 +286,100 @@ public class Schmoves : MonoBehaviour
 
             if (animationPhase == 0)
             {
-                rectX = Mathf.Lerp(rectX, 400f, finishSpeed * 2);
-                rectY = Mathf.Lerp(rectY, 3f, finishSpeed / 2);
+                //rectX = Mathf.Lerp(rectX, 400f, finishSpeed * 2);
+                //rectY = Mathf.Lerp(rectY, 3f, finishSpeed / 2);
+
+                rectX = EaseOutBack(rectX, 600f, finishSpeed);
+                rectY = EaseOutBack(rectY, 3f, finishSpeed);
+                if (isPlayedSound)
+                {
+                    isPlayedSound = false;
+                    AudioManager.instance.Play("Ding");
+                }
             }
             else
             {
-                rectX = Mathf.Lerp(rectX, 50f, finishSpeed);
-                rectY = Mathf.Lerp(rectY, 34.41f, finishSpeed / 2);
+                rectX = EaseOutBack(rectX, 50f, finishSpeed);
+                rectY = EaseOutBack(rectY, 34.41f, finishSpeed);
+
+                //rectX = Mathf.Lerp(rectX, 50f, finishSpeed);
+                //rectY = Mathf.Lerp(rectY, 34.41f, finishSpeed / 2);
             }
 
             colourBar.rectTransform.sizeDelta = new Vector2(rectX, rectY);
             ++currentDuration;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
         Debug.Log(originalColour);
         colourBar.color = originalColour;
 
-        
 
-        yield return null;
+        yield return new WaitForFixedUpdate();
+    }
+
+    public IEnumerator CooldownStartFlash(Image colourBar)
+    {
+        Color originalColour = colourBar.color;
+        colourBar.color = Color.white;
+        yield return new WaitForSecondsRealtime(0.2f);
+        colourBar.color = originalColour;
+        //int animationPhase = 0;
+        //int currentDuration = 0;
+        //float rectX = 50f;
+        //float rectY = 34.41f;
+
+        //Color originalColour = colourBar.color;
+        //colourBar.color = Color.black;
+
+        //switch (colourBar.name)
+        //{
+        //    case "Red":
+        //        RedCD_M2.color = Color.white;
+        //        break;
+        //    case "Yellow":
+        //        YellowCD_M2.color = Color.white;
+        //        break;
+        //    case "Blue":
+        //        BlueCD_M2.color = Color.white;
+        //        break;
+        //}
+
+        //while (true)
+        //{
+        //    if (animationPhase == 2) break;
+        //    if (currentDuration >= animationDurations[animationPhase])
+        //    {
+        //        currentDuration = 0;
+        //        ++animationPhase;
+        //    }
+
+        //    if (animationPhase == 0)
+        //    {
+        //        //rectX = Mathf.Lerp(rectX, 400f, finishSpeed * 2);
+        //        //rectY = Mathf.Lerp(rectY, 3f, finishSpeed / 2);
+
+        //        rectX = EaseOutBack(rectX, 600f, finishSpeed);
+        //        rectY = EaseOutBack(rectY, 3f, finishSpeed);
+        //    }
+        //    else
+        //    {
+        //        rectX = EaseOutBack(rectX, 50f, finishSpeed);
+        //        rectY = EaseOutBack(rectY, 34.41f, finishSpeed);
+
+        //        //rectX = Mathf.Lerp(rectX, 50f, finishSpeed);
+        //        //rectY = Mathf.Lerp(rectY, 34.41f, finishSpeed / 2);
+        //    }
+
+        //    colourBar.rectTransform.sizeDelta = new Vector2(rectX, rectY);
+        //    ++currentDuration;
+        //    yield return new WaitForFixedUpdate();
+        //}
+        //Debug.Log(originalColour);
+        //colourBar.color = originalColour;
+
+
+
+
     }
     #endregion
 

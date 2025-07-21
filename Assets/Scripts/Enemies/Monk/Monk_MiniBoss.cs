@@ -39,13 +39,19 @@ public class Monk_MiniBoss : EnemyBase
 
     private void Awake()
     {
-        //OnAECAwake();
         RandomizeColor();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
+        if (LevelModifierManager.instance.lessHealth)
+        {
+            int NewHP = hp;
+            NewHP = hp / 2;
+            hp = NewHP;
+        }
+
         agent = GetComponent<NavMeshAgent>();
 
         chainUI = FindFirstObjectByType<ChainUIMonkBoss>();
@@ -96,7 +102,7 @@ public class Monk_MiniBoss : EnemyBase
             yield return new WaitForSeconds(0.05f);
         }
         AudioManager.instance.Play("Monk_Cast");
-
+        StartCoroutine(Sparkles());
         yield return new WaitForSeconds(0.20f);
         Wave.SetActive(true);
         waveGrowthTimer = 0;
@@ -113,6 +119,11 @@ public class Monk_MiniBoss : EnemyBase
     }
     //casting
 
+    IEnumerator Sparkles()
+    {
+        yield return new WaitForSeconds(0.25f);
+        Instantiate(ParticleManager.instance.MonkEffect, transform.position, Quaternion.identity);
+    }
     IEnumerator ChangeColors()
     {
         while (true)

@@ -34,12 +34,12 @@ public class Monk : EnemyBase
     private void Awake()
     {
         OnAECAwake();
-        RandomizeColor();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
+
         startingPOS = transform.position;
         ColorSelection(setColor);
         agent = GetComponent<NavMeshAgent>();
@@ -64,6 +64,12 @@ public class Monk : EnemyBase
             agent.speed = agent.speed * 2f;
         }
 
+        if (LevelModifierManager.instance.lessHealth)
+        {
+            int NewHP = hp;
+            NewHP = hp / 2;
+            hp = NewHP;
+        }
     }
     // Update is called once per frame
     void Update()
@@ -110,22 +116,6 @@ public class Monk : EnemyBase
         agent.SetDestination(hit.position);
     }
 
-    //spacing
-    //void monkScan()
-    //{
-    //    Collider[] colliders = Physics.OverlapSphere(transform.position, minSeperationDistance);
-    //    for (int i = 0; i < colliders.Length; i++)
-    //    {
-    //        {
-    //            Collider collider = colliders[i];
-    //            if (collider.gameObject != gameObject && collider.CompareTag("monkEnemy"))
-    //            {
-    //                MonkSpacing(collider);
-    //                break;
-    //            }
-    //        }
-    //    }
-    //}
 
     void MonkSpacing(Collider other)
     {
@@ -160,8 +150,7 @@ public class Monk : EnemyBase
             yield return new WaitForSeconds(0.05f);
         }
         AudioManager.instance.Play("Monk_Cast");
-        Debug.Log("Debug cast");
-
+        StartCoroutine(Sparkles());
         yield return new WaitForSeconds(0.20f);
         Wave.SetActive(true);
         Wave.transform.localScale = Vector3.zero;
@@ -173,15 +162,16 @@ public class Monk : EnemyBase
             waveGrowthTimer += Time.deltaTime;
             yield return null;
         }
+        
         Wave.transform.localScale = waveSizeOriginal;
 
-
-
-        //if (monkInRange)
-        //{
-        //    monkScan();
-        //}
         roam();
         isCasting = false;
+    }
+
+    IEnumerator Sparkles()
+    {
+        yield return new WaitForSeconds(0.25f);
+        Instantiate(ParticleManager.instance.MonkEffect, transform.position, Quaternion.identity);
     }
 }

@@ -15,8 +15,9 @@ public class ComboManager : MonoBehaviour
     [SerializeField] float totalScore;
     [SerializeField] float currentComboScore;
     [SerializeField] ComboGrade comboGrade;
-    //[SerializeField] float comboHoldTimer;
-    //[SerializeField] float currentMult;
+
+    [SerializeField] DifficultyObject difficulty;
+    [SerializeField] public float difficultyMult;
 
     [Header("UI")]
     [SerializeField] TextMeshProUGUI comboGradeUGUI;
@@ -92,6 +93,19 @@ public class ComboManager : MonoBehaviour
 
         ease = Ease.EaseInQuint;
         func = GetEasingFunction(ease); //DO THIS IN AWAKE OR START
+
+        switch (difficulty.difficulty)
+        {
+            case DifficultyObject.DifficultyType.Normal:
+                difficultyMult = 1.0f;
+                break;
+            case DifficultyObject.DifficultyType.Easy:
+                difficultyMult = 0.5f;
+                break;
+            case DifficultyObject.DifficultyType.Hard:
+                difficultyMult = 2f;
+                break;
+        }
     }
 
     void Update()
@@ -111,7 +125,7 @@ public class ComboManager : MonoBehaviour
         //TESTING STUFF
         if (Input.GetKeyDown(KeyCode.G))
         {
-            AddScore(100);
+            //AddScore(100);
         }
     }
 

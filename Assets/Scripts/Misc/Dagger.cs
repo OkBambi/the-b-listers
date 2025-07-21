@@ -50,6 +50,7 @@ public class Dagger : MonoBehaviour
                 transform.position = hit.point;
                 transform.forward = reflectionDir.normalized;
                 Instantiate(deflectParticle, transform.position, transform.rotation);
+                AudioManager.instance.Play("WrongColour", Random.Range(0.8f, 1.2f));
             }
 
             //check for damage
@@ -57,9 +58,25 @@ public class Dagger : MonoBehaviour
 
             if (dmg != null)
             {
-                //HIT EM
-                dmg.takeDamage(projColor, 1);
-                Destroy(gameObject);
+                if (hit.collider.GetComponent<EnemyBase>().setColor != projColor)
+                {
+                    reflected = true;
+                    Vector3 reflectionDir = Vector3.Reflect(transform.forward, hit.normal);
+
+                    transform.position = hit.point;
+                    transform.forward = reflectionDir.normalized;
+                    Instantiate(deflectParticle, transform.position, transform.rotation);
+                    AudioManager.instance.Play("WrongColour", Random.Range(0.8f, 1.2f));
+                }
+                else
+                {
+                    //HIT EM
+                    dmg.takeDamage(projColor, 1);
+                    AudioManager.instance.Play("HitSFX", Random.Range(0.8f, 1.2f));
+                    Destroy(gameObject);
+                }
+                    
+                    
             }
         }
 

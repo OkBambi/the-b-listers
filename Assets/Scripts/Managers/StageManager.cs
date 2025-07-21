@@ -1,4 +1,5 @@
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -18,6 +19,7 @@ public class StageManager : MonoBehaviour
         {
             originalStageSize = stage.transform.localScale;
         }
+        Pathway = GameObject.Find("Pathway");
     }
     void Update()
     {
@@ -30,13 +32,13 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    public void Lvl3PathwayBlock()
+    public IEnumerator Lvl3PathwayBlock()
     {
-       if ( Pathway != null)
+        if (Pathway != null)
         {
             AudioManager.instance.Play("Floor_Crumble");
             Pathway.SetActive(false);
-
+            yield return new WaitForSecondsRealtime(0.01f);
         }
     }
 }

@@ -20,16 +20,12 @@ public class FOVSlider : MonoBehaviour
     void Start()
     {
         playerCamera = FindFirstObjectByType<PlayerCamera>();
-        //sets teh initial fov val to match the slider's val
-        //SettingsManager.instance.mainCamera.fieldOfView = fovSlider.value;
-        //SettingsManager.instance.pixelCamera.fieldOfView = fovSlider.value;
 
         //if adding the text
         //this updates the text initially
         if (fovText != null )
         {
-            //fovText.text = "FOV: " + fovSlider.value.ToString("F0");
-            fovText.text = fovSlider.value.ToString("F0");    //displays it as a whole number
+            fovText.text = fovSlider.value.ToString("F0") + "%";    //displays it as a whole number
         }
     }
 
@@ -42,12 +38,10 @@ public class FOVSlider : MonoBehaviour
             SettingsManager.instance.mainCamera.fieldOfView = newFOV;
             SettingsManager.instance.pixelCamera.fieldOfView = newFOV;
         }
-        //playerCamera.CameraAdjustFOV(newFOV);
 
         //again, if added text, this updates the text just like the above one
         if (fovText != null )
         {
-            //fovText.text = "FOV: " + newFOV.ToString("F0");
             fovText.text = newFOV.ToString("F0");
         }
     }

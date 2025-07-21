@@ -23,10 +23,6 @@ public class MenuNavigation : MonoBehaviour
             {
                 selectedObject = fallbackButton.gameObject;
             }
-            else
-            {
-                Debug.Log("No Button found in the scene.");
-            }
         }
 
         EventSystem.current.SetSelectedGameObject(selectedObject);
@@ -106,11 +102,8 @@ public class MenuNavigation : MonoBehaviour
         {
             if (selectable == null || !selectable.IsInteractable())
                 continue;
-            // Debugging output to see all selectables
-            Debug.Log($"Selectable: {selectable.gameObject.name}, Interactable: {selectable.IsInteractable()}");
         }
-        //Debug.Log(currentSelectable);
-        //Debug.Log(direction);
+
         if (next != null && next.IsInteractable())
         {
             return next.gameObject;

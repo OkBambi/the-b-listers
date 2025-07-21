@@ -24,11 +24,6 @@ public class StickyMechanics : MonoBehaviour
     GameObject stickyParent;
     Transform shootingPoint;
     int dmgAmount;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -41,6 +36,7 @@ public class StickyMechanics : MonoBehaviour
                 if (currentWindUp > blueWindup)
                 {
                     WindUp();
+                    AudioManager.instance.Play("Blue_Launch");
                 }
             }
             else

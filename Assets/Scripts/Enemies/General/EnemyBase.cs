@@ -3,6 +3,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static EasingLibrary;
 
 public class EnemyBase : MonoBehaviour, IDamage
 {
@@ -25,8 +26,11 @@ public class EnemyBase : MonoBehaviour, IDamage
     [Space]
     [Header("Boss Stuff")]
     public Image bossHPBar;
-    public float bossHPOrig;
+    public float bossHPOrig = 1;
     public TextMeshProUGUI bossName;
+
+    private Vector3 currentSize;
+    private Vector3 originalSize;
 
 
 
@@ -36,12 +40,6 @@ public class EnemyBase : MonoBehaviour, IDamage
     {
         ColorSelection(setColor);
         UpdateBoidAwareness();
-        if (LevelModifierManager.instance.lessHealth)
-        {
-            int NewHP = hp;
-            NewHP = hp / 2;
-            hp = NewHP;
-        }
     }
 
     protected void RandomizeColor()
@@ -56,20 +54,16 @@ public class EnemyBase : MonoBehaviour, IDamage
         {
             case PrimaryColor.RED:
                 model.material.color = Color.red;
-                //nameStr = "Red";
                 break;
             case PrimaryColor.YELLOW:
                 model.material.color = Color.yellow;
-                //nameStr = "Yellow";
                 break;
             case PrimaryColor.BLUE:
                 model.material.color = Color.blue;
-                //nameStr = "Blue";
                 break;
             case PrimaryColor.OMNI:
             default:
                 model.material.color = Color.black;
-                //nameStr = "Omni";
                 break;
         }
         baseColor = model.material.color;
@@ -86,32 +80,26 @@ public class EnemyBase : MonoBehaviour, IDamage
     //CALL THIS METHOD IN THE START OF ALL ENEMIES
     protected void UpdateBoidAwareness()
     {
-        //this code is being refactored, when an enemy spawns, it should add its own rigid body to the boidreferences rigidbody list in the enemy manager
-        //this rigid body list is what all boids will use
-
         EnemyManager.instance.boidReferences.Add(GetComponent<Rigidbody>());
-        //BoidAI[] activeboids = FindObjectsByType<BoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-        //for (int boidCount = 0; boidCount < activeboids.Length; boidCount++)
-        //{
-        //    activeboids[boidCount].boids.Add(GetComponent<Rigidbody>());
-        //}
     }
 
     //CALL THIS METHOD IN THE DEATH OF ALL ENEMIES
     protected void RemoveSelfFromTargetList()
     {
         EnemyManager.instance.boidReferences.Remove(GetComponent<Rigidbody>());
-        //BoidAI[] activeboids = FindObjectsByType<BoidAI>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-        //for (int boidCount = 0; boidCount < activeboids.Length; boidCount++)
-        //{
-        //    activeboids[boidCount].boids.Remove(GetComponent<Rigidbody>());
-        //}
     }
 
     //call this when an AEC enemy spawn
     public void OnAECAwake()
     {
+        originalSize = transform.localScale;
+        currentSize = Vector3.zero;
+        transform.localScale = currentSize;
+        StartCoroutine(SpawnJuice());
+        StartCoroutine(ShakePos(0.2f, 0.2f));
+
         EnemyManager.instance.OnAECAwake();
+        
     }
     //call this when an AEC enemy dies
     public void OnAECDestroy()
@@ -173,6 +161,7 @@ public class EnemyBase : MonoBehaviour, IDamage
 
         while (elapsed < duration)
         {
+            if (this) yield break;
             if (Time.timeScale == 0f) yield break;
             _x = Random.Range(-1f, 1f) * magnitude;
             _y = Random.Range(-1f, 1f) * magnitude;
@@ -183,7 +172,8 @@ public class EnemyBase : MonoBehaviour, IDamage
 
             yield return null;
         }
-        transform.localPosition = originalPos;
+        if (this)
+            transform.localPosition = originalPos;
     }
 
     public IEnumerator ShakeSize(float duration, float magnitude)
@@ -195,6 +185,7 @@ public class EnemyBase : MonoBehaviour, IDamage
 
         while (elapsed < duration)
         {
+            if (this) yield break;
             if (Time.timeScale == 0f) yield break;
             _x = Random.Range(-1f, 1f) * magnitude;
             _y = Random.Range(-1f, 1f) * magnitude;
@@ -205,7 +196,8 @@ public class EnemyBase : MonoBehaviour, IDamage
 
             yield return null;
         }
-        transform.localScale = originalSize;
+        if (this)
+            transform.localScale = originalSize;
     }
 
     public void spawnHitColorParticles()//spawn colors splats from the enemy
@@ -254,5 +246,34 @@ public class EnemyBase : MonoBehaviour, IDamage
     public void updateBossHPBar()
     {
         bossHPBar.fillAmount = hp / bossHPOrig;
+    }
+
+    IEnumerator SpawnJuice()
+    {
+        float timer = 0f;
+        while (timer <= 0.1f)
+        {
+            currentSize.x = EasingLibrary.EaseInBounce(currentSize.x, originalSize.x * 2f, 0.4f);
+            currentSize.y = EasingLibrary.EaseInBounce(currentSize.y, originalSize.y * 2f, 0.4f);
+            currentSize.z = EasingLibrary.EaseInBounce(currentSize.z, originalSize.z * 2f, 0.4f);
+
+            transform.localScale = currentSize;
+            timer += Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+
+        timer = 0f;
+        while (timer <= 0.5f)   
+        {
+            currentSize.x = EasingLibrary.EaseOutBounce(currentSize.x, originalSize.x, 0.2f);
+            currentSize.y = EasingLibrary.EaseOutBounce(currentSize.y, originalSize.y, 0.2f);
+            currentSize.z = EasingLibrary.EaseOutBounce(currentSize.z, originalSize.z, 0.2f);
+
+            transform.localScale = currentSize;
+            timer += Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+        yield return null;
+        transform.localScale = originalSize;
     }
 }

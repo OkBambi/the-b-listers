@@ -57,7 +57,7 @@ public class GameStartDagger : MonoBehaviour
         GameManager.instance.PlayLevelMusic();
         if (stageManager != null)
         {
-            stageManager.Lvl3PathwayBlock();
+            StartCoroutine(stageManager.Lvl3PathwayBlock());
         }
         Destroy(gameObject);
 

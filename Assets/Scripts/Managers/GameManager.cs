@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject MenuSettings;
     [SerializeField] GameObject MenuCredits;
     [SerializeField] GameObject MenuGameInfo;
-    [SerializeField] GameObject PlayerHUD;
+    [SerializeField] public GameObject PlayerHUD;
 
 
     public GameObject player;
@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.transform.parent.GetComponent<Player>();
         shootingPoint = GameObject.FindGameObjectWithTag("ShootingPoint").transform;
-        //TimeScaleOrigin = Time.timeScale;
         TimeScaleOrigin = 1f;
         Time.timeScale = TimeScaleOrigin;
         Cursor.lockState = CursorLockMode.Locked;
@@ -66,7 +65,22 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    if (MenuActive == null)
+        //    {
+        //        statePause();
+        //        MenuActive = MenuPause;
+        //        MenuActive.SetActive(true);
+        //    }
+        //    else if (MenuActive == MenuPause)
+        //    {
+        //        stateUnPause();
+        //    }
+        //}
+
+        //For Web of game
+        if (Input.GetKeyDown(KeyCode.P))
         {
             if (MenuActive == null)
             {
@@ -79,38 +93,37 @@ public class GameManager : MonoBehaviour
                 stateUnPause();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Keypad0))
-        {
-            SceneManager.LoadScene("Level_Showcase");
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            SceneManager.LoadScene("Level_1");
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            SceneManager.LoadScene("Level_2");
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad3))
-        {
-            SceneManager.LoadScene("Level_3");
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad4))
-        {
-            SceneManager.LoadScene("Level_4");
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad5))
-        {
-            SceneManager.LoadScene("Level_Bonus");
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad6))
-        {
-            SceneManager.LoadScene("Level_Boss");
-        }
-        if (Input.GetKeyDown(KeyCode.KeypadPlus))
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
+
+        //if (Input.GetKeyDown(KeyCode.Keypad0))
+        //{
+        //    SceneManager.LoadScene("Level_Showcase");
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad1))
+        //{
+        //    SceneManager.LoadScene("Level_1");
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad2))
+        //{
+        //    SceneManager.LoadScene("Level_2");
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad3))
+        //{
+        //    SceneManager.LoadScene("Level_3");
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad4))
+        //{
+        //    SceneManager.LoadScene("Level_4");
+        //}
+        //if (Input.GetKeyDown(KeyCode.Keypad5))
+        //{
+        //    SceneManager.LoadScene("Level_Boss");
+        //}
+        //if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        //{
+        //    SceneManager.LoadScene("MainMenu");
+        //    Cursor.visible = true;
+        //    Cursor.lockState = CursorLockMode.None;
+        //}
     }
     public void statePause()
     {
@@ -131,7 +144,7 @@ public class GameManager : MonoBehaviour
     }
     public void StateSettings()
     {
-        PlayerHUD.SetActive(false);
+        //PlayerHUD.SetActive(false);
         MenuActive = MenuSettings;
         MenuActive.SetActive(true);
     }
@@ -229,11 +242,7 @@ public class GameManager : MonoBehaviour
                 AudioManager.instance.Play("Level_4");
                 break;
 
-            case "Bonus_Level":
-                AudioManager.instance.Play("Bonus_Level");
-                break;
-
-            case "Boss_Level":
+            case "Level_Boss":
                 AudioManager.instance.Play("Boss_Level");
                 break;
 

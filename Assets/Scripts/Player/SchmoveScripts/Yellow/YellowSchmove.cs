@@ -103,6 +103,10 @@ public class YellowSchmove : MonoBehaviour
                     ComboManager.instance.RemoveScore(100 * chargeLevel); //may need to change this later
                     ComboFeed.theInstance.AddNewComboFeed("- " + (100 * chargeLevel).ToString() + " yellowSchmove", (-100 * chargeLevel));//same here
                     StartCoroutine(GameManager.instance.schmover.UpdateCoolDownUIYellow());
+                    StartCoroutine(GameManager.instance.schmover.CooldownStartFlash(GameManager.instance.schmover.YellowCD_UI));
+                    GameManager.instance.colorSwapper.m2.color = Color.gray;
+                    Instantiate(ParticleManager.instance.yellowSchmoveRailgunCircles, rb.transform.position + rb.transform.forward * 2f, shootingPoint.rotation);
+
                     StartCoroutine(camShaker.ShakeTween(1f, 0.04f * chargeLevel, 0f, 0.25f));
                     StartCoroutine(arm.RecoilTween(1f, 0.001f * chargeLevel, 0.01f * chargeLevel, 0.25f));
                 }

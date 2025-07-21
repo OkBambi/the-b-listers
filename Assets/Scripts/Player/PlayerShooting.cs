@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -27,9 +26,10 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] float rocketJumpForce;
     [SerializeField] int maxRocketJumps;
     [SerializeField] Animator mAnimator;
+    [SerializeField] AudioSource ShootyMcShootFace;
 
     float shootTimer;
-    bool isHolding;
+    //bool isHolding;
     float holdTime;
     [HideInInspector] public int currentRocketJumps;
 
@@ -38,7 +38,6 @@ public class PlayerShooting : MonoBehaviour
     public void Initialize()
     {
         camShaker = GameObject.FindFirstObjectByType<CameraShake>();
-        // mAnimator = GetComponent<Animator>();
     }
 
 
@@ -48,7 +47,7 @@ public class PlayerShooting : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            isHolding = true;
+            //isHolding = true;
             holdTime += Time.deltaTime;
             if (!LevelModifierManager.instance.shotgunOnly)
             {
@@ -59,7 +58,7 @@ public class PlayerShooting : MonoBehaviour
                     {
                         shootTimer = 0;
                         mAnimator.SetTrigger("Shooting");
-                        AudioManager.instance.Play("Rapid");
+                        AudioManager.instance.Play("Rapid", Random.Range(0.8f, 1.1f), ShootyMcShootFace);
                         GameObject b = Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
                         b.transform.Rotate(0, 0, UnityEngine.Random.Range(-360, 360));
                         Gradient grad;
@@ -92,7 +91,7 @@ public class PlayerShooting : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            isHolding = false;
+            //isHolding = false;
             if (!LevelModifierManager.instance.rapidFireOnly)
             {
                 if (holdTime <= tapThreshold && shootTimer > shotCooldown)
