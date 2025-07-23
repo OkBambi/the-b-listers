@@ -8,7 +8,7 @@ public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private void Start()
     {
-        Invoke("PositionInvoke", 0.01f);
+        Invoke("PositionInvoke", 0.1f);
     }
 
     //private void OnEnable()
@@ -36,6 +36,10 @@ public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void PositionInvoke()
     {
         NormalPosition = transform.localPosition;
+        if (EventSystem.current.currentSelectedGameObject == gameObject)
+        {
+            NormalPosition -= new Vector3(0f, 80f, 0f);
+        }
         ReturnButton();
     }
 
