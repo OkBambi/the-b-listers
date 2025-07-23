@@ -106,6 +106,7 @@ public class AudioManager : MonoBehaviour
         {
             s.source = _source;
             s.source.pitch = _pitch;
+            s.source.volume *= SettingsManager.instance.GetSFXVolume();
             s.source.Play();
         }
     }
@@ -116,6 +117,7 @@ public class AudioManager : MonoBehaviour
         if (s != null)
         {
             s.source = _source;
+            s.source.volume *= SettingsManager.instance.GetSFXVolume();
             s.source.Play();
         }
     }
