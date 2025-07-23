@@ -18,13 +18,17 @@ public class KillHitbox : MonoBehaviour
         {
             //HIT EM
             dmg.takeDamage(m_EnemyBase.setColor, 1);
-            if (m_EnemyBase.name != "Snake Head")
+
+            if (!LevelModifierManager.instance.difficulty.difficulty.Equals(DifficultyObject.DifficultyType.Easy))
             {
-                ComboFeed.theInstance.PlayerWasKilledBy(m_EnemyBase.name);
-            }
-            else
-            {
-                ComboFeed.theInstance.PlayerWasKilledBy("Snake");
+                if (m_EnemyBase.name != "Snake Head")
+                {
+                    ComboFeed.theInstance.PlayerWasKilledBy(m_EnemyBase.name);
+                }
+                else
+                {
+                    ComboFeed.theInstance.PlayerWasKilledBy("Snake");
+                }
             }
 
         }

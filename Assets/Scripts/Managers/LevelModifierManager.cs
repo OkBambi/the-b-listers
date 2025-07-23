@@ -25,7 +25,7 @@ public class LevelModifierManager : MonoBehaviour
 
     [Inspectable] public List<LevelModifier> modifiers;
 
-    [SerializeField] DifficultyObject difficulty;
+    [SerializeField] public DifficultyObject difficulty;
 
     //hard
     public bool schmovesOnly = false;
@@ -318,11 +318,11 @@ public class LevelModifierManager : MonoBehaviour
     {
         shotgunOnly = true;
     }
-
-    public void RapidfireOnly()
+    public void SavingGrace()
     {
-        rapidFireOnly = true;
+        savingGrace = true;
     }
+
     #endregion
 
 
@@ -338,9 +338,9 @@ public class LevelModifierManager : MonoBehaviour
         lessHealth = true;
     }
 
-    public void SavingGrace()
+    public void RapidfireOnly()
     {
-        savingGrace = true;
+        rapidFireOnly = true;
     }
     #endregion
 

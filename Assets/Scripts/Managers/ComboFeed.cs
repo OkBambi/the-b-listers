@@ -156,4 +156,10 @@ public class ComboFeed : MonoBehaviour
     {
         finalScore = 0;
     }
+
+    public void ClearScoreOnDeath()
+    {
+        AddNewComboFeed("- " + ComboManager.instance.GetScore() + " Touched", -ComboManager.instance.GetScore());
+        ComboManager.instance.RemoveScore(ComboManager.instance.GetScore());
+    }
 }

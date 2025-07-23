@@ -29,6 +29,10 @@ public class PlayerMovement : MonoBehaviour, IDamage
     public void Initialize()
     {
         cam = GetComponentInChildren<PlayerCamera>();
+        if (LevelModifierManager.instance.difficulty.difficulty.Equals(DifficultyObject.DifficultyType.Easy))
+        {
+            LevelModifierManager.instance.SavingGrace();
+        }
     }
 
     public void UpdateInput()
@@ -122,6 +126,13 @@ public class PlayerMovement : MonoBehaviour, IDamage
 
     public void takeDamage(PrimaryColor hitColor, int amount)
     {
-        transform.parent.GetComponent<Player>().Die();
+        if(LevelModifierManager.instance.difficulty.difficulty.Equals(DifficultyObject.DifficultyType.Easy))
+        {
+            ComboFeed.theInstance.ClearScoreOnDeath();
+        }
+        else
+        {
+            transform.parent.GetComponent<Player>().Die();
+        }
     }
 }
