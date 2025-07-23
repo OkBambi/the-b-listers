@@ -19,12 +19,13 @@ public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.localPosition += new Vector3(0f, 80f, 0f);
+        EventSystem.current.SetSelectedGameObject(gameObject);
+        MoveButtonForward();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        transform.localPosition -= new Vector3(0f, 80f, 0f);
+        MoveButtonBackward();
     }
 
     public void ReturnButton()
@@ -36,6 +37,15 @@ public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         NormalPosition = transform.localPosition;
         ReturnButton();
+    }
+
+    public void MoveButtonForward()
+    {
+        transform.localPosition += new Vector3(0f, 80f, 0f);
+    }
+    public void MoveButtonBackward()
+    {
+        transform.localPosition -= new Vector3(0f, 80f, 0f);
     }
 
 }

@@ -2368,6 +2368,7 @@ GameObject:
   - component: {fileID: 8841228396256306283}
   - component: {fileID: 137013679895246486}
   - component: {fileID: 3427051638148955048}
+  - component: {fileID: 6270703992679960112}
   m_Layer: 5
   m_Name: play
   m_TagString: Untagged
@@ -2539,6 +2540,51 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &6270703992679960112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273902091721596873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8841228396256306283}
+          m_TargetAssemblyTypeName: PopOut, Assembly-CSharp
+          m_MethodName: MoveButtonForward
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8841228396256306283}
+          m_TargetAssemblyTypeName: PopOut, Assembly-CSharp
+          m_MethodName: MoveButtonBackward
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &296433098652854752
 GameObject:
   m_ObjectHideFlags: 0
@@ -3502,6 +3548,7 @@ GameObject:
   - component: {fileID: 4522726527646447524}
   - component: {fileID: 8768880269900025631}
   - component: {fileID: 8984305321033368880}
+  - component: {fileID: 8983662619966972968}
   - component: {fileID: 6812761873602612333}
   - component: {fileID: 2170570699096690042}
   m_Layer: 5
@@ -3553,6 +3600,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NormalPosition: {x: -154, y: 100, z: 0}
   HoverPosition: {x: -154, y: 180, z: 0}
+--- !u!114 &8983662619966972968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373675305844067721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8984305321033368880}
+          m_TargetAssemblyTypeName: PopOut, Assembly-CSharp
+          m_MethodName: MoveButtonForward
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8984305321033368880}
+          m_TargetAssemblyTypeName: PopOut, Assembly-CSharp
+          m_MethodName: MoveButtonBackward
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &6812761873602612333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10266,6 +10358,7 @@ GameObject:
   - component: {fileID: 3853099015548196688}
   - component: {fileID: 630039258394902415}
   - component: {fileID: 9047312346170837138}
+  - component: {fileID: 2559651966517186088}
   - component: {fileID: 2272639776642894956}
   - component: {fileID: 8406860190307626130}
   m_Layer: 5
@@ -10317,6 +10410,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NormalPosition: {x: 893, y: 100, z: 0}
   HoverPosition: {x: 893, y: 180, z: 0}
+--- !u!114 &2559651966517186088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353333452875615013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 9047312346170837138}
+          m_TargetAssemblyTypeName: PopOut, Assembly-CSharp
+          m_MethodName: MoveButtonForward
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 9047312346170837138}
+          m_TargetAssemblyTypeName: PopOut, Assembly-CSharp
+          m_MethodName: MoveButtonBackward
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &2272639776642894956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11463,7 +11601,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>EASY</b>
+  m_text: '<b>BABY Mode</b>
 
 '
   m_isRightToLeft: 0
@@ -12112,6 +12250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8530238288717528057}
   - component: {fileID: 3136715803261844867}
+  - component: {fileID: 6372495915848367876}
   - component: {fileID: 1418180447200193637}
   - component: {fileID: 4865031330589939566}
   - component: {fileID: 8694081817352513708}
@@ -12156,6 +12295,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NormalPosition: {x: 631, y: 100, z: 0}
   HoverPosition: {x: 631, y: 180, z: 0}
+--- !u!114 &6372495915848367876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674940410481604338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3136715803261844867}
+          m_TargetAssemblyTypeName: PopOut, Assembly-CSharp
+          m_MethodName: MoveButtonForward
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3136715803261844867}
+          m_TargetAssemblyTypeName: PopOut, Assembly-CSharp
+          m_MethodName: MoveButtonBackward
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!222 &1418180447200193637
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -38308,6 +38492,7 @@ GameObject:
   - component: {fileID: 3352826275620723686}
   - component: {fileID: 1526610986446237661}
   - component: {fileID: 454809364329906865}
+  - component: {fileID: 4725340878108636055}
   - component: {fileID: 6937025893240518489}
   - component: {fileID: 4326819063567146105}
   m_Layer: 5
@@ -38359,6 +38544,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NormalPosition: {x: 1154, y: 100, z: 0}
   HoverPosition: {x: 1154, y: 180, z: 0}
+--- !u!114 &4725340878108636055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6201900411775354938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 454809364329906865}
+          m_TargetAssemblyTypeName: PopOut, Assembly-CSharp
+          m_MethodName: MoveButtonForward
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 454809364329906865}
+          m_TargetAssemblyTypeName: PopOut, Assembly-CSharp
+          m_MethodName: MoveButtonBackward
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &6937025893240518489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51940,6 +52170,7 @@ GameObject:
   - component: {fileID: 1026673188421273817}
   - component: {fileID: 4121430221600565663}
   - component: {fileID: 3462055407359747476}
+  - component: {fileID: 3236004271132922182}
   - component: {fileID: 8641001621340298498}
   - component: {fileID: 2521530001824964259}
   m_Layer: 5
@@ -51991,6 +52222,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NormalPosition: {x: 292, y: 100, z: 0}
   HoverPosition: {x: 292, y: 180, z: 0}
+--- !u!114 &3236004271132922182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8548101361578710503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3462055407359747476}
+          m_TargetAssemblyTypeName: PopOut, Assembly-CSharp
+          m_MethodName: MoveButtonForward
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3462055407359747476}
+          m_TargetAssemblyTypeName: PopOut, Assembly-CSharp
+          m_MethodName: MoveButtonBackward
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &8641001621340298498
 MonoBehaviour:
   m_ObjectHideFlags: 0
