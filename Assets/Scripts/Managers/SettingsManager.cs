@@ -37,11 +37,11 @@ public class SettingsManager : MonoBehaviour
         }
 
         //Debug.Log(PlayerPrefs.GetInt("resolution"));
-        if (PlayerPrefs.HasKey("resolution"))
+        if (PlayerPrefs.HasKey("quality"))
         {
-            settings.resolution = PlayerPrefs.GetInt("resolution");
+            //settings.resolution = PlayerPrefs.GetInt("resolution");
             settings.quality = PlayerPrefs.GetInt("quality");
-            settings.windowType = (FullScreenMode)PlayerPrefs.GetInt("windowType");
+            //settings.windowType = (FullScreenMode)PlayerPrefs.GetInt("windowType");
             settings.FOV = PlayerPrefs.GetInt("fov");
             settings.isReducedCameraShake = (PlayerPrefs.GetInt("reducedCameraShake") == 1 ? true : false);
             settings.isInvertY = (PlayerPrefs.GetInt("invertY") == 1 ? true : false);
@@ -63,25 +63,25 @@ public class SettingsManager : MonoBehaviour
         Invoke("ApplySettings", 0.01f);
     }
 
-    #region Resolution
-    public int GetResolution()
-    {
-        //Debug.Log(settings.resolution);
-        return settings.resolution;
-    }
-    public void SetResolution(int _resolution)
-    {
-        settings.resolution = _resolution;
-        PlayerPrefs.SetInt("resolution", settings.resolution);
-        PlayerPrefs.Save();
-    }
-    public void SetResolution(TMP_Dropdown _resolution)
-    {
-        settings.resolution = _resolution.value;
-        PlayerPrefs.SetInt("resolution", settings.resolution);
-        PlayerPrefs.Save();
-    }
-    #endregion
+    //#region Resolution
+    //public int GetResolution()
+    //{
+    //    //Debug.Log(settings.resolution);
+    //    return settings.resolution;
+    //}
+    //public void SetResolution(int _resolution)
+    //{
+    //    settings.resolution = _resolution;
+    //    PlayerPrefs.SetInt("resolution", settings.resolution);
+    //    PlayerPrefs.Save();
+    //}
+    //public void SetResolution(TMP_Dropdown _resolution)
+    //{
+    //    settings.resolution = _resolution.value;
+    //    PlayerPrefs.SetInt("resolution", settings.resolution);
+    //    PlayerPrefs.Save();
+    //}
+    //#endregion
 
     #region Quality
     public int GetQuality()
@@ -106,24 +106,24 @@ public class SettingsManager : MonoBehaviour
     }
     #endregion
 
-    #region Window Type
-    public FullScreenMode GetWindowType()
-    {
-        return settings.windowType;
-    }
-    public void SetWindowType(FullScreenMode _windowType)
-    {
-        settings.windowType = _windowType;
-        PlayerPrefs.SetInt("windowType", (int)_windowType);
-        PlayerPrefs.Save();
-    }
-    public void SetWindowType(TMP_Dropdown _windowType)
-    {
-        settings.windowType = (FullScreenMode)_windowType.value;
-        PlayerPrefs.SetInt("windowType", _windowType.value);
-        PlayerPrefs.Save();
-    }
-    #endregion
+    //#region Window Type
+    //public FullScreenMode GetWindowType()
+    //{
+    //    return settings.windowType;
+    //}
+    //public void SetWindowType(FullScreenMode _windowType)
+    //{
+    //    settings.windowType = _windowType;
+    //    PlayerPrefs.SetInt("windowType", (int)_windowType);
+    //    PlayerPrefs.Save();
+    //}
+    //public void SetWindowType(TMP_Dropdown _windowType)
+    //{
+    //    settings.windowType = (FullScreenMode)_windowType.value;
+    //    PlayerPrefs.SetInt("windowType", _windowType.value);
+    //    PlayerPrefs.Save();
+    //}
+    //#endregion
 
     #region FOV
     public int GetFOV()
@@ -273,9 +273,9 @@ public class SettingsManager : MonoBehaviour
 
     public void ResetSettings()
     {
-        SetResolution(26);
+        //SetResolution(26);
         SetQuality(3);
-        SetWindowType(FullScreenMode.ExclusiveFullScreen);
+        //SetWindowType(FullScreenMode.ExclusiveFullScreen);
         SetFOV(90);
         SetisReducedCameraShake(true);
         SetisInvertY(false);
@@ -293,11 +293,11 @@ public class SettingsManager : MonoBehaviour
 
         SettingsMenu settingsMenu = FindFirstObjectByType<SettingsMenu>(FindObjectsInactive.Include);
 
-        settingsMenu.SetResolution(GetResolution());
+        //settingsMenu.SetResolution(GetResolution());
 
         settingsMenu.SetQuality(GetQuality());
 
-        settingsMenu.SetWindowSetting(GetWindowType());
+        //settingsMenu.SetWindowSetting(GetWindowType());
 
         settingsMenu.SetSFX(GetSFXVolume());
 
@@ -313,17 +313,17 @@ public class SettingsManager : MonoBehaviour
         ApplyInvertY();
 
         settingsMenu.SetMouseSensitivity(GetmouseSensitivity());
-        StartCoroutine(FixScreen(settingsMenu));
+        //StartCoroutine(FixScreen(settingsMenu));
     }
 
-    public IEnumerator FixScreen(SettingsMenu settingsMenu)
-    {
-        FullScreenMode tempHolder = GetWindowType();
-        settingsMenu.SetWindowSetting(FullScreenMode.MaximizedWindow);
-        //Debug.LogError("before");
-        yield return new WaitForSecondsRealtime(0.1f);
-        //Debug.LogError("after");
-        //Debug.LogError(tempHolder);
-        settingsMenu.SetWindowSetting(tempHolder);
-    }
+    //public IEnumerator FixScreen(SettingsMenu settingsMenu)
+    //{
+    //    //FullScreenMode tempHolder = GetWindowType();
+    //    settingsMenu.SetWindowSetting(FullScreenMode.MaximizedWindow);
+    //    //Debug.LogError("before");
+    //    yield return new WaitForSecondsRealtime(0.1f);
+    //    //Debug.LogError("after");
+    //    //Debug.LogError(tempHolder);
+    //    settingsMenu.SetWindowSetting(tempHolder);
+    //}
 }
