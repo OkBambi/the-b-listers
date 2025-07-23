@@ -20,6 +20,9 @@ public class LevelModifierManager : MonoBehaviour
     [SerializeField] Image card2Icon;
     [SerializeField] Image card3Icon;
 
+    [SerializeField] GameObject shootHint;
+    [SerializeField] GameObject schmoveHint;
+
     [Inspectable] public List<LevelModifier> modifiers;
 
     [SerializeField] DifficultyObject difficulty;
@@ -276,6 +279,11 @@ public class LevelModifierManager : MonoBehaviour
         FindFirstObjectByType<GameStartDagger>().mod_SchmovesOnly = true;
         ComboManager.instance.AddScoreNoMult(1000f);
         ComboFeed.theInstance.AddNewComboFeed("+ 1000 Schmoves only", 1000f);
+        if (SceneManager.GetActiveScene().name == "Level_1")
+        {
+            shootHint.SetActive(false);
+            schmoveHint.SetActive(true);
+        }
     }
     public void DaggersOnly()
     {
