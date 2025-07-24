@@ -33,16 +33,7 @@ public class ColorSwapping : MonoBehaviour
     [Range(0f, 1f)] [SerializeField] float screenFlashSpeed;
     public void UpdateColor(ref PrimaryColor playerColor)
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && playerColor != PrimaryColor.RED)
-            SwapToColour(PrimaryColor.RED, ref playerColor);
-
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && playerColor != PrimaryColor.YELLOW)
-            SwapToColour(PrimaryColor.YELLOW, ref playerColor);
-
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && playerColor != PrimaryColor.BLUE)
-            SwapToColour(PrimaryColor.BLUE, ref playerColor);
-
-        else if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             PrimaryColor finalColour = playerColor;
             ++finalColour;
