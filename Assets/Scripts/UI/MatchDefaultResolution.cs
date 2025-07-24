@@ -10,7 +10,7 @@ public class MatchDefaultResolution : MonoBehaviour
     [SerializeField] float ratioY;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         scaler.referenceResolution = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
 

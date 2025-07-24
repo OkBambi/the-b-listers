@@ -8,7 +8,7 @@ public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private void Start()
     {
-        Invoke("PositionInvoke", 0.1f);
+        Invoke("PositionInvoke", 0f);
     }
 
     //private void OnEnable()
