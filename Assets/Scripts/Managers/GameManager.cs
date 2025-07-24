@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject MenuCredits;
     [SerializeField] GameObject MenuGameInfo;
     [SerializeField] public GameObject PlayerHUD;
+    [SerializeField] private ChainUIController chainUIController;
 
 
     public GameObject player;
@@ -204,8 +205,8 @@ public class GameManager : MonoBehaviour
     //CHAINUI
     public void ChainScreen(int ColorLockTimer)
     {
-
-    lockMarker.gameObject.SetActive(true);
+        chainUIController.PlayLockVideo();
+        lockMarker.gameObject.SetActive(true);
         unlockedMarker.gameObject.SetActive(false);
         AudioManager.instance.Play("Monk_Wave_Hit");
         StartCoroutine(ExitChainScreen(ColorLockTimer));
@@ -215,8 +216,14 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(timer);
         AudioManager.instance.Play("Monk_Wave_End");
-      unlockedMarker.gameObject.SetActive(true);
+        unlockedMarker.gameObject.SetActive(true);
         lockMarker.gameObject.SetActive(false);
+        chainUIController.PlayUnlockVideo();
+    }
+    void OnDestroy()
+    {
+        ChainEvents.OnChainLock -= chainUIController.PlayLockVideo;
+        ChainEvents.OnChainUnlock -= chainUIController.PlayUnlockVideo;
     }
 
     public void PlayLevelMusic()

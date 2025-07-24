@@ -50,9 +50,17 @@ public class WaveCollider : MonoBehaviour
                 colorLock.LockColorSelection(ColorLockTimer);
             }
             GameManager.instance.ChainScreen(ColorLockTimer);
+            ChainEvents.LockVideoChain();
+
+            StartCoroutine(UnlockAfterDelay(ColorLockTimer));
         }
     }
 
+    private IEnumerator UnlockAfterDelay(int delay)
+    {
+       yield return new WaitForSeconds(delay);
+        ChainEvents.UnlockVideoChain();
+    }
 
     private void resetPlayer()
     {
