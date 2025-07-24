@@ -14,6 +14,7 @@ public class WaveCollider : MonoBehaviour
     private PrimaryColor waveColor;
     [SerializeField] private ChainUIMonkBoss chainUI;
     [SerializeField] private ChainUIMonk MonkChainUI;
+    [SerializeField] private GameStartDagger gameStartDagger;
 
     [SerializeField] Monk_MiniBoss MMB;
     [SerializeField] Monk monkboy;
@@ -28,7 +29,10 @@ public class WaveCollider : MonoBehaviour
             GameManager.instance.playerScript.canSchmove = false;
             // You can add player damage logic here
             GameManager.instance.player.GetComponent<Rigidbody>().AddForce(Vector3.up * LaunchHight, ForceMode.Impulse); // Example force to push the player up
-            Invoke("resetPlayer", ShockTime);
+            if (gameStartDagger.DaggerGot)
+            {
+                Invoke("resetPlayer", ShockTime);
+            }
         }
         else
         {
@@ -58,7 +62,7 @@ public class WaveCollider : MonoBehaviour
 
     private IEnumerator UnlockAfterDelay(int delay)
     {
-       yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(delay);
         ChainEvents.UnlockVideoChain();
     }
 
