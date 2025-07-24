@@ -3,19 +3,23 @@ using UnityEngine.EventSystems;
 
 public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] Vector3 NormalPosition;
-    [SerializeField] Vector3 HoverPosition;
 
-    private void Start()
+    public RectTransform rectT;
+    [SerializeField] private Vector2 HoverOffset = new Vector2(0f, 80f);
+    [SerializeField] Vector2 NormalPosition;
+    [SerializeField] Vector2 HoverPosition;
+
+    private void Awake()
     {
-        Invoke("PositionInvoke", 0f);
+        rectT = GetComponent<RectTransform>();
+        NormalPosition = rectT.anchoredPosition;
+        HoverPosition = NormalPosition + HoverOffset;
     }
 
     //private void OnEnable()
     //{
-        
-    //}
 
+    //}
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -30,7 +34,8 @@ public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void ReturnButton()
     {
-        transform.localPosition = NormalPosition;
+        //transform.localPosition = NormalPosition;
+        rectT.anchoredPosition = NormalPosition;
     }
 
     public void PositionInvoke()
@@ -38,18 +43,20 @@ public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         NormalPosition = transform.localPosition;
         if (EventSystem.current.currentSelectedGameObject == gameObject)
         {
-            NormalPosition -= new Vector3(0f, 80f, 0f);
+            NormalPosition -= new Vector2(0f, 80f);
         }
         ReturnButton();
     }
 
     public void MoveButtonForward()
     {
-        transform.localPosition += new Vector3(0f, 80f, 0f);
+        //transform.localPosition += new Vector3(0f, 80f, 0f);
+        rectT.anchoredPosition = HoverPosition;
     }
     public void MoveButtonBackward()
     {
-        transform.localPosition -= new Vector3(0f, 80f, 0f);
+        //transform.localPosition -= new Vector3(0f, 80f, 0f);
+        rectT.anchoredPosition = NormalPosition;
     }
 
 }
