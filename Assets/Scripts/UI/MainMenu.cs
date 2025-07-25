@@ -7,7 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
+    float TimeScaleOrigin;
+    public void Awake()
+    {
+        TimeScaleOrigin = 1f;
+        Time.timeScale = TimeScaleOrigin;
 
+    }
     public void Start()
     {
         StartCoroutine(AudioIsPlaying());
