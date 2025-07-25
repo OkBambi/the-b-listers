@@ -20,6 +20,11 @@ public class ButtonFunction : MonoBehaviour
         SceneManager.LoadScene(currentLevelscene);
         ComboFeed.theInstance.clearFinalScore();
     }
+    public void onExitToMain()
+    {
+        SceneManager.LoadScene("MainMenu");
+
+    }
     public void onSettings()
     {
         GameManager.instance.StateSettings();
