@@ -6,12 +6,18 @@ using UnityEngine.UI;
 
 public class MatchDefaultResolution : MonoBehaviour
 {
+    public static MatchDefaultResolution instance;
     [SerializeField] CanvasScaler scaler;
     [SerializeField] float ratioX;
     [SerializeField] float ratioY;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
+    {
+        FixAllUI();
+    }
+
+    public void FixAllUI()
     {
         scaler.referenceResolution = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
 
@@ -34,6 +40,11 @@ public class MatchDefaultResolution : MonoBehaviour
 
         }
 
+        FixText();
+    }
+
+    public void FixText()
+    {
         TextMeshProUGUI[] allText = FindObjectsByType<TextMeshProUGUI>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         float textRatio = (ratioX < ratioY ? ratioX : ratioY);
@@ -44,6 +55,17 @@ public class MatchDefaultResolution : MonoBehaviour
         }
     }
 
+    public void FixCombo(TextMeshProUGUI[] test)
+    {
+        TextMeshProUGUI[] allText = test;
+
+        float textRatio = (ratioX < ratioY ? ratioX : ratioY);
+        foreach (TextMeshProUGUI text in allText)
+        {
+            text.fontSize = text.fontSize * textRatio;
+
+        }
+    }
 
     //private void OnEnable()
     //{
@@ -53,5 +75,5 @@ public class MatchDefaultResolution : MonoBehaviour
     //public IEnumerator FixUI()
     //{
     //    yield return new WaitForSecondsRealtime(2f);
-        
+
 }
