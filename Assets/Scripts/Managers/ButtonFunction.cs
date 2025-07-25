@@ -8,7 +8,6 @@ public class ButtonFunction : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public Toggle ArcadeToggler;
-    public Toggle OutlineToggler;
 
     public void onResume()
     {
@@ -17,9 +16,14 @@ public class ButtonFunction : MonoBehaviour
 
     public void onRestart()
     {
-        GameManager.instance.statePause();
-        SceneManager.LoadScene(0);
+        string currentLevelscene = GameManager.instance.currentLevel.name;
+        SceneManager.LoadScene(currentLevelscene);
         ComboFeed.theInstance.clearFinalScore();
+    }
+    public void onExitToMain()
+    {
+        SceneManager.LoadScene("MainMenu");
+
     }
     public void onSettings()
     {

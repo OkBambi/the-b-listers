@@ -2360,7 +2360,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArcadeToggler: {fileID: 0}
-  OutlineToggler: {fileID: 0}
 --- !u!114 &6197636836606507379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4225,7 +4224,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 765095653579140490}
         m_TargetAssemblyTypeName: ButtonFunction, Assembly-CSharp
-        m_MethodName: onRestart
+        m_MethodName: onExitToMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4260,7 +4259,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArcadeToggler: {fileID: 0}
-  OutlineToggler: {fileID: 0}
 --- !u!114 &5362186350928397381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11577,7 +11575,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArcadeToggler: {fileID: 1312435071219005500}
-  OutlineToggler: {fileID: 0}
 --- !u!1 &4564921803539591352
 GameObject:
   m_ObjectHideFlags: 0
@@ -12364,7 +12361,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArcadeToggler: {fileID: 0}
-  OutlineToggler: {fileID: 0}
 --- !u!114 &4079062026283333811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21826,7 +21822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7498959329709610747, guid: 5021a8e7e148bd34295b5041db8b2c34, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
