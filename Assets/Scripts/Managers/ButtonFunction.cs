@@ -16,7 +16,8 @@ public class ButtonFunction : MonoBehaviour
 
     public void onRestart()
     {
-        SceneManager.LoadScene("MainMenu");
+        string currentLevelscene = GameManager.instance.currentLevel.name;
+        SceneManager.LoadScene(currentLevelscene);
         ComboFeed.theInstance.clearFinalScore();
     }
     public void onSettings()

@@ -229,7 +229,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -25}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &659925133
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: f69c1e4b79ea00b43b554e8d4a697393, type: 3}
+  m_Texture: {fileID: 2800000, guid: 652aad8a3c48713489490fed277f55dc, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -362,7 +362,7 @@ PrefabInstance:
     - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
       propertyPath: UISounds.Array.data[5].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 17bac6ca7d8829d40917c6c612e34ddb, type: 3}
+      objectReference: {fileID: 8300000, guid: 439caf1adcd3c79408d0d33baeed102d, type: 3}
     - target: {fileID: 2403931880020675319, guid: 6f8825719b684cd44a3bc11a13992dff, type: 3}
       propertyPath: UISounds.Array.data[5].name
       value: Splash_Screen
@@ -647,9 +647,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Logo: {fileID: 659925135}
-  fadeIn: 2
-  displayDuration: 3
-  fadeOut: 2
+  fadeIn: 0.5
+  displayDuration: 2
+  fadeOut: 0.5
   LaunchMainMenu: MainMenu
 --- !u!20 &9146965112142063858
 Camera:
