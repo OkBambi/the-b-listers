@@ -27,6 +27,8 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] int maxRocketJumps;
     [SerializeField] Animator mAnimator;
     [SerializeField] AudioSource ShootyMcShootFace;
+    [SerializeField] float shotgunDelay;
+    float ShotgunDelayTimer;
 
     float shootTimer;
     //bool isHolding;
@@ -44,11 +46,67 @@ public class PlayerShooting : MonoBehaviour
     public void UpdateWeapon(PrimaryColor playerColor, PlayerArm playerArm)
     {
         shootTimer += Time.deltaTime;
+        ShotgunDelayTimer += Time.deltaTime;
 
         if (Input.GetMouseButton(0))
         {
             //isHolding = true;
             holdTime += Time.deltaTime;
+
+            if (LevelModifierManager.instance.shotgunOnly) //SHOTGUNS ONLY
+            {
+                if (ShotgunDelayTimer >= shotgunDelay)
+                {
+                    ShotgunDelayTimer = 0f;
+                    shootTimer = 0;
+                    mAnimator.SetTrigger("Shotgun"); 
+                    AudioManager.instance.Play("Shotgun_Shot");
+                    float dotProduct = Vector3.Dot(playerCam.forward, -Vector3.up);
+                    float inverCos = Mathf.Acos(dotProduct);
+                    float angle = Mathf.Rad2Deg * inverCos;
+
+                    if (angle < rocketJumpAngle && currentRocketJumps < maxRocketJumps)
+                    {
+                        print("ROCKET MANNNNN");
+                        currentRocketJumps++;
+                        rb.AddForce(Vector3.up * rocketJumpForce, ForceMode.Impulse);
+                    }
+
+                    for (int i = 0; i < bulletAmount; i++)
+                    {
+                        GameObject b = Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
+                        b.transform.Rotate(
+                            UnityEngine.Random.Range(-spreadAngle, spreadAngle),
+                            UnityEngine.Random.Range(-spreadAngle, spreadAngle),
+                            UnityEngine.Random.Range(-360, 360));
+                        Gradient grad;
+                        switch (playerColor)
+                        {
+                            case PrimaryColor.RED:
+                                b.GetComponent<Renderer>().material.color = Color.red;
+                                grad = ParticleManager.instance.DeflectRed;
+                                break;
+                            case PrimaryColor.BLUE:
+                                b.GetComponent<Renderer>().material.color = Color.blue;
+                                grad = ParticleManager.instance.DeflectBlue;
+                                break;
+                            case PrimaryColor.YELLOW:
+                                b.GetComponent<Renderer>().material.color = Color.yellow;
+                                grad = ParticleManager.instance.DeflectYellow;
+                                break;
+                            default:
+                                b.GetComponent<Renderer>().material.color = Color.black;
+                                grad = ParticleManager.instance.DeflectBlack;
+                                break;
+                        }
+
+                        b.GetComponent<Dagger>().Initialize(playerColor, bulletSpeed, bulletLifeTime, ignoreLayer, grad);
+                    }
+                    StartCoroutine(playerArm.RecoilTween(0.2f, 0.01f, 0.2f, 0.1f));
+                    StartCoroutine(camShaker.ShakeTween(0.2f, 0.2f, 0f, 0.3f));
+                }
+                holdTime = 0;
+            }
             if (!LevelModifierManager.instance.shotgunOnly)
             {
                 if (holdTime > tapThreshold)
@@ -149,4 +207,5 @@ public class PlayerShooting : MonoBehaviour
             }
         }
     }
+
 }
