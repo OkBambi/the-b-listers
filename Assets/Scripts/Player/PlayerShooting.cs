@@ -104,6 +104,7 @@ public class PlayerShooting : MonoBehaviour
                     }
                     StartCoroutine(playerArm.RecoilTween(0.2f, 0.01f, 0.2f, 0.1f));
                     StartCoroutine(camShaker.ShakeTween(0.2f, 0.2f, 0f, 0.3f));
+                    StartCoroutine(ShotgunBuffer());
                 }
                 holdTime = 0;
             }
@@ -206,6 +207,12 @@ public class PlayerShooting : MonoBehaviour
                 holdTime = 0;
             }
         }
+    }
+
+    IEnumerator ShotgunBuffer()
+    {
+        yield return new WaitForSeconds(0.25f);
+        AudioManager.instance.Play("ShotgunCockin");
     }
 
 }
