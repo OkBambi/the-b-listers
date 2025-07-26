@@ -192,10 +192,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2536750748213166940}
   - component: {fileID: 3342867535914146816}
+  - component: {fileID: 5966448927071105700}
   - component: {fileID: 6910109872347361451}
   m_Layer: 0
   m_Name: Arm Camera
-  m_TagString: Untagged
+  m_TagString: PixelCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -248,7 +249,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 70.00001
+  field of view: 80
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -266,6 +267,18 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &5966448927071105700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2909047292944231247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c6f406c382ea04890707ff5dc92e4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6910109872347361451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1445,6 +1458,14 @@ PrefabInstance:
     - target: {fileID: 102860556313389592, guid: b566ac0c212d726428f3323243b47c3a, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 535240731095946936, guid: b566ac0c212d726428f3323243b47c3a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 535240731095946936, guid: b566ac0c212d726428f3323243b47c3a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.68
       objectReference: {fileID: 0}
     - target: {fileID: 766196070945012508, guid: b566ac0c212d726428f3323243b47c3a, type: 3}
       propertyPath: m_BackGroundColor.b
