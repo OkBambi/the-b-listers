@@ -26,6 +26,7 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] float rocketJumpForce;
     [SerializeField] int maxRocketJumps;
     [SerializeField] Animator mAnimator;
+    [SerializeField] Animator mAnimatorQuake;
     [SerializeField] AudioSource ShootyMcShootFace;
     [SerializeField] float shotgunDelay;
     float ShotgunDelayTimer;
@@ -59,7 +60,14 @@ public class PlayerShooting : MonoBehaviour
                 {
                     ShotgunDelayTimer = 0f;
                     shootTimer = 0;
-                    mAnimator.SetTrigger("Shotgun"); 
+                    if (!LevelModifierManager.instance.QuakePro)
+                    {
+                        mAnimator.SetTrigger("Shotgun");
+                    }
+                        if (LevelModifierManager.instance.QuakePro)
+                    {
+                        mAnimatorQuake.SetTrigger("PewPew");
+                    }
                     AudioManager.instance.Play("Shotgun_Shot");
                     float dotProduct = Vector3.Dot(playerCam.forward, -Vector3.up);
                     float inverCos = Mathf.Acos(dotProduct);
@@ -67,7 +75,6 @@ public class PlayerShooting : MonoBehaviour
 
                     if (angle < rocketJumpAngle && currentRocketJumps < maxRocketJumps)
                     {
-                        print("ROCKET MANNNNN");
                         currentRocketJumps++;
                         rb.AddForce(Vector3.up * rocketJumpForce, ForceMode.Impulse);
                     }
@@ -116,7 +123,14 @@ public class PlayerShooting : MonoBehaviour
                     if (shootTimer > fireRate)
                     {
                         shootTimer = 0;
-                        mAnimator.SetTrigger("Shooting");
+                        if (!LevelModifierManager.instance.QuakePro)
+                        {
+                            mAnimator.SetTrigger("Shooting");
+                        }
+                            if (LevelModifierManager.instance.QuakePro)
+                        {
+                            mAnimatorQuake.SetTrigger("PewPew");
+                        }
                         AudioManager.instance.Play("Rapid", Random.Range(0.8f, 1.1f));
                         GameObject b = Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
                         b.transform.Rotate(0, 0, UnityEngine.Random.Range(-360, 360));
@@ -157,7 +171,14 @@ public class PlayerShooting : MonoBehaviour
                 {
                     //shotgun
                     shootTimer = 0;
-                    mAnimator.SetTrigger("Shotgun");
+                    if (!LevelModifierManager.instance.QuakePro)
+                    {
+                        mAnimator.SetTrigger("Shotgun");
+                    }
+                    if (LevelModifierManager.instance.QuakePro)
+                    {
+                        mAnimatorQuake.SetTrigger("PewPew");
+                    }
                     AudioManager.instance.Play("Shotgun_Shot");
                     float dotProduct = Vector3.Dot(playerCam.forward, -Vector3.up);
                     float inverCos = Mathf.Acos(dotProduct);
@@ -165,7 +186,6 @@ public class PlayerShooting : MonoBehaviour
 
                     if (angle < rocketJumpAngle && currentRocketJumps < maxRocketJumps)
                     {
-                        print("ROCKET MANNNNN");
                         currentRocketJumps++;
                         rb.AddForce(Vector3.up * rocketJumpForce, ForceMode.Impulse);
                     }

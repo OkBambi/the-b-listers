@@ -6,12 +6,14 @@ public class PlayerArm : MonoBehaviour
 {
     [SerializeField] Renderer model;
     [SerializeField] Renderer Leftmodel;
+    [SerializeField] Renderer QuakeModel;
 
     Vector3 defaultPos;
 
     private void Start()
     {
         defaultPos = transform.localPosition;
+        QuakeModel.gameObject.SetActive(false);
     }
 
     public IEnumerator Recoil(float duration, float magnitudeXY, float magnitudeZ)
@@ -66,19 +68,54 @@ public class PlayerArm : MonoBehaviour
         switch (armColor)
         {
             case PrimaryColor.RED:
-                model.material.color = Color.red;
+                if (!LevelModifierManager.instance.QuakePro)
+                {
+                    model.material.color = Color.red;
+                }
+                    if (LevelModifierManager.instance.QuakePro)
+                {
+                    QuakeModel.material.color = Color.red;
+                }
                 break;
             case PrimaryColor.YELLOW:
-                model.material.color = Color.yellow;
+                if (!LevelModifierManager.instance.QuakePro)
+                {
+                    model.material.color = Color.yellow;
+                }
+                if (LevelModifierManager.instance.QuakePro)
+                {
+                    QuakeModel.material.color = Color.yellow;
+                }
                 break;
             case PrimaryColor.BLUE:
-                model.material.color = Color.blue;
+                if (!LevelModifierManager.instance.QuakePro)
+                {
+                    model.material.color = Color.blue;
+                }
+                    if (LevelModifierManager.instance.QuakePro)
+                {
+                    QuakeModel.material.color = Color.blue;
+                }
                 break;
             case PrimaryColor.OMNI:
             default:
-                model.material.color = Color.black;
+                if (!LevelModifierManager.instance.QuakePro)
+                {
+                    model.material.color = Color.black;
+                }
+                    if (LevelModifierManager.instance.QuakePro)
+                {
+                    QuakeModel.material.color = Color.black;
+                }
                 break;
         }
-        Leftmodel.material.color = model.material.color;
+         Leftmodel.material.color = model.material.color;
+    }
+
+    public void QuakeGaming(bool QuakePro)
+    {
+        model.gameObject.SetActive(!QuakePro);
+        Leftmodel.gameObject.SetActive(!QuakePro);
+        QuakeModel.gameObject.SetActive(true);
     }
 }
