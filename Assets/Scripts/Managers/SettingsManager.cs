@@ -24,6 +24,7 @@ public class SettingsManager : MonoBehaviour
 
     public Camera mainCamera;
     public Camera pixelCamera;
+    public Camera armCamera;
 
     public ButtonFunction button;
 
@@ -34,6 +35,7 @@ public class SettingsManager : MonoBehaviour
         {
             mainCamera = FindFirstObjectByType<MainCamera_Marker>(FindObjectsInactive.Include).GetComponent<Camera>();
             pixelCamera = FindFirstObjectByType<PixelCamera_Marker>(FindObjectsInactive.Include).GetComponent<Camera>();
+            armCamera = FindFirstObjectByType<ArmCamera_Marker>(FindObjectsInactive.Include).GetComponent<Camera>();
         }
 
         //Debug.Log(PlayerPrefs.GetInt("resolution"));

@@ -387,17 +387,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1176927947764114762, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3923875554569662914, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3923875554569662914, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3990897285812716556, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -437,18 +429,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3990897285812716556, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6544136719575331733, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
-      propertyPath: canCam
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6544136719575331733, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
-      propertyPath: canAction
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6544136719575331733, guid: b07a23787f135e04d8d944ee62ed177b, type: 3}
-      propertyPath: canSchmove
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -791,7 +771,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 513
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -3959,6 +3939,10 @@ PrefabInstance:
       propertyPath: mAnimatorRight
       value: 
       objectReference: {fileID: 1203403281725742638}
+    - target: {fileID: 7974603893662413162, guid: 2ff37f62bb686324893e075301874d31, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8887993524747124817, guid: 2ff37f62bb686324893e075301874d31, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
