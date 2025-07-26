@@ -118,7 +118,10 @@ public class stopWatchShockWave : MonoBehaviour
 
     private void resetPlayer()
     {
-        GameManager.instance.playerScript.canAction = true; // Re-enable player actions
+        if (!LevelModifierManager.instance.schmovesOnly)
+        {
+            GameManager.instance.playerScript.canAction = true;
+        }
         GameManager.instance.playerScript.canSchmove = true;
     }
 }

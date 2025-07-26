@@ -200,7 +200,7 @@ public class GameManager : MonoBehaviour
     }
 
     //CHAINUI
-    public void ChainScreen(int ColorLockTimer)
+    public void ChainScreen(float ColorLockTimer)
     {
         chainUIController.PlayLockVideo();
         lockMarker.gameObject.SetActive(true);
@@ -209,7 +209,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(ExitChainScreen(ColorLockTimer));
     }
 
-    IEnumerator ExitChainScreen(int timer)
+    IEnumerator ExitChainScreen(float timer)
     {
         yield return new WaitForSeconds(timer);
         AudioManager.instance.Play("Monk_Wave_End");
