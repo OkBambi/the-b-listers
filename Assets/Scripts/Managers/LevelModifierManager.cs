@@ -24,8 +24,9 @@ public class LevelModifierManager : MonoBehaviour
     [SerializeField] GameObject schmoveHint;
 
     [Inspectable] public List<LevelModifier> modifiers;
-
     [SerializeField] public DifficultyObject difficulty;
+    [SerializeField] List<PlayerArm> Arms;
+
 
     //hard
     public bool schmovesOnly = false;
@@ -38,6 +39,8 @@ public class LevelModifierManager : MonoBehaviour
     public bool boogieWoogie = false;
     public bool shotgunOnly = false;
     public bool rapidFireOnly = false;
+    public bool NoMods = false;
+    public bool QuakePro = false;
 
     //easy
     public bool largerStage = false;
@@ -47,6 +50,9 @@ public class LevelModifierManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        Arms = new List<PlayerArm>(FindObjectsByType<PlayerArm>(FindObjectsSortMode.None));
+
     }
 
     private void Start()
@@ -107,7 +113,7 @@ public class LevelModifierManager : MonoBehaviour
         //ShowCardUI();
     }
 
-    
+
 
     public void ClearCurrentModifiers()
     {
@@ -119,11 +125,11 @@ public class LevelModifierManager : MonoBehaviour
         lowEnemyCooldowns = false;
         smallFastEnemies = false;
 
-        //
         boogieWoogie = false;
-
         shotgunOnly = false;
         rapidFireOnly = false;
+        NoMods = false;
+        QuakePro = false;
 
         largerStage = false;
         lessHealth = false;
@@ -321,6 +327,20 @@ public class LevelModifierManager : MonoBehaviour
     public void SavingGrace()
     {
         savingGrace = true;
+    }
+
+    public void Vanilla()
+    {
+        NoMods = true;
+    }
+    public void Quake()
+    {
+        QuakePro = true;
+        foreach (PlayerArm Arm in Arms)
+        {
+            Arm.QuakeGaming(QuakePro);
+        }
+
     }
 
     #endregion

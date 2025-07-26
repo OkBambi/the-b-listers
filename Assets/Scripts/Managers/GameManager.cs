@@ -57,13 +57,10 @@ public class GameManager : MonoBehaviour
         {
             PlayLevelMusic();
         }
-
         currentLevel = SceneManager.GetActiveScene();
-
     }
 
 
-    // Update is called once per frame
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.Escape))
