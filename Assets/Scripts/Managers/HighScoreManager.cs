@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -98,6 +99,8 @@ public class HighScoreManager : MonoBehaviour
 
     public IEnumerator DisplayHighScoreTable()
     {
+        MatchDefaultResolution.instance.FixCombo(highScoresNamesTableText);
+        MatchDefaultResolution.instance.FixCombo(highScoresTableText);
         string highScoreTable = "High Scores:\n";
         string highScoreNameTable = "\n";
         highScoresNamesTableText.text += highScoreNameTable;
