@@ -10,11 +10,22 @@ public class MatchDefaultResolution : MonoBehaviour
     [SerializeField] CanvasScaler scaler;
     [SerializeField] float ratioX;
     [SerializeField] float ratioY;
+    public bool isFeedMade;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         FixAllUI();
+        instance = this;
+    }
+
+    private void Update()
+    {
+        if(isFeedMade)
+        {
+            isFeedMade = false;
+            FixText();
+        }
     }
 
     public void FixAllUI()
@@ -40,7 +51,7 @@ public class MatchDefaultResolution : MonoBehaviour
 
         }
 
-        FixText();
+       FixText();
     }
 
     public void FixText()
@@ -55,16 +66,10 @@ public class MatchDefaultResolution : MonoBehaviour
         }
     }
 
-    public void FixCombo(TextMeshProUGUI[] test)
+    public void FixCombo(TextMeshProUGUI test)
     {
-        TextMeshProUGUI[] allText = test;
-
         float textRatio = (ratioX < ratioY ? ratioX : ratioY);
-        foreach (TextMeshProUGUI text in allText)
-        {
-            text.fontSize = text.fontSize * textRatio;
-
-        }
+        test.fontSize = test.fontSize * textRatio;
     }
 
     //private void OnEnable()

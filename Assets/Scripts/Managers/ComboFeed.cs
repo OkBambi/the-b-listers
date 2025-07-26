@@ -52,6 +52,8 @@ public class ComboFeed : MonoBehaviour
         finalFeedList.Add(_newScoreFeed.GetComponent<FeedListing>().GetScoreAndHow());
         finalColorList.Add(FindPlayerColor());
 
+        MatchDefaultResolution.instance.FixCombo(_newScoreFeed.GetComponent<TextMeshProUGUI>());
+
         if (currentFeedList.Count > maxFeedLength)
         {
             Destroy(currentFeedList.Dequeue());
@@ -92,7 +94,7 @@ public class ComboFeed : MonoBehaviour
         {
             GameObject newScoreFeed = Instantiate(feedListingPrefab, endFeed);
             newScoreFeed.transform.SetSiblingIndex(0);
-            newScoreFeed.GetComponent<FeedListing>().GetComponent<TextMeshProUGUI>().fontSize = 55;
+            //newScoreFeed.GetComponent<FeedListing>().GetComponent<TextMeshProUGUI>().fontSize = 55;
             newScoreFeed.GetComponent<FeedListing>().GetComponent<TextMeshProUGUI>().alignment = TextAlignmentOptions.Center;
             newScoreFeed.GetComponent<FeedListing>().SetScoreAndHow(finalFeedList[i]);
             newScoreFeed.GetComponent<FeedListing>().SetColor(finalColorList[i]);
@@ -101,7 +103,7 @@ public class ComboFeed : MonoBehaviour
             finalScoreText.color = finalColorList[i];
 
             currentFinalFeedList.Enqueue(newScoreFeed);
-            if (currentFinalFeedList.Count > maxFeedLength - 6)
+            if (currentFinalFeedList.Count > maxFeedLength - 2)
             {
                 Destroy(currentFinalFeedList.Dequeue());
             }
@@ -112,7 +114,7 @@ public class ComboFeed : MonoBehaviour
             {
                 GameObject finalMultiplier = Instantiate(feedListingPrefab, endFeed);
                 finalMultiplier.transform.SetSiblingIndex(0);
-                finalMultiplier.GetComponent<FeedListing>().GetComponent<TextMeshProUGUI>().fontSize = 55;
+                //finalMultiplier.GetComponent<FeedListing>().GetComponent<TextMeshProUGUI>().fontSize = 55;
                 finalMultiplier.GetComponent<FeedListing>().GetComponent<TextMeshProUGUI>().alignment = TextAlignmentOptions.Center;
                 finalMultiplier.GetComponent<FeedListing>().SetScoreAndHow("* " + ComboManager.instance.difficultyMult + " Difficulty Multiplier");
                 finalMultiplier.GetComponent<FeedListing>().SetColor(Color.white);
@@ -121,6 +123,7 @@ public class ComboFeed : MonoBehaviour
                 finalScoreText.text = finalScore.ToString();
                 finalScoreText.color = Color.white;
             }
+            MatchDefaultResolution.instance.FixCombo(newScoreFeed.GetComponent<TextMeshProUGUI>());
         }
         currentFinalFeedList.Clear();
 
