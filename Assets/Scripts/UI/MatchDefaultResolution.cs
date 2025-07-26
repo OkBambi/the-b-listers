@@ -19,15 +19,6 @@ public class MatchDefaultResolution : MonoBehaviour
         instance = this;
     }
 
-    private void Update()
-    {
-        if(isFeedMade)
-        {
-            isFeedMade = false;
-            FixText();
-        }
-    }
-
     public void FixAllUI()
     {
         scaler.referenceResolution = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
