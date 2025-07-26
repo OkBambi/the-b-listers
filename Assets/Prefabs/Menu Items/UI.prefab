@@ -9512,6 +9512,7 @@ MonoBehaviour:
   scaler: {fileID: 8508670521589936035}
   ratioX: 0
   ratioY: 0
+  isFeedMade: 0
 --- !u!1 &4029426777010480811
 GameObject:
   m_ObjectHideFlags: 0
@@ -16834,12 +16835,12 @@ MonoBehaviour:
   rb: {fileID: 0}
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 10750
+    m_Bits: 10622
   launchForce: 50
   hangTime: 0.75
   hookDist: 400
   hookForce: 400
-  damageRadius: 10
+  damageRadius: 15
   damage: 5
   indicator: {fileID: 6171642501292978191, guid: f3a4cd50e9378de418d41ababb92c29a, type: 3}
   dmgIndic: {fileID: 6171642501292978191, guid: c4cecdcab9a0d674d871ab09bb1741ec, type: 3}
