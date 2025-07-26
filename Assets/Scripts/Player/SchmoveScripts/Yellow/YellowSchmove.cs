@@ -50,6 +50,10 @@ public class YellowSchmove : MonoBehaviour
     void Update()
     {
 
+        if (!LevelModifierManager.instance.QuakePro)
+        {
+            RailGunAnimation();
+        }
 
         if (activated)
         {
@@ -57,10 +61,7 @@ public class YellowSchmove : MonoBehaviour
             chargeTime += Time.deltaTime;
             player.canAction = false;
             player.canColor = false;
-            if (!LevelModifierManager.instance.QuakePro)
-            {
-                RailGunAnimation();
-            }
+
             //increasing the charge level
             if (chargeTime >= chargeLevelDuration[Mathf.Clamp(chargeLevel, 0, chargeLevelDuration.Count - 1)] && ComboManager.instance.GetScore() >= 100 * (chargeLevel + 1))
             {
@@ -123,7 +124,9 @@ public class YellowSchmove : MonoBehaviour
 
                 chargeLevel = 0;
                 if (!LevelModifierManager.instance.schmovesOnly)
+                {
                     player.canAction = true;
+                }
                 player.canColor = true;
                 activated = false;
             }
@@ -143,13 +146,13 @@ public class YellowSchmove : MonoBehaviour
         }
         else
         {
+            
             mAnimatorRight.SetBool("RailGunUP", false);
             mAnimatorRight.SetBool("RailGunDOWN", true);
             mAnimatorLeft.SetBool("RailGunUP", false);
             mAnimatorLeft.SetBool("RailGunDOWN", true);
             UPAnimationState = false;
         }
-
     }
 
     public void Activate()

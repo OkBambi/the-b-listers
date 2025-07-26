@@ -231,7 +231,7 @@ public class PlayerShooting : MonoBehaviour
 
     IEnumerator ShotgunBuffer()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.05f);
         AudioManager.instance.Play("ShotgunCockin");
     }
 
