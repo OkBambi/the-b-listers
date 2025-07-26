@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class WaveCollider : MonoBehaviour
 {
-    [SerializeField] public int ColorLockTimer;
+    [SerializeField] public float ColorLockTimer;
     [SerializeField] ChainUIMonk LockColorChange;
 
     [Header("BoogieWoogie")]
@@ -60,7 +60,7 @@ public class WaveCollider : MonoBehaviour
         }
     }
 
-    private IEnumerator UnlockAfterDelay(int delay)
+    private IEnumerator UnlockAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         ChainEvents.UnlockVideoChain();

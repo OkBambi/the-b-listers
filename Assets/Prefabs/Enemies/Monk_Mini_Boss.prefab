@@ -118,12 +118,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1af13835a1242c438155a3384e545ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ColorLockTimer: 10
+  ColorLockTimer: 3.5
   LockColorChange: {fileID: 0}
   ShockTime: 0
   LaunchHight: 0
   chainUI: {fileID: 5782796787011602188}
+  MonkChainUI: {fileID: 0}
+  gameStartDagger: {fileID: 0}
   MMB: {fileID: 679301647414257552}
+  monkboy: {fileID: 0}
 --- !u!135 &1943281151638208284
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -256,6 +259,7 @@ MonoBehaviour:
   score: 1500
   bossHPBar: {fileID: 0}
   bossHPOrig: 3500
+  bossName: {fileID: 0}
   faceTargetSpeed: 5
   agent: {fileID: 3238446104026643963}
   PrimaryColor: 0
@@ -265,9 +269,9 @@ MonoBehaviour:
   pauseToCastTimer: 1
   waveSize: 250
   waveGrowthSpeed: 3
-  initialDelay: 5
-  CastingDelay: 5
-  StopTime: 3
+  initialDelay: 4
+  CastingDelay: 1.5
+  StopTime: 0.5
 --- !u!135 &1659226331836481002
 SphereCollider:
   m_ObjectHideFlags: 0
