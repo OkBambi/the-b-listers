@@ -125,6 +125,9 @@ MonoBehaviour:
   hitVfx: {fileID: 0}
   hp: 3
   score: 1000
+  bossHPBar: {fileID: 0}
+  bossHPOrig: 1
+  bossName: {fileID: 0}
   theBois:
   - {fileID: 1413622789291430068}
   - {fileID: 5292297638508225812}
@@ -139,6 +142,10 @@ MonoBehaviour:
   Snakeagent: {fileID: 8091754260129061058}
   player: {fileID: 0}
   followRange: 20
+  increaseFollowRange: 5
+  bossHpBg: {fileID: 0}
+  bossHpBar: {fileID: 0}
+  bossHpName: {fileID: 0}
   offsetRange: 3
   offset: {x: 0, y: 0, z: 0}
 --- !u!33 &760355888381591743
