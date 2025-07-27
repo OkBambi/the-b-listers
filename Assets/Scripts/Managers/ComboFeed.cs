@@ -103,7 +103,7 @@ public class ComboFeed : MonoBehaviour
             finalScoreText.color = finalColorList[i];
 
             currentFinalFeedList.Enqueue(newScoreFeed);
-            if (currentFinalFeedList.Count > maxFeedLength - 2)
+            if (currentFinalFeedList.Count > maxFeedLength - 3)
             {
                 Destroy(currentFinalFeedList.Dequeue());
             }
