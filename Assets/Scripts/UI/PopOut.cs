@@ -3,13 +3,13 @@ using UnityEngine.EventSystems;
 
 public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-
+#if UNITY_WEBGL
     public RectTransform rectT;
     [SerializeField] private Vector2 HoverOffset = new Vector2(0f, 80f);
     [SerializeField] Vector2 NormalPosition;
     [SerializeField] Vector2 HoverPosition;
 
-#if UNITY_WEBGL
+
     private void Awake()
     {
         rectT = GetComponent<RectTransform>();
@@ -54,7 +54,7 @@ public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         //transform.localPosition -= new Vector3(0f, 80f, 0f);
         rectT.anchoredPosition = NormalPosition;
     }
-#else 
+#else
     [SerializeField] Vector3 NormalPosition;
     [SerializeField] Vector3 HoverPosition;
 
