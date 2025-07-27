@@ -30,6 +30,7 @@ public class SettingsManager : MonoBehaviour
 
     private void Awake()
     {
+        Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
         instance = this;
         if (SceneManager.GetActiveScene().name != "MainMenu")
         {
