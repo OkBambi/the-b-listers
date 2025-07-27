@@ -9,17 +9,13 @@ public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] Vector2 NormalPosition;
     [SerializeField] Vector2 HoverPosition;
 
+#if UNITY_WEBGL
     private void Awake()
     {
         rectT = GetComponent<RectTransform>();
         NormalPosition = rectT.anchoredPosition;
         HoverPosition = NormalPosition + HoverOffset;
     }
-
-    //private void OnEnable()
-    //{
-
-    //}
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -58,5 +54,36 @@ public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         //transform.localPosition -= new Vector3(0f, 80f, 0f);
         rectT.anchoredPosition = NormalPosition;
     }
+#else 
+    [SerializeField] Vector3 NormalPosition;
+    [SerializeField] Vector3 HoverPosition;
+
+    private void Awake()
+    {
+        NormalPosition = transform.localPosition;
+    }
+
+    private void OnEnable()
+    {
+        ReturnButton();
+    }
+
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        transform.localPosition += new Vector3(0f, 80f, 0f);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        transform.localPosition -= new Vector3(0f, 80f, 0f);
+    }
+
+    public void ReturnButton()
+    {
+        transform.localPosition = NormalPosition;
+    }
+
+#endif
 
 }
