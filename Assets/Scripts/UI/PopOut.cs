@@ -71,6 +71,7 @@ public class PopOut : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        NormalPosition = transform.localPosition;
         transform.localPosition += new Vector3(0f, 80f, 0f);
     }
 
