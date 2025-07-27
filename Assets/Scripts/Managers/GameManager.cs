@@ -63,22 +63,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Escape))
-        //{
-        //    if (MenuActive == null)
-        //    {
-        //        statePause();
-        //        MenuActive = MenuPause;
-        //        MenuActive.SetActive(true);
-        //    }
-        //    else if (MenuActive == MenuPause)
-        //    {
-        //        stateUnPause();
-        //    }
-        //}
-
-        //For Web of game
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (MenuActive == null)
             {
@@ -91,6 +76,21 @@ public class GameManager : MonoBehaviour
                 stateUnPause();
             }
         }
+
+        //For Web of game
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    if (MenuActive == null)
+        //    {
+        //        statePause();
+        //        MenuActive = MenuPause;
+        //        MenuActive.SetActive(true);
+        //    }
+        //    else if (MenuActive == MenuPause)
+        //    {
+        //        stateUnPause();
+        //    }
+        //}
 
         //if (Input.GetKeyDown(KeyCode.Keypad0))
         //{
