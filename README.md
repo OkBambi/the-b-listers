@@ -8,10 +8,30 @@ This project uses Unity3D and GitHub as it's source control. During active devel
 Our team used an AGILE workflow for the development of PRIMARY and performed scrum/stand-up meetings. This allows us to make flexible decisions and keep everyone in check, as in the past we had to modify the games direction quite substantially, so AGILE lets that happen.
 
 ## Features
+PRIMARY is built around a core mechanic; Colors.
 
+The player can switch colors on command which allow them to hit enemies of the same colour with their daggers.
+For example, a red dagger can kill red enemies but passes through yellow and blue enemies.
 
-## Structure
+In addition, each color has an abilty. A Schmove if you will.
+Schmoves have cooldowns and are unique to each color, but can hit all enemies regardless of color.
 
+## Contents and Structure
+The game has 5 stages, each with different layouts and enemy combinations.
+
+There are 5 types of enemies:
+- Boid
+- Monolith
+- Monk
+- Stopwatch
+- Snake
+
+Each enemy derrives from the same base class but have independant AI and actions.
+
+There are 3 difficulties in the game, Easy, Medium and Hard. Each difficulty has its own modifiers that change up the game.
+Currently each difficulty has 3 modifiers.
+
+The main menu UI and the gameplay UI are similar but separated.
 
 ## Goals
 
