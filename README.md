@@ -26,9 +26,9 @@ Like I mentioned before, we ran into some difficulties in the second half of dev
 
 
 ## Improvements
-The game is indeed fast paced, almost to a fault.
+The game is indeed fast paced, almost to a fault. We found that even with the multiple difficulties, the base game was quite difficult. Some testers struggled with the first few levels however this was found late into development with little time to fix it.
 
-
+The UI also has some inconsistant bugs which are proving to be difficult to solve. More specifically some buttons would slowly shift locations over time when pressed, which is still in the game.
 
 ## Future
-
+The project has no future plans. It is fairly well rounded (despite the bugs and balancing issues) and is complete. While there are some features we wished to add, it would just be extra content that doesn't add much to the base game, so we don't see much of a purpose in adding it.
